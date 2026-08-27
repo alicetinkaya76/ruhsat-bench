@@ -67,7 +67,26 @@ cd ~/Desktop/ruhsat-bench && .venv/bin/python -m hpc.remote nohup "cd /workspace
 Raporlar: `sonuclar/gorev1_raporu.txt`, `sonuclar/gorev2_raporu.txt`,
 `sonuclar/gorev1_olcum_20260827.txt`, `sonuclar/maddeler2_raporu.txt`
 
-## 3c. Görev 3 ÖNÜNDEKİ İNSAN KAPISI
+## 3d. Görev 3 BİTTİ (2026-08-28)
+
+`scripts/f4_dayanak.py` — R1/R2/R3-bm25, EK-4 + **EK-6** şartlarıyla.
+Beyan EK-6 (korpus seçimi) **koşudan önce** yazılıp commit'lendi.
+
+Kabul kriterleri geçti: istem sha'ları basılıyor · R1 istemi doğru birim
+metnini içeriyor (3 örnek elle gösterildi) · R2 geri çağırma alanı dolu ·
+kesilen 0/78 (`qwen2.5:32b`).
+
+**İki taşıyıcı bulgu — üretim koşusunu etkiler:**
+
+1. **3B sınıfı model dayanaklı kolda kullanılamaz** (kütük #28). `llama3.2:3b`
+   dayanak verilince biçim talimatını bırakıyor; ayrıştırılamayan 15/78.
+   `qwen2.5:32b` aynı istemle 0/78.
+2. **Dayanaklı kollar deterministik değil** (kütük #29). Aynı model/makine/gün/
+   tohum: kapalı kitap 20/20 birebir, dayanaklı **17/20**. Biri kararın kendisi.
+   → Yerel dayanaklı kollar **3 koşu + çoğunluk oyu** gerektirir; üretim
+   maliyeti 3 katına çıkar.
+
+## 3c. Görev 3'ün korpus kapısı — EK-6 ile ÇÖZÜLDÜ
 
 `korpus_kur.py` rafine korpusu kendi kapısıyla reddediyor (çıkış 2):
 *"31 alıntı BAŞKA birimde — bu maddelerde dayanaklı kol modele YANLIŞ maddeyi
@@ -83,8 +102,8 @@ Kabul kapısı geçtikten sonra devam edilecek sıra değişmedi:
 
 1. ~~`maddeler2.py` + korpusun kurulumu~~ **BİTTİ**
 2. ~~R3 + kontroller, düzeltilmiş korpusta~~ **BİTTİ** (EK-5 §10 cevaplandı)
-3. `f4_dayanak.py` (R1/R2 koşucusu, EK-4 şartlarıyla) — **sıradaki**
-4. `f4_analiz.py` (kümeli çıkarım, standart ECE, P6 BAcc, risk–kapsam)
+3. ~~`f4_dayanak.py` (R1/R2 koşucusu)~~ **BİTTİ** (EK-6 beyanıyla)
+4. `f4_analiz.py` (kümeli çıkarım, standart ECE, P6 BAcc, risk–kapsam) — **sıradaki**
 5. Mevcut koşuların v7a ile yeniden puanlanması
 
 ## 5. Kullanıcıda bekleyen (asistanda değil)
