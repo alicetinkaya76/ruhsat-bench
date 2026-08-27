@@ -18,7 +18,13 @@
 #   python -m hpc.remote probe
 #   python -m hpc.remote sh "nvidia-smi"
 #   python -m hpc.remote push scripts
+#   python -m hpc.remote nohup "bash hpc/remote_scripts/ollama_kur.sh" --log /workspace/logs/x.log
 #   python -m hpc.remote get /workspace/ruhsat-bench/sonuclar/r3.jsonl ./r3.jsonl
+#
+# TUZAK (2026-08-27 olculdu): `sh "... &"` ile is arka plana ATILMAZ. Cocuk surec
+# calisir ama saran /bin/bash -c cikmaz, cagri zaman asimina ugrar (300 s'de
+# goruldu). Uzun isler icin `nohup` alt komutunu kullanin -- setsid + fd
+# yonlendirmesini o dogru yapar.
 
 from __future__ import annotations
 
@@ -364,6 +370,9 @@ def main() -> None:
     p_get = sub.add_parser("get", help="uzak dosyayı indir")
     p_get.add_argument("remote")
     p_get.add_argument("local")
+    p_nh = sub.add_parser("nohup", help="uzun işi konteynerde arka plana al")
+    p_nh.add_argument("command")
+    p_nh.add_argument("--log", default="/workspace/logs/kosu.log")
     p_log = sub.add_parser("log", help="uzak log dosyasının sonunu göster")
     p_log.add_argument("path")
     p_log.add_argument("-n", type=int, default=40)
@@ -391,6 +400,11 @@ def main() -> None:
         elif args.cmd == "get":
             Path(args.local).write_bytes(h.get_bytes(args.remote))
             print(f"indirildi: {args.remote} -> {args.local}")
+        elif args.cmd == "nohup":
+            pid, rc = h.nohup(args.command, args.log)
+            print(f"arka planda başlatıldı: pid={pid or '?'}  log={args.log}")
+            print(f"izle: python -m hpc.remote log {args.log} -n 40")
+            sys.exit(0 if rc == 0 else 1)
         elif args.cmd == "log":
             out, _, _ = h.sh(f"tail -n {args.n} {args.path}", timeout=60)
             print(out)
