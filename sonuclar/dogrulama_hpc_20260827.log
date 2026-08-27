@@ -1,0 +1,108 @@
+HEDEF: /workspace/ruhsat-bench
+
+1) depo gönderiliyor
+   scripts         145 KiB
+   hpc              21 KiB
+    parca 1/16    parca 2/16    parca 3/16    parca 4/16    parca 5/16    parca 6/16    parca 7/16    parca 8/16    parca 9/16    parca 10/16    parca 11/16    parca 12/16    parca 13/16    parca 14/16    parca 15/16    parca 16/16                                  16 parca halinde yuklendi (nginx 1 MiB siniri)
+   data           9898 KiB
+   sonuclar        502 KiB
+   uzlasi           33 KiB
+   beyanlar          7 KiB
+   requirements.txt                      0 KiB
+   ORTAM.md                              5 KiB
+   HANDOVER.md                          14 KiB
+   GECIS_LINUX.md                        9 KiB
+   kusur_kutugu.md                       4 KiB
+   REKONSTRUKSIYON.md                    6 KiB
+   kodlayici1_uzlasi_kitabi_doldurulmus.xlsx       14 KiB
+   kodlayici2_uzlasi_kitabi_secenek1.xlsx       16 KiB
+   TOPLAM                             10.4 MiB
+
+2) bootstrap (venv + pinli paketler)
+
+[1m== 1/5  kalıcı dizinler ve ortam değişkenleri[0m
+  ortam dosyasi: /workspace/ruhsat-bench/env.sh  (MarkLLM'in /workspace/env.sh'i KORUNDU)
+  OLLAMA_MODELS=/workspace/ollama/models  (overlay DEGIL)
+
+[1m== 2/5  disk (mount seçeneklerinde usrquota,grpquota var; değer okunamıyor)[0m
+  dosya sistemi: 685G toplam, 280G boş, %58% dolu
+  quota komutu yok -> kota SINIRI OKUNAMIYOR; gerçek tüketim izlenerek ölçülecek
+  depo şu an: 26M
+
+[1m== 3/5  sanal ortam (TEMİZ; pinler gölgelenmesin)[0m
+  oluşturuldu: /workspace/ruhsat-bench/.venv
+  pip freeze yazıldı: sonuclar/pip_freeze_hpc_20260827.txt
+
+[1m== 4/5  pin doğrulaması (pypdf BİLİMSEL OLARAK BAĞLAYICI — kusur kütüğü #5)[0m
+  python  3.12.3   (referans ölçüm: 3.12.3)
+  pypdf      5.9.0
+  openpyxl   3.1.5
+  requests   2.32.3
+  rank_bm25  0.2.2
+  eksik paket: yok
+
+[1m== 5/5  betiklerin derlenebilirliği (HANDOVER kabul kriteri)[0m
+  derlenemeyen betik: 0
+
+[1m== KURULUM TAMAM[0m
+  depo   : /workspace/ruhsat-bench
+  venv   : /workspace/ruhsat-bench/.venv          (source /workspace/ruhsat-bench/env.sh)
+  loglar : /workspace/logs
+
+  SIRADAKİ ADIM — KABUL KAPISI (17/17 görülmeden yeni koşu başlatma):
+    cd /workspace/ruhsat-bench && PATH=/workspace/ruhsat-bench/.venv/bin:$PATH bash scripts/dogrula_linux.sh
+
+  Ollama (yerel model kolları için, ayrı adım):
+    bash hpc/remote_scripts/ollama_kur.sh
+
+3) sürüm kayması ölçümü (pypdf metin çıkarımı — kusur kütüğü #5)
+== RUHSAT-Bench sürüm kayması ölçümü ==
+  ortam : python 3.12.3 · pypdf 5.9.0 · openpyxl 3.1.5 · requests 2.32.3 · rank_bm25 0.2.2
+  referans: macOS · Python 3.11.9 · pypdf 5.9.0 · 2026-08-27
+
+  korpus_kur.py yeniden koşuluyor (taze manifest)...
+
+  belge       karakter   Δkar  birim  pdf   metin
+  --------------------------------------------------------
+  6331           71025     +0     39  ✓     ✓
+  4708           55563     +0     15  ✓     ✓
+  3194          158417     +0     49  ✓     ✓
+  ISGRISK        16703     +0     19  ✓     ✓
+  TBDY          870747     +0   1208  ✓     ✓
+  YDUY           94556     +0     36  ✓     ✓
+
+  json: sonuclar/ortam_kayma.json
+
+  SONUÇ: sürüm kayması YOK
+   yerele alındı: sonuclar/ortam_kayma_hpc.json (4590 bayt)
+
+4) KABUL KAPISI — scripts/dogrula_linux.sh (17/17 şart)
+== 1/6 korpus_kur ==
+  [TAMAM] birim sayisi 1366
+  [TAMAM] Kontrol A 440/441
+  [TAMAM] Kontrol B 473/473
+  [TAMAM] Kontrol C 120/120
+== 2/6 bent_bol ==
+  [TAMAM] yeni birim 1523
+  [TAMAM] kurtarma 0.9632 korunuyor
+  [TAMAM] 364 -> 15.3.1
+== 3/6 kural_taban (R3) ==
+  [TAMAM] R3 473/473
+== 4/6 negatif kontrol (5 tohum) ==
+  [TAMAM] tohum degeri 0.5137
+  [TAMAM] tohum degeri 0.5412
+  [TAMAM] tohum degeri 0.5201
+  [TAMAM] tohum degeri 0.5349
+== 5/6 uzlasi_birlestir ==
+  [TAMAM] v7a 223/250
+  [TAMAM] v7b 221/252
+== 6/6 etki_analizi ==
+  [TAMAM] etki ort 0.0046
+  [TAMAM] etki maks 0.0347
+  [TAMAM] sonnet E1 0.697->0.692
+
+================================================
+SONUC: 17 tamam, 0 hata
+Port dogrulandi: Linux ortami, Windows'ta olculen zincirle birebir.
+
+✓ 17/17 — port doğrulandı.

@@ -18,6 +18,11 @@ Bu dosya "şu an neredeyiz, sıradaki ne" sorusunu cevaplar. Tarihçe için
 | Altın etiketler iki kodlayıcı kitabından **birebir** yeniden üretildi | v7a/v7b LF-hash'leri devir paketiyle aynı |
 | Mühürlü üreteç iki bağımsız pakette **aynı sha256** | `291f61f2…`, `REKONSTRUKSIYON.md` §3 |
 | TF-HPC taşıma katmanı yazıldı (`hpc/`) | commit `8adc32b` |
+| nginx 1 MiB sınırı ölçüldü (704 KiB geçer / 768 KiB düşer) → parçalı yükleme | kütük #17, pozitif kontrol 3 MiB sha256 birebir |
+| MarkLLM'in `/workspace/env.sh`'i **bozulmadan** ayrıldı | kütük #18 |
+| **TF-HPC'de 17/17** (Ubuntu 24.04.1, Python 3.12.3, pypdf 5.9.0) | `sonuclar/dogrulama_hpc_20260827.{txt,log}` |
+| Sürüm kayması **YOK**: 6 belgenin 6'sında `metin_sha256` birebir, Δkarakter 0 | `sonuclar/ortam_kayma_hpc.json` |
+| Kütük #5 daraltıldı: 870747/870751 ayrımı işletim sistemi değil, **pypdf sürümü** farkı | üç ortamda TBDY = 870747 |
 | `ortam_kayma.py` **pozitif kontrolden geçti** (planlanmış +252 karakter sapması yakalandı, çıkış 2) | bu oturumda koşuldu |
 | `f4_api_v2.py` yamadan yeniden üretildi (4/4 yama, özdoğrulama geçti) | commit `75d3bde` |
 | GECIS_LINUX.md §2.7 açık kalemi **kapandı**: anahtar zaten ortam değişkeninden okunuyor (`--anahtar-env`, varsayılan `LLM_API_KEY`) | `scripts/f4_api_v2.py:222` |
@@ -28,35 +33,20 @@ Bu dosya "şu an neredeyiz, sıradaki ne" sorusunu cevaplar. Tarihçe için
 gitti. Bir ön-kaydın ilgili koşudan önce yazıldığı git ile kanıtlanamaz.
 Beyan metni `REKONSTRUKSIYON.md` §7'de hazır.
 
-## 3. Sıradaki — VPN gerektirir (kullanıcı başlatır)
+## 3. Port TAMAM — kapı geçildi
+
+`/workspace/ruhsat-bench` ayakta, dört kapının dördü geçti, `linux-port-dogrulandi`
+etiketi atıldı. Kodu tazelemek için:
 
 ```bash
-cd ~/Desktop/ruhsat-bench
-cp ~/Desktop/MarkLLM/MarkLLM/.env .env      # TFHPC_TOKEN + TFHPC_USER
-.venv/bin/pip install -r hpc/requirements-hpc.txt
+cd ~/Desktop/ruhsat-bench && .venv/bin/python -m hpc.deploy --sadece-gonder
 ```
 
-VPN açıkken sırayla:
+Kalan tek kurulum adımı Ollama (yerel model kolları; **hedef ortamda henüz
+denenmedi**, kütük #15):
 
 ```bash
-.venv/bin/python -m hpc.remote probe
-```
-
-```bash
-.venv/bin/python -m hpc.deploy
-```
-
-`deploy` dört kapıyı sırayla koşar: gönder → bootstrap → sürüm kayması →
-**kabul kapısı 17/17**. Kapı geçilince:
-
-```bash
-cd ~/Desktop/ruhsat-bench && git tag linux-port-dogrulandi
-```
-
-Ollama (yerel model kolları için, ayrı ve **henüz denenmemiş** adım):
-
-```bash
-.venv/bin/python -m hpc.deploy --ollama
+cd ~/Desktop/ruhsat-bench && .venv/bin/python -m hpc.deploy --ollama
 ```
 
 ## 4. Bundan sonra — HANDOVER §4 görevleri
@@ -79,12 +69,16 @@ Kabul kapısı geçtikten sonra devam edilecek sıra değişmedi:
 
 ## 6. Ortam farkı — açık ve izlenen
 
-| | referans ölçüm | rekonstrüksiyon | TF-HPC |
+| | referans ölçüm (02 Ağu) | rekonstrüksiyon | TF-HPC |
 |---|---|---|---|
 | işletim sistemi | Ubuntu 24.04 | macOS 25.5 | Ubuntu 24.04.1 |
 | Python | 3.12.3 | **3.11.9** | 3.12.3 |
-| pypdf | 5.9.0 | 5.9.0 | 5.9.0 (pin) |
-| zincir | 17/17 | **17/17** | ölçülmedi |
+| pypdf | 5.9.0 | 5.9.0 | 5.9.0 |
+| numpy | — | 2.4.6 | **2.5.2** (kütük #19) |
+| zincir | 17/17 | **17/17** | **17/17** |
+| TBDY karakter | 870747 | 870747 | 870747 |
 
-3.11.9'da 17/17 çıkması, zincirin bu iki Python sürümü arasında kaymadığını
-gösterir; TF-HPC'de 3.12.3 ile üçüncü kez ölçülecek.
+Zincir **üç ortamda da** aynı sayıları verdi. pypdf 5.9.0 sabitken metin çıkarımı
+macOS ve Linux'ta bayt-birebir — kütük #5'in "iki ortam" ifadesi artık "iki pypdf
+sürümü" diye daraltılabilir. Tek açık ortam farkı numpy; kapıdan geçen zincir
+onu kullanmıyor ama `f4_dayanak.py`'nin BM25'i kullanacak.

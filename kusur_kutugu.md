@@ -13,7 +13,7 @@ ortalama 0.0046, maks 0.0347; hiçbir niteliksel sonuç değişmedi
 | 2 | `bentler()` kaynaşması (456 tanınmayan başlık, 27 sahte birim) | 7 altın döndü (EK-5, uzman onaylı); etki testi geçti | KAPANDI — `bent_bol.py` ile |
 | 3 | `kaynak_alinti` sütunu ~200 karakterde kırpık; P1/P2/P5'in %15'inde iddia içeriği alıntıdan uzun | Denetim 1. geçişinde uzmanlar kırpık alıntı gördüyse κ=1.00'a ek açıklama olabilir; `denetim_kitabi.py`'nin hangi alanı bastığı BAKILMADI | KÜTÜKTE — makale sınırlılığına aday; kovalanmıyor |
 | 4 | id=391 (YDUY/14): `temizle_v39` şerh ayıklaması alıntı ortasına denk gelmiş, 441'de 1 katı eşleşme kaybı | Ölçüldü, tek madde, gevşek eşleşme buluyor | KAPANDI — dipnot |
-| 5 | pypdf sürüm farkı: TBDY metni iki ortamda 870747/870751 karakter | Birim sayısı, kontroller, aday listesi AYNI çıktı (ölçüldü) | KÜTÜKTE — makalede pypdf sürümü + metin hash verilecek |
+| 5 | pypdf sürüm farkı: TBDY metni iki ortamda 870747/870751 karakter | Birim sayısı, kontroller, aday listesi AYNI çıktı (ölçüldü). **2026-08-27 DARALTILDI:** fark işletim sistemine değil, yalnız pypdf SÜRÜMÜNE bağlı — pypdf 5.9.0 ile macOS/py3.11.9 ve Ubuntu/py3.12.3 altı belgenin altısında da bayt-birebir metin verdi (Δkarakter=0, `metin_sha256` eşit) | KÜTÜKTE — makalede pypdf sürümü + metin hash verilecek; artık "iki ortam" değil "iki pypdf sürümü" diye yazılır |
 | 6 | `f4_skor.py` ECE'si kova orta noktası kullanıyor (denetim 1.10; R3 ile kanıtlandı: doğru değer 0 iken 0.050 basıyor) | Sonnet ECE'si ~0.014 şişkin | **DÜZELTİLECEK** — analiz katmanında; R3 pozitif kontrol (ECE=0 vermeli) |
 | 7 | `f4_skor.py` başlığı varyanttan bağımsız "varyant A" basıyor | Kozmetik | KÜTÜKTE |
 | 8 | Sonda betiğinin hüküm kapısı fazla gevşekti (CI bandı kesişimi); B'nin kendi kol içi bandı yoktu | frontCB2 k1-3 ikilileri bandı verecek; analiz bekliyor | AÇIK — görev #4 içinde |
@@ -32,3 +32,11 @@ ortalama 0.0046, maks 0.0347; hiçbir niteliksel sonuç değişmedi
 | 14 | `uzlasi_birlestir.py` v7a/v7b'yi CRLF ile yazıyor (Linux'ta da) | İçerik etkilenmiyor (LF-normalize sonrası birebir aynı, ölçüldü); `.gitattributes` commit'te normalize ediyor | KÜTÜKTE — kovalanmıyor |
 | 15 | `ollama_kur.sh` hedef ortamda **hiç koşulmadı** (konteynerde systemd yok; tarball + `setsid nohup` yolu belgeden yazıldı) | Ölçülmedi. Deterministik zincir bundan etkilenmiyor | AÇIK — ilk `--ollama` koşusunda ölçülecek, betikteki uyarı bloğu o zaman silinir |
 | 16 | Windows koşularında kullanılan **Ollama sürümü hiçbir yerde kayıtlı değil** (`ORTAM.md` §8 model adlarını veriyor, sürümü vermiyor) | Ölçülemez (kaynak makine yok). GECIS_LINUX.md §7: model dosyalarının sürümler arası bayt-birebir aynı olacağı garanti değil | AÇIK — yerel kollar yeniden koşulursa yeni sürüm sonuç dosyalarına yazılıp beyan edilecek |
+
+### TF-HPC ilk kurulumunda ölçülenler (2026-08-27)
+
+| # | kusur | etki ölçümü | karar |
+|---|---|---|---|
+| 17 | JupyterHub'ın önündeki nginx yükleme boyutunu sınırlıyor: `413 Request Entity Too Large`. İkili aramayla ölçüldü — **704 KiB ham geçti, 768 KiB düştü** (base64 4/3 ile `client_max_body_size=1m`) | `data/` (9,6 MB) hiç gönderilemiyordu; deploy 1. adımda düşüyordu | KAPANDI — `put_bytes_parcali()`, `PARCA_HAM=640 KiB`. Pozitif kontrol: 3 MiB 5 parçada, sha256 birebir |
+| 18 | `/workspace/env.sh` **MarkLLM'in** ve `~/.bashrc` onu source ediyor; `bootstrap.sh` üzerine yazacaktı | Yazsaydı MarkLLM'in `HF_HOME`/`TRANSFORMERS_CACHE`/`PYTHONPATH`'i silinirdi — paylaşılan konteynerde DİĞER proje bozulurdu. Deploy öncesi `ls /workspace` ile yakalandı, hasar OLUŞMADI | KAPANDI — ortam `/workspace/ruhsat-bench/env.sh`'e taşındı; MarkLLM'in dosyasına ve `~/.bashrc` satırına dokunulmuyor |
+| 19 | numpy sürümü iki ortamda farklı: macOS 2.4.6, HPC 2.5.2 (`rank_bm25`'in geçişli bağımlılığı) | Kabul kapısından geçen zincir numpy KULLANMIYOR — 17/17 etkilenmedi (ölçüldü) | AÇIK — `f4_dayanak.py`'nin BM25'i numpy kullanacak; o koşudan önce iki sürümün aynı sıralamayı verdiği gösterilmeli ya da numpy pinlenmeli |

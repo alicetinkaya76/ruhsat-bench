@@ -1,0 +1,30 @@
+# RUHSAT-Bench — TF-HPC KABUL TESTI
+
+tarih  : 2026-08-27T08:15:41Z
+hedef  : /workspace/ruhsat-bench (Selcuk TF-HPC, JupyterHub konteyneri)
+ortam  : Ubuntu 24.04.1 · Python 3.12.3 · pypdf 5.9.0 · Quadro RTX 8000
+commit : 6622143
+
+SONUC  : 17/17 — GECIS_LINUX.md 5'teki butun beklenen degerler birebir.
+         Surum kaymasi: YOK (6 belgenin 6'sinda metin_sha256 birebir).
+
+## Uc ortamda yeniden uretilebilirlik
+
+| | referans (Ubuntu, 02 Agu) | rekonstruksiyon (macOS) | TF-HPC |
+|---|---|---|---|
+| Python  | 3.12.3 | 3.11.9 | 3.12.3 |
+| pypdf   | 5.9.0  | 5.9.0  | 5.9.0  |
+| zincir  | 17/17  | 17/17  | 17/17  |
+| TBDY karakter | 870747 (kutuk #5: 870751 dali da olculmus) | 870747 | 870747 |
+
+## Kutuk #5 daraltilabilir
+
+870747/870751 ayrimi ISLETIM SISTEMI farki DEGIL: macOS/py3.11.9 ile
+Ubuntu/py3.12.3 ayni pypdf 5.9.0 ile alti belgenin altisinda da BAYT-BIREBIR
+metin uretti (metin_sha256 esit, Dkarakter = 0). Fark yalnizca pypdf SURUMUNE
+baglidir. Makalede kutuk #5 bu daraltmayla yazilabilir.
+
+## Bilinen ortam farki
+
+numpy 2.4.6 (macOS) vs 2.5.2 (HPC) — rank_bm25'in gecisli bagimliligi.
+Kapidan gecen zincir numpy KULLANMIYOR; f4_dayanak.py'nin BM25'i kullanacak.

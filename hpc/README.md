@@ -12,19 +12,23 @@ JupyterHub, aynı tuzaklar). Değişenler yalnız `REMOTE_ROOT` ve `PROBE`.
 
 ## 1. Ortam envanteri
 
-⚠ Aşağıdaki satırlar **MarkLLM oturumunda 2026-08-19'da ölçüldü**, bu projede
-yeniden doğrulanmadı. Aynı makine, aynı JupyterHub; ama `python -m hpc.remote probe`
-ilk iş olarak koşulmalı ve sapma varsa bu tablo güncellenmelidir.
+**2026-08-27'de bu projede ölçüldü** (`python -m hpc.remote probe`; sapan
+satırlar MarkLLM'in 2026-08-19 ölçümüyle yan yana verildi).
 
-| | |
-|---|---|
-| Erişim | JupyterHub **4.1.6** → kullanıcı başına Docker konteyneri, içinde **root**, `cwd=/workspace` |
-| | SSH/SLURM **yok**. `tfhpc.selcuk.edu.tr` → `172.22.202.23` (RFC1918) |
-| | Yalnız **üniversite VPN'i** üzerinden. Sertifika **kendinden imzalı** → `verify=False` zorunlu |
-| GPU | **Quadro RTX 8000** · 50,8 GB VRAM · sürücü 580.159.03 · host'ta tek GPU, **PAYLAŞIMLI** |
-| CPU / RAM | Xeon Gold 6226R, konteynere **12** çekirdek · 125 GB |
-| Disk | `/workspace` **ext4 gerçek blok cihaz**, 478 GB boş, 326 MB/s · `/` overlay |
-| OS | Ubuntu 24.04.1 LTS · Python **3.12.3** |
+| | | 19 Ağu (MarkLLM) |
+|---|---|---|
+| Erişim | JupyterHub → kullanıcı başına Docker konteyneri, içinde **root**, `cwd=/workspace` | aynı |
+| | SSH/SLURM **yok**. Yalnız **üniversite VPN'i**; sertifika **kendinden imzalı** → `verify=False` | aynı |
+| | ⚠ Önünde **nginx/1.18.0**, `client_max_body_size=1m` → yükleme parçalanmalı (kütük #17) | ölçülmemişti |
+| GPU | **Quadro RTX 8000** · 49152 MiB · sürücü 580.159.03 · **1 MiB kullanımda, %0** | aynı kart |
+| CPU / RAM | konteynere **12** çekirdek · 125 GB | aynı |
+| Disk | `/workspace` **ext4 gerçek blok cihaz**, 685 GB toplam, **280 GB boş** | 478 GB boştu |
+| OS / Python | Ubuntu 24.04.1 LTS · **Python 3.12.3** | aynı |
+| Ortak durum | `/workspace/env.sh`, `/workspace/hf` (52 GB), `/workspace/MarkLLM` **MarkLLM'e ait** — dokunulmaz (kütük #18) | — |
+
+**Kabul testi 2026-08-27'de geçti: 17/17, sürüm kayması YOK.**
+Kanıt: `sonuclar/dogrulama_hpc_20260827.{txt,log}`, `sonuclar/ortam_kayma_hpc.json`.
+Altı belgenin altısında `metin_sha256` macOS ölçümüyle birebir (Δkarakter = 0).
 
 Windows tarafındaki eski ortam (`ORTAM.md`): Windows/RDP, PowerShell 5.1,
 Python 3.13, Quadro RTX 8000 48 GB, D: sürücüsünde ~57 GB boş.
@@ -108,12 +112,16 @@ Projenin kuralı "ölçülmeyeni varsayma". Bu satırlar henüz **ölçüm deği
 
 | bilinmeyen | nasıl ölçülecek |
 |---|---|
-| `bootstrap.sh` hedef ortamda koşuyor mu | `python -m hpc.deploy` — ilk koşuda görülür |
-| `ollama_kur.sh` hedef ortamda koşuyor mu | konteynerde systemd yok; tarball + `setsid nohup` yolu **belgeden yazıldı, denenmedi** |
-| Ollama sürüm kayması | Windows'ta hangi Ollama sürümüyle koşulduğu `ORTAM.md`'de **yazmıyor**; yerel kollar yeniden koşulacaksa sürüm sonuç dosyalarına yazılıp beyan edilecek |
-| Python 3.12.3 ile zincir | referans ölçüm oydu; rekonstrüksiyon **3.11.9**'da 17/17 verdi. 3.12'de yeniden görülecek |
+| `ollama_kur.sh` hedef ortamda koşuyor mu | konteynerde systemd yok; tarball + `setsid nohup` yolu **belgeden yazıldı, HÂLÂ DENENMEDİ** (kütük #15) |
+| Ollama sürüm kayması | Windows'ta hangi Ollama sürümüyle koşulduğu `ORTAM.md`'de **yazmıyor** (kütük #16); yerel kollar yeniden koşulacaksa yeni sürüm sonuç dosyalarına yazılıp beyan edilecek |
+| numpy 2.4.6 ↔ 2.5.2 BM25 sıralaması | `f4_dayanak.py` koşusundan önce iki sürüm aynı sıralamayı veriyor mu gösterilecek, yoksa numpy pinlenecek (kütük #19) |
 | `/workspace` kotası | `quota` komutu yok; gerçek tüketim izlenerek ölçülecek |
-| API kolları | anahtar kullanıcıda; `f4_api_v2.py` anahtarı ortam değişkeninden okuyor mu **bakılmadı** (GECIS_LINUX.md §2.7'nin açık kalemi) |
+| API kolları | anahtar kullanıcıda; koşuyu kullanıcı yapar |
+
+**Kapanmış olanlar** (bu bölümden çıkarıldı, çünkü artık ölçüm): `bootstrap.sh`
+hedef ortamda koşuyor (2/5–5/5 geçti) · Python 3.12.3 ile zincir 17/17 ·
+`f4_api_v2.py` anahtarı `os.environ`'dan okuyor (`--anahtar-env`, varsayılan
+`LLM_API_KEY`) — GECIS_LINUX.md §2.7'nin açık kalemi kapandı.
 
 ## 6. Değişmeyen kurallar
 
