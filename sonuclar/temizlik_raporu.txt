@@ -1,0 +1,148 @@
+﻿==============================================================================
+RUHSAT-Bench — CERRAHI TEMIZLIK (v3.7 kurallari, uretici calistirilmadan)
+==============================================================================
+girdi: data/iddialar/uretilen_iddialar_v1.csv  (486 iddia)
+
+[1] BOZUK KAYNAK CUMLELER
+  119 farkli kaynak cumle en az bir kurala takildi.
+    [R2_capraz_kanun_atfi] Yapı sahibine bu şekilde tebligat yapılamaması hâlinde bu durum tebligat yapan idarenin internet sayfasında 30
+    [R2_capraz_kanun_atfi] İdare tarafından ruhsata bağlanamayacağı veya aykırılıkların giderilemeyeceği tespit edilen yapıların ruhsatı 
+    [R2_capraz_kanun_atfi] Bildirim yapmadığı tespit edilen işyeri hekimi ve iş güvenliği uzmanının belgesi üç ay, tekrarında ise altı ay
+    [R2_capraz_kanun_atfi] Tebligatı veya ilanı müteakip 30 günü geçmemek üzere ilgili idarece belirlenen süre içinde yapı sahibi tarafın
+    [R2_capraz_kanun_atfi] Fenni mesuller, Bakanlık tarafından çıkarılan yönetmelikte belirlenen sınıf, özellik ve büyüklüğe sahip buluna
+    [R2_capraz_kanun_atfi] Tehlikeli ve çok tehlikeli sınıfta yer alan işyerlerinde; yapılacak işlerde karşılaşılacak sağlık ve güvenlik 
+    [R2_capraz_kanun_atfi] İş sağlığı ve güvenliği bakımından teftişe yetkili üç iş müfettişinden oluşan heyet, iş sağlığı ve güvenliği b
+    [R2_capraz_kanun_atfi] Kapıcı daireleri anabina içinde olabileceği gibi, nizamlara, fen ve sağlık şartlarına aykırı yapılmamak, brüt 
+    [R2_capraz_kanun_atfi] Ruhsata aykırılık olan yapıda, bu aykırılığın giderilmiş olduğu veya ruhsat alındığı ve yapının bu ruhsata uyg
+    [R2_capraz_kanun_atfi] Çalışanlar, iş sağlığı ve güvenliği ile ilgili aldıkları eğitim ve işverenin bu konudaki talimatları doğrultus
+    [R2_capraz_kanun_atfi] İş kazası geçiren veya meslek hastalığına yakalanan çalışana işe başlamadan önce, söz konusu kazanın veya mesl
+    [R2_capraz_kanun_atfi] İleri tasarım yöntemleri ve teknolojileri gerektiren özellik arz eden binaların projeleri, bu alanda Bakanlık 
+    [R2_capraz_kanun_atfi] Sağlık hizmeti sunucuları kendilerine intikal eden iş kazalarını, yetkilendirilen sağlık hizmeti sunucuları is
+    [R1_fikra_ici_parcalanma] (1) Yapı denetim kuruluşuna ortak olabilmek için mimarlık, inşaat mühendisliği, makine mühendisliği veya elekt
+    [R2_capraz_kanun_atfi] Bu Kanun hükümlerini Bakanlar Kurulu yürütür. (Ek kroki ile sınır ve koordinat listesi:11/5/2018-7143/16 md.) 
+    [R2_capraz_kanun_atfi] (1) Mesleki risklerin önlenmesi ve bu risklerden korunulmasına yönelik çalışmaları da kapsayacak, iş sağlığı v
+    [R1_fikra_ici_parcalanma] (Başlığı ile Birlikte Değişik:RG-29/12/2018-30640) (4) (Değişik:RG-12/6/2025-32924) (1) Bakanlıkça belirlenen 
+    [R1_fikra_ici_parcalanma] (1) İlgili idare, Kanun ve ilgili mevzuat ile belirlenen görevlerini mevzuatta gösterilen süreler içinde tam v
+    [R2_capraz_kanun_atfi] İmar planlarının tanziminde planlanan beldenin ve bölgenin şartları ile müstakbel ihtiyaçlar gözönünde tutular
+    [R2_capraz_kanun_atfi] (1) Bu Kanun hükümlerinin uygulanmasının izlenmesi ve teftişi, iş sağlığı ve güvenliği yönünden teftiş yapmaya
+
+[2] KURAL BASINA ATILAN IDDIA
+    R1_fikra_ici_parcalanma      35
+    R2_capraz_kanun_atfi         209
+    R3_bolum_basligi             0
+    R4_bolunmus_ek               3
+    R5_caps_basligi              0
+    TOPLAM                       247
+
+  atilan iddialar (id | probe | gold):
+    #5     P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 23. maddesine göre ana tesis yapıldığında yapı sahibi veya sahipleri lağım ayak
+    #6     P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 10. maddesine göre belediyeler; imar planlarının yürürlüğe girmesinden en geç 3
+    #8     P3_anakronizm   YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı İmar Kanunu 2003 yılında kabul edilmiştir.
+    #9     P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           İSG Risk Değerlendirmesi Yönetmeliği'ne göre mevcut ise bölge planı ve çevre düzeni plan kararlarına
+    #10    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 38. maddesinde 1989 yılında değişiklik yapılmıştır.
+    #13    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 49. maddesine göre yapı sahibine bu şekilde tebligat yapılamaması hâlinde bu du
+    #14    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 10. maddesinde 2020 yılında değişiklik yapılmıştır.
+    #16    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 50. maddesinde 2018 yılında değişiklik yapılmıştır.
+    #17    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 6. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #19    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 17. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #20    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 4. maddesinde 2018 yılında değişiklik yapılmıştır.
+    #23    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           İSG Risk Değerlendirmesi Yönetmeliği'ne göre risk kontrol adımları uygulanırken toplu korunma önleml
+    #24    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 28. maddesine göre bildirim üzerine, en geç üç iş günü içinde 32 nci maddeye gö
+    #26    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           4708 sayılı Kanun'un 9. maddesine göre yapı denetim kuruluşunun izin belgesi alma aşamasında gerçeğe
+    #27    P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 31. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #28    P2_sayisal      YANLIS   R2_capraz_kanun_atfi
+           4708 sayılı Kanun'a göre birden fazla müstakil yapının bulunduğu parsellerde, bütün yapıların toplam
+    #30    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           İSG Risk Değerlendirmesi Yönetmeliği'ne göre ana tesis yapıldığında yapı sahibi veya sahipleri lağım
+    #32    P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 37. maddesi, ilk yayımlandığı 1985 yılından bu yana hiç değiştirilmemiştir.
+    #34    P2_sayisal      YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'a göre itirazlar valiliğe yapılır, valilik itirazları ve planları otuz gün içerisi
+    #36    P4_uydurma      YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre ilgililer 'Yıllık Saha Uygunluk Karnesi' belgesini her ay ilgili idareye ib
+    #39    P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 10. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #41    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'a göre esaslı tadilat gerektiren eksiklikler, ilgili idaresinden alınacak ruhsat v
+    #42    P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 6. maddesi, ilk yayımlandığı 2012 yılından bu yana hiç değiştirilmemiştir.
+    #46    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre idare tarafından ruhsata bağlanamayacağı veya aykırılıkların giderilemeyece
+    #48    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 4. maddesine göre çalışanların iş sağlığı ve güvenliği alanındaki yükümlülükler
+    #54    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'a göre idare tarafından ruhsata bağlanamayacağı veya aykırılıkların giderilemeyece
+    #55    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 20. maddesine göre ileri tasarım yöntemleri ve teknolojileri gerektiren özellik
+    #61    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 8. maddesine göre bildirim yapmadığı tespit edilen işyeri hekimi ve iş güvenliğ
+    #63    P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 50. maddesi, ilk yayımlandığı 1985 yılından bu yana hiç değiştirilmemiştir.
+    #64    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           4708 sayılı Kanun'a göre birden fazla müstakil yapının bulunduğu parsellerde, bütün yapıların toplam
+    #66    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 24. maddesinde 2024 yılında değişiklik yapılmıştır.
+    #67    P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 15. maddesi, ilk yayımlandığı 2012 yılından bu yana hiç değiştirilmemiştir.
+    #68    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 15. maddesinde 2014 yılında değişiklik yapılmıştır.
+    #71    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 22. maddesine göre eksik veya yanlış olduğu takdirde; müracaat tarihinden itiba
+    #73    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 36. maddesinde 2022 yılında değişiklik yapılmıştır.
+    #76    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre toplu sözleşme veya toplu iş sözleşmesi ile çalışan kamu personeli, bu madd
+    #77    P4_uydurma      YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre ilgililer 'Merkezi Ruhsat Doğrulama Kartı' belgesini her ay ilgili idareye 
+    #79    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 11. maddesinde 2008 yılında değişiklik yapılmıştır.
+    #81    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre işveren, iş sağlığı ve güvenliği yönü nden risk değerlendirmesi yapmak veya
+    #84    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 2. maddesine göre işveren, iş sağlığı ve güvenliği yönü nden risk değerlendirme
+
+[3] TEMIZ SETIN YAPISI
+  486 -> 239 iddia  (-247, %50.8)
+    gold DOGRU     243 ->  124  (%51.9)
+    gold YANLIS    243 ->  115  (%48.1)
+
+  probe dagilimi (probe / probe_alt):
+    P1_dogrudan       108  (%45.2)
+        P1_verbatim            59
+        P1_madde_atifli        49
+    P2_sayisal         24  (%10.0)
+    P3_anakronizm       6  (%2.5)
+        P3_yil                  3
+        P3_yil_dogru            2
+        P3_yururluk             1
+    P4_uydurma          3  (%1.3)
+    P5_capraz          73  (%30.5)
+        P5_maddeshift          67
+        P5_lawshuffle           6
+    P6_guncellik       25  (%10.5)
+        P6_yil                 13
+        P6_degismedi           12
+
+[4] DENGE NOTU
+  P5 alt-turleri: maddeshift 67 / lawshuffle 6
+  ! dengesiz (11.2x). Ikisi F4'te AYRI raporlanacak;
+    kucuk olan alt-tur (6 madde) dusuk guclu. 1500'e genisletirken
+    lawshuffle payini artirin (uretecte random.random() < 0.5 esigini kaydirin).
+  40'in altinda kalan probe'lar: P2_sayisal=24, P3_anakronizm=6, P4_uydurma=3, P6_guncellik=25
+
+  (--kuru) dosya yazilmadi.

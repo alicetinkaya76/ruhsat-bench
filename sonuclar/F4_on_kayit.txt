@@ -1,0 +1,42 @@
+﻿RUHSAT-Bench F4 — ON KAYIT (kosu oncesi donduruldu)
+====================================================
+Kume      : data/iddialar/uretilen_iddialar_v6_onarilmis.csv (473 iddia)
+Kosullar  : E1 kacinmali (DOGRU/YANLIS/EMIN_DEGILIM), E2 zorunlu ikili
+
+1. DOGRULAYICI ANALIZLER (duzeltmeli, onceden ilan edilmis)
+   1.1 E1 vs E2 kapsam farki                    (eslesmis, 473 madde)
+   1.2 E1 vs E2 baglı dogruluk farki            (eslesmis)
+   1.3 Genel dengeli dogruluk ve Youden J       (model x kosul)
+   1.4 lambda = dogruluk(P1) + dogruluk(P5) - 1 (bilgi endeksi)
+   Coklu karsilastirma: model sayisi uzerinden Bonferroni.
+
+2. KESIFSEL ANALIZLER (duzeltmesiz, GA ile betimsel raporlanir)
+   Prob ve alt-tur kirilimlari. Hipotez testi olarak SUNULMAZ.
+   Gerekce: %80 gucte saptanabilir en kucuk fark
+     P5_maddeshift(89) vs P5_lawshuffle(32) : 27.6 puan (18 modelde 36.9)
+     P6 2x2 hucreleri (30/30)               : 33.4 puan
+     P4(13) vs P1(163)                      : 33.9 puan
+     P3_yil(12) vs P3_dogru(7)              : 50.0 puan
+   P3 yapisal tavan: belge sayisiyla olceklenir, iddia sayisiyla degil.
+
+3. ASGARI KAPSAM ESIGI
+   Bir model x kosul hucresi maddelerin %80'inden azina cevap verirse
+   PUANLANMAZ; "uyumsuz" olarak raporlanir. Esik kosudan ONCE ilan edildi.
+
+4. SIRA
+   Madde sirasi her model icin AYRI karistirilir (tohum = model adi hash'i).
+   Konum etkisinin modeller arasinda eslesmesi boylece onlenir.
+
+5. PROMPT DUYARLILIGI
+   Her kosul icin iki prompt varyanti. Birincil sonuc varyant A;
+   varyant B tutarlilik kontrolu olarak raporlanir.
+
+6. ALT-TUR RAPORLAMASI
+   P5: maddeshift ve lawshuffle AYRI.
+   P6: dort hucre (yil/yil_yanlis/degismedi/degismedi_dogru) AYRI.
+   Prob ICI dengeli dogruluk yalnizca P3 ve P6'da tanimlidir; diger
+   problar tek sinifli oldugu icin orada yanlilik duzeltmeli kontrast
+   kullanilir, "dogruluk" olarak raporlanmaz.
+
+7. DURDURMA
+   Kosu tamamlanmadan ara sonuca bakilarak tasarim degistirilmez.

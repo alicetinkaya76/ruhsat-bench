@@ -1,0 +1,36 @@
+﻿==============================================================================
+RUHSAT-Bench — P6 YUZEY KALIBI SIZINTISI (mevcut kosudan, yeni cikarim yok)
+==============================================================================
+temiz kume: data\iddialar\uretilen_iddialar_v4_temiz.csv (472 iddia) | kosu: sonuclar/konsensus.jsonl
+P6 payi: 119/472 = %25.2
+
+[1] MODEL x KOSUL
+    model / kosul                          bacc  baccP3  baccP6  P1(D)  P5(Y)  kazanc
+    gemma3:12b / E1                        0.57    0.73    0.60   0.69   0.39   +0.03
+    gemma3:12b / E2                        0.52    0.67    0.50   0.39   0.64   -0.02
+    gemma3:4b / E1                         0.56    0.62    0.55   0.59   0.46   -0.00
+    gemma3:4b / E2                         0.58    0.53    0.68   0.61   0.43   +0.10
+    llama3.2:3b-instruct-q5_K_M / E1       0.51    0.47    0.53   0.29   0.73   +0.02
+    llama3.2:3b-instruct-q5_K_M / E2       0.50    0.50    0.50   0.00   1.00   +0.00
+    qwen2.5:14b-instruct / E1              0.50    0.56     nan   0.79   0.19    +nan
+    qwen2.5:14b-instruct / E2              0.56    0.42    0.71   0.72   0.31   +0.14
+    qwen2.5:7b-instruct-q4_K_M / E1        0.58     nan     nan   0.67   0.33    +nan
+    qwen2.5:7b-instruct-q4_K_M / E2        0.46    0.54    0.34   0.94   0.08   -0.13
+
+  bacc   : tum kume, dengeli dogruluk (0.50 = sans)
+  baccP6 : P6_yil(DOGRU) vs P6_degismedi(YANLIS) — kalip etiketi ele veriyor
+  baccP3 : KONTROL. Ayni kalip, yalnizca yil degisiyor; gercek bilgi olcer.
+  P1/P5  : tek sinifli tabakalar. Bunlar BILGI DEGIL, cevap yanliligidir.
+
+[2] KARAR
+  ortalama kazanc (baccP6 - bacc): +0.016
+  pozitif hucre: 4/8   isaret testi p=1.000
+  => KISAYOL KULLANILMIYOR gorunuyor. Sizinti bir TASARIM kusuru olarak
+     kalir (genisletmede duzeltilecek) ama mevcut olcumleri kirletmiyor.
+
+[3] NOT
+  Bu test tek basina nedensel degildir: baccP6'nin yuksek olmasi 'kalip
+  okundu' ya da 'metadata sorusu kolay' demek olabilir. Ayrimi kesinlestiren
+  tek sey eksik iki hucreyi uretmektir (yanlis yilli P6_yil -> YANLIS,
+  gercekten degismemis madde -> P6_degismedi DOGRU). O zaman kalip ile
+  etiket arasindaki bag kopar ve olcum dogrudan olur.

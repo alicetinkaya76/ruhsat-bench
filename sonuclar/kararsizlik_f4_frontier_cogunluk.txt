@@ -1,0 +1,30 @@
+﻿================================================================================================
+RUHSAT-Bench F4 — COK KOSULU BIRLESTIRME  (3 kosu)
+  sonuclar\frontC_k1.jsonl  (946 kayit)
+  sonuclar\frontC_k2.jsonl  (946 kayit)
+  sonuclar\frontC_k3.jsonl  (946 kayit)
+================================================================================================
+her kosuda bulunan kayit: 946
+
+[1] KOSULAR ARASI TEKRAR ORANI
+  model / kosul                          n  oybirligi  ikili uyum  ham ayni
+  claude-sonnet-5 / E1                 473       0.84        0.89      0.49
+  claude-sonnet-5 / E2                 473       0.88        0.92      0.46
+
+[2] COGUNLUK OYU: 946 kayit | cogunluk olusmayan: 4
+
+[3] KARARSIZLIK HATAYI ONGORUYOR MU?
+  Kosular arasi fikir degistirilen maddeler, hata yapilan maddeler mi?
+  model / kosul                              oybirl.        bolunmus    fark  Fisher p
+  claude-sonnet-5 / E1              175/240 =  0.73   28/51 =  0.55   +0.18    0.0179  *
+  claude-sonnet-5 / E2              264/418 =  0.63   37/55 =  0.67   -0.04    0.6550
+  Oybirligi maddelerinde dogruluk daha yuksekse kararsizlik hata sinyalidir.
+
+[4] HANGI SINYAL DAHA IYI: KARARSIZLIK MI, BEYAN EDILEN GUVEN MI?
+  Ikisi de HATAYI ongormede AUROC ile olculur (yuksek = daha iyi).
+  model / kosul                          n  kararsizlik   1-guven    fark
+  claude-sonnet-5 / E1                 291        0.562     0.589  -0.027
+  claude-sonnet-5 / E2                 473        0.491     0.576  -0.085
+  Kararsizlik kazaniyorsa: model ne bilmedigini SOYLEYEMIYOR ama
+  DAVRANISI ele veriyor. Bu, kalibrasyon literaturu icin aktarilabilir
+  bir sonuctur ve deterministik modellerde olculemez.

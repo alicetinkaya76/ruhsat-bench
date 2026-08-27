@@ -1,0 +1,22 @@
+﻿id,probe,uretim_sablonu,gold,csv_madde,iddia_atfi,GERCEK_BENT,iddia
+25,P5_capraz,P5_maddeshift(7.2.1.4→14.13.1.1),YANLIS,7.2.1.4,14.13.1.1,7.2.4,TBDY 2018'in 14.13.1.1 numaralı bendine göre kesit Hesaplarında Kullanılacak Yöntem Bu bölüm kapsamında betonarme elemanların depreme dayanıklı olarak
+38,P5_capraz,P5_maddeshift(2.1.2→15.1.4),YANLIS,2.1.2,15.1.4,2.2.2,"TBDY 2018'in 15.1.4 numaralı bendine göre deprem Yer Hareketi Düzeyi-2 (DD-2) DD-2 Deprem Yer Hareketi, spektral büyüklüklerin 50 yılda aşılma olasılı"
+58,P5_capraz,P5_maddeshift(6.2.3→15.5.2.5),YANLIS,6.2.3,15.5.2.5,6.2,TBDY 2018'in 15.5.2.5 numaralı bendine göre mekanik ve Elektrik Donanımlar için Büyütme ve Davranış Katsayıları Mekanik veya Elektrik Donanım eB eR Ha
+60,P5_capraz,P5_maddeshift(2.1.2→5.6.5.2),YANLIS,2.1.2,5.6.5.2,2.2.3,"TBDY 2018'in 5.6.5.2 numaralı bendine göre deprem Yer Hareketi Düzeyi-3 (DD-3) DD-3 Deprem Yer Hareketi, spektral büyüklüklerin 50 yılda aşılma olasıl"
+70,P5_capraz,P5_maddeshift(15.1→15.4.8),YANLIS,15.1,15.4.8,15.3.1,TBDY 2018'in 15.4.8 numaralı bendine göre gevrek olarak hasar gören elemanlarda bu sınıflandırma geçerli değildir.
+123,P5_capraz,P5_maddeshift(7.2.1.4→3.3.3),YANLIS,7.2.1.4,3.3.3,7.2.4,TBDY 2018'in 3.3.3 numaralı bendine göre c50’den daha yüksek bet on sınıflarının kullanıldığı durumlarda kesitlerin eğilme momenti ve eksenel yük altı
+127,P1_dogrudan,P1_verbatim,DOGRU,6.2.3,(atifsiz),6.2,"TBDY 2018'e göre mekanik ve Elektrik Donanımlar için Büyütme ve Davranış Katsayıları Mekanik veya Elektrik Donanım eB eR Havalandırma, ısıtma, soğutma"
+246,P1_dogrudan,P1_madde_atifli,DOGRU,2.1.2,2.1.2,2.2.3,"TBDY 2018'in 2.1.2 numaralı bendine göre deprem Yer Hareketi Düzeyi-3 (DD-3) DD-3 Deprem Yer Hareketi, spektral büyüklüklerin 50 yılda aşılma olasılığ"
+257,P1_dogrudan,P1_madde_atifli,DOGRU,2.1.2,2.1.2,2.2.2,"TBDY 2018'in 2.1.2 numaralı bendine göre deprem Yer Hareketi Düzeyi-2 (DD-2) DD-2 Deprem Yer Hareketi, spektral büyüklüklerin 50 yılda aşılma olasılığ"
+278,P1_dogrudan,P1_verbatim,DOGRU,14.5,(atifsiz),14.15.4,TBDY 2018'e göre belirlenen düşey rijitlik ile hesapta göz önüne alınan düşey rijitlik arasındaki farkın deneyden elde edilen değere oranı %15’den faz
+304,P1_dogrudan,P1_madde_atifli,DOGRU,7.2.1.4,7.2.1.4,7.2.4,TBDY 2018'in 7.2.1.4 numaralı bendine göre c50’den daha yüksek bet on sınıflarının kullanıldığı durumlarda kesitlerin eğilme momenti ve eksenel yük al
+310,P5_capraz,P5_maddeshift(2.1.2→14.5.1),YANLIS,2.1.2,14.5.1,2.2.1,"TBDY 2018'in 14.5.1 numaralı bendine göre deprem Yer Hareketi Düzeyi-1 (DD-1) DD-1 Deprem Yer Hareketi , spektral büyüklüklerin 50 yılda aşılma olasıl"
+323,P1_dogrudan,P1_verbatim,DOGRU,16.11.1,(atifsiz),16.6,TBDY 2018'e göre statik su basıncı dışında tüm zemin basınçları düzgün yayılı olarak etki ettirilecektir.
+351,P5_capraz,P5_maddeshift(15.2.1.3→16.7.3.3),YANLIS,15.2.1.3,16.7.3.3,15.2.2,TBDY 2018'in 16.7.3.3 numaralı bendine göre bilgi düzeyleri sırasıyla sınırlı ve kapsamlı olarak sınıflandırılacaktır.
+360,P1_dogrudan,P1_madde_atifli,DOGRU,2.1.2,2.1.2,2.2.1,"TBDY 2018'in 2.1.2 numaralı bendine göre deprem Yer Hareketi Düzeyi-1 (DD-1) DD-1 Deprem Yer Hareketi , spektral büyüklüklerin 50 yılda aşılma olasılı"
+364,P1_dogrudan,P1_madde_atifli,DOGRU,15.1,15.1,15.3.1,TBDY 2018'in 15.1 numaralı bendine göre gevrek olarak hasar gören elemanlarda bu sınıflandırma geçerli değildir.
+382,P1_dogrudan,P1_madde_atifli,DOGRU,7.2.1.4,7.2.1.4,7.2.4,TBDY 2018'in 7.2.1.4 numaralı bendine göre kesit Hesaplarında Kullanılacak Yöntem Bu bölüm kapsamında betonarme elemanların depreme dayanıklı olarak b
+393,P1_dogrudan,P1_madde_atifli,DOGRU,14.5,14.5,14.15.4,TBDY 2018'in 14.5 numaralı bendine göre deneye tabi tutulan her iki yalıtım birimi için ikinci çevrimde hesaplanan etkin rijitlik ve etkin sönüm oranı
+426,P1_dogrudan,P1_verbatim,DOGRU,15.2.1.3,(atifsiz),15.2.2,TBDY 2018'e göre bilgi düzeyleri sırasıyla sınırlı ve kapsamlı olarak sınıflandırılacaktır.
+444,P1_dogrudan,P1_verbatim,DOGRU,15.2.11.3,(atifsiz),15.2.12,"TBDY 2018'e göre malzeme dayanımları, özellikle belirtilmedikçe ilgili tasarım yönetmeliklerinde verilen malzeme katsayıları ile bölünmeyecektir."
+476,P5_capraz,P5_maddeshift(16.11.1→9.2.1.1),YANLIS,16.11.1,9.2.1.1,16.6,TBDY 2018'in 9.2.1.1 numaralı bendine göre statik su basıncı dışında tüm zemin basınçları düzgün yayılı olarak etki ettirilecektir.

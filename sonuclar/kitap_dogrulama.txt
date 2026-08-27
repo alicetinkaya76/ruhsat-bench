@@ -1,0 +1,45 @@
+﻿==============================================================================
+RUHSAT-Bench — UZMAN KITABI DOGRULAMA
+==============================================================================
+anahtar: sonuclar\ikinci_gecis_anahtar.csv  (60 kod)
+
+--- gecis2_INS_MUH.xlsx  (14690 bayt)
+  [GECTI] sayfalar DENETIM + BENIOKU   ['DENETIM', 'BENIOKU']
+  [GECTI] basliklar bilinen bir semayla eslesiyor   gecis2
+  [GECTI] satir sayisi anahtarla ayni   60 / 60
+  [GECTI] bos IDDIA / KAYNAK yok   bos: []
+  [GECTI] KARAR sutunu bos (dagitim oncesi)   dolu: 0
+  [GECTI] KARAR acilir listesi tum satirlarda   [60]
+  [ATLANDI] KALITE ekseni bu semada yok
+  [GECTI] Turkce karakter bozulmasi yok
+
+--- gecis2_ISG_UZM.xlsx  (14562 bayt)
+  [GECTI] sayfalar DENETIM + BENIOKU   ['DENETIM', 'BENIOKU']
+  [GECTI] basliklar bilinen bir semayla eslesiyor   gecis2
+  [GECTI] satir sayisi anahtarla ayni   60 / 60
+  [GECTI] bos IDDIA / KAYNAK yok   bos: []
+  [GECTI] KARAR sutunu bos (dagitim oncesi)   dolu: 0
+  [GECTI] KARAR acilir listesi tum satirlarda   [60]
+  [ATLANDI] KALITE ekseni bu semada yok
+  [GECTI] Turkce karakter bozulmasi yok
+
+--- ORTAK
+  [GECTI] iki kitabin kod KUMESI ayni   fark: []
+  [GECTI] kodlar anahtarla birebir   fark: []
+  [GECTI] SIRA farkli (kor tasarim)   h1=c5169d94 h2=323cd1af
+  [GECTI] kontrol/tuzak satirlari kitapta   2 kontrol maddesi
+
+--- KORLUK (sizinti taramasi)
+  gecis2_INS_MUH.xlsx          bulgu: 0
+  gecis2_ISG_UZM.xlsx          bulgu: 0
+  [GECTI] gorunur hucrelerde altin/probe/tabaka YOK   0 bulgu
+
+--- POZITIF KONTROL (tarama gercekten yakaliyor mu?)
+  sizinti 'belge' sutununa enjekte edildi
+  [GECTI] kasten sizdirilan altin yakalandi
+  [GECTI] kasten sizdirilan probe yakalandi
+
+==============================================================================
+SONUC: butun denetimler gecti. Kitaplar dagitilabilir.
+  60 satir, uzman basina ~35 dakika.
+==============================================================================

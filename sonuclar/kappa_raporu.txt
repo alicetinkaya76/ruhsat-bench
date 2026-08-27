@@ -1,0 +1,84 @@
+﻿==============================================================================
+RUHSAT-Bench — UZMAN DENETIMI BIRLESTIRME
+==============================================================================
+uzman: INS_MUH_DOLDURULMUS, ISG_UZM_DOLDURULMUS | anahtar: 158 kod
+
+[0] GIRDI DOGRULAMA  (asagidaki her sey buna bagli)
+    INS_MUH_DOLDURULMUS
+      anahtarda 158 kod | dosyada 158 | EKSIK 0 | anahtar disi 0
+      KARAR  degerleri: {'YANLIS': 105, 'DOGRU': 53}
+      KALITE degerleri: {'TEMIZ': 128, 'KIRLI': 22, 'BAGLAMSIZ': 8}
+    ISG_UZM_DOLDURULMUS
+      anahtarda 158 kod | dosyada 158 | EKSIK 0 | anahtar disi 0
+      KARAR  degerleri: {'YANLIS': 105, 'DOGRU': 53}
+      KALITE degerleri: {'TEMIZ': 125, 'KIRLI': 21, 'BAGLAMSIZ': 12}
+    => girdi beklenen bicimde.
+
+[1] KAPSAM
+    INS_MUH_DOLDURULMUS KARAR dolu  158 / 158   KALITE dolu  158
+    ISG_UZM_DOLDURULMUS KARAR dolu  158 / 158   KALITE dolu  158
+    iki uzmanda da dolu: 158
+
+[1b] BAGIMSIZLIK KONTROLU  (kappa'nin on sarti)
+    KARAR birebir ayni : 158/158
+    KALITE birebir ayni: 151/158
+    GEREKCE metni birebir ayni: 0/112
+    dayanak: serbest metin ortusmesi %0 (112 ortak dolu satirda)
+
+    (not) KARAR ekseninde uyum TAM. Bagimsizlik serbest metinle
+    dogrulandigi icin bu bir sorun degil, ama kappa=1.00 yorumlanmali:
+    kitap kaynak alintisini ve alintinin maddesini gosteriyorsa cogu
+    prob icin karar bir HATIRLAMA degil KARSILASTIRMA isidir ve tam uyum
+    beklenir. Bu eksen, uretecin manipulasyonunun gosterilen kanittan
+    geri okunabildigini dogrular; altin etiketi mevzuata karsi BAGIMSIZ
+    olarak dogrulamaz. Makalede bu ayrim yazilmali.
+    => bagimsiz gorunuyor, kappa hesaplanabilir.
+
+[2] DIKKAT TUZAGI (pozitif kontrol — dogru etiket YANLIS)
+    INS_MUH_DOLDURULMUS 8/8 yakalandi
+    ISG_UZM_DOLDURULMUS 8/8 yakalandi
+  Yakalama dusukse asagidaki hata orani tahminleri ALT SINIRDIR.
+
+[3] KODLAYICILAR ARASI UYUM (Cohen kappa)
+    KARAR (3 kategori)           k=1.000  %95GA [1.000, 1.000]  po=1.000 pe=0.543  n=150   (cok iyi)
+    KARAR (EMIN_DEGILIM haric)   k=1.000  %95GA [1.000, 1.000]  po=1.000 pe=0.543  n=150   (cok iyi)
+    KALITE (3 kategori)          k=0.860  %95GA [0.759, 0.961]  po=0.953 pe=0.667  n=150   (cok iyi)
+    EMIN_DEGILIM sayisi: INS_MUH_DOLDURULMUS=0, ISG_UZM_DOLDURULMUS=0
+
+[4] ALTIN GECERLILIGI  (tasarim agirlikli)
+    KESIN hata (iki uzman ayni, altindan farkli)
+      ham: 0/150   hicbir hata gozlenmedi
+      %95 TEK YONLU UST SINIR: %2.50
+      NOT: '%0.0 [%0.0, %0.0]' diye raporlamayin. Sifir olay, hata
+      oraninin sifir oldugunu degil, ust sinirin bu degerde oldugunu gosterir.
+    ADAY  hata (en az bir uzman farkli)
+      ham: 0/150   hicbir hata gozlenmedi
+      %95 TEK YONLU UST SINIR: %2.50
+      NOT: '%0.0 [%0.0, %0.0]' diye raporlamayin. Sifir olay, hata
+      oraninin sifir oldugunu degil, ust sinirin bu degerde oldugunu gosterir.
+
+[5] A vs B KALDIRACI  (bayrak gercekten hata ongoruyor mu?)
+    [kesin] A: 0/100 = %0.0   B: 0/50 = %0.0   kaldirac iki tabakada da hata yok   Fisher p=1.000
+      ! IKI TABAKADA DA SIFIR OLAY -> testin gucu SIFIR.
+        Bu sonuc, bayraklarin ise yaramadigini GOSTERMEZ; hicbir sey
+        gostermez. Bayrak konusunda uzman verisiyle cikarim yapilamaz.
+    [aday] A: 0/100 = %0.0   B: 0/50 = %0.0   kaldirac iki tabakada da hata yok   Fisher p=1.000
+      ! IKI TABAKADA DA SIFIR OLAY -> testin gucu SIFIR.
+        Bu sonuc, bayraklarin ise yaramadigini GOSTERMEZ; hicbir sey
+        gostermez. Bayrak konusunda uzman verisiyle cikarim yapilamaz.
+  Olay gozlendiginde: p>0.05, konsensus bayraginin altin hatasi ongormedigi
+  yonunde kanittir. Olay yoksa bu satir okunmaz.
+
+[6] PROB KIRILIMI  (A tabakasi, kesin hata)
+    P1_dogrudan        0/22   %  0.0  [%0.0, %14.9]
+    P2_sayisal         0/17   %  0.0  [%0.0, %18.4]
+    P3_anakronizm      0/15   %  0.0  [%0.0, %20.4]
+    P4_uydurma         0/12   %  0.0  [%0.0, %24.3]
+    P5_capraz          0/16   %  0.0  [%0.0, %19.4]
+    P6_guncellik       0/18   %  0.0  [%0.0, %17.6]
+
+[7] KALITE DAGILIMI
+    INS_MUH_DOLDURULMUS BAGLAMSIZ=7  KIRLI=21  TEMIZ=122
+    ISG_UZM_DOLDURULMUS BAGLAMSIZ=11  KIRLI=20  TEMIZ=119
+
+[8] UYUSMAZLIK: 0 madde -> sonuclar/uyusmazliklar.csv  (UZLASI sutunu birlikte doldurulacak)

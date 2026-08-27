@@ -1,0 +1,72 @@
+﻿==============================================================================
+RUHSAT-Bench — KAYNAK KIMLIK DOGRULAMA v2 (deterministik, modelsiz)
+==============================================================================
+iddia sayisi: 486
+varyant etiketi okundu -> P5_maddeshift: 92 | P5_lawshuffle: 34 | P2_swap: 41
+
+[A] BASLIK TARAMASI  (yutulan madde tespiti)
+  3194      siki=49   gevsek=86   madde=49   eksik no=1    YUTULAN=0
+  4708      siki=16   gevsek=23   madde=15   eksik no=0    YUTULAN=0
+  6331      siki=39   gevsek=50   madde=39   eksik no=0    YUTULAN=0
+  ISGRISK   siki=19   gevsek=20   madde=19   eksik no=0    YUTULAN=0
+  TBDY      bent basligi=1317  (ondalikli yapi; yutulma testi uygulanmaz)
+  YDUY      siki=36   gevsek=54   madde=36   eksik no=0    YUTULAN=0
+  temiz: gevsek tarama ekstra baslik bulmadi.
+
+[B] KOKEN KONTROLU  (cumle gercekten kayitli maddede mi? tum yerler)
+  kontrol edilebilen: 453 | eslesti: 453 | KAYMIS: 0 | bulunamadi: 1 | atlandi: 32
+  birden fazla yerde gecen cumle: 7  (bunlarda madde atfi tek degil; [C1] hepsini test eder)
+
+[B2] TAM ESLESMEYEN CUMLELER  (v1'de 'bulunamadi' diyenler)
+  7 cumle ham metinde birebir bulunamadi. Beklenen sebep:
+  uretecteki cumleler() '(Değişik: ...)' etiketlerini ve bastaki 'b)' /
+  '(4)' isaretlerini SOKUYOR; kaynak_alinti bu yuzden ham metnin birebir
+  alt dizisi olmayabilir. n-gram kapsanmasi bunu ayirt eder:
+    #134   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol e
+    #202   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol e
+    #254   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Maddede sayılan işlemler, ihtisas konusuna göre ilgili (4) denetçi ve 
+    #255   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Maddede sayılan işlemler, ihtisas konusuna göre ilgili (4) denetçi ve 
+    #272   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol e
+    #282   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Maddede sayılan işlemler, ihtisas konusuna göre ilgili (4) denetçi ve 
+    #391   YDUY     kapsanma=0.44  kismi ortusme - GOZ KONTROLU
+           Denetçi mimar ve denetçi mühendis olarak görev yapabilmek için, ilgili
+
+[C1] KAZARA-DOGRU TESTI - madde kaydirma  (P5_maddeshift)
+  P5_maddeshift iddiasi: 92 | koken kontrolu yapilabilen: 92
+  temiz: hicbir kaydirma hedefi cumlenin gectigi maddelere denk gelmiyor.
+
+[C2] KAZARA-DOGRU TESTI - belge degistirme  (P5_lawshuffle)
+  Mantik: cumle hedef belgede de gecerse 'yanlis belgeye atif' iddiasi DOGRU olur.
+  P5_lawshuffle iddiasi: 34 | test edilen: 34
+  kapsanma >= 0.85: 0 (KESIN)  |  0.6-0.85: 0 (SUPHELI)
+  temiz: hicbir kaynak cumle hedef belgede kayda deger olcude gecmiyor.
+  (kalibrasyon) en yuksek 10 kapsanma: 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00
+
+[C3] P2 ATIF BOZMA UYARISI  (nicelik testi mi, atif testi mi?)
+  P2_swap iddiasi: 41 | atif baglaminda sayi saptirilmis: 1
+  Bunlarda altin etiket yine YANLIS'tir (hata degil) ama olculen sey
+  'sayisal hafiza' degil 'capraz atif hafizasi'dir; P2 skoru kirlenir.
+    #378   3194     2960->1480   ...ALTINCI BÖLÜM 2960 Sayılı Boğaziçi Kanunu ile İlgili Hüküm...
+
+[C4] P6 DEGISIKLIK DOGRULAMASI  (kayitli yil madde blogunda gercekten var mi?)
+  P6 iddiasi (yil kayitli): 119 | blokta dogrulanamayan: 0
+  temiz: her P6 iddiasinin yili kendi madde blogunda dogrulandi.
+
+[D] YAPISAL MADDE UYARISI  (Amac/Kapsam/Dayanak/Tanimlar)
+  [B] bu cumlelerin gercekten bu bloklarda oldugunu dogruladi; sorun etiket
+  degil ICERIK: tanim/amac cumleleri belgeler arasi tekrar eder, bu yuzden
+  P5_lawshuffle'da kazara-dogru riski en yuksek olan satirlar bunlardir.
+    YDUY      madde 4    -> 7 iddia
+    4708      madde 1    -> 3 iddia
+    6331      madde 4    -> 2 iddia
+
+[E] KARAR
+  + 1 P2 satiri atif bozuyor (altin dogru, olcum kirli).
+  Kaynak-kimlik VE kazara-dogruluk katmanlari temiz.
+  Kalan altin hatasi anlamsal duzeydedir; onu ancak uzman denetimi bulur.

@@ -1,0 +1,75 @@
+RUHSAT-Bench F4 — ON KAYIT EK-1  (kosu tamamlandi, PUANLAMA ONCESI)
+====================================================================
+Tarih   : 28.07.2026
+Durum   : 17.028 cagri tamamlandi (18 model x 2 kosul x 473 iddia).
+          Bu ek, HICBIR DOGRULUK METRIGI HESAPLANMADAN once yazildi.
+          Yalnizca yanit/kacinma sayimlarina bakildi.
+
+1. DUZELTILEN TANIM HATASI
+--------------------------
+Ana on kayit madde 3 soyle diyordu:
+  "Bir model x kosul hucresi maddelerin %80'inden azina cevap verirse
+   PUANLANMAZ; 'uyumsuz' olarak raporlanir."
+
+"Cevap vermek" iki AYRI kavrami kapsiyor ve bunlari ayirmak gerekiyor:
+
+  (a) YANIT ORANI  = ayristirilabilir cikti / toplam madde
+      Uyum olcusudur. Model etiket uretemiyorsa hucre yorumlanamaz.
+
+  (b) TAAHHUT ORANI = DOGRU|YANLIS verilen madde / toplam madde
+      E1'de bunun tumleyeni KACINMADIR ve kacinma bu calismanin
+      BAGIMLI DEGISKENIDIR.
+
+Esigi (b)'ye uygulamak, olculmek istenen davranisi "uyumsuzluk" saymak
+olur. Ornek: qwen2.5:7b-instruct-q4_K_M E1'de 473 maddenin 467'sinde
+kacinmistir ve ciktisinin %100'u ayristirilabilir. Bu model tam uyumludur;
+kacinmasi bulgunun kendisidir.
+
+DUZELTME: %80 esigi YANIT ORANINA uygulanir. Taahhut orani bir kapi degil,
+raporlanan bir SONUCTUR.
+
+Bu duzeltme sonuclara degil kavramlarin tanimina dayanir; dogru tanim
+verinin ne gosterdiginden bagimsizdir. Yine de sapmadir ve makalede
+her iki kuralin sonucu da verilecektir (birincil: duzeltilmis kural;
+duyarlilik analizi: orijinal kural).
+
+Duzeltilmis kuralla elenen model (yanit orani < %80):
+    llama3.2:1b                   E1 0.55  E2 0.03
+    llama3.2:3b-instruct-q4_K_M   E1 0.67  E2 0.66
+Her ikisi de etiket yerine iddia metnini geri yaziyor; gercek bicim
+uyumsuzlugudur.
+
+2. YENI RAPORLAMA KURALI (POST-HOC, ON KAYITTA YOKTU)
+-----------------------------------------------------
+Dogruluk turu metrikler (dengeli dogruluk, Youden J, d', ECE) yalnizca
+TAAHHUT EDILEN madde sayisi >= 30 olan hucrelerde raporlanir; altinda
+kalan hucrelerde n yazilir ve metrik "-" olarak birakilir.
+
+Gerekce: qwen2.5:7b-instruct-q4_K_M E1'de 6 maddeye cevap vermistir;
+6 gozlemden hesaplanan bir dengeli dogruluk yaniltici olur.
+
+Bu kural ON KAYITTA YOKTU. Post-hoc raporlama uzlasimi olarak
+isaretlenir; hipotez testi icin kullanilmaz.
+
+3. EKLENEN ANALIZ (KESIFSEL, ON KAYITTA YOKTU)
+----------------------------------------------
+KACINMANIN BILGI DEGERI. Iki kosullu tasarim sunu mumkun kilar:
+
+  A_tah = modelin E1'de TAAHHUT ETTIGI maddelerde E2 dogrulugu
+  A_kac = modelin E1'de KACINDIGI maddelerde E2 dogrulugu
+  Delta = A_tah - A_kac
+
+Delta > 0 ise kacinma BILGI TASIYOR: model cevapladigi maddelerde,
+kacindigi maddelere gore daha basarili. Delta ~ 0 ise kacinma
+ayirt edici degildir, yalnizca genel bir cekingenliktir.
+
+Bu, secmeli tahmin (selective prediction) literaturunun standart
+olcutudur ve bu calismanin asil sorusudur. Iki farkli madde kumesi
+karsilastirildigi icin iki oran testi kullanilir.
+
+KESIFSEL olarak isaretlenir; coklu karsilastirma duzeltmesi uygulanmaz.
+
+4. DEGISMEYENLER
+----------------
+Ana on kaydin 1, 2, 4, 5, 6, 7 numarali maddeleri aynen gecerlidir.
+Promptlar, tohum, siralama ve alt-tur raporlamasi degismemistir.

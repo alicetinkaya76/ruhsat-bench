@@ -1,0 +1,45 @@
+﻿========================================================================================================
+RUHSAT-Bench F4 — VARYANTLAR ARASI KARARLILIK  (EK-2, KESIFSEL)
+iki varyantta da kosulmus hucre: 12
+========================================================================================================
+
+model / kosul                     kacinma A>B     P(D) A>B  dogruluk A>B    lambda A>B    donen        p
+--------------------------------------------------------------------------------------------------------
+gemma3:12b / E1                   0.01>0.01    0.48>0.13     0.56>0.54       0.09>0.03  162/463    0.0000  *
+gemma3:12b / E2                   0.00>0.00    0.26>0.26     0.54>0.54       0.04>0.04   38/473    0.6271
+gemma3:4b / E1                    0.10>0.93    0.59>0.60     0.51>0.60       0.05>0.21    3/30     0.2500
+gemma3:4b / E2                    0.00>0.00    0.60>0.02     0.49>0.52       0.03>0.02  271/468    0.0000  *
+llama3.2:3b-instruct-fp16 / E1    0.00>0.00    0.73>0.00     0.53>0.51       0.07>0.01  271/381    0.0000  *
+llama3.2:3b-instruct-fp16 / E2    0.00>0.00    0.00>0.44     0.53>0.53      0.00>-0.00  138/342    0.0000  *
+qwen2.5:32b-instruct / E1         0.83>0.98    0.33>0.67     0.65>0.78       0.21>0.33    0/9      1.0000
+qwen2.5:32b-instruct / E2         0.00>0.00    0.19>0.31     0.56>0.55       0.10>0.04   64/473    0.0000  *
+qwen2.5:7b-instruct-fp16 / E1     0.95>0.73    0.83>0.99     0.58>0.49      0.03>-0.02    0/19     1.0000
+qwen2.5:7b-instruct-fp16 / E2     0.00>0.00    0.81>0.48     0.49>0.51       0.03>0.03  152/464    0.0000  *
+qwen2.5:7b-instruct-q4_K_M / E1   0.99>0.66    0.67>0.77     0.67>0.53      0.33>-0.01    0/4      1.0000
+qwen2.5:7b-instruct-q4_K_M / E2   0.00>0.00    0.91>0.46     0.49>0.54       0.01>0.05  183/414    0.0000  *
+
+========================================================================================================
+OZET — OLCUTLER VARYANT DEGISIMINE NE KADAR DAYANIKLI
+  Ozete giren hucre: 9/12  (iki varyantta da taahhut >= 30)
+    disarida: qwen2.5:32b-instruct/E1 (n_A=82, n_B=9)
+    disarida: qwen2.5:7b-instruct-fp16/E1 (n_A=24, n_B=128)
+    disarida: qwen2.5:7b-instruct-q4_K_M/E1 (n_A=6, n_B=160)
+========================================================================================================
+  olcut                         aile       ort |A-B|   medyan  en buyuk  olcut duzeyi   goreli
+  kacinma orani                 yanlilik       0.093    0.000     0.831         0.059     1.56
+  P(DOGRU | taahhut)            yanlilik       0.335    0.349     0.723         0.190     1.76
+  taahhut dogrulugu             yanlilik       0.028    0.021     0.091         0.029     0.96
+  lambda                        BILGI          0.044    0.037     0.161         0.048     0.92
+  'olcut duzeyi' = olcutun iki varyanttaki ortalama BUYUKLUGU.
+  'goreli' = ort |A-B| / olcut duzeyi. Sifira yapisik bir olcutun
+  mutlak savrulmasi kucuk cikar; bu kararlilik DEGIL, yer olmamasidir.
+
+  P(DOGRU) savrulmasi / lambda savrulmasi = x7.55
+  => YANLILIK OLCUTLERI SAVRULUYOR, LAMBDA GORELI OLARAK DAHA KARARLI.
+     DIKKAT: lambda sifira yapisiksa mutlak savrulmasi zaten kucuk
+     cikar. 'goreli' sutununa bakmadan kararlilik iddia etmeyin.
+
+NOT (EK-2 madde 3): iki prompt, prompt uzayindan alinmis IKI NOKTADIR.
+Savrulmanin buyuklugu hakkinda ALT SINIR verir; dagilimi hakkinda bilgi
+vermez. Varyant B yalnizca 6 modelde kosuldugu icin bulgu bu altkumeyle
+sinirlidir.

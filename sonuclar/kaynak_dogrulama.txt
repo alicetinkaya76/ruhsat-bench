@@ -1,0 +1,34 @@
+﻿==============================================================================
+RUHSAT-Bench — KAYNAK KIMLIK DOGRULAMA (deterministik, modelsiz)
+==============================================================================
+iddia sayisi: 486
+
+[A] BASLIK TARAMASI  (yutulan madde tespiti)
+  3194      siki baslik=49   gevsek=86   bulunan madde=49   eksik no=1    YUTULAN=0
+            eksik: [48]
+  4708      siki baslik=16   gevsek=23   bulunan madde=15   eksik no=0    YUTULAN=0
+  6331      siki baslik=39   gevsek=50   bulunan madde=39   eksik no=0    YUTULAN=0
+  ISGRISK   siki baslik=19   gevsek=20   bulunan madde=19   eksik no=0    YUTULAN=0
+  TBDY      bent basligi=1317  (ondalikli bent yapisi; yutulma testi uygulanmaz)
+  YDUY      siki baslik=36   gevsek=54   bulunan madde=36   eksik no=0    YUTULAN=0
+  temiz: gevsek tarama ekstra baslik bulmadi.
+
+[B] KOKEN KONTROLU  (cumle gercekten kayitli maddede mi?)
+  kontrol edilebilen: 447 | eslesti: 447 | KAYMIS: 0 | metinde bulunamadi: 7 | atlandi: 32
+  7 cumle belgede birden fazla yerde geciyor (madde atfi belirsiz).
+  kayma orani: %0.0
+
+[C] KAZARA-DOGRU TESTI  (P5 madde-kaydirma hedefi gercek maddeye denk mi?)
+  P5_maddeshift iddiasi: 0 | koken kontrolu yapilabilen: 0
+  temiz: hicbir kaydirma hedefi gercek maddeye denk gelmiyor.
+
+[D] YAPISAL MADDE UYARISI  (Amac/Kapsam/Dayanak/Tanimlar'dan hukum cikmaz)
+  Bu maddeler tipik olarak Amac/Kapsam/Dayanak/Tanimlar'dir; buradan
+  cikan 'hukum' cumleleri buyuk olasilikla sonraki maddelerden yutulmustur:
+    YDUY      madde 4    -> 7 iddia
+    4708      madde 1    -> 3 iddia
+    6331      madde 4    -> 2 iddia
+
+[E] KARAR
+  Kaynak-kimlik katmani temiz. Altin hatasi varsa anlamsal duzeydedir;
+  onu ancak uzman denetimi bulur.

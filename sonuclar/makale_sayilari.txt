@@ -1,0 +1,165 @@
+﻿========================================================================================
+RUHSAT-Bench — MAKALEDE GECEN SAYILAR (dosyalardan uretildi)
+========================================================================================
+
+[4.2-4.4] YEREL KOL
+  hucre: 36 | yanit esigini gecen: 32 | metrik yeterli (n>=30): 28
+  elenen model: ['llama3.2:1b', 'llama3.2:3b-instruct-q4_K_M']
+  dengeli dogruluk : 0.48 – 0.64  (medyan 0.51, n=28)
+  Youden J         : -0.04 – 0.28  (medyan 0.03, n=28)
+  ECE              : 0.21 – 0.44  (medyan 0.35, n=28)
+  guven AUROC      : 0.46 – 0.54  (medyan 0.50, n=28)
+  kacinma (E1)     : 0.00 – 0.99  (medyan 0.31, n=16)
+
+[4.5] VARYANT KARARSIZLIGI
+  hucre: 12 | ozete giren (n>=30, iki varyant): 9
+  |A-B| P(DOGRU)             ort 0.335  medyan 0.349  en buyuk 0.723
+  |A-B| taahhut dogrulugu    ort 0.028  medyan 0.021  en buyuk 0.091
+  |A-B| lambda               ort 0.044  medyan 0.037  en buyuk 0.161
+  ORAN P(DOGRU)/lambda = x7.5
+
+[4.6] BARINDIRILAN MODELLER
+  sonnet  E1  yanit 1.0  kacinma 0.3763  n 291  bacc 0.6966  J 0.3931  ECE 0.0359  AUROC 0.5891
+  sonnet  E2  yanit 1.0  kacinma 0.0  n 473  bacc 0.6314  J 0.2629  ECE 0.0714  AUROC 0.5762
+  haiku   E1  yanit 1.0  kacinma 0.2727  n 336  bacc 0.5327  J 0.0654  ECE 0.231  AUROC 0.5807
+  haiku   E2  yanit 1.0  kacinma 0.0  n 472  bacc 0.5575  J 0.115  ECE 0.2106  AUROC 0.514
+
+[4.3 / 4.6] KACINMANIN BILGI DEGERI  (rapor dosyalarindan)
+  --- yerel (11 satir)
+   gemma3:27b                         459    0.54     14    0.43   +0.12   0.3905
+   gemma3:4b                          422    0.49     49    0.49   +0.00   0.9673
+   qwen2.5:14b-instruct                97    0.57    376    0.50   +0.06   0.2582
+   qwen2.5:32b-instruct                82    0.65    391    0.54   +0.11   0.0702
+   qwen2.5:3b-instruct-fp16           344    0.52    129    0.49   +0.03   0.5355
+   qwen2.5:3b-instruct-q4_K_M         458    0.54     11    0.45   +0.08   0.5774
+   qwen2.5:3b-instruct-q5_K_M         244    0.54    228    0.52   +0.01   0.7450
+   qwen2.5:3b-instruct-q8_0           311    0.53    162    0.45   +0.08   0.0861
+   qwen2.5:7b-instruct-fp16            24    0.58    445    0.48   +0.10   0.3281
+   qwen2.5:7b-instruct-q5_K_M          16    0.50    453    0.47   +0.03   0.8144
+   qwen2.5:7b-instruct-q8_0            18    0.56    440    0.48   +0.08   0.5147
+  --- sonnet (1 satir)
+   claude-sonnet-5                    291    0.70    178    0.54   +0.16   0.0005  *
+  --- haiku (1 satir)
+   claude-haiku-4-5-20251001          335    0.57    129    0.52   +0.05   0.3241
+
+[4.8] KOSULAR ARASI TEKRAR
+  --- kararsizlik_f4_frontier_cogunluk.txt
+     claude-sonnet-5 / E1                 473       0.84        0.89      0.49
+     claude-sonnet-5 / E2                 473       0.88        0.92      0.46
+     claude-sonnet-5 / E1              175/240 =  0.73   28/51 =  0.55   +0.18    0.0179  *
+     claude-sonnet-5 / E2              264/418 =  0.63   37/55 =  0.67   -0.04    0.6550
+     claude-sonnet-5 / E1                 291        0.562     0.589  -0.027
+     claude-sonnet-5 / E2                 473        0.491     0.576  -0.085
+  --- kararsizlik_f4_haiku_cogunluk.txt
+     claude-haiku-4-5-20251001 / E1       473       0.73        0.82      0.31
+     claude-haiku-4-5-20251001 / E2       473       0.81        0.87      0.31
+     claude-haiku-4-5-20251001 / E1    141/257 =  0.55   38/79 =  0.48   +0.07    0.3049
+     claude-haiku-4-5-20251001 / E2    212/381 =  0.56   51/91 =  0.56   -0.00    1.0000
+     claude-haiku-4-5-20251001 / E1       336        0.524     0.581  -0.056
+     claude-haiku-4-5-20251001 / E2       472        0.499     0.514  -0.015
+  --- kararsizlik_f4_sonnetB_cogunluk.txt
+     claude-sonnet-5 / E1                 473       0.80        0.86      0.45
+     claude-sonnet-5 / E2                 473       0.85        0.90      0.43
+     claude-sonnet-5 / E1              158/229 =  0.69   32/61 =  0.52   +0.17    0.0224  *
+     claude-sonnet-5 / E2              251/402 =  0.62   36/70 =  0.51   +0.11    0.0861
+     claude-sonnet-5 / E1                 290        0.561     0.633  -0.073
+     claude-sonnet-5 / E2                 472        0.529     0.591  -0.062
+
+[3.6] UZMAN DENETIMI
+  --- gecis 1
+   [1b] BAGIMSIZLIK KONTROLU  (kappa'nin on sarti)
+       dogrulandigi icin bu bir sorun degil, ama kappa=1.00 yorumlanmali:
+       => bagimsiz gorunuyor, kappa hesaplanabilir.
+   [3] KODLAYICILAR ARASI UYUM (Cohen kappa)
+         %95 TEK YONLU UST SINIR: %2.50
+         oraninin sifir oldugunu degil, ust sinirin bu degerde oldugunu gosterir.
+         %95 TEK YONLU UST SINIR: %2.50
+         oraninin sifir oldugunu degil, ust sinirin bu degerde oldugunu gosterir.
+  --- gecis 2
+       Cohen kappa = 0.722   po=0.897 pe=0.628 n=58
+         CERCEVE TAHMINI: %6.7  %95GA [%1.6, %11.8]   (birinci gecis ornegi = 138 madde)
+         BILESIK AGIRLIKLA (butun kumeye yansitilmis): %8.8
+         CERCEVE TAHMINI: hicbir olay gozlenmedi (0/58)
+         %95 TEK YONLU UST SINIR: %6.2
+       N: 5/33 = %15.2   T: 1/25 = %4.0   kaldirac x3.8   Fisher p = 0.2216
+
+========================================================================================
+VERI ERISILEBILIRLIK — sonuclar/ altindaki dosyalar
+========================================================================================
+       1,975 bayt  F4_on_kayit.txt
+       3,211 bayt  F4_on_kayit_ek.txt
+       2,842 bayt  F4_on_kayit_ek2.txt
+       2,701 bayt  F4_on_kayit_ek3.txt
+         146 bayt  altin_hatalari_v2.csv
+       9,256 bayt  belge_guncellik.txt
+       8,956 bayt  dayanak_kaybi.csv
+       2,167 bayt  denetim_anahtar.csv
+      11,326 bayt  denetim_anahtar_v2.csv
+       1,516 bayt  denetim_kitabi_rapor.txt
+       7,719 bayt  denetim_konsol.txt
+      17,264 bayt  det1.jsonl
+      17,176 bayt  det2.jsonl
+      21,304 bayt  dus_sonda.jsonl
+     316,499 bayt  f4_frontier_cogunluk.jsonl
+     325,365 bayt  f4_haiku_cogunluk.jsonl
+       3,487 bayt  f4_metrikler.csv
+       1,283 bayt  f4_metrikler_B.csv
+         365 bayt  f4_metrikler_frontier.csv
+         385 bayt  f4_metrikler_haiku.csv
+      60,473 bayt  f4_rapor.txt
+      24,624 bayt  f4_rapor_B.txt
+       7,234 bayt  f4_rapor_frontier.txt
+       7,421 bayt  f4_rapor_haiku.txt
+     317,715 bayt  f4_sonnetB_cogunluk.jsonl
+     634,313 bayt  f4_sonnet_AB.jsonl
+   5,363,512 bayt  f4_sonuclar.jsonl
+     206,305 bayt  frontB_k1.jsonl
+     206,262 bayt  frontB_k2.jsonl
+     206,290 bayt  frontB_k3.jsonl
+     254,244 bayt  frontCB_k1.jsonl
+     254,559 bayt  frontCB_k2.jsonl
+     253,850 bayt  frontCB_k3.jsonl
+     253,792 bayt  frontC_k1.jsonl
+     253,951 bayt  frontC_k2.jsonl
+     253,875 bayt  frontC_k3.jsonl
+     261,543 bayt  frontH_k1.jsonl
+     261,725 bayt  frontH_k2.jsonl
+     261,552 bayt  frontH_k3.jsonl
+     205,575 bayt  front_k1.jsonl
+     205,800 bayt  front_k2.jsonl
+     205,656 bayt  front_k3.jsonl
+       3,403 bayt  gecis2_raporu.txt
+       2,584 bayt  gecis2_uzlasi.csv
+       3,904 bayt  ikinci_gecis_anahtar.csv
+         961 bayt  ikinci_gecis_rapor.txt
+       4,334 bayt  kappa_raporu.txt
+       4,324 bayt  kapsanma_kalibrasyon.txt
+       1,999 bayt  kapsanma_kalibrasyon_temiz.txt
+       1,737 bayt  kararsizlik_f4_frontier_cogunluk.txt
+       1,734 bayt  kararsizlik_f4_haiku_cogunluk.txt
+       1,741 bayt  kararsizlik_f4_sonnetB_cogunluk.txt
+       1,777 bayt  kaynak_dogrulama.txt
+       4,458 bayt  kaynak_dogrulama_v2.txt
+       3,505 bayt  kelime_onarim.txt
+       2,013 bayt  kitap_dogrulama.txt
+     649,973 bayt  konsensus.jsonl
+      34,046 bayt  konsensus_bayrak.csv
+       1,863 bayt  konsensus_dogrulama.txt
+       5,944 bayt  konsensus_rapor.txt
+       1,285 bayt  konsensus_tani.csv
+       8,627 bayt  makale_sayilari.txt
+      34,267 bayt  ozet_paketi.txt
+       2,401 bayt  p6_denge_raporu.txt
+       2,245 bayt  p6_kestirilebilirlik.txt
+       1,838 bayt  tekrar_eden_cumleler.csv
+       1,838 bayt  tekrar_temiz.csv
+      11,811 bayt  temizlik_raporu.txt
+      15,790 bayt  temizlik_raporu_v38.txt
+       7,636 bayt  temizlik_raporu_v39.txt
+         207 bayt  uyusmazliklar.csv
+       1,371 bayt  varyant_kararlilik.csv
+       3,284 bayt  varyant_kararlilik.txt
+         356 bayt  varyant_kararlilik_sonnet.csv
+       1,922 bayt  varyant_kararlilik_sonnet.txt
+       3,568 bayt  yerel_metrikler.csv
+     303,304 bayt  yerel_sonuclar.jsonl

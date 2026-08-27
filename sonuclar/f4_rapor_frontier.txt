@@ -1,0 +1,105 @@
+﻿======================================================================================================================
+RUHSAT-Bench F4 — PUANLAMA  (varyant A, kumede 473 iddia)
+Oranlar HUCREDE DENENEN madde sayisina gore; sinirli kosular dogru okunur.
+EK-1 uyarinca: esik YANIT oranina uygulanir; KACINMA bir sonuctur, kapi degildir.
+yanit esigi %80 | dogruluk metrikleri icin asgari taahhut n=30
+======================================================================================================================
+
+model / kosul                       yanit  kacin  taahh n_tah   dogr   bacc      J  dprime    ECE  AUROC  durum
+----------------------------------------------------------------------------------------------------------------------
+claude-sonnet-5 / E1                 1.00   0.38   0.62   291   0.70   0.70   0.39    1.04  0.036   0.59  gecerli
+claude-sonnet-5 / E2                 1.00   0.00   1.00   473   0.64   0.63   0.26    0.76  0.071   0.58  gecerli
+
+====================================================================================================
+DOGRULAYICI ANALIZLER   (Bonferroni: 1 model, alfa=0.0500)
+====================================================================================================
+
+[1.1-1.2] E1 vs E2, ESLESMIS  (ayni maddeler, ayni model)
+  UYARI: taahhut dogrulugu iki kosulda da cevaplanan ORTAK maddelerde
+  hesaplanir. Cok kacinan modellerde bu kume kucuktur; n_ortak sutununa bakin.
+  model                            kapsamE1 kapsamE2   fark n_ortak  taahE1  taahE2   fark  McNemar p
+  claude-sonnet-5                      0.62     1.00  +0.38     291    0.70    0.70  +0.00     1.0000
+  * = Bonferroni duzeltmeli esigin altinda
+
+[1.3b] CEVAP POLITIKASI KAYMASI   (EK-1 sonrasi eklendi — KESIFSEL)
+  Dogruluk uzerinden McNemar YANILTICI olabilir: bir probda dususu baska
+  probda yukselis dengeleyince toplam degismez ama YANLILIK degismistir.
+  Bu yuzden dogrudan cevap dagilimina ve ortak maddedeki DONME oranina bakilir.
+  model                             E1 P(D)  E2 P(D)   kayma n_ortak   donen      %
+  claude-sonnet-5                      0.44     0.32   -0.12     291      26     9%
+  Yuksek donme orani: kacinma secenegi kaldirilinca model sadece CEVAP
+  VERMIYOR, VERDIGI CEVABI da degistiriyor. Bu durumda E2 olcumu ayni
+  bilginin zorunlu ifadesi degil, FARKLI bir cevap politikasidir.
+
+[1.3c] DEJENERE HUCRELER  (taahhut edilenlerin >=%90'i tek etiket)
+  dejenere hucre: 0. Bu hucrelerde dogruluk turu metrikler bilgi degil
+  cevap yanliligi olcer; dengeli dogruluk tanim geregi 0.50'ye yakin cikar.
+
+[1.4] lambda = dogruluk(P1) + dogruluk(P5) - 1   (yanlilikten arindirilmis bilgi)
+  lambda ~ 0 : model yalnizca cevap yanliligiyla calisiyor
+  model / kosul                              P1(D)   P5(Y)   lambda
+  claude-sonnet-5 / E1                        0.74    0.59   +0.334
+  claude-sonnet-5 / E2                        0.59    0.71   +0.300
+
+[1.5] KACINMANIN BILGI DEGERI   (EK-1 madde 3 — KESIFSEL, on kayitta yoktu)
+  Modelin E1'de KACINDIGI maddelerde E2 dogrulugu ile TAAHHUT ETTIGI
+  maddelerde E2 dogrulugunu karsilastirir. Delta>0 ise kacinma bilgi tasir.
+  model                            n_tah   A_tah  n_kac   A_kac   Delta        p
+  claude-sonnet-5                    291    0.70    178    0.54   +0.16   0.0005  *
+  * p<0.05 (duzeltmesiz). Delta>0: model cevapladigi maddelerde daha basarili;
+  yani kacinma ayirt edici. Delta~0: kacinma yalnizca genel cekingenlik.
+
+[1.6] DUYARLILIK — ORIJINAL ON KAYIT KURALI (esik TAAHHUT oranina)
+  Kural harfiyen uygulansaydi hangi hucreler elenirdi:
+  elenen hucre: 1
+    claude-sonnet-5/E1 (0.62)
+  Bunlarin cogu KACINDIGI icin elenirdi; EK-1'in duzelttigi hata budur.
+
+====================================================================================================
+KESIFSEL — PROB VE ALT-TUR KIRILIMI
+  ON KAYIT 2: bunlar hipotez testi DEGILDIR; guven araliklariyla betimseldir.
+  Tek sinifli tabakalarda gosterilen deger 'altin sinifi secme orani'dir,
+  bilgi olcusu degildir. Prob ici dengeli dogruluk yalnizca P3 ve P6'da tanimli.
+====================================================================================================
+
+  claude-sonnet-5 / E1
+    P1_dogrudan               84/113    0.74  [0.66, 0.81]   (tek sinifli)
+    P2_sayisal                21/29     0.72  [0.54, 0.85]   (tek sinifli)
+    P3_anakronizm             18/19     0.95  [0.75, 0.99]
+    P4_uydurma                13/13     1.00  [0.77, 1.00]   (tek sinifli)
+    P5_capraz                 39/66     0.59  [0.47, 0.70]   (tek sinifli)
+    P6_guncellik              28/51     0.55  [0.41, 0.68]
+        P1_madde_atifli           31/42     0.74  [0.59, 0.85]   (tek sinifli)
+        P1_verbatim               53/71     0.75  [0.63, 0.83]   (tek sinifli)
+        P2_swap                   21/29     0.72  [0.54, 0.85]   (tek sinifli)
+        P3_yil                    11/12     0.92  [0.65, 0.99]   (tek sinifli)
+        P3_yil_dogru               6/6      1.00  [0.61, 1.00]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P5_lawshuffle             21/29     0.72  [0.54, 0.85]   (tek sinifli)
+        P5_maddeshift             18/37     0.49  [0.33, 0.64]   (tek sinifli)
+        P6_degismedi              28/28     1.00  [0.88, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/23     0.00  [0.00, 0.14]   (tek sinifli)
+
+  claude-sonnet-5 / E2
+    P1_dogrudan               96/163    0.59  [0.51, 0.66]   (tek sinifli)
+    P2_sayisal                27/37     0.73  [0.57, 0.85]   (tek sinifli)
+    P3_anakronizm             18/19     0.95  [0.75, 0.99]
+    P4_uydurma                13/13     1.00  [0.77, 1.00]   (tek sinifli)
+    P5_capraz                 86/121    0.71  [0.62, 0.78]   (tek sinifli)
+    P6_guncellik              61/120    0.51  [0.42, 0.60]
+        P1_madde_atifli           40/80     0.50  [0.39, 0.61]   (tek sinifli)
+        P1_verbatim               56/83     0.67  [0.57, 0.77]   (tek sinifli)
+        P2_swap                   27/37     0.73  [0.57, 0.85]   (tek sinifli)
+        P3_yil                    11/12     0.92  [0.65, 0.99]   (tek sinifli)
+        P3_yil_dogru               6/6      1.00  [0.61, 1.00]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P5_lawshuffle             26/32     0.81  [0.65, 0.91]   (tek sinifli)
+        P5_maddeshift             60/89     0.67  [0.57, 0.76]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         1/30     0.03  [0.01, 0.17]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)

@@ -1,0 +1,95 @@
+==============================================================================
+RUHSAT-Bench — yanlilik duzeltmeli konsensus on-taramasi (v2)
+==============================================================================
+iddia sayisi: 486 | model x kosul hucresi: 10
+
+[1] MODEL x KOSUL TANILAYICI
+model                             ks      n   kaps          baskin   accD   accY   bacc      J  durum
+gemma3:12b                        E1    480    99%      YANLIS %52   0.55   0.59   0.57   0.13  gecerli
+gemma3:12b                        E2    486   100%      YANLIS %74   0.28   0.77   0.52   0.05  bilgisiz (J=0.05)
+gemma3:4b                         E1    436    90%       DOGRU %61   0.66   0.45   0.56   0.11  gecerli
+gemma3:4b                         E2    484   100%       DOGRU %62   0.69   0.45   0.57   0.14  gecerli
+llama3.2:3b-instruct-q5_K_M       E1    448    92%      YANLIS %66   0.36   0.67   0.51   0.03  bilgisiz (J=0.03)
+llama3.2:3b-instruct-q5_K_M       E2    467    96%     YANLIS %100   0.00   1.00   0.50   0.00  dejenere (YANLIS %100); bilgisiz (J=0.00)
+qwen2.5:14b-instruct              E1    100    21%       DOGRU %81   0.81   0.19   0.50   0.00  dusuk kapsam (21%); bilgisiz (J=0.00)
+qwen2.5:14b-instruct              E2    486   100%       DOGRU %57   0.63   0.50   0.56   0.13  gecerli
+qwen2.5:7b-instruct-q4_K_M        E1      7     1%       DOGRU %57   0.67   0.50   0.58   0.17  dusuk kapsam (1%)
+qwen2.5:7b-instruct-q4_K_M        E2    486   100%       DOGRU %88   0.85   0.09   0.47  -0.07  dejenere (DOGRU %88); bilgisiz (J=-0.07)
+
+secilen oy veren hucreler (3):
+  gemma3:12b / E1  (J=0.13)
+  gemma3:4b / E2  (J=0.14)
+  qwen2.5:14b-instruct / E2  (J=0.13)
+
+[2] BAYRAK SONUCU
+  v2 (agirlikli, elemeli) : 73 madde  (%15.0)
+  v1 (naif, esit oy)      : 82 madde  (%16.9)
+  ortak                   : 50 | yalniz v2: 23 | yalniz v1: 32
+
+[3] ALTIN SINIFINA GORE (yanlilik testi)
+  gold=DOGRU  n=243   v1 bayrak=47  (%19.3)   v2 bayrak=18  (%7.4)
+  gold=YANLIS n=243   v1 bayrak=35  (%14.4)   v2 bayrak=55  (%22.6)
+  sinif asimetrisi: v1 4.9 puan -> v2 15.2 puan
+  ! Duzeltmeden SONRA da asimetri var ve yonu: gold=YANLIS maddeler daha cok bayrakli.
+    Bu, elemeden sonra kalan oy verenlerin ARTIK yanliligidir; J agirligi
+    bilgililigi duzeltir, yanliligi duzeltmez. Bayraklari altin hatasi
+    kaniti saymayin.
+
+[4] PROBE KIRILIMI
+  P1_dogrudan      n=168   bayrak=11   (%6.5)
+  P5_capraz        n=126   bayrak=42   (%33.3)
+  P6_guncellik     n=119   bayrak=5    (%4.2)
+  P2_sayisal       n=41    bayrak=10   (%24.4)
+  P3_anakronizm    n=19    bayrak=4    (%21.1)
+  P4_uydurma       n=13    bayrak=1    (%7.7)
+
+[5] KAYNAK KIRILIMI
+  TBDY                         n=158   bayrak=31   (%19.6)
+  YDUY                         n=122   bayrak=13   (%10.7)
+  3194                         n=101   bayrak=11   (%10.9)
+  6331                         n=62    bayrak=10   (%16.1)
+  4708                         n=26    bayrak=5    (%19.2)
+  ISGRISK                      n=17    bayrak=3    (%17.6)
+
+[6] EN ONCELIKLI 20 BAYRAK
+  #7     TBDY               11.2.5     P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #22    YDUY               8          P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #33    TBDY               16.4.1     P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #35    TBDY               5.7        P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #37    TBDY               16.13.2    P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #38    TBDY               2.1.2      P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #45    TBDY               11.2.2     P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #48    6331               4          P1_dogrudan  gold=DOGRU  karsi=%100 (3 oy)
+  #55    3194               28         P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #66    6331               24         P6_guncellik gold=DOGRU  karsi=%100 (3 oy)
+  #80    TBDY               16.6.2     P2_sayisal   gold=YANLIS karsi=%100 (3 oy)
+  #84    6331               10         P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #89    TBDY               4.4.4.2    P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #92    4708               9          P6_guncellik gold=DOGRU  karsi=%100 (3 oy)
+  #94    TBDY               15.2.5.1   P1_dogrudan  gold=DOGRU  karsi=%100 (3 oy)
+  #108   ISGRISK            17         P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #109   TBDY               5.3.2.1    P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #110   ISGRISK            5          P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #118   3194               39         P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #138   6331               8          P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  ... (+53)
+
+[7] YORUM
+  Bayrak = 'altin yanlis' demek DEGILDIR; en fazla 'once buna bak' demektir.
+  Pilotta 60 el-dogrulanmis maddede gercek altin hatasi 1 taneydi (~%1.7).
+
+[8] KULLANILABILIRLIK KARARI
+  secilen hucrelerin en yuksek Youden J degeri: 0.14
+  ! HICBIR OY VEREN YETERINCE BILGILI DEGIL (J<0.20 => sansa cok yakin).
+    Zayif oy verenlerden olusan bir konsensus, altin hatasini rastgele
+    secimden anlamli olcude iyi bulamaz. Bu bayrak listesini uzman
+    triyajinin SIRASI olarak kullanmayin; dogrulama icin tabakali
+    rastgele ornek kullanin (bkz. scripts/ornek_denetim.py).
+  probe yogunlasmasi: en yuksek P5_capraz %33.3 / en dusuk P6_guncellik %4.2  (oran x7.9)
+  ! Bayraklar probe turune gore x7.9 degisiyor. Altin hatasinin probe
+    turune bu kadar bagli olmasi beklenmez; buna karsilik modellerin
+    KUCUK sozcuksel degisiklikle yanlislanan iddialari (referans/sayi/tarih
+    degistirme) kacirmasi beklenir. Yani bu bayraklar buyuk olasilikla
+    ALTIN HATASINI degil PROBE ZORLUGUNU olcuyor. Bayrakli maddeleri
+    setten atmak, kiyaslamayi en ayirt edici maddelerinden yoksun
+    birakir ve model basarimini yapay olarak yukseltir.

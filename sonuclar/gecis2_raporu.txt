@@ -1,0 +1,63 @@
+﻿==============================================================================
+RUHSAT-Bench — IKINCI GECIS BIRLESTIRME
+==============================================================================
+uzman: INS_MUH_doldurulmus, ISG_UZM_doldurulmus_ | anahtarda 60 kod | ikisinde dolu 60
+
+[1] BAGIMSIZLIK
+    KARAR ayni: 53/60 | GEREKCE metni ayni: 0/60
+
+[2] POZITIF KONTROL (K tabakasi — bilinen altin hatasi)
+    K291  altin=DOGRU
+      INS_MUH_doldurulmus YANLIS         YAKALADI   Bu ifade 45. maddenin hükmü değil; 45. maddeden sonra başlayan Altıncı
+      ISG_UZM_doldurulmus_ DOGRU          altinla ayni   45. maddede yer alan bölüm başlığı ve 2960 sayılı Kanun atfı kaynakla 
+    K378  altin=YANLIS
+      INS_MUH_doldurulmus YANLIS         altinla ayni   Bölüm başlığındaki kanun numarası 2960'tır; 1480 değildir.
+      ISG_UZM_doldurulmus_ YANLIS         altinla ayni   Bölüm başlığında 2960 sayılı Boğaziçi Kanunu yazıyor; 1480 sayısı kayn
+
+    INS_MUH_doldurulmus 1/2 bilinen hatayi yakaladi
+    ISG_UZM_doldurulmus_ 0/2 bilinen hatayi yakaladi
+    KESIN kural (ikisi birden): 0/2
+    GEVSEK kural (en az biri) : 1/2
+
+    ! KESIN kural bilinen bir hatayi KACIRDI, GEVSEK kural yakaladi.
+      Birincil olcut GEVSEK kural olmalidir; KESIN kural alt sinir verir.
+      Birinci gecisteki 0/150 sonucu da bu isikta okunmalidir.
+
+[3] KODLAYICILAR ARASI UYUM
+    Cohen kappa = 0.722   po=0.897 pe=0.628 n=58
+    uyusmazlik: 6   yon dagilimi: {('YANLIS', 'DOGRU'): 6}
+    yon simetrisi (isaret testi) p = 0.0312
+
+    ! UYUSMAZLIK SISTEMATIK, rastgele degil. Iki uzman farkli bir
+      KURAL uyguluyor. Bu bir olcum hatasi degil TANIM sorunudur ve
+      ortalamayla kapatilamaz; uzlasi toplantisi gerekir.
+      Tipik ayrisma: 'hukum kaynakta geciyor mu' (DOGRU) ile
+      'hukum BU KOSULLARLA mi geciyor' (YANLIS) arasindadir.
+      Ikincisi bu gecisin sordugu sorudur.
+
+[4] BAGLAMSAL HATA ORANI  (tabaka agirlikli)
+    GEVSEK (en az bir uzman altindan farkli)
+      N      5/33   = % 15.2  [%6.7, %30.9]   cerceve 33, agirlik 1.00
+      T      1/25   = %  4.0  [%0.7, %19.5]   cerceve 105, agirlik 4.20
+      CERCEVE TAHMINI: %6.7  %95GA [%1.6, %11.8]   (birinci gecis ornegi = 138 madde)
+      BILESIK AGIRLIKLA (butun kumeye yansitilmis): %8.8
+      Bu, iki asamali ornekleme duzeltmesidir; ustteki cerceve
+      tahmini yalnizca birinci gecis ornegine aittir.
+
+    KESIN  (iki uzman da altindan farkli)
+      N      0/33   = %  0.0  [%0.0, %10.4]   cerceve 33, agirlik 1.00
+      T      0/25   = %  0.0  [%0.0, %13.3]   cerceve 105, agirlik 4.20
+      CERCEVE TAHMINI: hicbir olay gozlenmedi (0/58)
+      %95 TEK YONLU UST SINIR: %6.2
+      '%0.0 [%0.0, %0.0]' diye raporlamayin.
+
+[5] BIRINCI GECIS KALITE BAYRAGININ YORDAYICI GECERLILIGI
+    N tabakasi = birinci geciste kusurlu bulunanlar, T = temiz bulunanlar.
+    N: 5/33 = %15.2   T: 1/25 = %4.0   kaldirac x3.8   Fisher p = 0.2216
+    => Yon dogru ama bu ornek buyuklugunde ANLAMLI DEGIL. Kaldiraci
+       'egilim' olarak raporlayin, yordayici gecerlilik iddia etmeyin.
+
+[6] UZLASI DOSYASI: 8 madde -> sonuclar/gecis2_uzlasi.csv
+    KURAL_NOTU sutununa once KURALI yazin (hangi kriter dogru kabul edildi),
+    sonra UZLASI sutununu doldurun. Kural once kararlastirilmazsa uzlasi
+    madde madde pazarlik olur ve tekrarlanabilir olmaz.

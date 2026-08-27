@@ -1,0 +1,17 @@
+﻿==============================================================================
+RUHSAT-Bench — IKINCI GECIS (baglamda dogruluk)
+==============================================================================
+metin kaynagi: data/iddialar/uretilen_iddialar_v6_onarilmis.csv  (onarilmis surum)
+birinci gecis ornegi: 158 kod
+
+[1] TABAKALAR
+    N (en az bir uzman TEMIZ demedi) :   33 / 33 secildi
+    T (ikisi de TEMIZ dedi)          :  105 / 25 secildi
+    K (bilinen altin hatasi, kontrol):    2 / 2 secildi
+        #291 P1_dogrudan gold=DOGRU -> 3194 sayılı Kanun'un 45. maddesine göre aLTINCI BÖLÜM 2960 Sayılı Boğa
+        #378 P2_sayisal gold=YANLIS -> 3194 sayılı Kanun'a göre aLTINCI BÖLÜM 1480 Sayılı Boğaziçi Kanunu ile
+  toplam: 60 madde
+
+anahtar: sonuclar/ikinci_gecis_anahtar.csv   <-- UZMANLARA VERILMEZ
+yazildi: data/iddialar\gecis2_INS_MUH.xlsx  (60 madde)
+yazildi: data/iddialar\gecis2_ISG_UZM.xlsx  (60 madde)

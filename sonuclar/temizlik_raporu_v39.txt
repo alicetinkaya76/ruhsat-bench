@@ -1,0 +1,143 @@
+﻿==============================================================================
+RUHSAT-Bench — CERRAHI TEMIZLIK v3.9  (kural kapsami prob ailesine gore)
+==============================================================================
+girdi: data/iddialar/uretilen_iddialar_v1.csv  (486 iddia)
+kural kapsami: R1-R5 yalnizca kaynak_alinti VE yalnizca cumle-turevli problar
+  kural uygulanan probe: P1_dogrudan, P2_sayisal, P5_capraz
+  muaf: P3/P4/P6 — bunlarda kaynak_alinti onerme degil KOKEN KANITIDIR.
+
+[0] IDDIA METNINDEKI 'NNNN sayılı' ISABETLERI  (v3.7'nin atma sebebi)
+  iddia cercevesinde kanun numarasi gecen ve alintisi TEMIZ olan satir: 176
+    uretici kalibindan gelen (zararsiz)            : 176
+    kaliba uymayan / incelenmeli                   : 0
+  KARAR: bunlar v3.8'de ATILMIYOR. 'NNNN sayılı' iddia metninde uretim
+  kalibinin parcasidir; kaynak cumlenin kusuru degildir.
+
+[1] BOZUK KAYNAK CUMLELER  (yalnizca alinti uzerinden)
+  5 farkli kaynak cumle en az bir kurala takildi.
+    [R1_fikra_ici_parcalanma] Maddede sayılan işlemler, ihtisas konusuna göre ilgili (4) denetçi ve yardımcı kontrol elemanlarının denetimin
+    [R1_fikra_ici_parcalanma] Uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol elemanı gözetiminde beton dökümüne izin v
+    [R4_bolunmus_ek] İşveren, iş sağlığı ve güvenliği yönü nden risk değerlendirmesi yapmak veya yaptırmakla yükümlüdür.
+    [R4_bolunmus_ek] Ankraj çubukları malzeme sinin kopma uzaması oranı %14 değerinden az olmayacaktır.
+    [R2_capraz_kanun_atfi] ALTINCI BÖLÜM 2960 Sayılı Boğaziçi Kanunu ile İlgili Hükümler
+
+[2] KURAL BASINA ATILAN IDDIA
+    R1_fikra_ici_parcalanma      6
+    R2_capraz_kanun_atfi         3
+    R3_bolum_basligi             0
+    R4_bolunmus_ek               5
+    R5_caps_basligi              0
+    TOPLAM                       14
+
+  atilan iddialar (id | probe | gold | sebep):
+    #81    P1_dogrudan     DOGRU    R4_bolunmus_ek
+           6331 sayılı Kanun'a göre işveren, iş sağlığı ve güvenliği yönü nden risk değerlendirmesi yapmak veya
+    #84    P5_capraz       YANLIS   R4_bolunmus_ek
+           6331 sayılı Kanun'un 2. maddesine göre işveren, iş sağlığı ve güvenliği yönü nden risk değerlendirme
+    #114   P1_dogrudan     DOGRU    R4_bolunmus_ek
+           TBDY 2018'e göre ankraj çubukları malzeme sinin kopma uzaması oranı %14 değerinden az olmayacaktır.
+    #134   P5_capraz       YANLIS   R1_fikra_ici_parcalanma
+           6331 sayılı Kanun'a göre uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol eleman
+    #202   P2_sayisal      YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'ne göre uygulama denetçisi inşaat mühendisi veya (8) ilgili yardı
+    #248   P5_capraz       YANLIS   R4_bolunmus_ek
+           TBDY 2018'in 15.7.1.2 numaralı bendine göre ankraj çubukları malzeme sinin kopma uzaması oranı %14 d
+    #254   P2_sayisal      YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'ne göre maddede sayılan işlemler, ihtisas konusuna göre ilgili (8
+    #255   P5_capraz       YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 35. maddesine göre maddede sayılan işlemler, ihtisas konusuna
+    #272   P1_dogrudan     DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'ne göre uygulama denetçisi inşaat mühendisi veya (4) ilgili yardı
+    #282   P1_dogrudan     DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'ne göre maddede sayılan işlemler, ihtisas konusuna göre ilgili (4
+    #291   P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 45. maddesine göre aLTINCI BÖLÜM 2960 Sayılı Boğaziçi Kanunu ile İlgili Hükümle
+    #342   P2_sayisal      YANLIS   R4_bolunmus_ek
+           TBDY 2018'e göre ankraj çubukları malzeme sinin kopma uzaması oranı %28 değerinden az olmayacaktır.
+    #378   P2_sayisal      YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'a göre aLTINCI BÖLÜM 1480 Sayılı Boğaziçi Kanunu ile İlgili Hükümler
+    #398   P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre aLTINCI BÖLÜM 2960 Sayılı Boğaziçi Kanunu ile İlgili Hükümler
+
+[3] TEMIZ SETIN YAPISI
+  486 -> 472 iddia  (-14, %2.9)
+    gold DOGRU     243 ->  238  (%50.4)
+    gold YANLIS    243 ->  234  (%49.6)
+
+  probe dagilimi (probe / probe_alt):
+    P1_dogrudan       168 ->  163  (%34.5)
+        P1_verbatim            83
+        P1_madde_atifli        80
+    P2_sayisal         41 ->   37  (%7.8)
+    P3_anakronizm      19 ->   19  (%4.0)
+        P3_yil                 12
+        P3_yil_dogru            6
+        P3_yururluk             1
+    P4_uydurma         13 ->   13  (%2.8)
+        P4_belge               10
+        P4_tbdy                 3
+    P5_capraz         126 ->  121  (%25.6)
+        P5_maddeshift          89
+        P5_lawshuffle          32
+    P6_guncellik      119 ->  119  (%25.2)
+        P6_yil                 68
+        P6_degismedi           51
+
+[4] KAYNAK BELGE KIRILIMI  (karisim testi — v3.7'nin sessiz hasari buradaydi)
+    TBDY        158 ->  155  (hayatta %98)
+    YDUY        122 ->  116  (hayatta %95)
+    3194        101 ->   98  (hayatta %97)
+    6331         62 ->   60  (hayatta %97)
+    4708         26 ->   26  (hayatta %100)
+    ISGRISK      17 ->   17  (hayatta %100)
+  temiz: hayatta kalma orani belgeler arasinda dengeli.
+
+[5] R6 TANI (ATMAZ) — alinti icinde coklu bosluk = sokulmus (Değişik:...) etiketi
+  bosluk izi tasiyan iddia: 7  (farkli cumle: 3)
+    + fikra isareti de var (GERCEK KUSUR, R1 zaten atiyor): 6
+    yalniz etiket bosluğu (ZARARSIZ, kalir)               : 1
+  Yorum: [B2]'deki 0.44-0.50 kapsanma bu bosluklardan gelir; n-gram
+  bosluk uzerinden atlayamadigi icin kapsanma duser. Kapsanmanin dusuk
+  olmasi tek basina altin hatasi DEGILDIR.
+      #391   P1_dogrudan     gold=DOGRU   Denetçi mimar ve denetçi mühendis olarak görev yapabilmek için, ilgililerin Merk
+
+[6] KONTROLLER
+  pozitif kontrol (DUSMESI zorunlu):
+    #134   GECTI   (alinti ortasinda (4))
+    #202   GECTI   (alinti ortasinda (4))
+    #254   GECTI   (alinti ortasinda (4))
+    #255   GECTI   (alinti ortasinda (4))
+    #272   GECTI   (alinti ortasinda (4))
+    #282   GECTI   (alinti ortasinda (4))
+    #378   GECTI   (alintida 2960 Sayılı / ALTINCI BÖLÜM)
+  muafiyet kontrolu (v3.8'de blok kozmetigi yuzunden dusmustu, simdi yasamali):
+    #14    YASIYOR
+    #19    YASIYOR
+    #20    YASIYOR
+    #27    YASIYOR
+    #39    YASIYOR
+    #73    YASIYOR
+    #116   YASIYOR
+    #156   YASIYOR
+    #198   YASIYOR
+    #358   YASIYOR
+  negatif kontrol (YASAMASI beklenir):
+    #5     YASIYOR
+    #6     YASIYOR
+    #10    YASIYOR
+    #16    YASIYOR
+    #48    YASIYOR
+    #66    YASIYOR
+    #391   YASIYOR
+
+[7] ONCEKI SURUM ILE FARK
+  onceki: 239 | v3.9: 472
+  v3.9'da GERI GELEN iddia: 233
+  v3.9'da yeni dusen       : 0
+    geri gelenlerin probe dagilimi : P1_dogrudan=55, P2_sayisal=13, P3_anakronizm=13, P4_uydurma=10, P5_capraz=48, P6_guncellik=94
+    geri gelenlerin kaynak dagilimi: 3194=98, 4708=26, 6331=60, ISGRISK=7, YDUY=42
+
+[8] DENGE NOTU
+  P5 alt-turleri: maddeshift 89 / lawshuffle 32
+  ! dengesiz (2.8x). F4'te AYRI raporlanacak.
+  40'in altinda kalan probe'lar: P2_sayisal=37, P3_anakronizm=19, P4_uydurma=13

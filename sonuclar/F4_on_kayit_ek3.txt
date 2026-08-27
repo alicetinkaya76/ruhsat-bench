@@ -1,0 +1,60 @@
+RUHSAT-Bench F4 — ON KAYIT EK-3  (frontier kolu, YENIDEN KOSU ONCESI)
+======================================================================
+Tarih   : 28.07.2026
+Durum   : Frontier kosulari (front_k1-3, frontB_k1-3) teshis amaciyla
+          incelendi. Bu ek, yeni kosu baslamadan once yazildi.
+
+1. GECERSIZ SAYILAN KOSULAR
+---------------------------
+Anthropic claude-sonnet-5 genisletilmis dusunme ile calisiyor ve token
+butcesinin tamami dusunmeye gidebiliyor. Ham yanit teshisi:
+
+    #482  output 112 token -> thinking 104, text 'DOGRU|75'
+    #270  output 128 token -> thinking 128, text BLOGU YOK
+          stop_reason = max_tokens
+
+Sonuc: bir madde ancak model AZ DUSUNEREK cevaplayabildiginde puanlanmis
+oluyor. Cok dusundugu maddeler "ayristirilamadi" olarak dusuyor.
+
+Bu, RASTGELE OLMAYAN bir kayiptir ve yonu bellidir: dusen maddeler modelin
+zor buldugu maddelerdir. Dolayisiyla su kosulardan hesaplanan BUTUN
+metrikler (lambda, Youden J, ECE, AUROC, prob kirilimi) yukari yanlidir:
+
+    front_k1,  front_k2,  front_k3    (max_tokens=32,  yanit orani E1 0.61)
+    frontB_k1, frontB_k2, frontB_k3   (max_tokens=128, yanit orani E1 0.72)
+    det1, det2                        (tekrar sondasi, ayni kusur)
+
+Bu kosular ARSIVDE TUTULUR ama SONUC OLARAK RAPORLANMAZ. Yalnizca
+teshis materyali ve tekrar orani olcumu olarak kullanilir.
+
+2. PROTOKOL ESITLEME
+--------------------
+Yerel 18 model dogrudan cevap uretti (6-11 cikti token, dusunme yok).
+Frontier modelin dusunmesi acikken ayni gorev DEGILDIR. Karsilastirmanin
+gecerli olmasi icin birincil frontier kolunda DUSUNME KAPATILIR.
+
+    BIRINCIL KOL   : dusunme kapali. Yerel protokolle esit. Tavan sorusu
+                     ("gorev kapali kitap cozulebilir mi") bu kolda
+                     cevaplanir.
+    KESIFSEL KOL   : dusunme acik, comert butce. Modelin dogal kipi.
+                     Ayri raporlanir; yerel modellerle DOGRUDAN
+                     karsilastirilmaz.
+
+Iki kol arasindaki fark kendi basina bir sonuctur: bu gorevde dusunmek
+olcuye yansiyan bir katki sagliyor mu?
+
+3. DOGRULAMA SARTI
+------------------
+`thinking: {"type":"disabled"}` parametresinin bu modelde gecerli oldugu
+VARSAYILMAZ, OLCULUR. Kosucu her yanitin `thinking_tokens` degerini
+kaydeder ve kosu sonunda toplamini basar. Kapali istendigi halde
+dusunme token'i uretilmisse kol birincil sayilmaz.
+
+Ayrica her kayda `bitis_sebebi` (stop_reason) yazilir; butceyi asarak
+kesilen yanit sayisi kosu sonunda raporlanir. Bu sayi sifir degilse
+yanit orani yine yapay olarak dusuk demektir.
+
+4. DEGISMEYENLER
+----------------
+Promptlar, ayristirma mantigi, siralama tohumu ve cogunluk oyu yordami
+degismemistir. Ana on kayit ile EK-1 ve EK-2 aynen gecerlidir.

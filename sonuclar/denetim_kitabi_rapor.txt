@@ -1,0 +1,29 @@
+﻿==============================================================================
+RUHSAT-Bench — KOR UZMAN DENETIM KITABI
+==============================================================================
+kaynak kume: data\iddialar\uretilen_iddialar_v4_temiz.csv  (472 iddia)
+bayrakli (temiz kumede kalan): 68
+
+[1] TABAKA x PROBE  (N = evrende, n = ornekte, agirlik = N/n)
+    tabaka       probe                N    n  agirlik
+    A_rastgele   P1_dogrudan        153   22     6.95
+    A_rastgele   P2_sayisal          29   17     1.71
+    A_rastgele   P3_anakronizm       15   15     1.00
+    A_rastgele   P4_uydurma          12   12     1.00
+    A_rastgele   P5_capraz           81   16     5.06
+    A_rastgele   P6_guncellik       114   18     6.33
+    B_bayrakli   P1_dogrudan         10    8     1.25
+    B_bayrakli   P2_sayisal           8    8     1.00
+    B_bayrakli   P3_anakronizm        4    4     1.00
+    B_bayrakli   P4_uydurma           1    1     1.00
+    B_bayrakli   P5_capraz           40   24     1.67
+    B_bayrakli   P6_guncellik         5    5     1.00
+  toplam secilen: 150  (A=100, B=50)
+
+[2] DIKKAT TUZAGI: 8 madde eklendi (dogru etiket = YANLIS).
+  Bunlar hata orani tahminlerinden dislanir; uzman katmaninin
+  pozitif kontrolu olarak kullanilir.
+
+anahtar: sonuclar/denetim_anahtar_v2.csv  <-- UZMANLARA VERILMEZ
+yazildi: data/iddialar\denetim_INS_MUH.xlsx  (158 satir, sira uzmana ozel)
+yazildi: data/iddialar\denetim_ISG_UZM.xlsx  (158 satir, sira uzmana ozel)

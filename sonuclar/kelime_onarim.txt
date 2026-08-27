@@ -1,0 +1,62 @@
+﻿==============================================================================
+RUHSAT-Bench — KELIME KIRIGI ONARIMI
+==============================================================================
+girdi: data/iddialar/uretilen_iddialar_v5_p6dengeli.csv  (473 iddia)
+
+[1] REFERANS RENDER
+    6331      var  (2351 farkli token)
+    4708      var  (1706 farkli token)
+    3194      var  (4232 farkli token)
+    ISGRISK   var  (898 farkli token)
+    TBDY      YOK -> bu belge atlanacak
+    YDUY      YOK -> bu belge atlanacak
+
+[2] ONARIM
+  onarilan iddia: 31  |  kapsanma dusurdugu icin GERI ALINAN: 0
+  belgeye gore: 4708=7, 6331=24
+
+  en sik kirik kaliplari:
+    alanın|ın                                6
+    yaz|ılı                                  6
+    uyuştur|ucu                              5
+    tehl|ikeli                               4
+    görevl|endirilen                         4
+    ilg|ili                                  4
+    sa|ğlık                                  2
+    tehlik|eoluşturan                        2
+    koru|nma                                 2
+    belge|si                                 1
+    bu|nlara                                 1
+    nede|niyle                               1
+    kı|sıtlanamaz                            1
+    yükümlül|ükleri                          1
+    kurulu|şları                             1
+
+  ornekler (id | probe | kapsanma once -> sonra | yapilan):
+    #28    P2_sayisal      0.59 -> 1.00   alanın ın -> alanının; alanın ın -> alanının
+    #64    P1_dogrudan     0.59 -> 1.00   alanın ın -> alanının; alanın ın -> alanının
+    #67    P6_guncellik    0.60 -> 0.95   sa ğlık -> sağlık
+    #91    P6_guncellik    0.71 -> 1.00   belge si -> belgesi
+    #103   P6_guncellik    0.62 -> 0.95   tehlik eoluşturan -> tehlike oluşturan
+    #105   P5_capraz       0.59 -> 1.00   tehl ikeli -> tehlikeli; tehl ikeli -> tehlikeli
+    #145   P1_dogrudan     0.25 -> 1.00   görevl endirilen -> görevlendirilen; görevl endirilen -> görevlendirilen
+    #160   P5_capraz       0.63 -> 1.00   yaz ılı -> yazılı; yaz ılı -> yazılı
+    #163   P1_dogrudan     0.68 -> 0.96   ilg ili -> ilgili; ilg ili -> ilgili
+    #183   P2_sayisal      0.63 -> 1.00   yaz ılı -> yazılı; yaz ılı -> yazılı
+    #191   P6_guncellik    0.65 -> 0.95   bu nlara -> bunlara
+    #196   P1_dogrudan     0.59 -> 1.00   tehl ikeli -> tehlikeli; tehl ikeli -> tehlikeli
+    #212   P1_dogrudan     0.72 -> 1.00   koru nma -> korunma; koru nma -> korunma
+    #235   P5_capraz       0.59 -> 1.00   alanın ın -> alanının; alanın ın -> alanının
+    #300   P6_guncellik    0.55 -> 0.95   nede niyle -> nedeniyle; kı sıtlanamaz -> kısıtlanamaz
+    #307   P5_capraz       0.62 -> 1.00   uyuştur ucu -> uyuşturucu; uyuştur ucu -> uyuşturucu
+    #329   P1_dogrudan     0.62 -> 1.00   uyuştur ucu -> uyuşturucu; uyuştur ucu -> uyuşturucu
+    #373   P6_guncellik    0.70 -> 0.96   yükümlül ükleri -> yükümlülükleri
+    #383   P5_capraz       0.25 -> 1.00   görevl endirilen -> görevlendirilen; görevl endirilen -> görevlendirilen
+    #419   P5_capraz       0.68 -> 0.96   ilg ili -> ilgili; ilg ili -> ilgili
+    ... (+11)
+
+[3] POZITIF KONTROL OZETI
+    olculebilen onarim: 31
+    ortalama kapsanma: 0.590 -> 0.969
+    onarim sonrasi kapsanmasi >=0.95 olan: 26/31
+    => Onarimlar temiz metne YAKINSIYOR; degisiklikler dogrulanmistir.

@@ -1,0 +1,48 @@
+﻿==============================================================================
+RUHSAT-Bench — P6 2x2 DENGELEME
+==============================================================================
+girdi: data/iddialar/uretilen_iddialar_v4_temiz.csv  (472 iddia)
+mevcut P6: P6_degismedi=51, P6_yil=68
+
+[1] KAYNAK TARAMASI
+  6331        39 madde | yil kayitli   10 | belge kunyesi   85 | konsolide
+  4708        15 madde | yil kayitli    8 | belge kunyesi  139 | konsolide
+  3194        49 madde | yil kayitli   19 | belge kunyesi  267 | konsolide
+  ISGRISK     19 madde | yil kayitli    0 | belge kunyesi    0 | KONSOLIDE DEGIL
+  YDUY        36 madde | yil kayitli   31 | belge kunyesi  406 | konsolide
+
+[2] IZ TARAMASI — POZITIF KONTROL
+  Kontrol: yil KAYITLI maddelerde iz bulunmali (beklenti ~%100).
+  yil kayitli madde: 68 | iz bulunan: 68  (%100.0)
+  ! [H2] DISI BIRAKILAN BELGE: ISGRISK
+    Belge genelinde tek bir degisiklik kunyesi yok -> konsolide metin
+    degil. 'Hic degistirilmemistir' iddiasinin altini bu belgeyle
+    kanitlanamaz. Bu belgelerden [H2] URETILMIYOR.
+  => tarama saglam.
+
+[3] ADAY URETIMI
+  [H1] yanlis yilli 'degisiklik yapilmistir' (gold=YANLIS) aday: 49
+  [H2] gercekten degismemis 'hic degistirilmemistir' (gold=DOGRU) aday: 66
+  kesilmis blok (4000+ karakter) yuzunden elenen madde: 21
+  [H1] uygun yil bulunamadigi icin elenen madde: 0
+  [H2] iz taramasinin ELEDIGI madde: 4
+  [H2] konsolide olmayan belge yuzunden elenen madde: 18
+  Not: elenen bu maddeler, uretecin yil regex'inin kacirdigi degisiklik
+  bicimleridir ('(Başlığı ile ... Değişik:...)', '(Mülga:...)'). v3.7
+  ureteci yazilirken regex bunlari da kapsamali.
+
+[4] HEDEF 2x2
+    kalip                          DOGRU  YANLIS
+    degisiklik yapilmistir            30      30
+    hic degistirilmemistir            30      30
+  Kalip artik etiketi belirlemiyor: her iki kalipta da iki sinif var.
+
+[5] YENI KUME
+  472 -> 473 iddia (P6 disi 353, P6 120)
+  gold: DOGRU 230 / YANLIS 243  (%48.6 / %51.4)
+  P6 payi: %25.4
+  yeni id araligi: 501-560  (1-486 DOKUNULMADI)
+
+  ornek [H1]: Yapı Denetimi Uygulama Yönetmeliği'nin 2. maddesinde 2019 yılında değişiklik yapılmıştır.
+       not  : gerçek: [2018, 2020] | iddia: 2019
+  ornek [H2]: 3194 sayılı Kanun'un 3. maddesi, ilk yayımlandığı 1985 yılından bu yana hiç değiştirilmemiştir.

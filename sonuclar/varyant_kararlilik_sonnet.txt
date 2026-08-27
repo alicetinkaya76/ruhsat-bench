@@ -1,0 +1,33 @@
+﻿========================================================================================================
+RUHSAT-Bench F4 — VARYANTLAR ARASI KARARLILIK  (EK-2, KESIFSEL)
+iki varyantta da kosulmus hucre: 2
+========================================================================================================
+
+model / kosul                     kacinma A>B     P(D) A>B  dogruluk A>B    lambda A>B    donen        p
+--------------------------------------------------------------------------------------------------------
+claude-sonnet-5 / E1              0.38>0.36    0.44>0.43     0.70>0.66       0.33>0.25   15/276    1.0000
+claude-sonnet-5 / E2              0.00>0.00    0.32>0.31     0.64>0.61       0.30>0.20   24/472    0.8388
+
+========================================================================================================
+OZET — OLCUTLER VARYANT DEGISIMINE NE KADAR DAYANIKLI
+  Ozete giren hucre: 2/2  (iki varyantta da taahhut >= 30)
+========================================================================================================
+  olcut                         aile       ort |A-B|   medyan  en buyuk  olcut duzeyi   goreli
+  kacinma orani                 yanlilik       0.006    0.006     0.013         0.185     0.03
+  P(DOGRU | taahhut)            yanlilik       0.004    0.004     0.006         0.125     0.03
+  taahhut dogrulugu             yanlilik       0.035    0.035     0.042         0.149     0.24
+  lambda                        BILGI          0.092    0.092     0.097         0.271     0.34
+  'olcut duzeyi' = olcutun iki varyanttaki ortalama BUYUKLUGU.
+  'goreli' = ort |A-B| / olcut duzeyi. Sifira yapisik bir olcutun
+  mutlak savrulmasi kucuk cikar; bu kararlilik DEGIL, yer olmamasidir.
+
+  P(DOGRU) savrulmasi / lambda savrulmasi = x0.04
+
+  ! HUCRE SAYISI < 4. Tek bir ozet hukmu VERILMEZ; sayilar
+    yukaridaki tablodan okunmalidir. Bu kadar az hucrede oran
+    tek bir modelin davranisini yansitir, bir desen degil.
+
+NOT (EK-2 madde 3): iki prompt, prompt uzayindan alinmis IKI NOKTADIR.
+Savrulmanin buyuklugu hakkinda ALT SINIR verir; dagilimi hakkinda bilgi
+vermez. Varyant B yalnizca 6 modelde kosuldugu icin bulgu bu altkumeyle
+sinirlidir.

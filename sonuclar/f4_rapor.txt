@@ -1,0 +1,828 @@
+﻿======================================================================================================================
+RUHSAT-Bench F4 — PUANLAMA  (varyant A, kumede 473 iddia)
+Oranlar HUCREDE DENENEN madde sayisina gore; sinirli kosular dogru okunur.
+EK-1 uyarinca: esik YANIT oranina uygulanir; KACINMA bir sonuctur, kapi degildir.
+yanit esigi %80 | dogruluk metrikleri icin asgari taahhut n=30
+======================================================================================================================
+
+model / kosul                       yanit  kacin  taahh n_tah   dogr   bacc      J  dprime    ECE  AUROC  durum
+----------------------------------------------------------------------------------------------------------------------
+gemma3:12b / E1                      1.00   0.01   0.99   467   0.56   0.56   0.11    0.28  0.370   0.52  gecerli
+gemma3:12b / E2                      1.00   0.00   1.00   473   0.54   0.53   0.07    0.22  0.248   0.50  gecerli
+gemma3:27b / E1                      1.00   0.03   0.97   459   0.57   0.57   0.15    0.41  0.347   0.48  gecerli
+gemma3:27b / E2                      1.00   0.00   1.00   473   0.54   0.54   0.09    0.24  0.366   0.51  gecerli
+gemma3:4b / E1                       1.00   0.10   0.90   424   0.51   0.51   0.02    0.06  0.372   0.48  gecerli
+gemma3:4b / E2                       1.00   0.00   1.00   471   0.49   0.50  -0.01   -0.02  0.398   0.47  gecerli
+llama3.2:1b / E1                     0.55   0.31   0.23   110   0.51   0.48  -0.03   -0.44  0.348   0.51  YANIT ESIGI ALTI
+llama3.2:1b / E2                     0.03   0.00   0.03    14      -      -      -      -      -      -  YANIT ESIGI ALTI  (n<30)
+llama3.2:3b-instruct-fp16 / E1       0.89   0.00   0.89   419   0.53   0.54   0.07    0.22  0.348   0.54  gecerli
+llama3.2:3b-instruct-fp16 / E2       0.88   0.00   0.88   418   0.53   0.50   0.00    0.04  0.256   0.47  gecerli
+llama3.2:3b-instruct-q4_K_M / E1     0.67   0.01   0.67   316   0.49   0.50   0.00    0.01  0.392   0.54  YANIT ESIGI ALTI
+llama3.2:3b-instruct-q4_K_M / E2     0.66   0.00   0.66   313   0.51   0.50   0.00    0.02  0.245   0.47  YANIT ESIGI ALTI
+llama3.2:3b-instruct-q5_K_M / E1     0.94   0.00   0.94   446   0.53   0.52   0.05    0.15  0.211   0.50  gecerli
+llama3.2:3b-instruct-q5_K_M / E2     0.96   0.00   0.96   453   0.52   0.50   0.00    0.02  0.215   0.46  gecerli
+llama3.2:3b-instruct-q8_0 / E1       0.89   0.00   0.88   418   0.53   0.54   0.09    0.27  0.346   0.53  gecerli
+llama3.2:3b-instruct-q8_0 / E2       0.90   0.00   0.90   424   0.53   0.50   0.00    0.04  0.268   0.48  gecerli
+qwen2.5:14b-instruct / E1            1.00   0.79   0.21    97   0.57   0.55   0.10    0.38  0.317   0.50  gecerli
+qwen2.5:14b-instruct / E2            1.00   0.00   1.00   473   0.52   0.52   0.04    0.09  0.335   0.50  gecerli
+qwen2.5:32b-instruct / E1            1.00   0.83   0.17    82   0.65   0.64   0.28    0.81  0.301   0.47  gecerli
+qwen2.5:32b-instruct / E2            1.00   0.00   1.00   473   0.56   0.55   0.10    0.35  0.301   0.53  gecerli
+qwen2.5:3b-instruct-fp16 / E1        1.00   0.27   0.73   344   0.54   0.51   0.02    0.25  0.328   0.49  gecerli
+qwen2.5:3b-instruct-fp16 / E2        1.00   0.00   1.00   473   0.51   0.51   0.01    0.04  0.399   0.48  gecerli
+qwen2.5:3b-instruct-q4_K_M / E1      0.99   0.02   0.97   458   0.52   0.50   0.00    0.03  0.343   0.50  gecerli
+qwen2.5:3b-instruct-q4_K_M / E2      1.00   0.00   1.00   473   0.54   0.53   0.06    0.20  0.327   0.54  gecerli
+qwen2.5:3b-instruct-q5_K_M / E1      1.00   0.48   0.52   244   0.57   0.51   0.02    0.33  0.394   0.52  gecerli
+qwen2.5:3b-instruct-q5_K_M / E2      1.00   0.00   1.00   473   0.53   0.53   0.06    0.14  0.438   0.49  gecerli
+qwen2.5:3b-instruct-q8_0 / E1        1.00   0.34   0.66   311   0.54   0.52   0.03    0.28  0.320   0.48  gecerli
+qwen2.5:3b-instruct-q8_0 / E2        1.00   0.00   1.00   473   0.51   0.50   0.00    0.01  0.409   0.47  gecerli
+qwen2.5:7b-instruct-fp16 / E1        1.00   0.95   0.05    24      -      -      -      -      -      -  gecerli  (n<30)
+qwen2.5:7b-instruct-fp16 / E2        0.99   0.00   0.99   469   0.49   0.49  -0.01   -0.04  0.402   0.51  gecerli
+qwen2.5:7b-instruct-q4_K_M / E1      1.00   0.99   0.01     6      -      -      -      -      -      -  gecerli  (n<30)
+qwen2.5:7b-instruct-q4_K_M / E2      1.00   0.00   1.00   473   0.49   0.50  -0.00   -0.03  0.412   0.50  gecerli
+qwen2.5:7b-instruct-q5_K_M / E1      1.00   0.97   0.03    16      -      -      -      -      -      -  gecerli  (n<30)
+qwen2.5:7b-instruct-q5_K_M / E2      0.99   0.00   0.99   469   0.47   0.48  -0.04   -0.16  0.410   0.51  gecerli
+qwen2.5:7b-instruct-q8_0 / E1        1.00   0.96   0.04    18      -      -      -      -      -      -  gecerli  (n<30)
+qwen2.5:7b-instruct-q8_0 / E2        0.97   0.00   0.97   458   0.48   0.49  -0.02   -0.06  0.407   0.51  gecerli
+
+====================================================================================================
+DOGRULAYICI ANALIZLER   (Bonferroni: 16 model, alfa=0.0031)
+====================================================================================================
+
+[1.1-1.2] E1 vs E2, ESLESMIS  (ayni maddeler, ayni model)
+  UYARI: taahhut dogrulugu iki kosulda da cevaplanan ORTAK maddelerde
+  hesaplanir. Cok kacinan modellerde bu kume kucuktur; n_ortak sutununa bakin.
+  model                            kapsamE1 kapsamE2   fark n_ortak  taahE1  taahE2   fark  McNemar p
+  gemma3:12b                           0.99     1.00  +0.01     467    0.56    0.54  -0.02     0.4884
+  gemma3:27b                           0.97     1.00  +0.03     459    0.57    0.54  -0.02     0.0525
+  gemma3:4b                            0.90     1.00  +0.10     422    0.51    0.49  -0.02     0.4101
+  llama3.2:3b-instruct-fp16            0.89     0.88  -0.00     382    0.52    0.53  +0.01     0.8567
+  llama3.2:3b-instruct-q5_K_M          0.94     0.96  +0.01     426    0.54    0.52  -0.02     0.4884
+  llama3.2:3b-instruct-q8_0            0.88     0.90  +0.01     384    0.53    0.53  +0.01     0.9524
+  qwen2.5:14b-instruct                 0.21     1.00  +0.79      97    0.57    0.57  +0.00     1.0000
+  qwen2.5:32b-instruct                 0.17     1.00  +0.83      82    0.65    0.65  +0.00     1.0000
+  qwen2.5:3b-instruct-fp16             0.73     1.00  +0.27     344    0.54    0.52  -0.02     0.4767
+  qwen2.5:3b-instruct-q4_K_M           0.97     1.00  +0.03     458    0.52    0.54  +0.02     0.3374
+  qwen2.5:3b-instruct-q5_K_M           0.52     1.00  +0.48     244    0.57    0.54  -0.03     0.4999
+  qwen2.5:3b-instruct-q8_0             0.66     1.00  +0.34     311    0.54    0.53  -0.01     0.9099
+  qwen2.5:7b-instruct-fp16             0.05     0.99  +0.94      24    0.58    0.58  +0.00     1.0000
+  qwen2.5:7b-instruct-q4_K_M           0.01     1.00  +0.99       6    0.67    0.67  +0.00     1.0000
+  qwen2.5:7b-instruct-q5_K_M           0.03     0.99  +0.96      16    0.50    0.50  +0.00     1.0000
+  qwen2.5:7b-instruct-q8_0             0.04     0.97  +0.93      18    0.56    0.56  +0.00     1.0000
+  * = Bonferroni duzeltmeli esigin altinda
+
+[1.3b] CEVAP POLITIKASI KAYMASI   (EK-1 sonrasi eklendi — KESIFSEL)
+  Dogruluk uzerinden McNemar YANILTICI olabilir: bir probda dususu baska
+  probda yukselis dengeleyince toplam degismez ama YANLILIK degismistir.
+  Bu yuzden dogrudan cevap dagilimina ve ortak maddedeki DONME oranina bakilir.
+  model                             E1 P(D)  E2 P(D)   kayma n_ortak   donen      %
+  gemma3:12b                           0.48     0.26   -0.22     467     102    22%
+  gemma3:27b                           0.67     0.62   -0.05     459      22     5%
+  gemma3:4b                            0.59     0.60   +0.01     422      53    13%
+  llama3.2:3b-instruct-fp16            0.73     0.00   -0.73     382     276    72%
+  llama3.2:3b-instruct-q5_K_M          0.26     0.00   -0.26     426     102    24%
+  llama3.2:3b-instruct-q8_0            0.74     0.00   -0.74     384     280    73%
+  qwen2.5:14b-instruct                 0.81     0.58   -0.24      97       0     0%
+  qwen2.5:32b-instruct                 0.33     0.19   -0.13      82       0     0%
+  qwen2.5:3b-instruct-fp16             0.04     0.32   +0.28     344      71    21%
+  qwen2.5:3b-instruct-q4_K_M           0.04     0.23   +0.18     458      88    19%
+  qwen2.5:3b-instruct-q5_K_M           0.03     0.40   +0.36     244      79    32%
+  qwen2.5:3b-instruct-q8_0             0.06     0.35   +0.29     311      78    25%
+  qwen2.5:7b-instruct-fp16             0.83     0.81   -0.02      24       0     0%
+  qwen2.5:7b-instruct-q4_K_M           0.67     0.91   +0.24       6       0     0%
+  qwen2.5:7b-instruct-q5_K_M           0.81     0.81   -0.00      16       0     0%
+  qwen2.5:7b-instruct-q8_0             0.78     0.81   +0.04      18       0     0%
+  Yuksek donme orani: kacinma secenegi kaldirilinca model sadece CEVAP
+  VERMIYOR, VERDIGI CEVABI da degistiriyor. Bu durumda E2 olcumu ayni
+  bilginin zorunlu ifadesi degil, FARKLI bir cevap politikasidir.
+
+[1.3c] DEJENERE HUCRELER  (taahhut edilenlerin >=%90'i tek etiket)
+    llama3.2:3b-instruct-fp16        E2  YANLIS %100  (n=418)
+    llama3.2:3b-instruct-q5_K_M      E2  YANLIS %100  (n=453)
+    llama3.2:3b-instruct-q8_0        E2  YANLIS %100  (n=424)
+    qwen2.5:3b-instruct-fp16         E1  YANLIS %96  (n=344)
+    qwen2.5:3b-instruct-q4_K_M       E1  YANLIS %96  (n=458)
+    qwen2.5:3b-instruct-q5_K_M       E1  YANLIS %97  (n=244)
+    qwen2.5:3b-instruct-q8_0         E1  YANLIS %94  (n=311)
+    qwen2.5:7b-instruct-q4_K_M       E2  DOGRU %91  (n=473)
+  dejenere hucre: 8. Bu hucrelerde dogruluk turu metrikler bilgi degil
+  cevap yanliligi olcer; dengeli dogruluk tanim geregi 0.50'ye yakin cikar.
+
+[1.4] lambda = dogruluk(P1) + dogruluk(P5) - 1   (yanlilikten arindirilmis bilgi)
+  lambda ~ 0 : model yalnizca cevap yanliligiyla calisiyor
+  model / kosul                              P1(D)   P5(Y)   lambda
+  gemma3:12b / E1                             0.70    0.39   +0.091
+  gemma3:12b / E2                             0.39    0.64   +0.037
+  gemma3:27b / E1                             0.84    0.30   +0.137
+  gemma3:27b / E2                             0.80    0.30   +0.095
+  gemma3:4b / E1                              0.59    0.46   +0.048
+  gemma3:4b / E2                              0.61    0.42   +0.035
+  llama3.2:3b-instruct-fp16 / E1              0.83    0.24   +0.067
+  llama3.2:3b-instruct-fp16 / E2              0.00    1.00   +0.000
+  llama3.2:3b-instruct-q5_K_M / E1            0.15    0.88   +0.024
+  llama3.2:3b-instruct-q5_K_M / E2            0.00    1.00   +0.000
+  llama3.2:3b-instruct-q8_0 / E1              0.84    0.24   +0.085
+  llama3.2:3b-instruct-q8_0 / E2              0.00    1.00   +0.000
+  qwen2.5:14b-instruct / E1                   0.87    0.23   +0.098
+  qwen2.5:14b-instruct / E2                   0.72    0.31   +0.030
+  qwen2.5:32b-instruct / E1                   0.49    0.72   +0.206
+  qwen2.5:32b-instruct / E2                   0.33    0.78   +0.102
+  qwen2.5:3b-instruct-fp16 / E1               0.07    0.98   +0.048
+  qwen2.5:3b-instruct-fp16 / E2               0.42    0.55   -0.031
+  qwen2.5:3b-instruct-q4_K_M / E1             0.06    0.94   +0.004
+  qwen2.5:3b-instruct-q4_K_M / E2             0.33    0.70   +0.034
+  qwen2.5:3b-instruct-q5_K_M / E1             0.06    0.98   +0.043
+  qwen2.5:3b-instruct-q5_K_M / E2             0.56    0.46   +0.027
+  qwen2.5:3b-instruct-q8_0 / E1               0.08    0.97   +0.055
+  qwen2.5:3b-instruct-q8_0 / E2               0.46    0.51   -0.027
+  qwen2.5:7b-instruct-fp16 / E1               0.83    0.20   +0.033
+  qwen2.5:7b-instruct-fp16 / E2               0.91    0.12   +0.032
+  qwen2.5:7b-instruct-q4_K_M / E1             1.00    0.33   +0.333
+  qwen2.5:7b-instruct-q4_K_M / E2             0.94    0.07   +0.013
+  qwen2.5:7b-instruct-q5_K_M / E1             0.75    0.33   +0.083
+  qwen2.5:7b-instruct-q5_K_M / E2             0.90    0.12   +0.026
+  qwen2.5:7b-instruct-q8_0 / E1               0.78    0.25   +0.028
+  qwen2.5:7b-instruct-q8_0 / E2               0.91    0.13   +0.040
+
+[1.5] KACINMANIN BILGI DEGERI   (EK-1 madde 3 — KESIFSEL, on kayitta yoktu)
+  Modelin E1'de KACINDIGI maddelerde E2 dogrulugu ile TAAHHUT ETTIGI
+  maddelerde E2 dogrulugunu karsilastirir. Delta>0 ise kacinma bilgi tasir.
+  model                            n_tah   A_tah  n_kac   A_kac   Delta        p
+  gemma3:12b                         467       -      6       -   (bir taraf n<10)
+  gemma3:27b                         459    0.54     14    0.43   +0.12   0.3905
+  gemma3:4b                          422    0.49     49    0.49   +0.00   0.9673
+  llama3.2:3b-instruct-fp16          382       -      1       -   (bir taraf n<10)
+  llama3.2:3b-instruct-q5_K_M        426       -      0       -   (bir taraf n<10)
+  llama3.2:3b-instruct-q8_0          384       -      1       -   (bir taraf n<10)
+  qwen2.5:14b-instruct                97    0.57    376    0.50   +0.06   0.2582
+  qwen2.5:32b-instruct                82    0.65    391    0.54   +0.11   0.0702
+  qwen2.5:3b-instruct-fp16           344    0.52    129    0.49   +0.03   0.5355
+  qwen2.5:3b-instruct-q4_K_M         458    0.54     11    0.45   +0.08   0.5774
+  qwen2.5:3b-instruct-q5_K_M         244    0.54    228    0.52   +0.01   0.7450
+  qwen2.5:3b-instruct-q8_0           311    0.53    162    0.45   +0.08   0.0861
+  qwen2.5:7b-instruct-fp16            24    0.58    445    0.48   +0.10   0.3281
+  qwen2.5:7b-instruct-q4_K_M           6       -    467       -   (bir taraf n<10)
+  qwen2.5:7b-instruct-q5_K_M          16    0.50    453    0.47   +0.03   0.8144
+  qwen2.5:7b-instruct-q8_0            18    0.56    440    0.48   +0.08   0.5147
+  * p<0.05 (duzeltmesiz). Delta>0: model cevapladigi maddelerde daha basarili;
+  yani kacinma ayirt edici. Delta~0: kacinma yalnizca genel cekingenlik.
+
+[1.6] DUYARLILIK — ORIJINAL ON KAYIT KURALI (esik TAAHHUT oranina)
+  Kural harfiyen uygulansaydi hangi hucreler elenirdi:
+  elenen hucre: 13
+    llama3.2:1b/E1 (0.23)
+    llama3.2:1b/E2 (0.03)
+    llama3.2:3b-instruct-q4_K_M/E1 (0.67)
+    llama3.2:3b-instruct-q4_K_M/E2 (0.66)
+    qwen2.5:14b-instruct/E1 (0.21)
+    qwen2.5:32b-instruct/E1 (0.17)
+    qwen2.5:3b-instruct-fp16/E1 (0.73)
+    qwen2.5:3b-instruct-q5_K_M/E1 (0.52)
+    qwen2.5:3b-instruct-q8_0/E1 (0.66)
+    qwen2.5:7b-instruct-fp16/E1 (0.05)
+    qwen2.5:7b-instruct-q4_K_M/E1 (0.01)
+    qwen2.5:7b-instruct-q5_K_M/E1 (0.03)
+    qwen2.5:7b-instruct-q8_0/E1 (0.04)
+  Bunlarin cogu KACINDIGI icin elenirdi; EK-1'in duzelttigi hata budur.
+
+====================================================================================================
+KESIFSEL — PROB VE ALT-TUR KIRILIMI
+  ON KAYIT 2: bunlar hipotez testi DEGILDIR; guven araliklariyla betimseldir.
+  Tek sinifli tabakalarda gosterilen deger 'altin sinifi secme orani'dir,
+  bilgi olcusu degildir. Prob ici dengeli dogruluk yalnizca P3 ve P6'da tanimli.
+====================================================================================================
+
+  gemma3:12b / E1
+    P1_dogrudan              112/161    0.70  [0.62, 0.76]   (tek sinifli)
+    P2_sayisal                18/36     0.50  [0.34, 0.66]   (tek sinifli)
+    P3_anakronizm             14/19     0.74  [0.51, 0.88]
+    P4_uydurma                11/12     0.92  [0.65, 0.99]   (tek sinifli)
+    P5_capraz                 47/119    0.39  [0.31, 0.48]   (tek sinifli)
+    P6_guncellik              58/120    0.48  [0.40, 0.57]
+        P1_madde_atifli           50/79     0.63  [0.52, 0.73]   (tek sinifli)
+        P1_verbatim               62/82     0.76  [0.65, 0.84]   (tek sinifli)
+        P2_swap                   18/36     0.50  [0.34, 0.66]   (tek sinifli)
+        P3_yil                     9/12     0.75  [0.47, 0.91]   (tek sinifli)
+        P3_yil_dogru               4/6      0.67  [0.30, 0.90]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                   9/9      1.00  [0.70, 1.00]   (tek sinifli)
+        P4_tbdy                    2/3      0.67  [0.21, 0.94]   (tek sinifli)
+        P5_lawshuffle             13/32     0.41  [0.26, 0.58]   (tek sinifli)
+        P5_maddeshift             34/87     0.39  [0.29, 0.50]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil                     5/30     0.17  [0.07, 0.34]   (tek sinifli)
+        P6_yil_yanlis             23/30     0.77  [0.59, 0.88]   (tek sinifli)
+
+  gemma3:12b / E2
+    P1_dogrudan               64/163    0.39  [0.32, 0.47]   (tek sinifli)
+    P2_sayisal                28/37     0.76  [0.60, 0.87]   (tek sinifli)
+    P3_anakronizm             14/19     0.74  [0.51, 0.88]
+    P4_uydurma                12/13     0.92  [0.67, 0.99]   (tek sinifli)
+    P5_capraz                 78/121    0.64  [0.56, 0.72]   (tek sinifli)
+    P6_guncellik              60/120    0.50  [0.41, 0.59]
+        P1_madde_atifli           26/80     0.33  [0.23, 0.43]   (tek sinifli)
+        P1_verbatim               38/83     0.46  [0.35, 0.56]   (tek sinifli)
+        P2_swap                   28/37     0.76  [0.60, 0.87]   (tek sinifli)
+        P3_yil                    11/12     0.92  [0.65, 0.99]   (tek sinifli)
+        P3_yil_dogru               3/6      0.50  [0.19, 0.81]   (tek sinifli)
+        P3_yururluk                0/1      0.00  [0.00, 0.79]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    2/3      0.67  [0.21, 0.94]   (tek sinifli)
+        P5_lawshuffle             17/32     0.53  [0.36, 0.69]   (tek sinifli)
+        P5_maddeshift             61/89     0.69  [0.58, 0.77]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)
+
+  gemma3:27b / E1
+    P1_dogrudan              134/160    0.84  [0.77, 0.89]   (tek sinifli)
+    P2_sayisal                13/37     0.35  [0.22, 0.51]   (tek sinifli)
+    P3_anakronizm             14/19     0.74  [0.51, 0.88]
+    P4_uydurma                11/13     0.85  [0.58, 0.96]   (tek sinifli)
+    P5_capraz                 36/120    0.30  [0.23, 0.39]   (tek sinifli)
+    P6_guncellik              52/110    0.47  [0.38, 0.57]
+        P1_madde_atifli           64/79     0.81  [0.71, 0.88]   (tek sinifli)
+        P1_verbatim               70/81     0.86  [0.77, 0.92]   (tek sinifli)
+        P2_swap                   13/37     0.35  [0.22, 0.51]   (tek sinifli)
+        P3_yil                     7/12     0.58  [0.32, 0.81]   (tek sinifli)
+        P3_yil_dogru               6/6      1.00  [0.61, 1.00]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P5_lawshuffle             18/32     0.56  [0.39, 0.72]   (tek sinifli)
+        P5_maddeshift             18/88     0.20  [0.13, 0.30]   (tek sinifli)
+        P6_degismedi              23/26     0.88  [0.71, 0.96]   (tek sinifli)
+        P6_degismedi_dogru         7/24     0.29  [0.15, 0.49]   (tek sinifli)
+        P6_yil                    17/30     0.57  [0.39, 0.73]   (tek sinifli)
+        P6_yil_yanlis              5/30     0.17  [0.07, 0.34]   (tek sinifli)
+
+  gemma3:27b / E2
+    P1_dogrudan              130/163    0.80  [0.73, 0.85]   (tek sinifli)
+    P2_sayisal                11/37     0.30  [0.17, 0.46]   (tek sinifli)
+    P3_anakronizm             14/19     0.74  [0.51, 0.88]
+    P4_uydurma                11/13     0.85  [0.58, 0.96]   (tek sinifli)
+    P5_capraz                 36/121    0.30  [0.22, 0.38]   (tek sinifli)
+    P6_guncellik              54/120    0.45  [0.36, 0.54]
+        P1_madde_atifli           62/80     0.78  [0.67, 0.85]   (tek sinifli)
+        P1_verbatim               68/83     0.82  [0.72, 0.89]   (tek sinifli)
+        P2_swap                   11/37     0.30  [0.17, 0.46]   (tek sinifli)
+        P3_yil                     8/12     0.67  [0.39, 0.86]   (tek sinifli)
+        P3_yil_dogru               5/6      0.83  [0.44, 0.97]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P5_lawshuffle             16/32     0.50  [0.34, 0.66]   (tek sinifli)
+        P5_maddeshift             20/89     0.22  [0.15, 0.32]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         1/30     0.03  [0.01, 0.17]   (tek sinifli)
+        P6_yil                    17/30     0.57  [0.39, 0.73]   (tek sinifli)
+        P6_yil_yanlis              6/30     0.20  [0.10, 0.37]   (tek sinifli)
+
+  gemma3:4b / E1
+    P1_dogrudan               81/138    0.59  [0.50, 0.67]   (tek sinifli)
+    P2_sayisal                16/32     0.50  [0.34, 0.66]   (tek sinifli)
+    P3_anakronizm             12/19     0.63  [0.41, 0.81]
+    P4_uydurma                10/13     0.77  [0.50, 0.92]   (tek sinifli)
+    P5_capraz                 47/102    0.46  [0.37, 0.56]   (tek sinifli)
+    P6_guncellik              50/120    0.42  [0.33, 0.51]
+        P1_madde_atifli           37/61     0.61  [0.48, 0.72]   (tek sinifli)
+        P1_verbatim               44/77     0.57  [0.46, 0.68]   (tek sinifli)
+        P2_swap                   16/32     0.50  [0.34, 0.66]   (tek sinifli)
+        P3_yil                     8/12     0.67  [0.39, 0.86]   (tek sinifli)
+        P3_yil_dogru               3/6      0.50  [0.19, 0.81]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                   9/10     0.90  [0.60, 0.98]   (tek sinifli)
+        P4_tbdy                    1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P5_lawshuffle             17/32     0.53  [0.36, 0.69]   (tek sinifli)
+        P5_maddeshift             30/70     0.43  [0.32, 0.55]   (tek sinifli)
+        P6_degismedi               8/30     0.27  [0.14, 0.44]   (tek sinifli)
+        P6_degismedi_dogru        16/30     0.53  [0.36, 0.70]   (tek sinifli)
+        P6_yil                    23/30     0.77  [0.59, 0.88]   (tek sinifli)
+        P6_yil_yanlis              3/30     0.10  [0.03, 0.26]   (tek sinifli)
+
+  gemma3:4b / E2
+    P1_dogrudan              100/163    0.61  [0.54, 0.68]   (tek sinifli)
+    P2_sayisal                16/37     0.43  [0.29, 0.59]   (tek sinifli)
+    P3_anakronizm             10/18     0.56  [0.34, 0.75]
+    P4_uydurma                10/13     0.77  [0.50, 0.92]   (tek sinifli)
+    P5_capraz                 51/121    0.42  [0.34, 0.51]   (tek sinifli)
+    P6_guncellik              45/119    0.38  [0.30, 0.47]
+        P1_madde_atifli           49/80     0.61  [0.50, 0.71]   (tek sinifli)
+        P1_verbatim               51/83     0.61  [0.51, 0.71]   (tek sinifli)
+        P2_swap                   16/37     0.43  [0.29, 0.59]   (tek sinifli)
+        P3_yil                     7/11     0.64  [0.35, 0.85]   (tek sinifli)
+        P3_yil_dogru               2/6      0.33  [0.10, 0.70]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    0/3      0.00  [0.00, 0.56]   (tek sinifli)
+        P5_lawshuffle             18/32     0.56  [0.39, 0.72]   (tek sinifli)
+        P5_maddeshift             33/89     0.37  [0.28, 0.47]   (tek sinifli)
+        P6_degismedi              11/30     0.37  [0.22, 0.54]   (tek sinifli)
+        P6_degismedi_dogru         7/30     0.23  [0.12, 0.41]   (tek sinifli)
+        P6_yil                    27/29     0.93  [0.78, 0.98]   (tek sinifli)
+        P6_yil_yanlis              0/30     0.00  [0.00, 0.11]   (tek sinifli)
+
+  llama3.2:3b-instruct-fp16 / E1
+    P1_dogrudan              133/161    0.83  [0.76, 0.88]   (tek sinifli)
+    P2_sayisal                 8/36     0.22  [0.12, 0.38]   (tek sinifli)
+    P3_anakronizm              8/18     0.44  [0.25, 0.66]
+    P4_uydurma                 3/13     0.23  [0.08, 0.50]   (tek sinifli)
+    P5_capraz                 28/116    0.24  [0.17, 0.33]   (tek sinifli)
+    P6_guncellik              41/75     0.55  [0.43, 0.65]
+        P1_madde_atifli           60/78     0.77  [0.66, 0.85]   (tek sinifli)
+        P1_verbatim               73/83     0.88  [0.79, 0.93]   (tek sinifli)
+        P2_swap                    8/36     0.22  [0.12, 0.38]   (tek sinifli)
+        P3_yil                     4/12     0.33  [0.14, 0.61]   (tek sinifli)
+        P3_yil_dogru               4/6      0.67  [0.30, 0.90]   (tek sinifli)
+        P4_belge                   3/10     0.30  [0.11, 0.60]   (tek sinifli)
+        P4_tbdy                    0/3      0.00  [0.00, 0.56]   (tek sinifli)
+        P5_lawshuffle              5/31     0.16  [0.07, 0.33]   (tek sinifli)
+        P5_maddeshift             23/85     0.27  [0.19, 0.37]   (tek sinifli)
+        P6_degismedi              15/23     0.65  [0.45, 0.81]   (tek sinifli)
+        P6_degismedi_dogru        15/17     0.88  [0.66, 0.97]   (tek sinifli)
+        P6_yil                     2/17     0.12  [0.03, 0.34]   (tek sinifli)
+        P6_yil_yanlis              9/18     0.50  [0.29, 0.71]   (tek sinifli)
+
+  llama3.2:3b-instruct-fp16 / E2
+    P1_dogrudan                0/141    0.00  [0.00, 0.03]   (tek sinifli)
+    P2_sayisal                35/35     1.00  [0.90, 1.00]   (tek sinifli)
+    P3_anakronizm             12/18     0.67  [0.44, 0.84]
+    P4_uydurma                12/12     1.00  [0.76, 1.00]   (tek sinifli)
+    P5_capraz                106/106    1.00  [0.97, 1.00]   (tek sinifli)
+    P6_guncellik              56/106    0.53  [0.43, 0.62]
+        P1_madde_atifli            0/72     0.00  [0.00, 0.05]   (tek sinifli)
+        P1_verbatim                0/69     0.00  [0.00, 0.05]   (tek sinifli)
+        P2_swap                   35/35     1.00  [0.90, 1.00]   (tek sinifli)
+        P3_yil                    12/12     1.00  [0.76, 1.00]   (tek sinifli)
+        P3_yil_dogru               0/6      0.00  [0.00, 0.39]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    2/2      1.00  [0.34, 1.00]   (tek sinifli)
+        P5_lawshuffle             28/28     1.00  [0.88, 1.00]   (tek sinifli)
+        P5_maddeshift             78/78     1.00  [0.95, 1.00]   (tek sinifli)
+        P6_degismedi              26/26     1.00  [0.87, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/20     0.00  [0.00, 0.16]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)
+
+  llama3.2:3b-instruct-q5_K_M / E1
+    P1_dogrudan               24/161    0.15  [0.10, 0.21]   (tek sinifli)
+    P2_sayisal                34/37     0.92  [0.79, 0.97]   (tek sinifli)
+    P3_anakronizm              7/16     0.44  [0.23, 0.67]
+    P4_uydurma                12/13     0.92  [0.67, 0.99]   (tek sinifli)
+    P5_capraz                105/120    0.88  [0.80, 0.92]   (tek sinifli)
+    P6_guncellik              54/99     0.55  [0.45, 0.64]
+        P1_madde_atifli           10/79     0.13  [0.07, 0.22]   (tek sinifli)
+        P1_verbatim               14/82     0.17  [0.10, 0.27]   (tek sinifli)
+        P2_swap                   34/37     0.92  [0.79, 0.97]   (tek sinifli)
+        P3_yil                     0/9      0.00  [0.00, 0.30]   (tek sinifli)
+        P3_yil_dogru               6/6      1.00  [0.61, 1.00]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                   9/10     0.90  [0.60, 0.98]   (tek sinifli)
+        P4_tbdy                    3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P5_lawshuffle             27/32     0.84  [0.68, 0.93]   (tek sinifli)
+        P5_maddeshift             78/88     0.89  [0.80, 0.94]   (tek sinifli)
+        P6_degismedi              18/30     0.60  [0.42, 0.75]   (tek sinifli)
+        P6_degismedi_dogru        19/30     0.63  [0.46, 0.78]   (tek sinifli)
+        P6_yil                    11/20     0.55  [0.34, 0.74]   (tek sinifli)
+        P6_yil_yanlis              6/19     0.32  [0.15, 0.54]   (tek sinifli)
+
+  llama3.2:3b-instruct-q5_K_M / E2
+    P1_dogrudan                0/155    0.00  [0.00, 0.02]   (tek sinifli)
+    P2_sayisal                37/37     1.00  [0.91, 1.00]   (tek sinifli)
+    P3_anakronizm              8/11     0.73  [0.43, 0.90]
+    P4_uydurma                12/12     1.00  [0.76, 1.00]   (tek sinifli)
+    P5_capraz                121/121    1.00  [0.97, 1.00]   (tek sinifli)
+    P6_guncellik              57/117    0.49  [0.40, 0.58]
+        P1_madde_atifli            0/80     0.00  [0.00, 0.05]   (tek sinifli)
+        P1_verbatim                0/75     0.00  [0.00, 0.05]   (tek sinifli)
+        P2_swap                   37/37     1.00  [0.91, 1.00]   (tek sinifli)
+        P3_yil                     8/8      1.00  [0.68, 1.00]   (tek sinifli)
+        P3_yil_dogru               0/3      0.00  [0.00, 0.56]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    2/2      1.00  [0.34, 1.00]   (tek sinifli)
+        P5_lawshuffle             32/32     1.00  [0.89, 1.00]   (tek sinifli)
+        P5_maddeshift             89/89     1.00  [0.96, 1.00]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             27/27     1.00  [0.88, 1.00]   (tek sinifli)
+
+  llama3.2:3b-instruct-q8_0 / E1
+    P1_dogrudan              135/160    0.84  [0.78, 0.89]   (tek sinifli)
+    P2_sayisal                 8/36     0.22  [0.12, 0.38]   (tek sinifli)
+    P3_anakronizm              6/18     0.33  [0.16, 0.56]
+    P4_uydurma                 3/13     0.23  [0.08, 0.50]   (tek sinifli)
+    P5_capraz                 28/116    0.24  [0.17, 0.33]   (tek sinifli)
+    P6_guncellik              43/75     0.57  [0.46, 0.68]
+        P1_madde_atifli           61/78     0.78  [0.68, 0.86]   (tek sinifli)
+        P1_verbatim               74/82     0.90  [0.82, 0.95]   (tek sinifli)
+        P2_swap                    8/36     0.22  [0.12, 0.38]   (tek sinifli)
+        P3_yil                     2/12     0.17  [0.05, 0.45]   (tek sinifli)
+        P3_yil_dogru               4/6      0.67  [0.30, 0.90]   (tek sinifli)
+        P4_belge                   3/10     0.30  [0.11, 0.60]   (tek sinifli)
+        P4_tbdy                    0/3      0.00  [0.00, 0.56]   (tek sinifli)
+        P5_lawshuffle              5/31     0.16  [0.07, 0.33]   (tek sinifli)
+        P5_maddeshift             23/85     0.27  [0.19, 0.37]   (tek sinifli)
+        P6_degismedi              15/23     0.65  [0.45, 0.81]   (tek sinifli)
+        P6_degismedi_dogru        16/17     0.94  [0.73, 0.99]   (tek sinifli)
+        P6_yil                     2/17     0.12  [0.03, 0.34]   (tek sinifli)
+        P6_yil_yanlis             10/18     0.56  [0.34, 0.75]   (tek sinifli)
+
+  llama3.2:3b-instruct-q8_0 / E2
+    P1_dogrudan                0/142    0.00  [0.00, 0.03]   (tek sinifli)
+    P2_sayisal                35/35     1.00  [0.90, 1.00]   (tek sinifli)
+    P3_anakronizm             12/18     0.67  [0.44, 0.84]
+    P4_uydurma                13/13     1.00  [0.77, 1.00]   (tek sinifli)
+    P5_capraz                107/107    1.00  [0.97, 1.00]   (tek sinifli)
+    P6_guncellik              57/109    0.52  [0.43, 0.61]
+        P1_madde_atifli            0/74     0.00  [0.00, 0.05]   (tek sinifli)
+        P1_verbatim                0/68     0.00  [0.00, 0.05]   (tek sinifli)
+        P2_swap                   35/35     1.00  [0.90, 1.00]   (tek sinifli)
+        P3_yil                    12/12     1.00  [0.76, 1.00]   (tek sinifli)
+        P3_yil_dogru               0/6      0.00  [0.00, 0.39]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P5_lawshuffle             28/28     1.00  [0.88, 1.00]   (tek sinifli)
+        P5_maddeshift             79/79     1.00  [0.95, 1.00]   (tek sinifli)
+        P6_degismedi              27/27     1.00  [0.88, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/22     0.00  [0.00, 0.15]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)
+
+  qwen2.5:14b-instruct / E1
+    P1_dogrudan               41/47     0.87  [0.75, 0.94]   (tek sinifli)
+    P2_sayisal                 0/4      0.00  [0.00, 0.49]   (tek sinifli)
+    P3_anakronizm              5/13     0.38  [0.18, 0.64]
+    P4_uydurma                 2/2      1.00  [0.34, 1.00]   (tek sinifli)
+    P5_capraz                  7/31     0.23  [0.11, 0.40]   (tek sinifli)
+        P1_madde_atifli           18/21     0.86  [0.65, 0.95]   (tek sinifli)
+        P1_verbatim               23/26     0.88  [0.71, 0.96]   (tek sinifli)
+        P2_swap                    0/4      0.00  [0.00, 0.49]   (tek sinifli)
+        P3_yil                     2/9      0.22  [0.06, 0.55]   (tek sinifli)
+        P3_yil_dogru               3/4      0.75  [0.30, 0.95]   (tek sinifli)
+        P4_belge                   2/2      1.00  [0.34, 1.00]   (tek sinifli)
+        P5_lawshuffle              4/14     0.29  [0.12, 0.55]   (tek sinifli)
+        P5_maddeshift              3/17     0.18  [0.06, 0.41]   (tek sinifli)
+
+  qwen2.5:14b-instruct / E2
+    P1_dogrudan              118/163    0.72  [0.65, 0.79]   (tek sinifli)
+    P2_sayisal                12/37     0.32  [0.20, 0.49]   (tek sinifli)
+    P3_anakronizm              9/19     0.47  [0.27, 0.68]
+    P4_uydurma                 9/13     0.69  [0.42, 0.87]   (tek sinifli)
+    P5_capraz                 37/121    0.31  [0.23, 0.39]   (tek sinifli)
+    P6_guncellik              59/120    0.49  [0.40, 0.58]
+        P1_madde_atifli           56/80     0.70  [0.59, 0.79]   (tek sinifli)
+        P1_verbatim               62/83     0.75  [0.64, 0.83]   (tek sinifli)
+        P2_swap                   12/37     0.32  [0.20, 0.49]   (tek sinifli)
+        P3_yil                     5/12     0.42  [0.19, 0.68]   (tek sinifli)
+        P3_yil_dogru               3/6      0.50  [0.19, 0.81]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                   9/10     0.90  [0.60, 0.98]   (tek sinifli)
+        P4_tbdy                    0/3      0.00  [0.00, 0.56]   (tek sinifli)
+        P5_lawshuffle             17/32     0.53  [0.36, 0.69]   (tek sinifli)
+        P5_maddeshift             20/89     0.22  [0.15, 0.32]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil                    15/30     0.50  [0.33, 0.67]   (tek sinifli)
+        P6_yil_yanlis             14/30     0.47  [0.30, 0.64]   (tek sinifli)
+
+  qwen2.5:32b-instruct / E1
+    P1_dogrudan               17/35     0.49  [0.33, 0.64]   (tek sinifli)
+    P2_sayisal                 5/6      0.83  [0.44, 0.97]   (tek sinifli)
+    P3_anakronizm              6/7      0.86  [0.49, 0.97]
+    P4_uydurma                 7/7      1.00  [0.65, 1.00]   (tek sinifli)
+    P5_capraz                 18/25     0.72  [0.52, 0.86]   (tek sinifli)
+    P6_guncellik               0/2      0.00  [0.00, 0.66]
+        P1_madde_atifli            4/15     0.27  [0.11, 0.52]   (tek sinifli)
+        P1_verbatim               13/20     0.65  [0.43, 0.82]   (tek sinifli)
+        P2_swap                    5/6      0.83  [0.44, 0.97]   (tek sinifli)
+        P3_yil                     4/4      1.00  [0.51, 1.00]   (tek sinifli)
+        P3_yil_dogru               1/2      0.50  [0.09, 0.91]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                   7/7      1.00  [0.65, 1.00]   (tek sinifli)
+        P5_lawshuffle              7/13     0.54  [0.29, 0.77]   (tek sinifli)
+        P5_maddeshift             11/12     0.92  [0.65, 0.99]   (tek sinifli)
+        P6_yil                     0/2      0.00  [0.00, 0.66]   (tek sinifli)
+
+  qwen2.5:32b-instruct / E2
+    P1_dogrudan               53/163    0.33  [0.26, 0.40]   (tek sinifli)
+    P2_sayisal                32/37     0.86  [0.72, 0.94]   (tek sinifli)
+    P3_anakronizm             13/19     0.68  [0.46, 0.85]
+    P4_uydurma                11/13     0.85  [0.58, 0.96]   (tek sinifli)
+    P5_capraz                 94/121    0.78  [0.69, 0.84]   (tek sinifli)
+    P6_guncellik              60/120    0.50  [0.41, 0.59]
+        P1_madde_atifli           18/80     0.23  [0.15, 0.33]   (tek sinifli)
+        P1_verbatim               35/83     0.42  [0.32, 0.53]   (tek sinifli)
+        P2_swap                   32/37     0.86  [0.72, 0.94]   (tek sinifli)
+        P3_yil                    10/12     0.83  [0.55, 0.95]   (tek sinifli)
+        P3_yil_dogru               2/6      0.33  [0.10, 0.70]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P5_lawshuffle             22/32     0.69  [0.51, 0.82]   (tek sinifli)
+        P5_maddeshift             72/89     0.81  [0.72, 0.88]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)
+
+  qwen2.5:3b-instruct-fp16 / E1
+    P1_dogrudan                7/97     0.07  [0.04, 0.14]   (tek sinifli)
+    P2_sayisal                20/21     0.95  [0.77, 0.99]   (tek sinifli)
+    P3_anakronizm             11/18     0.61  [0.39, 0.80]
+    P4_uydurma                 9/9      1.00  [0.70, 1.00]   (tek sinifli)
+    P5_capraz                 80/82     0.98  [0.92, 0.99]   (tek sinifli)
+    P6_guncellik              59/117    0.50  [0.41, 0.59]
+        P1_madde_atifli            3/58     0.05  [0.02, 0.14]   (tek sinifli)
+        P1_verbatim                4/39     0.10  [0.04, 0.24]   (tek sinifli)
+        P2_swap                   20/21     0.95  [0.77, 0.99]   (tek sinifli)
+        P3_yil                     9/12     0.75  [0.47, 0.91]   (tek sinifli)
+        P3_yil_dogru               2/6      0.33  [0.10, 0.70]   (tek sinifli)
+        P4_belge                   9/9      1.00  [0.70, 1.00]   (tek sinifli)
+        P5_lawshuffle             27/27     1.00  [0.88, 1.00]   (tek sinifli)
+        P5_maddeshift             53/55     0.96  [0.88, 0.99]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil                     0/28     0.00  [0.00, 0.12]   (tek sinifli)
+        P6_yil_yanlis             29/29     1.00  [0.88, 1.00]   (tek sinifli)
+
+  qwen2.5:3b-instruct-fp16 / E2
+    P1_dogrudan               69/163    0.42  [0.35, 0.50]   (tek sinifli)
+    P2_sayisal                25/37     0.68  [0.51, 0.80]   (tek sinifli)
+    P3_anakronizm              9/19     0.47  [0.27, 0.68]
+    P4_uydurma                13/13     1.00  [0.77, 1.00]   (tek sinifli)
+    P5_capraz                 66/121    0.55  [0.46, 0.63]   (tek sinifli)
+    P6_guncellik              60/120    0.50  [0.41, 0.59]
+        P1_madde_atifli           33/80     0.41  [0.31, 0.52]   (tek sinifli)
+        P1_verbatim               36/83     0.43  [0.33, 0.54]   (tek sinifli)
+        P2_swap                   25/37     0.68  [0.51, 0.80]   (tek sinifli)
+        P3_yil                     3/12     0.25  [0.09, 0.53]   (tek sinifli)
+        P3_yil_dogru               5/6      0.83  [0.44, 0.97]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P5_lawshuffle             18/32     0.56  [0.39, 0.72]   (tek sinifli)
+        P5_maddeshift             48/89     0.54  [0.44, 0.64]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)
+
+  qwen2.5:3b-instruct-q4_K_M / E1
+    P1_dogrudan               10/155    0.06  [0.04, 0.11]   (tek sinifli)
+    P2_sayisal                33/36     0.92  [0.78, 0.97]   (tek sinifli)
+    P3_anakronizm             12/18     0.67  [0.44, 0.84]
+    P4_uydurma                13/13     1.00  [0.77, 1.00]   (tek sinifli)
+    P5_capraz                109/116    0.94  [0.88, 0.97]   (tek sinifli)
+    P6_guncellik              60/120    0.50  [0.41, 0.59]
+        P1_madde_atifli            1/79     0.01  [0.00, 0.07]   (tek sinifli)
+        P1_verbatim                9/76     0.12  [0.06, 0.21]   (tek sinifli)
+        P2_swap                   33/36     0.92  [0.78, 0.97]   (tek sinifli)
+        P3_yil                    12/12     1.00  [0.76, 1.00]   (tek sinifli)
+        P3_yil_dogru               0/6      0.00  [0.00, 0.39]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P5_lawshuffle             27/30     0.90  [0.74, 0.97]   (tek sinifli)
+        P5_maddeshift             82/86     0.95  [0.89, 0.98]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)
+
+  qwen2.5:3b-instruct-q4_K_M / E2
+    P1_dogrudan               54/163    0.33  [0.26, 0.41]   (tek sinifli)
+    P2_sayisal                29/37     0.78  [0.63, 0.89]   (tek sinifli)
+    P3_anakronizm             12/19     0.63  [0.41, 0.81]
+    P4_uydurma                13/13     1.00  [0.77, 1.00]   (tek sinifli)
+    P5_capraz                 85/121    0.70  [0.62, 0.78]   (tek sinifli)
+    P6_guncellik              61/120    0.51  [0.42, 0.60]
+        P1_madde_atifli           24/80     0.30  [0.21, 0.41]   (tek sinifli)
+        P1_verbatim               30/83     0.36  [0.27, 0.47]   (tek sinifli)
+        P2_swap                   29/37     0.78  [0.63, 0.89]   (tek sinifli)
+        P3_yil                     9/12     0.75  [0.47, 0.91]   (tek sinifli)
+        P3_yil_dogru               2/6      0.33  [0.10, 0.70]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P5_lawshuffle             17/32     0.53  [0.36, 0.69]   (tek sinifli)
+        P5_maddeshift             68/89     0.76  [0.67, 0.84]   (tek sinifli)
+        P6_degismedi              29/30     0.97  [0.83, 0.99]   (tek sinifli)
+        P6_degismedi_dogru         2/30     0.07  [0.02, 0.21]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)
+
+  qwen2.5:3b-instruct-q5_K_M / E1
+    P1_dogrudan                4/66     0.06  [0.02, 0.15]   (tek sinifli)
+    P2_sayisal                18/18     1.00  [0.82, 1.00]   (tek sinifli)
+    P3_anakronizm             11/17     0.65  [0.41, 0.83]
+    P4_uydurma                 9/9      1.00  [0.70, 1.00]   (tek sinifli)
+    P5_capraz                 57/58     0.98  [0.91, 1.00]   (tek sinifli)
+    P6_guncellik              39/76     0.51  [0.40, 0.62]
+        P1_madde_atifli            1/36     0.03  [0.00, 0.14]   (tek sinifli)
+        P1_verbatim                3/30     0.10  [0.03, 0.26]   (tek sinifli)
+        P2_swap                   18/18     1.00  [0.82, 1.00]   (tek sinifli)
+        P3_yil                    10/12     0.83  [0.55, 0.95]   (tek sinifli)
+        P3_yil_dogru               1/5      0.20  [0.04, 0.62]   (tek sinifli)
+        P4_belge                   9/9      1.00  [0.70, 1.00]   (tek sinifli)
+        P5_lawshuffle             23/23     1.00  [0.86, 1.00]   (tek sinifli)
+        P5_maddeshift             34/35     0.97  [0.85, 0.99]   (tek sinifli)
+        P6_degismedi              22/22     1.00  [0.85, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/26     0.00  [0.00, 0.13]   (tek sinifli)
+        P6_yil                     0/11     0.00  [0.00, 0.26]   (tek sinifli)
+        P6_yil_yanlis             17/17     1.00  [0.82, 1.00]   (tek sinifli)
+
+  qwen2.5:3b-instruct-q5_K_M / E2
+    P1_dogrudan               92/163    0.56  [0.49, 0.64]   (tek sinifli)
+    P2_sayisal                22/37     0.59  [0.43, 0.74]   (tek sinifli)
+    P3_anakronizm              7/19     0.37  [0.19, 0.59]
+    P4_uydurma                13/13     1.00  [0.77, 1.00]   (tek sinifli)
+    P5_capraz                 56/121    0.46  [0.38, 0.55]   (tek sinifli)
+    P6_guncellik              61/120    0.51  [0.42, 0.60]
+        P1_madde_atifli           44/80     0.55  [0.44, 0.65]   (tek sinifli)
+        P1_verbatim               48/83     0.58  [0.47, 0.68]   (tek sinifli)
+        P2_swap                   22/37     0.59  [0.43, 0.74]   (tek sinifli)
+        P3_yil                     2/12     0.17  [0.05, 0.45]   (tek sinifli)
+        P3_yil_dogru               5/6      0.83  [0.44, 0.97]   (tek sinifli)
+        P3_yururluk                0/1      0.00  [0.00, 0.79]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P5_lawshuffle             13/32     0.41  [0.26, 0.58]   (tek sinifli)
+        P5_maddeshift             43/89     0.48  [0.38, 0.59]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         1/30     0.03  [0.01, 0.17]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)
+
+  qwen2.5:3b-instruct-q8_0 / E1
+    P1_dogrudan                8/99     0.08  [0.04, 0.15]   (tek sinifli)
+    P2_sayisal                17/18     0.94  [0.74, 0.99]   (tek sinifli)
+    P3_anakronizm             11/18     0.61  [0.39, 0.80]
+    P4_uydurma                 9/9      1.00  [0.70, 1.00]   (tek sinifli)
+    P5_capraz                 77/79     0.97  [0.91, 0.99]   (tek sinifli)
+    P6_guncellik              46/88     0.52  [0.42, 0.62]
+        P1_madde_atifli            4/58     0.07  [0.03, 0.16]   (tek sinifli)
+        P1_verbatim                4/41     0.10  [0.04, 0.23]   (tek sinifli)
+        P2_swap                   17/18     0.94  [0.74, 0.99]   (tek sinifli)
+        P3_yil                     8/12     0.67  [0.39, 0.86]   (tek sinifli)
+        P3_yil_dogru               3/6      0.50  [0.19, 0.81]   (tek sinifli)
+        P4_belge                   9/9      1.00  [0.70, 1.00]   (tek sinifli)
+        P5_lawshuffle             26/26     1.00  [0.87, 1.00]   (tek sinifli)
+        P5_maddeshift             51/53     0.96  [0.87, 0.99]   (tek sinifli)
+        P6_degismedi              21/21     1.00  [0.85, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/23     0.00  [0.00, 0.14]   (tek sinifli)
+        P6_yil                     0/19     0.00  [0.00, 0.17]   (tek sinifli)
+        P6_yil_yanlis             25/25     1.00  [0.87, 1.00]   (tek sinifli)
+
+  qwen2.5:3b-instruct-q8_0 / E2
+    P1_dogrudan               75/163    0.46  [0.39, 0.54]   (tek sinifli)
+    P2_sayisal                22/37     0.59  [0.43, 0.74]   (tek sinifli)
+    P3_anakronizm              7/19     0.37  [0.19, 0.59]
+    P4_uydurma                13/13     1.00  [0.77, 1.00]   (tek sinifli)
+    P5_capraz                 62/121    0.51  [0.42, 0.60]   (tek sinifli)
+    P6_guncellik              60/120    0.50  [0.41, 0.59]
+        P1_madde_atifli           35/80     0.44  [0.33, 0.55]   (tek sinifli)
+        P1_verbatim               40/83     0.48  [0.38, 0.59]   (tek sinifli)
+        P2_swap                   22/37     0.59  [0.43, 0.74]   (tek sinifli)
+        P3_yil                     1/12     0.08  [0.01, 0.35]   (tek sinifli)
+        P3_yil_dogru               5/6      0.83  [0.44, 0.97]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                  10/10     1.00  [0.72, 1.00]   (tek sinifli)
+        P4_tbdy                    3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P5_lawshuffle             16/32     0.50  [0.34, 0.66]   (tek sinifli)
+        P5_maddeshift             46/89     0.52  [0.41, 0.62]   (tek sinifli)
+        P6_degismedi              30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_degismedi_dogru         0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil                     0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_yil_yanlis             30/30     1.00  [0.89, 1.00]   (tek sinifli)
+
+  qwen2.5:7b-instruct-fp16 / E1
+    P1_dogrudan               10/12     0.83  [0.55, 0.95]   (tek sinifli)
+    P3_anakronizm              3/7      0.43  [0.16, 0.75]
+    P5_capraz                  1/5      0.20  [0.04, 0.62]   (tek sinifli)
+        P1_madde_atifli            6/8      0.75  [0.41, 0.93]   (tek sinifli)
+        P1_verbatim                4/4      1.00  [0.51, 1.00]   (tek sinifli)
+        P3_yil                     1/5      0.20  [0.04, 0.62]   (tek sinifli)
+        P3_yil_dogru               2/2      1.00  [0.34, 1.00]   (tek sinifli)
+        P5_lawshuffle              1/4      0.25  [0.05, 0.70]   (tek sinifli)
+        P5_maddeshift              0/1      0.00  [0.00, 0.79]   (tek sinifli)
+
+  qwen2.5:7b-instruct-fp16 / E2
+    P1_dogrudan              148/163    0.91  [0.85, 0.94]   (tek sinifli)
+    P2_sayisal                 3/37     0.08  [0.03, 0.21]   (tek sinifli)
+    P3_anakronizm              9/19     0.47  [0.27, 0.68]
+    P4_uydurma                 4/13     0.31  [0.13, 0.58]   (tek sinifli)
+    P5_capraz                 15/121    0.12  [0.08, 0.19]   (tek sinifli)
+    P6_guncellik              49/116    0.42  [0.34, 0.51]
+        P1_madde_atifli           74/80     0.93  [0.85, 0.97]   (tek sinifli)
+        P1_verbatim               74/83     0.89  [0.81, 0.94]   (tek sinifli)
+        P2_swap                    3/37     0.08  [0.03, 0.21]   (tek sinifli)
+        P3_yil                     2/12     0.17  [0.05, 0.45]   (tek sinifli)
+        P3_yil_dogru               6/6      1.00  [0.61, 1.00]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                   3/10     0.30  [0.11, 0.60]   (tek sinifli)
+        P4_tbdy                    1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P5_lawshuffle              8/32     0.25  [0.13, 0.42]   (tek sinifli)
+        P5_maddeshift              7/89     0.08  [0.04, 0.15]   (tek sinifli)
+        P6_degismedi              14/28     0.50  [0.33, 0.67]   (tek sinifli)
+        P6_degismedi_dogru        12/29     0.41  [0.26, 0.59]   (tek sinifli)
+        P6_yil                    17/29     0.59  [0.41, 0.74]   (tek sinifli)
+        P6_yil_yanlis              6/30     0.20  [0.10, 0.37]   (tek sinifli)
+
+  qwen2.5:7b-instruct-q4_K_M / E1
+    P1_dogrudan                2/2      1.00  [0.34, 1.00]   (tek sinifli)
+    P3_anakronizm              1/1      1.00  [0.21, 1.00]
+    P5_capraz                  1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P1_madde_atifli            1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P1_verbatim                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P3_yil                     1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P5_lawshuffle              1/2      0.50  [0.09, 0.91]   (tek sinifli)
+        P5_maddeshift              0/1      0.00  [0.00, 0.79]   (tek sinifli)
+
+  qwen2.5:7b-instruct-q4_K_M / E2
+    P1_dogrudan              153/163    0.94  [0.89, 0.97]   (tek sinifli)
+    P2_sayisal                 1/37     0.03  [0.00, 0.14]   (tek sinifli)
+    P3_anakronizm              8/19     0.42  [0.23, 0.64]
+    P4_uydurma                 3/13     0.23  [0.08, 0.50]   (tek sinifli)
+    P5_capraz                  9/121    0.07  [0.04, 0.14]   (tek sinifli)
+    P6_guncellik              56/120    0.47  [0.38, 0.56]
+        P1_madde_atifli           76/80     0.95  [0.88, 0.98]   (tek sinifli)
+        P1_verbatim               77/83     0.93  [0.85, 0.97]   (tek sinifli)
+        P2_swap                    1/37     0.03  [0.00, 0.14]   (tek sinifli)
+        P3_yil                     2/12     0.17  [0.05, 0.45]   (tek sinifli)
+        P3_yil_dogru               5/6      0.83  [0.44, 0.97]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                   2/10     0.20  [0.06, 0.51]   (tek sinifli)
+        P4_tbdy                    1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P5_lawshuffle              5/32     0.16  [0.07, 0.32]   (tek sinifli)
+        P5_maddeshift              4/89     0.04  [0.02, 0.11]   (tek sinifli)
+        P6_degismedi               0/30     0.00  [0.00, 0.11]   (tek sinifli)
+        P6_degismedi_dogru        30/30     1.00  [0.89, 1.00]   (tek sinifli)
+        P6_yil                    20/30     0.67  [0.49, 0.81]   (tek sinifli)
+        P6_yil_yanlis              6/30     0.20  [0.10, 0.37]   (tek sinifli)
+
+  qwen2.5:7b-instruct-q5_K_M / E1
+    P1_dogrudan                6/8      0.75  [0.41, 0.93]   (tek sinifli)
+    P3_anakronizm              1/5      0.20  [0.04, 0.62]
+    P5_capraz                  1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P1_madde_atifli            3/5      0.60  [0.23, 0.88]   (tek sinifli)
+        P1_verbatim                3/3      1.00  [0.44, 1.00]   (tek sinifli)
+        P3_yil                     0/4      0.00  [0.00, 0.49]   (tek sinifli)
+        P3_yil_dogru               1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P5_lawshuffle              1/2      0.50  [0.09, 0.91]   (tek sinifli)
+        P5_maddeshift              0/1      0.00  [0.00, 0.79]   (tek sinifli)
+
+  qwen2.5:7b-instruct-q5_K_M / E2
+    P1_dogrudan              147/163    0.90  [0.85, 0.94]   (tek sinifli)
+    P2_sayisal                 1/37     0.03  [0.00, 0.14]   (tek sinifli)
+    P3_anakronizm              8/19     0.42  [0.23, 0.64]
+    P4_uydurma                 5/13     0.38  [0.18, 0.64]   (tek sinifli)
+    P5_capraz                 15/121    0.12  [0.08, 0.19]   (tek sinifli)
+    P6_guncellik              45/116    0.39  [0.30, 0.48]
+        P1_madde_atifli           75/80     0.94  [0.86, 0.97]   (tek sinifli)
+        P1_verbatim               72/83     0.87  [0.78, 0.92]   (tek sinifli)
+        P2_swap                    1/37     0.03  [0.00, 0.14]   (tek sinifli)
+        P3_yil                     1/12     0.08  [0.01, 0.35]   (tek sinifli)
+        P3_yil_dogru               6/6      1.00  [0.61, 1.00]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                   4/10     0.40  [0.17, 0.69]   (tek sinifli)
+        P4_tbdy                    1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P5_lawshuffle              8/32     0.25  [0.13, 0.42]   (tek sinifli)
+        P5_maddeshift              7/89     0.08  [0.04, 0.15]   (tek sinifli)
+        P6_degismedi              10/27     0.37  [0.22, 0.56]   (tek sinifli)
+        P6_degismedi_dogru        14/29     0.48  [0.31, 0.66]   (tek sinifli)
+        P6_yil                    12/30     0.40  [0.25, 0.58]   (tek sinifli)
+        P6_yil_yanlis              9/30     0.30  [0.17, 0.48]   (tek sinifli)
+
+  qwen2.5:7b-instruct-q8_0 / E1
+    P1_dogrudan                7/9      0.78  [0.45, 0.94]   (tek sinifli)
+    P3_anakronizm              2/5      0.40  [0.12, 0.77]
+    P5_capraz                  1/4      0.25  [0.05, 0.70]   (tek sinifli)
+        P1_madde_atifli            3/5      0.60  [0.23, 0.88]   (tek sinifli)
+        P1_verbatim                4/4      1.00  [0.51, 1.00]   (tek sinifli)
+        P3_yil                     1/4      0.25  [0.05, 0.70]   (tek sinifli)
+        P3_yil_dogru               1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P5_lawshuffle              1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P5_maddeshift              0/1      0.00  [0.00, 0.79]   (tek sinifli)
+
+  qwen2.5:7b-instruct-q8_0 / E2
+    P1_dogrudan              147/162    0.91  [0.85, 0.94]   (tek sinifli)
+    P2_sayisal                 1/37     0.03  [0.00, 0.14]   (tek sinifli)
+    P3_anakronizm              9/19     0.47  [0.27, 0.68]
+    P4_uydurma                 4/13     0.31  [0.13, 0.58]   (tek sinifli)
+    P5_capraz                 16/121    0.13  [0.08, 0.20]   (tek sinifli)
+    P6_guncellik              43/106    0.41  [0.32, 0.50]
+        P1_madde_atifli           73/79     0.92  [0.84, 0.96]   (tek sinifli)
+        P1_verbatim               74/83     0.89  [0.81, 0.94]   (tek sinifli)
+        P2_swap                    1/37     0.03  [0.00, 0.14]   (tek sinifli)
+        P3_yil                     2/12     0.17  [0.05, 0.45]   (tek sinifli)
+        P3_yil_dogru               6/6      1.00  [0.61, 1.00]   (tek sinifli)
+        P3_yururluk                1/1      1.00  [0.21, 1.00]   (tek sinifli)
+        P4_belge                   3/10     0.30  [0.11, 0.60]   (tek sinifli)
+        P4_tbdy                    1/3      0.33  [0.06, 0.79]   (tek sinifli)
+        P5_lawshuffle              8/32     0.25  [0.13, 0.42]   (tek sinifli)
+        P5_maddeshift              8/89     0.09  [0.05, 0.17]   (tek sinifli)
+        P6_degismedi              13/25     0.52  [0.33, 0.70]   (tek sinifli)
+        P6_degismedi_dogru         9/26     0.35  [0.19, 0.54]   (tek sinifli)
+        P6_yil                    15/26     0.58  [0.39, 0.74]   (tek sinifli)
+        P6_yil_yanlis              6/29     0.21  [0.10, 0.38]   (tek sinifli)

@@ -1,0 +1,65 @@
+﻿==============================================================================
+RUHSAT-Bench — [C2] POZITIF KONTROL + FILTRE ETKISI
+==============================================================================
+iddia dosyasi: data/iddialar/uretilen_iddialar_v1.csv  (486 iddia)
+  3194         158417 karakter      20475 farkli 6-gram
+  4708          55563 karakter       7270 farkli 6-gram
+  6331          71025 karakter       9410 farkli 6-gram
+  ISGRISK       16703 karakter       2042 farkli 6-gram
+  TBDY         870751 karakter     108792 farkli 6-gram
+  YDUY          94556 karakter      12023 farkli 6-gram
+
+[1] POZITIF KONTROL  (lawshuffle cumlesinin KENDI belgesindeki kapsanmasi)
+  Beklenti: kaynak ~1.00, hedef ~0.00. Kaynak da 0.00 ise [C2] arizalidir.
+  olculen lawshuffle iddiasi: 34
+  KAYNAK belgede kapsanma : min=0.50 q1=1.00 med=1.00 q3=1.00 max=1.00
+  HEDEF  belgede kapsanma : min=0.00 q1=0.00 med=0.00 q3=0.00 max=0.00
+  ! kaynak kapsanmasi 0.85 altinda kalan 1 satir:
+      #134   YDUY->6331     kaynak=0.50 hedef=0.00
+             Uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol elemanı gözetiminde b
+  => KISMI: ayrim var ama tam degil; asagidaki dusuk satirlara bakin.
+
+[2] TAVAN OLCUMU  (belgeler arasi GERCEK tekrar ve suzgecin etkisi)
+  X'in her aday cumlesi (60-300 karakter) Y'de aranir. temiz_mi() ayrica
+  calistirilir: tekrar eden cumle iddia havuzuna girebilir miydi?
+  aday cumle sayisi: 3194=440, 4708=114, 6331=204, ISGRISK=77, TBDY=3590, YDUY=270
+
+  tekrar eden cumle olayi: 14  (>=0.85: 10 | 0.6-0.85: 4)
+  bunlardan temiz_mi() SUZGECINI GECEN: 0
+  => Tekrar eden butun cumleler suzgece takiliyor. [C2]'nin bos cikmasi
+     tesaduf degil: risk havuzu uretim aninda zaten bosaltilmis.
+
+  belge cifti bazinda (kesin / supheli):
+    YDUY      -> 4708         1 /    2
+    3194      -> 4708         1 /    1
+    ISGRISK   -> 6331         1 /    1
+    3194      -> 6331         1 /    0
+    4708      -> 3194         1 /    0
+    4708      -> 6331         1 /    0
+    4708      -> YDUY         1 /    0
+    6331      -> 3194         1 /    0
+    6331      -> 4708         1 /    0
+    6331      -> ISGRISK      1 /    0
+
+  en yuksek 15 tekrar (suzgec sonucu ile):
+    1.00 YDUY->4708      temiz_mi=False Her ne suretle olursa olsun, alınan teminatlar haczedilemez ve üzerine ihtiyati tedbir k
+    1.00 6331->4708      temiz_mi=False Bu maddenin uygulanmasına ilişkin usul ve esaslar Bakanlıkça belirlenir.
+    1.00 6331->3194      temiz_mi=False Bu maddenin uygulanmasına ilişkin usul ve esaslar Bakanlıkça belirlenir.
+    1.00 4708->YDUY      temiz_mi=False Her ne suretle olursa olsun, alınan teminatlar haczedilemez ve üzerine ihtiyati tedbir k
+    1.00 4708->6331      temiz_mi=False Bu maddenin uygulanmasına ilişkin usul ve esaslar Bakanlıkça belirlenir.
+    1.00 4708->3194      temiz_mi=False Bu maddenin uygulanmasına ilişkin usul ve esaslar Bakanlıkça belirlenir.
+    1.00 3194->6331      temiz_mi=False Bu maddenin uygulanmasına ilişkin usul ve esaslar Bakanlıkça belirlenir.
+    1.00 3194->4708      temiz_mi=False Bu maddenin uygulanmasına ilişkin usul ve esaslar Bakanlıkça belirlenir.
+    0.92 ISGRISK->6331      temiz_mi=False ı) Genç, yaşlı, engelli, gebe veya emziren çalışanlar gibi özel politika gerektiren grup
+    0.92 6331->ISGRISK   temiz_mi=False ç) Genç, yaşlı, engelli, gebe veya emziren çalışanlar gibi özel politika gerektiren grup
+    0.67 YDUY->4708      temiz_mi=False Komisyon, Bakanlıkça uygun görülen birimin bünyesinde faaliyetlerini yürütür.
+    0.67 3194->4708      temiz_mi=False Bu maddenin uygulanmasına ilişkin usul ve esaslar Bakanlıkça hazırlanan yönetmelikle bel
+    0.65 YDUY->4708      temiz_mi=False Bakanlık, gerek görülen konular hakkında çalışmada bulunmak üzere ilgili kamu kurum ve k
+    0.65 ISGRISK->6331      temiz_mi=False İşyerinde meydana gelen ancak yaralanma veya ölüme neden olmadığı halde işyeri ya da iş 
+
+[3] RISK HAVUZU ILE IDDIA SETININ KESISIMI
+  risk havuzu bos -> 34 lawshuffle iddiasinin hicbiri riskli
+  cumleden turemis olamaz. [C2] sonucu yapisal olarak guvenli.
+
+[4] KARAR
+  Karisik sonuc; yukaridaki dusuk/riskli satirlar elden gecirilmeli.

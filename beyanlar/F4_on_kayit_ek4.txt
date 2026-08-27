@@ -1,0 +1,154 @@
+RUHSAT-Bench F5 — ON KAYIT EK-4  (DAYANAKLI KOLLAR, KOSU ONCESI)
+================================================================
+Tarih   : 02.08.2026
+Durum   : Bu ek, F5 asamasinin HICBIR model cagrisi yapilmadan once
+          yazildi. Tek istisna Bolum 7'de acikca beyan edilmistir.
+
+0. NEDEN YENI BIR ASAMA
+-----------------------
+Ucuncu-goz denetimi (01.08.2026) mevcut calismanin kapali-kitap
+oldugunu ve tek basina bir muhendislik degerlendirmesi olmadigini
+belirtti: gercek uyum kontrolu mevzuati GETIRIR. Bu asama, kapali
+kitap sonuclarini bir mimari alt siniri olarak konumlandirmak icin
+dayanak getirilen kollari ekler.
+
+1. KORPUS
+---------
+Alti donmus belge, iddialari ureten betigin KENDI ayristiricilariyla
+(uret_iddia_v3_6.maddeler / .bentler) birimlere bolundu. Yeniden
+yazilmadi; boylece dayanak birimi ile iddianin uretildigi birim tanim
+geregi aynidir.
+
+    6331    39 birim     4708    15 birim     3194    49 birim
+    ISGRISK 19 birim     TBDY  1208 birim     YDUY    36 birim
+    toplam 1366 birim
+
+Belge SHA-256'lari data/korpus/belge_manifest.txt icindedir ve makalede
+verilecektir. Bu dosya, denetimin 1.18 maddesindeki "donmus belgelerin
+snapshot'i arsivde yok" eksigini kapatir.
+
+Korpus, iddia kumesinden farkli olarak (Degisik.../Ek ibare...) serhlerini
+KORUR. Iddia kumesinde bu serhler temizle_v39 tarafindan ayiklanmistir.
+Fark kasitlidir ve P6'nin dayanaktan cozulebilmesinin sebebidir.
+
+Anlik goruntu kapsami: YDUY metninde 12/6/2025 tarihli serh vardir.
+Her belgenin kapsadigi en son degisiklik tarihi makalede ayri yazilacaktir.
+
+2. ATIF COZUMU — NEDEN CSV SUTUNU KULLANILMAZ
+---------------------------------------------
+CSV'nin `kanun`/`madde` sutunlari iddianin ATIF YAPTIGI yeri degil,
+metnin GERCEK KAYNAGINI tutar. P5'te bu ikisi kasten farklidir.
+Dayanak getirmede CSV sutunu kullanilirsa modele iddianin dogru
+alintiladigi pasaj gosterilir ve P5 tersine doner.
+
+Bu nedenle atif YALNIZCA iddia metninden cozulur (scripts/atif_coz.py).
+Cozumleyici, uretim_sablonu sutunundan turetilen altin kumeye karsi
+473/473 dogruluk verdi. Gercek is akisi da budur: muhendis iddianin
+GOSTERDIGI maddeye bakar.
+
+Atif dagilimi: 289 madde duzeyinde, 184 yalnizca belge duzeyinde.
+
+3. KOLLAR
+---------
+    R0  kapali kitap        n=473   dayanak yok        (mevcut F4 sonuclari)
+    R1  madde dayanagi      n=289   atifla cozulen birimin tam metni
+    R2  retrieval           n=473   BM25 top-k, 1366 birim
+    R3  kural tabanli       n=473   LLM YOK, deterministik
+
+R1'in 289'a kisitlanmasi bir SECIM DEGIL, veri zorlamasidir: 184 maddede
+iddia yalnizca belgeyi gosterir ve belge metinleri 16k-870k karakterdir,
+enjekte edilemez. R1 karsilastirmalari ayni 289'luk alt kumede R0/R2/R3 ile
+birlikte verilir. Tam kume karsilastirmasi R0/R2/R3 uzerinden yurur.
+
+4. BIRINCIL VE IKINCIL KARSILASTIRMALAR
+---------------------------------------
+BIRINCIL (onceden tanimli, tek aile, kaynak-kumeli bootstrap CI ile):
+    H1  R2 - R0  tam kumede dengeli dogruluk farki   (retrieval kazanci)
+    H2  R1 - R0  289'luk alt kumede ayni fark        (tavan kazanci)
+
+IKINCIL / KESIFSEL:
+    R1 - R2 (retrieval kusurunun maliyeti), R3 - R2, prob kirilimleri,
+    kalibrasyon, kacinma davranisi.
+
+Coklu karsilastirma: birincil aile iki kontrast icerir; Bonferroni-2
+uygulanir. Ikincil sonuclar duzeltmesiz ve KESIFSEL olarak etiketlenir.
+
+5. R1 BIR TAVANDIR, DAGITIM TAHMINI DEGILDIR
+--------------------------------------------
+Iddialar bu korpustan uretilmistir. Dolayisiyla dayanak verildiginde
+yuksek basari BEKLENIR ve bu kismen uretim surecinin bir artifaktidir.
+Bu, sonradan savunulacak bir zayiflik degil, BASTAN kabul edilen bir
+tasarim ozelligidir.
+
+R1 su soruyu cevaplar: "retrieval kusursuz olsaydi gorev cozulur muydu?"
+R1'in yuksek cikmasi, kapali kitaptaki basarisizligin gorevin
+cozulemezliginden degil MIMARIDEN geldigini gosterir. Makalede R1 asla
+"dagitilabilir sistem performansi" diye sunulmayacaktir.
+
+6. R3'UN KORLUGU (zorunlu sart)
+-------------------------------
+kural_taban.py YALNIZCA `id` ve `iddia` sutunlarini okur. `probe`,
+`kanun`, `madde`, `gold`, `uretim_sablonu`, `degisiklik_notu`,
+`kaynak_alinti` sutunlarina ERISMEZ. Betik bunu kosu basinda assert eder.
+Bu sart ihlal edilirse R3 sonuc olarak raporlanamaz.
+
+R3'un kacinma secenegi YOKTUR; kapsami 1.00'dir ve kalibre guven
+uretmez. Bu nedenle ECE/AUROC eksenlerinde R3 karsilastirmaya girmez.
+E1 ve E2 kollarinda ayni karari verir.
+
+7. BEYAN ONCESI BILINEN SONUC  (dogruluk gerekcesi)
+---------------------------------------------------
+Korpus dogrulamasi sirasinda P6 icin deterministik kural ZATEN
+HESAPLANDI ve 120/120 (1.0000) cikti. Yani R3'un P6 sonucu bu beyan
+yazilmadan once bilinmektedir ve KESIFSEL DIYE SUNULAMAZ.
+
+Bu kontrolun dairesel bir yani vardir: korpusun `degisiklik_yillari`
+alani ile CSV'nin `degisiklik_notu` alani ayni regex'in ayni PDF'lere
+uygulanmasindan gelir. Kontrol, serhlerin HUKUKEN dogru oldugunu
+gostermez; yalnizca bilgi kanalinin korpusta var oldugunu ve yeniden
+kurulumun ureticiyle uyustugunu gosterir.
+
+Bu nedenle SART: P6 serhlerinden 20 maddelik bir orneklem, resmi
+mukerrer metne karsi bagimsiz olarak dogrulanacaktir. Bu dogrulama
+yapilmadan R3'un P6 sonucu makalede birincil bulgu olarak verilmez.
+
+8. P3 ICIN AYRI UYARI
+---------------------
+R3'un P3 (kabul/yururluk yili) karari, korpus metninden degil
+uret_iddia_v3_6.LAWS meta verisindeki `kabul` alanindan turetilir.
+Bu, P6 ile ayni dairesellige sahiptir ve DAHA ZAYIFTIR, cunku korpusta
+bagimsiz bir dogrulama kanali yoktur. P3 sonuclari R3 icin ayri
+raporlanir ve "meta veri turevli" diye etiketlenir.
+
+9. R3 ESLESTIRME KURALI (kosudan once sabitlenmistir)
+-----------------------------------------------------
+    a) Serhler ((Degisik|Ek|Mulga|Yeniden duzenleme) ...) korpus
+       tarafindan ayiklanir. Iddia kumesinde bunlar zaten yoktur.
+    b) Iki taraftan da TUM bosluklar atilir ve kucuk harfe cevrilir.
+       Gerekce: kelime_onar.py yalnizca kelime ici boslugu oynatmistir;
+       31 onarimin 31'i bosluksuz halde v5 ile birebir aynidir.
+    c) Madde duzeyinde atif -> YALNIZCA o birimde aranir. Belgeye
+       DUSULMEZ. Dusulseydi P5_maddeshift maddeleri DOGRU cikardi.
+    d) Belge duzeyinde atif -> belgenin tamaminda aranir.
+    e) Bulunursa DOGRU, bulunmazsa YANLIS.
+    f) Yil kaliplari (P6/P3) ayri islenir.
+
+Bu kural altin etiketlere bakilarak AYARLANMAMISTIR. Kosu sonrasi
+ayarlanirsa, hem ilk hem ayarlanmis sonuc raporlanir ve ayarlama
+gerekcesi yazilir.
+
+10. KOLU GECERSIZ KILACAK DURUMLAR
+----------------------------------
+  * Dayanak enjekte edilen istemin hash'i satir basina kaydedilmezse.
+  * Kesilen yanit orani %1'i asarsa (EK-3 ile ayni gerekce: kayip
+    rastgele olmaz, kolay maddelere yanli olur).
+  * R2'de retrieval geri cagirma orani ayrica raporlanmazsa; R2
+    sonucu retrieval ve yargi bilesenlerine ayrilmadan verilemez.
+  * R3, izin verilen iki sutun disinda bir sutuna erisirse.
+
+11. DEGISMEYENLER
+-----------------
+Iddia kumesi (v6; uzlasi sonrasi v7), altin etiketler, E1/E2 tanimlari,
+ayristirma mantigi, siralama tohumu, cogunluk oyu yordami ve
+f4_skor.py puanlama semasi degismemistir. Ana on kayit ile EK-1, EK-2,
+EK-3 aynen gecerlidir.

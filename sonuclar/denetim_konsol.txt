@@ -1,0 +1,49 @@
+--- #55 | 3194 | 28 | P5_capraz | gold=YANLIS
+IDDIA : 3194 sayılı Kanun'un 20. maddesine göre ileri tasarım yöntemleri ve teknolojileri gerektiren özellik arz eden binaların projeleri, bu alanda Bakanlık tarafından çıkarılan yönetmelik çerçevesinde yeterli uzmanlığı haiz mühendislerin gözetiminde yapılır.
+KAYNAK: İleri tasarım yöntemleri ve teknolojileri gerektiren özellik arz eden binaların projeleri, bu alanda Bakanlık tarafından çıkarılan yönetmelik çerçevesinde yeterli uzmanlığı haiz mühendislerin gözetiminde yapılır.
+MODEL : gemma3:12b/E1=D  gemma3:12b/E2=D  gemma3:4b/E1=D  gemma3:4b/E2=D  llama3.2:3b-instruct-q5_K_M/E1=D  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=D  qwen2.5:14b-instruct/E2=D  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=D
+
+--- #60 | TBDY | 2.1.2 | P5_capraz | gold=YANLIS
+IDDIA : TBDY 2018'in 5.6.5.2 numaralı bendine göre deprem Yer Hareketi Düzeyi-3 (DD-3) DD-3 Deprem Yer Hareketi, spektral büyüklüklerin 50 yılda aşılma olasılığının %50 ve buna karşı gelen tekrarlanma periyodunun 72 yıl olduğu sık deprem yer hareketini nitelemektedir.
+KAYNAK: Deprem Yer Hareketi Düzeyi-3 (DD-3) DD-3 Deprem Yer Hareketi, spektral büyüklüklerin 50 yılda aşılma olasılığının %50 ve buna karşı gelen tekrarlanma periyodunun 72 yıl olduğu sık deprem yer hareketini nitelemektedir.
+MODEL : gemma3:12b/E1=Y  gemma3:12b/E2=Y  gemma3:4b/E1=E  gemma3:4b/E2=Y  llama3.2:3b-instruct-q5_K_M/E1=Y  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=E  qwen2.5:14b-instruct/E2=D  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=D
+
+--- #89 | TBDY | 4.4.4.2 | P5_capraz | gold=YANLIS
+IDDIA : TBDY 2018'in 17.6.7 numaralı bendine göre güvenlik Katsayıları ile Tasarım (GKT) yaklaşımının uygulanması durumunda, Bölüm 16’ya göre temel tasarımı dışında, Bölüm 9 ve Bölüm 10’da verilen yük birleşimleri kullanılacaktır.
+KAYNAK: Güvenlik Katsayıları ile Tasarım (GKT) yaklaşımının uygulanması durumunda, Bölüm 16’ya göre temel tasarımı dışında, Bölüm 9 ve Bölüm 10’da verilen yük birleşimleri kullanılacaktır.
+MODEL : gemma3:12b/E1=D  gemma3:12b/E2=Y  gemma3:4b/E1=D  gemma3:4b/E2=D  llama3.2:3b-instruct-q5_K_M/E1=D  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=E  qwen2.5:14b-instruct/E2=D  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=D
+
+--- #138 | 6331 | 8 | P5_capraz | gold=YANLIS
+IDDIA : 6331 sayılı Kanun'un 6. maddesine göre bildirim yapmadığı tespit edilen işyeri hekimi ve iş güvenliği uzmanının belgesi üç ay, tekrarında ise altı ay süreyle ; ortak sağlık ve güvenlik biriminin yetki belgesi altı ay, tekrarında ise bir yıl süreyle askıya alınır.
+KAYNAK: Bildirim yapmadığı tespit edilen işyeri hekimi ve iş güvenliği uzmanının belgesi üç ay, tekrarında ise altı ay süreyle ; ortak sağlık ve güvenlik biriminin yetki belgesi altı ay, tekrarında ise bir yıl süreyle askıya alı
+MODEL : gemma3:12b/E1=D  gemma3:12b/E2=D  gemma3:4b/E1=D  gemma3:4b/E2=D  llama3.2:3b-instruct-q5_K_M/E1=Y  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=E  qwen2.5:14b-instruct/E2=D  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=D
+
+--- #173 | YDUY | 12 | P5_capraz | gold=YANLIS
+IDDIA : Yapı Denetimi Uygulama Yönetmeliği'nin 17. maddesine göre yapı denetim kuruluşunun faaliyet göstereceği ilde en az 100 m2 alana sahip tam donanımlı bir ofisinin bulunması zorunludur.
+KAYNAK: Yapı denetim kuruluşunun faaliyet göstereceği ilde en az 100 m2 alana sahip tam donanımlı bir ofisinin bulunması zorunludur.
+MODEL : gemma3:12b/E1=Y  gemma3:12b/E2=Y  gemma3:4b/E1=D  gemma3:4b/E2=D  llama3.2:3b-instruct-q5_K_M/E1=Y  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=E  qwen2.5:14b-instruct/E2=Y  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=D
+
+--- #188 | 3194 | 36 | P5_capraz | gold=YANLIS
+IDDIA : 3194 sayılı Kanun'un 28. maddesine göre kapıcı daireleri anabina içinde olabileceği gibi, nizamlara, fen ve sağlık şartlarına aykırı yapılmamak, brüt 40 metrekareyi geçmemek şartı ile bahçenin herhangi bir yerinde veya müştemilat binaları içerisinde de tertiplenebilir.
+KAYNAK: Kapıcı daireleri anabina içinde olabileceği gibi, nizamlara, fen ve sağlık şartlarına aykırı yapılmamak, brüt 40 metrekareyi geçmemek şartı ile bahçenin herhangi bir yerinde veya müştemilat binaları içerisinde de tertipl
+MODEL : gemma3:12b/E1=D  gemma3:12b/E2=D  gemma3:4b/E1=Y  gemma3:4b/E2=Y  llama3.2:3b-instruct-q5_K_M/E1=Y  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=E  qwen2.5:14b-instruct/E2=D  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=D
+
+--- #208 | 3194 | 23 | P5_capraz | gold=YANLIS
+IDDIA : İSG Risk Değerlendirmesi Yönetmeliği'ne göre alınan bu paralar teknik altyapıyı yaptıranlara veya bu meblağı önceden ilgili idareye ödeyenlere aynen geri verilir.
+KAYNAK: Alınan bu paralar teknik altyapıyı yaptıranlara veya bu meblağı önceden ilgili idareye ödeyenlere aynen geri verilir.
+MODEL : gemma3:12b/E1=Y  gemma3:12b/E2=Y  gemma3:4b/E1=Y  gemma3:4b/E2=Y  llama3.2:3b-instruct-q5_K_M/E1=Y  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=E  qwen2.5:14b-instruct/E2=Y  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=Y
+
+--- #248 | TBDY | 9.12.6 | P5_capraz | gold=YANLIS
+IDDIA : TBDY 2018'in 15.7.1.2 numaralı bendine göre ankraj çubukları malzeme sinin kopma uzaması oranı %14 değerinden az olmayacaktır.
+KAYNAK: Ankraj çubukları malzeme sinin kopma uzaması oranı %14 değerinden az olmayacaktır.
+MODEL : gemma3:12b/E1=Y  gemma3:12b/E2=Y  gemma3:4b/E1=D  gemma3:4b/E2=D  llama3.2:3b-instruct-q5_K_M/E1=Y  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=E  qwen2.5:14b-instruct/E2=D  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=D
+
+--- #268 | TBDY | 7.6.3.3 | P5_capraz | gold=YANLIS
+IDDIA : TBDY 2018'in 15.2.1.3 numaralı bendine göre uç bölgeleri dışında, perde gövdelerinin her iki yüzündeki donatı ağları, her bir metrekare perde yüzünde en az dört adet özel deprem çirozu ile karşılıklı olarak bağlanacaktır.
+KAYNAK: Uç bölgeleri dışında, perde gövdelerinin her iki yüzündeki donatı ağları, her bir metrekare perde yüzünde en az dört adet özel deprem çirozu ile karşılıklı olarak bağlanacaktır.
+MODEL : gemma3:12b/E1=Y  gemma3:12b/E2=Y  gemma3:4b/E1=D  gemma3:4b/E2=D  llama3.2:3b-instruct-q5_K_M/E1=Y  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=E  qwen2.5:14b-instruct/E2=Y  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=D
+
+--- #375 | YDUY | 4 | P5_capraz | gold=YANLIS
+IDDIA : Yapı Denetimi Uygulama Yönetmeliği'nin 8. maddesine göre inşaatın tamamlanmasını müteakiben tanzim edilen iş bitirme tutanağı ilgili idarece incelenerek, on beş iş günü içinde onaylanır veya var ise eksikliklerinin neler olduğu belirtilerek, giderilmesinin gerektiği yazılı olarak bildirilir.
+KAYNAK: İnşaatın tamamlanmasını müteakiben tanzim edilen iş bitirme tutanağı ilgili idarece incelenerek, on beş iş günü içinde onaylanır veya var ise eksikliklerinin neler olduğu belirtilerek, giderilmesinin gerektiği yazılı ola
+MODEL : gemma3:12b/E1=D  gemma3:12b/E2=D  gemma3:4b/E1=D  gemma3:4b/E2=D  llama3.2:3b-instruct-q5_K_M/E1=Y  llama3.2:3b-instruct-q5_K_M/E2=Y  qwen2.5:14b-instruct/E1=D  qwen2.5:14b-instruct/E2=D  qwen2.5:7b-instruct-q4_K_M/E1=E  qwen2.5:7b-instruct-q4_K_M/E2=D

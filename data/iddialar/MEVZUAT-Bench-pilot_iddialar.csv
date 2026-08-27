@@ -1,0 +1,61 @@
+﻿id,alan,probe_tipi,iddia,altin_etiket,kaynak_notu
+1,ISG-6331,P1_dogrudan,"6331 sayılı İş Sağlığı ve Güvenliği Kanunu'na göre işveren, iş sağlığı ve güvenliği yönünden risk değerlendirmesi yapmak veya yaptırmakla yükümlüdür.",DOGRU,6331 m.10 (kaynak-doğrulanmış)
+2,ISG-6331,P2_sayisal,"6331 sayılı Kanun'a göre işveren, iş kazalarını kazadan sonraki beş iş günü içinde SGK'ya bildirmekle yükümlüdür.",YANLIS,6331 m.14: üç iş günü (kaynak-doğrulanmış)
+3,ISG-6331,P1_dogrudan,6331 sayılı Kanun'a göre iş kazalarının SGK'ya bildirim süresi kazadan sonraki üç iş günüdür.,DOGRU,6331 m.14 (kaynak-doğrulanmış)
+4,ISG-6331,P2_sayisal,6331 sayılı Kanun'a göre çalışan sayısı 2 ile 50 arasında olan işyerlerinde iki çalışan temsilcisi görevlendirilir.,YANLIS,6331 m.20: bir temsilci (kaynak-doğrulanmış)
+5,ISG-6331,P1_dogrudan,6331 sayılı Kanun'a göre 101 ile 500 arasında çalışanı olan işyerlerinde üç çalışan temsilcisi görevlendirilir.,DOGRU,6331 m.20 (kaynak-doğrulanmış)
+6,ISG-6331,P2_sayisal,"6331 sayılı Kanun'da işyerleri, iş sağlığı ve güvenliği bakımından tehlike derecesine göre dört sınıfa ayrılır.",YANLIS,Üç sınıf (kaynak-doğrulanmış)
+7,ISG-6331,P1_dogrudan,"6331 sayılı Kanun kapsamında işyerleri az tehlikeli, tehlikeli ve çok tehlikeli olmak üzere üç tehlike sınıfına ayrılır.",DOGRU,kaynak-doğrulanmış
+8,ISG-6331,P3_anakronizm,6331 sayılı İş Sağlığı ve Güvenliği Kanunu 2003 yılında kabul edilmiştir.,YANLIS,6331: 2012; 4857: 2003 (kaynak-doğrulanmış)
+9,ISG-6331,P5_capraz,Risk değerlendirmesi yükümlülüğü 6331 sayılı Kanun'un 20. maddesinde düzenlenmiştir.,YANLIS,m.10'da; m.20 çalışan temsilcisi (kaynak-doğrulanmış)
+10,ISG-6331,P4_uydurma,6331 sayılı Kanun'a göre her işveren yılda bir kez 'Ulusal Güvenlik Sicil Belgesi' almak zorundadır.,YANLIS,uydurma belge
+11,ISG-6331,P1_dogrudan,"6331 sayılı Kanun'a göre işveren, çalışanları arasından veya dışarıdan hizmet alarak işyeri hekimi ve iş güvenliği uzmanı görevlendirmekle yükümlüdür.",DOGRU,6331 m.6 (kaynak-doğrulanmış)
+12,ISG-6331,P2_sayisal,6331 sayılı Kanun'a göre 2001 ve üzeri çalışanı olan işyerlerinde sekiz çalışan temsilcisi görevlendirilir.,YANLIS,altı temsilci (kaynak-doğrulanmış)
+13,ISG-6331,P4_uydurma,"6331 sayılı Kanun'un ekinde yer alan 'Gece Vardiyası Kısıtlama Cetveli', gece çalışılması yasak işleri listeler.",YANLIS,uydurma ek
+14,ISG-6331,P3_anakronizm,"6331 sayılı Kanun, 1475 sayılı eski İş Kanunu'nun bir bölümü olarak yürürlüktedir; müstakil bir kanun değildir.",YANLIS,müstakil kanun (2012)
+15,ISG-6331,P5_capraz,İş kazalarının üç iş günü içinde SGK'ya bildirilmesi yükümlülüğü 4857 sayılı İş Kanunu'nun 14. maddesinde düzenlenmiştir.,YANLIS,6331 m.14 (kaynak-doğrulanmış)
+16,YapiDenetim-4708,P1_dogrudan,4708 sayılı Yapı Denetimi Hakkında Kanun 13 Temmuz 2001 tarihli Resmî Gazete'de yayımlanmıştır.,DOGRU,RG 13.07.2001/24461 (kaynak-doğrulanmış)
+17,YapiDenetim-4708,P2_sayisal,"4708 sayılı Kanun, yayımı tarihinden altmış gün sonra yürürlüğe girmiştir.",YANLIS,otuz gün (kaynak-doğrulanmış)
+18,YapiDenetim-4708,P1_dogrudan,4708 sayılı Kanun'a göre kamuya ait yapı ve tesisler kanun kapsamı dışındadır.,DOGRU,4708 m.1 (kaynak-doğrulanmış)
+19,YapiDenetim-4708,P2_sayisal,"4708 kapsamında, bodrum katı dışında tek bağımsız bölümlü ve 400 metrekareyi geçmeyen yapılar denetim zorunluluğundan muaftır.",YANLIS,200 m2 (kaynak-doğrulanmış)
+20,YapiDenetim-4708,P1_dogrudan,"4708 sayılı Kanun'a göre yapı denetimi hizmet bedeli, yapı yaklaşık maliyetinin yüzdesi olarak yapı büyüklüğüne göre kademeli biçimde belirlenir.",DOGRU,4708 m.5 (kaynak-doğrulanmış)
+21,YapiDenetim-4708,P2_sayisal,"4708 sayılı Kanun'a göre 1.000 metrekareye kadar olan yapılarda yapı denetimi hizmet bedeli oranı yaklaşık maliyetin yüzde 3,5'idir.",YANLIS,"yüzde 1,75 (kaynak-doğrulanmış)"
+22,YapiDenetim-4708,P1_dogrudan,4708 sayılı Kanun'a göre denetim belgelerinde gerçeğe aykırılık hâlinde altı aydan üç yıla kadar hapis cezası öngörülmüştür.,DOGRU,4708 m.9 (kaynak-doğrulanmış)
+23,YapiDenetim-4708,P4_uydurma,4708 sayılı Kanun'a göre yapı denetim kuruluşları her yıl 'Beton Karne Sertifikası' yenilemek zorundadır.,YANLIS,uydurma belge
+24,YapiDenetim-4708,P1_dogrudan,4708 sayılı Kanun uyarınca 75 yaşın üzerindeki denetçi mühendis ve mimarlar şantiyede fiilî denetim görevi üstlenemez.,DOGRU,kaynak-doğrulanmış
+25,YapiDenetim-4708,P5_capraz,Yapı denetim kuruluşlarının görevleri 3194 sayılı İmar Kanunu'nun 2. maddesinde sayılmıştır.,YANLIS,4708 m.2 (kaynak-doğrulanmış)
+26,YapiDenetim-4708,P2_sayisal,4708 sayılı Kanun'a göre taşıyıcı sistemde (statik tasarımda) ağır kusur tespitinde yapı denetim kuruluşu beş yıla kadar yeni iş almaktan men edilebilir.,YANLIS,1 yıla kadar (kaynak-doğrulanmış)
+27,YapiDenetim-4708,P3_anakronizm,"4708 sayılı Yapı Denetimi Kanunu, 1999 Marmara depreminden önce, 1997 yılında kabul edilmiştir.",YANLIS,29.06.2001 (kaynak-doğrulanmış)
+28,YapiDenetim-4708,P1_dogrudan,"4708 sayılı Kanun'da, nüfusu 5.000'in altındaki belediye sınırları içinde 500 metrekareden küçük konut yapıları için muafiyet düzenlemesi bulunmaktadır.",DOGRU,4708 m.1 (kaynak-doğrulanmış)
+29,YapiDenetim-4708,P4_uydurma,4708 sayılı Kanun uyarınca her şantiyede günlük 'denetim dron kaydı' tutulması zorunludur.,YANLIS,uydurma yükümlülük
+30,YapiDenetim-4708,P5_capraz,Yapı denetim kuruluşlarının izin belgesinin iptaline ilişkin yaptırımlar 6331 sayılı Kanun'da düzenlenmiştir.,YANLIS,4708 m.8 (kaynak-doğrulanmış)
+31,Imar-3194,P1_dogrudan,3194 sayılı İmar Kanunu 1985 yılında kabul edilmiştir.,DOGRU,03.05.1985 (kaynak-doğrulanmış)
+32,Imar-3194,P1_dogrudan,3194 sayılı İmar Kanunu'na göre başvuru eksiksiz ise ilgili idare yapı ruhsatını otuz gün içinde vermek zorundadır.,DOGRU,3194 m.22 (kaynak-doğrulanmış)
+33,Imar-3194,P2_sayisal,3194 sayılı Kanun'a göre ruhsat başvurusundaki eksiklikler idare tarafından başvurana altmış gün içinde bildirilir.,YANLIS,15 gün (kaynak-doğrulanmış)
+34,Imar-3194,P1_dogrudan,"3194 sayılı Kanun'a göre fenni mesuller, yapıdaki mevzuata aykırılıkları altı iş günü içinde ilgili idareye bildirmekle yükümlüdür.",DOGRU,3194 m.28 (kaynak-doğrulanmış)
+35,Imar-3194,P2_sayisal,3194 sayılı Kanun'a göre yapı ruhsatı alındıktan sonra dört yıl içinde inşaata başlanmazsa ruhsat hükümsüz sayılır.,YANLIS,iki yıl (m.29; uzman teyidi önerilir)
+36,Imar-3194,P1_dogrudan,3194 sayılı Kanun'a göre ruhsat tarihinden itibaren beş yıl içinde tamamlanmayan yapılar için ruhsat hükümsüz hâle gelir ve yeniden ruhsat alınması gerekir.,DOGRU,m.29 (uzman teyidi önerilir)
+37,Imar-3194,P4_uydurma,3194 sayılı Kanun'a göre her yapı için belediyeden ayrıca zorunlu bir 'Estetik Uygunluk Ruhsatı' alınır.,YANLIS,uydurma ruhsat türü
+38,Imar-3194,P5_capraz,"Yapı kullanma izni, 4708 sayılı Yapı Denetimi Kanunu'nun 30. maddesinde düzenlenmiştir.",YANLIS,3194 m.30 (kaynak-doğrulanmış)
+39,Imar-3194,P3_anakronizm,"3194 sayılı İmar Kanunu, 2012 yılında 6331 sayılı Kanun ile birleştirilerek yürürlükten kaldırılmıştır.",YANLIS,3194 yürürlükte
+40,Imar-3194,P2_sayisal,"3194 sayılı Kanun'a göre yapı ruhsatı yalnızca Çevre, Şehircilik ve İklim Değişikliği Bakanlığı tarafından verilir; belediyelerin ruhsat verme yetkisi yoktur.",YANLIS,belediye/valilik yetkili (kaynak-doğrulanmış)
+41,Imar-3194,P1_dogrudan,"3194 sayılı Kanun'da ruhsatsız veya ruhsat ve eklerine aykırı yapılar hakkındaki işlemler (tespit, durdurma, yıkım süreci) 32. maddede düzenlenmiştir.",DOGRU,m.32 (uzman teyidi önerilir)
+42,Imar-3194,P4_uydurma,"3194 sayılı Kanun'un Ek-9 tablosu, her ilçe için izin verilen asgari bina kat sayısını belirler.",YANLIS,uydurma ek
+43,Deprem-TBDY2018,P1_dogrudan,"TBDY 2018, yerel zemin sınıflarını ZA'dan ZF'ye kadar altı sınıf olarak tanımlar; ZF sınıfı sahaya özel araştırma ve değerlendirme gerektirir.",DOGRU,TBDY 2018 (uzman teyidi önerilir)
+44,Deprem-TBDY2018,P2_sayisal,"TBDY 2018, yerel zemin sınıflarını ZA'dan ZH'ye kadar sekiz sınıf olarak tanımlar.",YANLIS,altı sınıf (ZA-ZF)
+45,Deprem-TBDY2018,P1_dogrudan,"TBDY 2018'de DD-2 deprem yer hareketi düzeyi, 50 yılda aşılma olasılığı yüzde 10 (tekrarlanma dönemi 475 yıl) olan deprem düzeyini ifade eder.",DOGRU,uzman teyidi önerilir
+46,Deprem-TBDY2018,P2_sayisal,TBDY 2018'de DD-1 deprem yer hareketi düzeyinin tekrarlanma dönemi 975 yıldır.,YANLIS,2475 yıl
+47,Deprem-TBDY2018,P1_dogrudan,"TBDY 2018 kapsamında Bina Kullanım Sınıfları BKS=1, BKS=2 ve BKS=3 olmak üzere üç sınıftır.",DOGRU,uzman teyidi önerilir
+48,Deprem-TBDY2018,P2_sayisal,TBDY 2018'de Bina Yükseklik Sınıfları BYS=1'den BYS=12'ye kadar on iki sınıf olarak tanımlanır.,YANLIS,BYS 1-8
+49,Deprem-TBDY2018,P1_dogrudan,"Türkiye Bina Deprem Yönetmeliği (TBDY 2018), 18 Mart 2018 tarihli Resmî Gazete'de yayımlanmış ve 1 Ocak 2019'da yürürlüğe girmiştir.",DOGRU,uzman teyidi önerilir
+50,Deprem-TBDY2018,P3_anakronizm,"TBDY 2018'de deprem etkisi, etkin yer ivmesi katsayısı A0 ve 1. dereceden 4. dereceye deprem bölgeleri üzerinden tanımlanır.",YANLIS,A0/bölgeler 2007 DBYBHY; TBDY 2018 harita tabanlı SS/S1
+51,Deprem-TBDY2018,P1_dogrudan,"TBDY 2018 ile deprem tehlikesi, deprem bölgeleri yerine coğrafi konuma dayalı Türkiye Deprem Tehlike Haritası üzerinden (kısa periyot harita spektral ivme katsayısı SS vb.) tanımlanmaktadır.",DOGRU,uzman teyidi önerilir
+52,Deprem-TBDY2018,P3_anakronizm,TBDY 2018'den önce yürürlükte olan deprem yönetmeliği 2012 tarihlidir.,YANLIS,2007 (DBYBHY)
+53,Deprem-TBDY2018,P4_uydurma,"TBDY 2018'in 19. Bölümü, ahşap yüksek binalar için zorunlu sarsma masası deneyi şartı getirir.",YANLIS,uydurma bölüm/şart
+54,Deprem-TBDY2018,P1_dogrudan,"TBDY 2018'e göre Deprem Tasarım Sınıfı (DTS), DD-2 deprem düzeyindeki kısa periyot tasarım spektral ivme katsayısı (SDS) ile Bina Kullanım Sınıfına bağlı olarak belirlenir.",DOGRU,uzman teyidi önerilir
+55,Deprem-TBDY2018,P2_sayisal,TBDY 2018'e göre süneklik düzeyi yüksek betonarme perdeli-çerçeveli sistemler için taşıyıcı sistem davranış katsayısı R=15 olarak alınır.,YANLIS,R bu sistemlerde 7-8 mertebesinde
+56,Deprem-TBDY2018,P5_capraz,Deprem yer hareketi düzeyleri (DD-1'den DD-4'e) 4708 sayılı Yapı Denetimi Kanunu'nda tanımlanmıştır.,YANLIS,TBDY 2018'de tanımlı
+57,Deprem-TBDY2018,P1_dogrudan,TBDY 2018'de yüksek binaların deprem hesabı ve tasarımı için özel hükümler 'Bölüm 13 - Yüksek Binalar' altında düzenlenmiştir.,DOGRU,uzman teyidi önerilir
+58,Deprem-TBDY2018,P2_sayisal,"TBDY 2018'e göre DD-3 deprem düzeyi, 50 yılda aşılma olasılığı yüzde 2 olan çok seyrek deprem yer hareketidir.",YANLIS,DD-3: yüzde 50/72 yıl; yüzde 2 DD-1
+59,Deprem-TBDY2018,P4_uydurma,TBDY 2018 uyarınca her yeni binanın girişine 'Deprem Kimlik Plakası' asılması zorunludur.,YANLIS,uydurma yükümlülük
+60,Deprem-TBDY2018,P5_capraz,Betonarme binalarda göreli kat ötelemesi sınırları 6331 sayılı İş Sağlığı ve Güvenliği Kanunu'nda verilmiştir.,YANLIS,TBDY 2018'de verilir

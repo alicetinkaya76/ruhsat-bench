@@ -1,0 +1,29 @@
+==========================================================================
+KONSENSUS ON-TARAMA DOGRULAMA BENZETIMI
+==========================================================================
+oyveren profil kaynagi : sonuclar/konsensus_tani.csv
+model x kosul hucresi  : 10 | v2'nin bilgili buldugu: 1
+iddia/tur=486  enjekte altin hatasi=%3.0 (yari DOGRU-altin, yari YANLIS-altin)
+tekrar=300  esik=%70  tohum=20260727
+
+olcut                                       v1 naif    v2 duzeltmeli         rastgele
+secilen madde                             49.4 ±6.6       69.5 ±35.1       69.5 ±35.1
+geri-cagirma (tum hatalar) %             16.0 ±10.4       23.6 ±15.2       14.4 ±11.1
+  ... DOGRU-altin hatalarinda %          20.8 ±15.6       18.3 ±17.6       14.7 ±14.4
+  ... YANLIS-altin hatalarinda %         11.1 ±12.0       29.0 ±20.5       14.0 ±14.1
+kesinlik %                                 4.5 ±2.9         4.1 ±2.8         2.4 ±1.8
+sinif asimetrisi (puan)                    7.4 ±2.6         8.1 ±6.0         2.2 ±2.0
+
+YORUM (sayilardan turetilmistir, sabit metin degildir)
+  Rastgele ayni sayida satir secmek %2.4 kesinlik verir; bu taban cizgisidir.
+  v1 kaldiraci: x1.87   |   v2 kaldiraci: x1.70
+  Naif tarama sinif korlugu gosteriyor: DOGRU-altin %21 / YANLIS-altin %11.
+  Duzeltme dengeyi iyilestirmedi (asimetri 7.4 -> 8.1 puan);
+  eleme sonrasi kalan oy verenlerin ARTIK yanliligi yeni bir asimetri uretiyor.
+
+KARAR
+  ! BU OY VEREN KADROSUYLA TARAMA UZMAN TRIYAJI ICIN KULLANILMAMALIDIR.
+  69 satirlik uzman emegi ~2.9 gercek hata getirir; ayni emegi rastgele
+  harcamak ~1.7 hata getirirdi. Fark istatistiksel olarak anlamsiza yakin.
+  Sorun toplama kuralinda degil oy verenlerde: hicbir hucre yeterince bilgili degil.
+  Dogru yol: bayrakli satirlar yerine TABAKALI RASTGELE ORNEK uzerinden uzman denetimi.

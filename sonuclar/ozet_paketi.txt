@@ -1,0 +1,420 @@
+﻿
+
+==============================================================================
+### sonuclar\kaynak_dogrulama_v2.txt
+==============================================================================
+==============================================================================
+RUHSAT-Bench — KAYNAK KIMLIK DOGRULAMA v2 (deterministik, modelsiz)
+==============================================================================
+iddia sayisi: 486
+varyant etiketi okundu -> P5_maddeshift: 92 | P5_lawshuffle: 34 | P2_swap: 41
+
+[A] BASLIK TARAMASI  (yutulan madde tespiti)
+  3194      siki=49   gevsek=86   madde=49   eksik no=1    YUTULAN=0
+  4708      siki=16   gevsek=23   madde=15   eksik no=0    YUTULAN=0
+  6331      siki=39   gevsek=50   madde=39   eksik no=0    YUTULAN=0
+  ISGRISK   siki=19   gevsek=20   madde=19   eksik no=0    YUTULAN=0
+  TBDY      bent basligi=1317  (ondalikli yapi; yutulma testi uygulanmaz)
+  YDUY      siki=36   gevsek=54   madde=36   eksik no=0    YUTULAN=0
+  temiz: gevsek tarama ekstra baslik bulmadi.
+
+[B] KOKEN KONTROLU  (cumle gercekten kayitli maddede mi? tum yerler)
+  kontrol edilebilen: 453 | eslesti: 453 | KAYMIS: 0 | bulunamadi: 1 | atlandi: 32
+  birden fazla yerde gecen cumle: 7  (bunlarda madde atfi tek degil; [C1] hepsini test eder)
+
+[B2] TAM ESLESMEYEN CUMLELER  (v1'de 'bulunamadi' diyenler)
+  7 cumle ham metinde birebir bulunamadi. Beklenen sebep:
+  uretecteki cumleler() '(Değişik: ...)' etiketlerini ve bastaki 'b)' /
+  '(4)' isaretlerini SOKUYOR; kaynak_alinti bu yuzden ham metnin birebir
+  alt dizisi olmayabilir. n-gram kapsanmasi bunu ayirt eder:
+    #134   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol e
+    #202   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol e
+    #254   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Maddede sayılan işlemler, ihtisas konusuna göre ilgili (4) denetçi ve 
+    #255   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Maddede sayılan işlemler, ihtisas konusuna göre ilgili (4) denetçi ve 
+    #272   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol e
+    #282   YDUY     kapsanma=0.50  duzenleme artigi (zararsiz; konum n-gram ile bulundu)
+           Maddede sayılan işlemler, ihtisas konusuna göre ilgili (4) denetçi ve 
+    #391   YDUY     kapsanma=0.44  kismi ortusme - GOZ KONTROLU
+           Denetçi mimar ve denetçi mühendis olarak görev yapabilmek için, ilgili
+
+[C1] KAZARA-DOGRU TESTI - madde kaydirma  (P5_maddeshift)
+  P5_maddeshift iddiasi: 92 | koken kontrolu yapilabilen: 92
+  temiz: hicbir kaydirma hedefi cumlenin gectigi maddelere denk gelmiyor.
+
+[C2] KAZARA-DOGRU TESTI - belge degistirme  (P5_lawshuffle)
+  Mantik: cumle hedef belgede de gecerse 'yanlis belgeye atif' iddiasi DOGRU olur.
+  P5_lawshuffle iddiasi: 34 | test edilen: 34
+  kapsanma >= 0.85: 0 (KESIN)  |  0.6-0.85: 0 (SUPHELI)
+  temiz: hicbir kaynak cumle hedef belgede kayda deger olcude gecmiyor.
+  (kalibrasyon) en yuksek 10 kapsanma: 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00
+
+[C3] P2 ATIF BOZMA UYARISI  (nicelik testi mi, atif testi mi?)
+  P2_swap iddiasi: 41 | atif baglaminda sayi saptirilmis: 1
+  Bunlarda altin etiket yine YANLIS'tir (hata degil) ama olculen sey
+  'sayisal hafiza' degil 'capraz atif hafizasi'dir; P2 skoru kirlenir.
+    #378   3194     2960->1480   ...ALTINCI BÖLÜM 2960 Sayılı Boğaziçi Kanunu ile İlgili Hüküm...
+
+[C4] P6 DEGISIKLIK DOGRULAMASI  (kayitli yil madde blogunda gercekten var mi?)
+  P6 iddiasi (yil kayitli): 119 | blokta dogrulanamayan: 0
+  temiz: her P6 iddiasinin yili kendi madde blogunda dogrulandi.
+
+[D] YAPISAL MADDE UYARISI  (Amac/Kapsam/Dayanak/Tanimlar)
+  [B] bu cumlelerin gercekten bu bloklarda oldugunu dogruladi; sorun etiket
+  degil ICERIK: tanim/amac cumleleri belgeler arasi tekrar eder, bu yuzden
+  P5_lawshuffle'da kazara-dogru riski en yuksek olan satirlar bunlardir.
+    YDUY      madde 4    -> 7 iddia
+    4708      madde 1    -> 3 iddia
+    6331      madde 4    -> 2 iddia
+
+[E] KARAR
+  + 1 P2 satiri atif bozuyor (altin dogru, olcum kirli).
+  Kaynak-kimlik VE kazara-dogruluk katmanlari temiz.
+  Kalan altin hatasi anlamsal duzeydedir; onu ancak uzman denetimi bulur.
+
+==============================================================================
+### sonuclar\temizlik_raporu.txt
+==============================================================================
+==============================================================================
+RUHSAT-Bench — CERRAHI TEMIZLIK (v3.7 kurallari, uretici calistirilmadan)
+==============================================================================
+girdi: data/iddialar/uretilen_iddialar_v1.csv  (486 iddia)
+
+[1] BOZUK KAYNAK CUMLELER
+  119 farkli kaynak cumle en az bir kurala takildi.
+    [R2_capraz_kanun_atfi] Yapı sahibine bu şekilde tebligat yapılamaması hâlinde bu durum tebligat yapan idarenin internet sayfasında 30
+    [R2_capraz_kanun_atfi] İdare tarafından ruhsata bağlanamayacağı veya aykırılıkların giderilemeyeceği tespit edilen yapıların ruhsatı 
+    [R2_capraz_kanun_atfi] Bildirim yapmadığı tespit edilen işyeri hekimi ve iş güvenliği uzmanının belgesi üç ay, tekrarında ise altı ay
+    [R2_capraz_kanun_atfi] Tebligatı veya ilanı müteakip 30 günü geçmemek üzere ilgili idarece belirlenen süre içinde yapı sahibi tarafın
+    [R2_capraz_kanun_atfi] Fenni mesuller, Bakanlık tarafından çıkarılan yönetmelikte belirlenen sınıf, özellik ve büyüklüğe sahip buluna
+    [R2_capraz_kanun_atfi] Tehlikeli ve çok tehlikeli sınıfta yer alan işyerlerinde; yapılacak işlerde karşılaşılacak sağlık ve güvenlik 
+    [R2_capraz_kanun_atfi] İş sağlığı ve güvenliği bakımından teftişe yetkili üç iş müfettişinden oluşan heyet, iş sağlığı ve güvenliği b
+    [R2_capraz_kanun_atfi] Kapıcı daireleri anabina içinde olabileceği gibi, nizamlara, fen ve sağlık şartlarına aykırı yapılmamak, brüt 
+    [R2_capraz_kanun_atfi] Ruhsata aykırılık olan yapıda, bu aykırılığın giderilmiş olduğu veya ruhsat alındığı ve yapının bu ruhsata uyg
+    [R2_capraz_kanun_atfi] Çalışanlar, iş sağlığı ve güvenliği ile ilgili aldıkları eğitim ve işverenin bu konudaki talimatları doğrultus
+    [R2_capraz_kanun_atfi] İş kazası geçiren veya meslek hastalığına yakalanan çalışana işe başlamadan önce, söz konusu kazanın veya mesl
+    [R2_capraz_kanun_atfi] İleri tasarım yöntemleri ve teknolojileri gerektiren özellik arz eden binaların projeleri, bu alanda Bakanlık 
+    [R2_capraz_kanun_atfi] Sağlık hizmeti sunucuları kendilerine intikal eden iş kazalarını, yetkilendirilen sağlık hizmeti sunucuları is
+    [R1_fikra_ici_parcalanma] (1) Yapı denetim kuruluşuna ortak olabilmek için mimarlık, inşaat mühendisliği, makine mühendisliği veya elekt
+    [R2_capraz_kanun_atfi] Bu Kanun hükümlerini Bakanlar Kurulu yürütür. (Ek kroki ile sınır ve koordinat listesi:11/5/2018-7143/16 md.) 
+    [R2_capraz_kanun_atfi] (1) Mesleki risklerin önlenmesi ve bu risklerden korunulmasına yönelik çalışmaları da kapsayacak, iş sağlığı v
+    [R1_fikra_ici_parcalanma] (Başlığı ile Birlikte Değişik:RG-29/12/2018-30640) (4) (Değişik:RG-12/6/2025-32924) (1) Bakanlıkça belirlenen 
+    [R1_fikra_ici_parcalanma] (1) İlgili idare, Kanun ve ilgili mevzuat ile belirlenen görevlerini mevzuatta gösterilen süreler içinde tam v
+    [R2_capraz_kanun_atfi] İmar planlarının tanziminde planlanan beldenin ve bölgenin şartları ile müstakbel ihtiyaçlar gözönünde tutular
+    [R2_capraz_kanun_atfi] (1) Bu Kanun hükümlerinin uygulanmasının izlenmesi ve teftişi, iş sağlığı ve güvenliği yönünden teftiş yapmaya
+
+[2] KURAL BASINA ATILAN IDDIA
+    R1_fikra_ici_parcalanma      35
+    R2_capraz_kanun_atfi         209
+    R3_bolum_basligi             0
+    R4_bolunmus_ek               3
+    R5_caps_basligi              0
+    TOPLAM                       247
+
+  atilan iddialar (id | probe | gold):
+    #5     P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 23. maddesine göre ana tesis yapıldığında yapı sahibi veya sahipleri lağım ayak
+    #6     P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 10. maddesine göre belediyeler; imar planlarının yürürlüğe girmesinden en geç 3
+    #8     P3_anakronizm   YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı İmar Kanunu 2003 yılında kabul edilmiştir.
+    #9     P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           İSG Risk Değerlendirmesi Yönetmeliği'ne göre mevcut ise bölge planı ve çevre düzeni plan kararlarına
+    #10    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 38. maddesinde 1989 yılında değişiklik yapılmıştır.
+    #13    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 49. maddesine göre yapı sahibine bu şekilde tebligat yapılamaması hâlinde bu du
+    #14    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 10. maddesinde 2020 yılında değişiklik yapılmıştır.
+    #16    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 50. maddesinde 2018 yılında değişiklik yapılmıştır.
+    #17    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 6. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #19    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 17. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #20    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 4. maddesinde 2018 yılında değişiklik yapılmıştır.
+    #23    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           İSG Risk Değerlendirmesi Yönetmeliği'ne göre risk kontrol adımları uygulanırken toplu korunma önleml
+    #24    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 28. maddesine göre bildirim üzerine, en geç üç iş günü içinde 32 nci maddeye gö
+    #26    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           4708 sayılı Kanun'un 9. maddesine göre yapı denetim kuruluşunun izin belgesi alma aşamasında gerçeğe
+    #27    P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 31. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #28    P2_sayisal      YANLIS   R2_capraz_kanun_atfi
+           4708 sayılı Kanun'a göre birden fazla müstakil yapının bulunduğu parsellerde, bütün yapıların toplam
+    #30    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           İSG Risk Değerlendirmesi Yönetmeliği'ne göre ana tesis yapıldığında yapı sahibi veya sahipleri lağım
+    #32    P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 37. maddesi, ilk yayımlandığı 1985 yılından bu yana hiç değiştirilmemiştir.
+    #34    P2_sayisal      YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'a göre itirazlar valiliğe yapılır, valilik itirazları ve planları otuz gün içerisi
+    #36    P4_uydurma      YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre ilgililer 'Yıllık Saha Uygunluk Karnesi' belgesini her ay ilgili idareye ib
+    #39    P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 10. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #41    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'a göre esaslı tadilat gerektiren eksiklikler, ilgili idaresinden alınacak ruhsat v
+    #42    P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 6. maddesi, ilk yayımlandığı 2012 yılından bu yana hiç değiştirilmemiştir.
+    #46    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre idare tarafından ruhsata bağlanamayacağı veya aykırılıkların giderilemeyece
+    #48    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 4. maddesine göre çalışanların iş sağlığı ve güvenliği alanındaki yükümlülükler
+    #54    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'a göre idare tarafından ruhsata bağlanamayacağı veya aykırılıkların giderilemeyece
+    #55    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 20. maddesine göre ileri tasarım yöntemleri ve teknolojileri gerektiren özellik
+    #61    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 8. maddesine göre bildirim yapmadığı tespit edilen işyeri hekimi ve iş güvenliğ
+    #63    P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 50. maddesi, ilk yayımlandığı 1985 yılından bu yana hiç değiştirilmemiştir.
+    #64    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           4708 sayılı Kanun'a göre birden fazla müstakil yapının bulunduğu parsellerde, bütün yapıların toplam
+    #66    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 24. maddesinde 2024 yılında değişiklik yapılmıştır.
+    #67    P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 15. maddesi, ilk yayımlandığı 2012 yılından bu yana hiç değiştirilmemiştir.
+    #68    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 15. maddesinde 2014 yılında değişiklik yapılmıştır.
+    #71    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 22. maddesine göre eksik veya yanlış olduğu takdirde; müracaat tarihinden itiba
+    #73    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 36. maddesinde 2022 yılında değişiklik yapılmıştır.
+    #76    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre toplu sözleşme veya toplu iş sözleşmesi ile çalışan kamu personeli, bu madd
+    #77    P4_uydurma      YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre ilgililer 'Merkezi Ruhsat Doğrulama Kartı' belgesini her ay ilgili idareye 
+    #79    P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 11. maddesinde 2008 yılında değişiklik yapılmıştır.
+    #81    P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre işveren, iş sağlığı ve güvenliği yönü nden risk değerlendirmesi yapmak veya
+    #84    P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 2. maddesine göre işveren, iş sağlığı ve güvenliği yönü nden risk değerlendirme
+
+[3] TEMIZ SETIN YAPISI
+  486 -> 239 iddia  (-247, %50.8)
+    gold DOGRU     243 ->  124  (%51.9)
+    gold YANLIS    243 ->  115  (%48.1)
+
+  probe dagilimi (probe / probe_alt):
+    P1_dogrudan       108  (%45.2)
+        P1_verbatim            59
+        P1_madde_atifli        49
+    P2_sayisal         24  (%10.0)
+    P3_anakronizm       6  (%2.5)
+        P3_yil                  3
+        P3_yil_dogru            2
+        P3_yururluk             1
+    P4_uydurma          3  (%1.3)
+    P5_capraz          73  (%30.5)
+        P5_maddeshift          67
+        P5_lawshuffle           6
+    P6_guncellik       25  (%10.5)
+        P6_yil                 13
+        P6_degismedi           12
+
+[4] DENGE NOTU
+  P5 alt-turleri: maddeshift 67 / lawshuffle 6
+  ! dengesiz (11.2x). Ikisi F4'te AYRI raporlanacak;
+    kucuk olan alt-tur (6 madde) dusuk guclu. 1500'e genisletirken
+    lawshuffle payini artirin (uretecte random.random() < 0.5 esigini kaydirin).
+  40'in altinda kalan probe'lar: P2_sayisal=24, P3_anakronizm=6, P4_uydurma=3, P6_guncellik=25
+
+==============================================================================
+### sonuclar\konsensus_rapor.txt
+==============================================================================
+==============================================================================
+RUHSAT-Bench — yanlilik duzeltmeli konsensus on-taramasi (v2)
+==============================================================================
+iddia sayisi: 486 | model x kosul hucresi: 10
+
+[1] MODEL x KOSUL TANILAYICI
+model                             ks      n   kaps          baskin   accD   accY   bacc      J  durum
+gemma3:12b                        E1    480    99%      YANLIS %52   0.55   0.59   0.57   0.13  gecerli
+gemma3:12b                        E2    486   100%      YANLIS %74   0.28   0.77   0.52   0.05  bilgisiz (J=0.05)
+gemma3:4b                         E1    436    90%       DOGRU %61   0.66   0.45   0.56   0.11  gecerli
+gemma3:4b                         E2    484   100%       DOGRU %62   0.69   0.45   0.57   0.14  gecerli
+llama3.2:3b-instruct-q5_K_M       E1    448    92%      YANLIS %66   0.36   0.67   0.51   0.03  bilgisiz (J=0.03)
+llama3.2:3b-instruct-q5_K_M       E2    467    96%     YANLIS %100   0.00   1.00   0.50   0.00  dejenere (YANLIS %100); bilgisiz (J=0.00)
+qwen2.5:14b-instruct              E1    100    21%       DOGRU %81   0.81   0.19   0.50   0.00  dusuk kapsam (21%); bilgisiz (J=0.00)
+qwen2.5:14b-instruct              E2    486   100%       DOGRU %57   0.63   0.50   0.56   0.13  gecerli
+qwen2.5:7b-instruct-q4_K_M        E1      7     1%       DOGRU %57   0.67   0.50   0.58   0.17  dusuk kapsam (1%)
+qwen2.5:7b-instruct-q4_K_M        E2    486   100%       DOGRU %88   0.85   0.09   0.47  -0.07  dejenere (DOGRU %88); bilgisiz (J=-0.07)
+
+secilen oy veren hucreler (3):
+  gemma3:12b / E1  (J=0.13)
+  gemma3:4b / E2  (J=0.14)
+  qwen2.5:14b-instruct / E2  (J=0.13)
+
+[2] BAYRAK SONUCU
+  v2 (agirlikli, elemeli) : 73 madde  (%15.0)
+  v1 (naif, esit oy)      : 82 madde  (%16.9)
+  ortak                   : 50 | yalniz v2: 23 | yalniz v1: 32
+
+[3] ALTIN SINIFINA GORE (yanlilik testi)
+  gold=DOGRU  n=243   v1 bayrak=47  (%19.3)   v2 bayrak=18  (%7.4)
+  gold=YANLIS n=243   v1 bayrak=35  (%14.4)   v2 bayrak=55  (%22.6)
+  sinif asimetrisi: v1 4.9 puan -> v2 15.2 puan
+  ! Duzeltmeden SONRA da asimetri var ve yonu: gold=YANLIS maddeler daha cok bayrakli.
+    Bu, elemeden sonra kalan oy verenlerin ARTIK yanliligidir; J agirligi
+    bilgililigi duzeltir, yanliligi duzeltmez. Bayraklari altin hatasi
+    kaniti saymayin.
+
+[4] PROBE KIRILIMI
+  P1_dogrudan      n=168   bayrak=11   (%6.5)
+  P5_capraz        n=126   bayrak=42   (%33.3)
+  P6_guncellik     n=119   bayrak=5    (%4.2)
+  P2_sayisal       n=41    bayrak=10   (%24.4)
+  P3_anakronizm    n=19    bayrak=4    (%21.1)
+  P4_uydurma       n=13    bayrak=1    (%7.7)
+
+[5] KAYNAK KIRILIMI
+  TBDY                         n=158   bayrak=31   (%19.6)
+  YDUY                         n=122   bayrak=13   (%10.7)
+  3194                         n=101   bayrak=11   (%10.9)
+  6331                         n=62    bayrak=10   (%16.1)
+  4708                         n=26    bayrak=5    (%19.2)
+  ISGRISK                      n=17    bayrak=3    (%17.6)
+
+[6] EN ONCELIKLI 20 BAYRAK
+  #7     TBDY               11.2.5     P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #22    YDUY               8          P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #33    TBDY               16.4.1     P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #35    TBDY               5.7        P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #37    TBDY               16.13.2    P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #38    TBDY               2.1.2      P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #45    TBDY               11.2.2     P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #48    6331               4          P1_dogrudan  gold=DOGRU  karsi=%100 (3 oy)
+  #55    3194               28         P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #66    6331               24         P6_guncellik gold=DOGRU  karsi=%100 (3 oy)
+  #80    TBDY               16.6.2     P2_sayisal   gold=YANLIS karsi=%100 (3 oy)
+  #84    6331               10         P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #89    TBDY               4.4.4.2    P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #92    4708               9          P6_guncellik gold=DOGRU  karsi=%100 (3 oy)
+  #94    TBDY               15.2.5.1   P1_dogrudan  gold=DOGRU  karsi=%100 (3 oy)
+  #108   ISGRISK            17         P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #109   TBDY               5.3.2.1    P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #110   ISGRISK            5          P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #118   3194               39         P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  #138   6331               8          P5_capraz    gold=YANLIS karsi=%100 (3 oy)
+  ... (+53)
+
+[7] YORUM
+  Bayrak = 'altin yanlis' demek DEGILDIR; en fazla 'once buna bak' demektir.
+  Pilotta 60 el-dogrulanmis maddede gercek altin hatasi 1 taneydi (~%1.7).
+
+[8] KULLANILABILIRLIK KARARI
+  secilen hucrelerin en yuksek Youden J degeri: 0.14
+  ! HICBIR OY VEREN YETERINCE BILGILI DEGIL (J<0.20 => sansa cok yakin).
+    Zayif oy verenlerden olusan bir konsensus, altin hatasini rastgele
+    secimden anlamli olcude iyi bulamaz. Bu bayrak listesini uzman
+    triyajinin SIRASI olarak kullanmayin; dogrulama icin tabakali
+    rastgele ornek kullanin (bkz. scripts/ornek_denetim.py).
+  probe yogunlasmasi: en yuksek P5_capraz %33.3 / en dusuk P6_guncellik %4.2  (oran x7.9)
+  ! Bayraklar probe turune gore x7.9 degisiyor. Altin hatasinin probe
+    turune bu kadar bagli olmasi beklenmez; buna karsilik modellerin
+    KUCUK sozcuksel degisiklikle yanlislanan iddialari (referans/sayi/tarih
+    degistirme) kacirmasi beklenir. Yani bu bayraklar buyuk olasilikla
+    ALTIN HATASINI degil PROBE ZORLUGUNU olcuyor. Bayrakli maddeleri
+    setten atmak, kiyaslamayi en ayirt edici maddelerinden yoksun
+    birakir ve model basarimini yapay olarak yukseltir.
+
+==============================================================================
+### sonuclar\konsensus_dogrulama.txt
+==============================================================================
+==========================================================================
+KONSENSUS ON-TARAMA DOGRULAMA BENZETIMI
+==========================================================================
+oyveren profil kaynagi : sonuclar/konsensus_tani.csv
+model x kosul hucresi  : 10 | v2'nin bilgili buldugu: 1
+iddia/tur=486  enjekte altin hatasi=%3.0 (yari DOGRU-altin, yari YANLIS-altin)
+tekrar=300  esik=%70  tohum=20260727
+
+olcut                                       v1 naif    v2 duzeltmeli         rastgele
+secilen madde                             49.4 ±6.6       69.5 ±35.1       69.5 ±35.1
+geri-cagirma (tum hatalar) %             16.0 ±10.4       23.6 ±15.2       14.4 ±11.1
+  ... DOGRU-altin hatalarinda %          20.8 ±15.6       18.3 ±17.6       14.7 ±14.4
+  ... YANLIS-altin hatalarinda %         11.1 ±12.0       29.0 ±20.5       14.0 ±14.1
+kesinlik %                                 4.5 ±2.9         4.1 ±2.8         2.4 ±1.8
+sinif asimetrisi (puan)                    7.4 ±2.6         8.1 ±6.0         2.2 ±2.0
+
+YORUM (sayilardan turetilmistir, sabit metin degildir)
+  Rastgele ayni sayida satir secmek %2.4 kesinlik verir; bu taban cizgisidir.
+  v1 kaldiraci: x1.87   |   v2 kaldiraci: x1.70
+  Naif tarama sinif korlugu gosteriyor: DOGRU-altin %21 / YANLIS-altin %11.
+  Duzeltme dengeyi iyilestirmedi (asimetri 7.4 -> 8.1 puan);
+  eleme sonrasi kalan oy verenlerin ARTIK yanliligi yeni bir asimetri uretiyor.
+
+KARAR
+  ! BU OY VEREN KADROSUYLA TARAMA UZMAN TRIYAJI ICIN KULLANILMAMALIDIR.
+  69 satirlik uzman emegi ~2.9 gercek hata getirir; ayni emegi rastgele
+  harcamak ~1.7 hata getirirdi. Fark istatistiksel olarak anlamsiza yakin.
+  Sorun toplama kuralinda degil oy verenlerde: hicbir hucre yeterince bilgili degil.
+  Dogru yol: bayrakli satirlar yerine TABAKALI RASTGELE ORNEK uzerinden uzman denetimi.
+
+==============================================================================
+### sonuclar\altin_hatalari_v2.csv
+==============================================================================
+
+id  kanun tur                    detay      skor ozet                                                      
+--  ----- ---                    -----      ---- ----                                                      
+378 3194  KALITE_P2_atif_bozuldu 2960->1480      ALTINCI BÖLÜM 2960 Sayılı Boğaziçi Kanunu ile İlgili Hüküm
+
+
+
+
+==============================================================================
+### sonuclar\konsensus_bayrak.csv
+==============================================================================
+
+oncelik id  kanun   madde     probe         gold   agirlikli_karsi_pay oy_sayisi karsi_modeller                                       iddia                                                             
+------- --  -----   -----     -----         ----   ------------------- --------- --------------                                       -----                                                             
+1       7   TBDY    11.2.5    P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 9.3.1.2 numaralı bendine göre duvar ve döşeme pane...
+2       22  YDUY    8         P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği'nin 30. maddesine göre yapı ...
+3       33  TBDY    16.4.1    P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 9.2.5.2 numaralı bendine göre sahaya özel araştırm...
+4       35  TBDY    5.7       P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 4.5 numaralı bendine göre panellerin kaplamaları y...
+5       37  TBDY    16.13.2   P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 2.5.1.2 numaralı bendine göre yapısal elemanlarla ...
+6       38  TBDY    2.1.2     P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 15.1.4 numaralı bendine göre deprem Yer Hareketi D...
+7       45  TBDY    11.2.2    P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 7.3.7.1 numaralı bendine göre donatı yerleştirilec...
+8       48  6331    4         P1_dogrudan   DOGRU  1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 6331 sayılı Kanun'un 4. maddesine göre çalışanların iş sağlığı ...
+9       55  3194    28        P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 3194 sayılı Kanun'un 20. maddesine göre ileri tasarım yöntemler...
+10      66  6331    24        P6_guncellik  DOGRU  1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 6331 sayılı Kanun'un 24. maddesinde 2024 yılında değişiklik yap...
+11      80  TBDY    16.6.2    P2_sayisal    YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'e göre zemin sıvılaşması, yeraltı su seviyesinin altı...
+12      84  6331    10        P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 6331 sayılı Kanun'un 2. maddesine göre işveren, iş sağlığı ve g...
+13      89  TBDY    4.4.4.2   P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 17.6.7 numaralı bendine göre güvenlik Katsayıları ...
+14      92  4708    9         P6_guncellik  DOGRU  1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 4708 sayılı Kanun'un 9. maddesinde 2024 yılında değişiklik yapı...
+15      94  TBDY    15.2.5.1  P1_dogrudan   DOGRU  1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'e göre projeler ölçümler ile önemli farklılıklar göst...
+16      108 ISGRISK 17        P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği'ne göre işverenlere, risk de...
+17      109 TBDY    5.3.2.1   P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 17.4.1.3 numaralı bendine göre binanın taşıyıcı si...
+18      110 ISGRISK 5         P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği'ne göre risk değerlendirmesi...
+19      118 3194    39        P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 3194 sayılı Kanun'un 29. maddesine göre tebligatı veya ilanı mü...
+20      138 6331    8         P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 6331 sayılı Kanun'un 6. maddesine göre bildirim yapmadığı tespi...
+21      174 YDUY    0         P3_anakronizm YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği 2003 yılında Resmî Gazete'de...
+22      178 YDUY    12        P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği'nin 19. maddesine göre izin ...
+23      180 4708    5         P6_guncellik  DOGRU  1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 4708 sayılı Kanun'un 5. maddesinde 2024 yılında değişiklik yapı...
+24      182 TBDY    7.2.5.3   P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 4.8.5.2 numaralı bendine göre özel amaçlarla kulla...
+25      197 3194    28        P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 3194 sayılı Kanun'un 36. maddesine göre fenni mesuller, Bakanlı...
+26      198 4708    12        P6_guncellik  DOGRU  1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 4708 sayılı Kanun'un 12. maddesinde 2024 yılında değişiklik yap...
+27      207 ISGRISK 10        P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 6331 sayılı Kanun'a göre risk kontrol adımları uygulanırken top...
+28      211 TBDY    7.2.1.4   P2_sayisal    YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'e göre c50’den daha yüksek bet on sınıflarının kullan...
+29      213 TBDY    16.12.2.8 P1_dogrudan   DOGRU  1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 16.12.2.8 numaralı bendine göre topuğu etrafında s...
+30      219 YDUY    0         P3_anakronizm YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği 2017 yılında Resmî Gazete'de...
+31      226 YDUY    4         P2_sayisal    YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği'ne göre inşaatın tamamlanmas...
+32      237 6331    14        P2_sayisal    YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 6331 sayılı Kanun'a göre sağlık hizmeti sunucuları kendilerine ...
+33      240 6331    25        P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 6331 sayılı Kanun'un 6. maddesine göre işveren, işin durdurulma...
+34      252 3194    7         P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 3194 sayılı Kanun'un 31. maddesine göre halihazır haritası bulu...
+35      254 YDUY    6         P2_sayisal    YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği'ne göre maddede sayılan işle...
+36      255 YDUY    6         P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği'nin 35. maddesine göre madde...
+37      272 YDUY    6         P1_dogrudan   DOGRU  1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 Yapı Denetimi Uygulama Yönetmeliği'ne göre uygulama denetçisi i...
+38      273 TBDY    7.6.1.2   P1_dogrudan   DOGRU  1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 7.6.1.2 numaralı bendine göre perdeler, planda uzu...
+39      283 TBDY    12.4.2.9  P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 TBDY 2018'in 9.8.5.1 numaralı bendine göre oluşturulan sistemin...
+40      285 3194    30        P5_capraz     YANLIS 1.000               3         gemma3:4b/E2, gemma3:12b/E1, qwen2.5:14b-instruct/E2 6331 sayılı Kanun'a göre mal sahibinin müracaatı üzerine, yapın...
+
+
+

@@ -1,0 +1,30 @@
+RUHSAT-Bench — ASISTAN TESLIM PAKETI
+====================================
+28 Temmuz 2026
+
+BU PAKETTE NE VAR
+-----------------
+  HANDOVER.md             Devir notu: durum, bulgular, kalan is
+  ORTAM.md                Calisma ortami — bir sonraki oturumda ILK okutulacak
+  UCUNCU_GOZ_PROMPT.md    Bagimsiz hakem prompt'u + kaynak haritasi
+  scripts/                Bu oturumda uretilen butun betikler
+  makale/                 Yazilmis bolumler (3.6, 4, yontem taslagi)
+  beyan/                  EK-1, EK-2, EK-3 on kayit beyanlari
+
+BU PAKETTE NE YOK
+-----------------
+Veri ve sonuc dosyalari. Onlar D:\jestech\ruhsat-bench altinda ve asistanin
+erisimi yok. Onlari kendiniz ziplemeniz gerekiyor — komut HANDOVER.md'nin
+yanindaki sohbet mesajinda.
+
+KURULUM
+-------
+  Copy-Item paket\scripts\*.py D:\jestech\ruhsat-bench\scripts\ -Force
+  Copy-Item paket\makale\*.md  D:\jestech\ruhsat-bench\makale\ -Force
+  Copy-Item paket\beyan\*.txt  D:\jestech\ruhsat-bench\sonuclar\ -Force
+  Copy-Item paket\*.md         D:\jestech\ruhsat-bench\ -Force
+
+DIKKAT
+------
+scripts\ altindaki dosyalar depodakilerin EN SON hallidir. Ustune kopyalamak
+guvenlidir; git zaten fark gosterir.

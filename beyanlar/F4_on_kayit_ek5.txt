@@ -1,0 +1,172 @@
+RUHSAT-Bench — ON KAYIT EK-5  (TBDY BENT KAYNASMASI ve ALTIN DUZELTMESI)
+=======================================================================
+Tarih   : 02.08.2026
+Durum   : Bu ek, duzeltmenin uygulanmasindan ve HICBIR metrik yeniden
+          hesaplanmadan ONCE yazildi.
+
+0. NEDEN
+--------
+Uzlasi maddesi 364'te insaat muhendisi "cumle 15.1'de degil, 15.3.1'de
+yer aliyor" dedi. Bu, tanim tartismasi degil OLGU iddiasidir ve korpustan
+bakilarak sinanabilir. Sinandi; uzman hakli cikti. Ardindan ayni hatanin
+sistematik olup olmadigi tarandi. Sistematikti.
+
+1. KUSURUN KOK NEDENI
+---------------------
+uret_iddia_v3_6.bentler() TBDY'yi tek kalipla boluyor:
+
+    \b(\d{1,2}(?:\.\d{1,2}){1,3})\s*[–\-—]\s        ->  "15.3.1 - Baslik"
+
+Olculen sorunlar:
+
+  (a) TANINMAYAN BASLIK BICIMI. TBDY basliklarinin bir kismi
+      "15.3.1. Baslik" biciminde, yani nokta ile. Kalip gormuyor.
+          taninan bicim   : 1317 eslesme, 1220 benzersiz numara
+          taninmayan      : 1119 eslesme,  526 benzersiz numara
+          YALNIZCA taninmayan bicimde olan: 456 bent
+
+  (b) SAHTE BIRIM. "Tablo 15.1 - ..." ve "Sekil 4.2 - ..." kalibi
+      sagliyor ve BIRIM oluyor. 27 sahte birim, her biri bir sonraki
+      sinira kadar her seyi yutuyor.
+
+  (c) SONUC: 1208 birimin 311'i (%25.7) govdesinde gomulu baslik
+      tasiyor; 500 bent yutulmus. TBDY iddialarinin 21'inde (155'te)
+      kaydedilen bent, cumlenin gercek yeri degil.
+
+Nedensel zincir:
+    ayristirici bentleri kaynastirdi
+      -> uretec metni YANLIS bende atfetti
+        -> ALTIN ETIKET yanlis oldu
+
+2. NEDEN MEVCUT KONTROLLER GORMEDI
+----------------------------------
+  * Korpus Kontrol A (alintinin gercek kaynak biriminde bulunmasi,
+    440/441) GECTI, cunku YANLIS birim alintiyi ICERIYOR.
+  * Korpus Kontrol B (atif yapilan birimin var olmasi, 473/473) GECTI,
+    cunku kaynasmis birim mevcut.
+  * Uzman denetimi birinci gecisinde iki uzmana da AYNI YANLIS kaynak
+    birim gosterildi; kappa=1.00 ve sifir bulgunun bir sebebi daha budur.
+  * Ikinci geciste tek bir vaka (364) yalnizca insan mevzuat bilgisiyle
+    yakalandi.
+
+Bu, kontrol tasarimlarinin bir SINIRIDIR ve makalede oyle yazilacaktir:
+bir denetim, denetlenen surecin kendi ciktisini referans aliyorsa o
+surecin hatasini goremez.
+
+3. TESPIT YONTEMI ve DOGRULAMA CIPASI
+-------------------------------------
+scripts/birim_kaynasma.py  : eski ayristirmada gomulu baslik konumlarina
+                             gore etkilenen iddialari bulur (icerigi
+                             KESMEZ, bu yuzden tespit icin guvenilirdir)
+scripts/bent_bol.py        : eski ayristirmayi bozmadan gomulu basliklarda
+                             boler (korpus icin), ve adaylari listeler
+
+DOGRULAMA CIPASI: yontem, insan uzmanin bagimsiz olarak bulup dogruladigi
+TEK vakayi (364: 15.1 -> 15.3.1) dogru yere koymak zorundadir. Koydu.
+Digerleri ayni yontemin ciktisidir; KANIT DEGIL, DELILDIR.
+
+bent_bol dogrulama tablosu:
+    birim             1208 -> 1523   (+315)
+    gomulu baslik      482 -> 0
+    icerik kurtarma  0.9632 -> 0.9632   (metin kaybi SIFIR)
+    csv maddesi var  0.9677 -> 0.9677
+    364 cumlesi      15.1   -> 15.3.1
+
+4. BASARISIZ DENEME — KAYDA GECIRILIR
+-------------------------------------
+Ilk yaklasim ayristiriciyi SIFIRDAN yazmakti: iki baslik bicimi de
+taninacak, yanlis pozitifler "belge sirasi tekduzeligi" ile elenecekti
+(bent numaralari belge boyunca artar varsayimi). Olculen sonuc:
+
+    birim  1208 -> 529        icerik kurtarma  0.9632 -> 0.0221
+    eleme sayaci: elendi_sira_disi = 1862
+
+pypdf ciktisinda sayfa basliklari, icindekiler ve sekil numaralari araya
+girdigi icin bent numaralari artan sirada GELMIYOR. Varsayim yanlisti.
+Kod scripts/bentler2.py olarak arsivde tutulur, sonuc olarak kullanilmaz.
+
+Rafine yaklasimda da iki hata olculup duzeltildi; ikisi de SESSIZ METIN
+KAYBIYDI:
+  (i)  bolme sonucu uretilen numara zaten birimse parca ATILIYORDU
+  (ii) bagimsiz birim, daha once yerlestirilmis parcanin UZERINE yaziyordu
+TBDY'de 53 bent iki ayri yerde geciyor; cakisma nadir degil. Iki hata
+duzeltilene kadar 8 iddianin icerigi korpustan siliniyor ve 4 GERCEK
+altin adayi gorunmez oluyordu. Duzeltme sonrasi ~2, ~3 ekleriyle her iki
+gecis de saklanir.
+
+5. UC ETIKET SINIFI (uygulama kurali)
+-------------------------------------
+21 etkilenen maddenin etiket sonucu SABLONA gore ayrilir:
+
+  (A) P1_madde_atifli — 7 madde: 246, 257, 304, 360, 364, 382, 393
+      Iddia bendi ACIKCA soyluyor ve o bentte olmayan bir icerigi ona
+      atfediyor. Iddia YANLIStir. P5_maddeshift ile ayni hata sinifi.
+      -> ALTIN DOGRU -> YANLIS
+
+  (B) P1_verbatim — 5 madde: 127, 278, 323, 426, 444
+      Iddia bent belirtmiyor ("TBDY 2018'e gore"). Icerik TBDY'de
+      gercekten var, yalnizca kayittaki bentte degil. Iddia DOGRUdur.
+      -> ALTIN DEGISMEZ; duzeltilecek olan KAYNAK KAYDIDIR
+
+  (C) P5_maddeshift — 9 madde
+      Altin zaten YANLIS. Degisen tek sey kaydedilen kaynak bent,
+      dolayisiyla sablon etiketindeki kaydirma mesafesi.
+      -> ALTIN DEGISMEZ
+
+Elenen sahte adaylar: 275 ve 485. Bunlarda "gercek" bent, ayni bendin
+ikinci kopyasidir (2.2.1 -> 2.2.1~2); yanlis atif degildir.
+
+ALTIN DAGILIMI: 230 DOGRU / 243 YANLIS  ->  223 DOGRU / 250 YANLIS
+
+6. UYGULAMA SARTI — UZMAN ONAYI
+-------------------------------
+(A) sinifindaki 7 duzeltme ONERIDIR, tek tarafli uygulanmaz. Uzlasi
+kitabina AYRI BIR SAYFA olarak eklenir ve uzmanlarca teyit edilir.
+Bunlar tanim sorusu DEGILDIR; uzmanlardan istenen tek sey, kaydedilen
+bendin metniyle iddianin icerigini karsilastirip yanlis atfi onaylamaktir.
+Kural notu bu sayfa icin gerekli degildir.
+
+Teyit alinmadan hicbir altin etiketi degistirilmez.
+
+7. MUHURLU URETEC DEGISMEZ
+--------------------------
+uret_iddia_v3_6.py'ye DOKUNULMAZ. Iddia METINLERI sabittir; 486 id
+konsensus kosusuna baglidir. bent_bol.py yalnizca (a) F5 dayanak korpusu
+ve (b) altin denetimi icin kullanilir. Iddia kumesi yeniden uretilmez.
+
+8. DUYARLILIK — ZORUNLU
+-----------------------
+Butun sonuclar IKI ETIKET KUMESIYLE yan yana raporlanacaktir:
+    v6  : orijinal altin (230/243)
+    v7  : uzlasi + kaynasma duzeltmesi sonrasi altin
+Fark buyukse bu bir bulgudur, gizlenecek bir sey degildir. Ozellikle
+lambda = dogruluk(P1) + dogruluk(P5) - 1 dogrudan etkilenir; P1'in
+altin dagilimi degisiyor.
+
+9. BU DUZELTMEYI GECERSIZ KILACAK DURUMLAR
+------------------------------------------
+  * bent_bol dogrulama tablosunda icerik kurtarma 0.9632'nin ALTINA
+    duserse (metin kaybi var demektir).
+  * 364 cumlesi 15.3.1'de bulunmazsa (dogrulama cipasi kirilmistir).
+  * Uzmanlar (A) sinifindaki maddelerde yanlis atfi teyit etmezse; o
+    madde duzeltilmez ve gerekcesi kaydedilir.
+  * Farkli pypdf surumunde birim sayisi veya aday listesi degisirse;
+    surum ve metin hash'i makalede verilecektir.
+    (Olculdu: TBDY metni iki ortamda 870747 / 870751 karakter, 4
+    karakter fark; birim sayisi, kontroller ve aday listesi AYNI.)
+
+10. ACIK KALAN
+--------------
+  * Kaynasma taramasi yalnizca TBDY icin yapildi; maddeler() ile
+    ayristirilan bes belge (3194, 4708, 6331, ISGRISK, YDUY) benzer bir
+    sinir tanima kusuru tasiyor olabilir. Ayni tarama onlara da
+    uygulanacaktir.
+  * R3 (kural tabanli baseline) 473/473 vermisti. Bu sonucun ne kadari
+    kaynasmis ayristirmadan pay aliyordu, duzeltilmis korpusla yeniden
+    olculecektir.
+
+11. DEGISMEYENLER
+-----------------
+E1/E2 tanimlari, prob taksonomisi, ayristirma mantigi, siralama tohumu,
+cogunluk oyu yordami ve f4_skor.py puanlama semasi degismemistir.
+Ana on kayit ile EK-1, EK-2, EK-3, EK-4 aynen gecerlidir.

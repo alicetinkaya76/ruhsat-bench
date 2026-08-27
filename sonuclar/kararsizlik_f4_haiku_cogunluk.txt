@@ -1,0 +1,30 @@
+﻿================================================================================================
+RUHSAT-Bench F4 — COK KOSULU BIRLESTIRME  (3 kosu)
+  sonuclar\frontH_k1.jsonl  (946 kayit)
+  sonuclar\frontH_k2.jsonl  (946 kayit)
+  sonuclar\frontH_k3.jsonl  (946 kayit)
+================================================================================================
+her kosuda bulunan kayit: 946
+
+[1] KOSULAR ARASI TEKRAR ORANI
+  model / kosul                          n  oybirligi  ikili uyum  ham ayni
+  claude-haiku-4-5-20251001 / E1       473       0.73        0.82      0.31
+  claude-haiku-4-5-20251001 / E2       473       0.81        0.87      0.31
+
+[2] COGUNLUK OYU: 946 kayit | cogunluk olusmayan: 9
+
+[3] KARARSIZLIK HATAYI ONGORUYOR MU?
+  Kosular arasi fikir degistirilen maddeler, hata yapilan maddeler mi?
+  model / kosul                              oybirl.        bolunmus    fark  Fisher p
+  claude-haiku-4-5-20251001 / E1    141/257 =  0.55   38/79 =  0.48   +0.07    0.3049
+  claude-haiku-4-5-20251001 / E2    212/381 =  0.56   51/91 =  0.56   -0.00    1.0000
+  Oybirligi maddelerinde dogruluk daha yuksekse kararsizlik hata sinyalidir.
+
+[4] HANGI SINYAL DAHA IYI: KARARSIZLIK MI, BEYAN EDILEN GUVEN MI?
+  Ikisi de HATAYI ongormede AUROC ile olculur (yuksek = daha iyi).
+  model / kosul                          n  kararsizlik   1-guven    fark
+  claude-haiku-4-5-20251001 / E1       336        0.524     0.581  -0.056
+  claude-haiku-4-5-20251001 / E2       472        0.499     0.514  -0.015
+  Kararsizlik kazaniyorsa: model ne bilmedigini SOYLEYEMIYOR ama
+  DAVRANISI ele veriyor. Bu, kalibrasyon literaturu icin aktarilabilir
+  bir sonuctur ve deterministik modellerde olculemez.

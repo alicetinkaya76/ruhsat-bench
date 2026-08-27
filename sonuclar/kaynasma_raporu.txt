@@ -1,0 +1,47 @@
+﻿==================================================================================
+TBDY BIRIM KAYNASMASI TARAMASI
+==================================================================================
+
+1) BASLIK BICIMLERI
+    'N.N.N - Baslik' (taninan)   :  1317 eslesme, 1220 benzersiz numara
+    'N.N.N. Baslik'  (taninmayan):  1119 eslesme, 526 benzersiz numara
+    YALNIZCA taninmayan bicimde olan numara: 456
+    korpusta olusan birim sayisi: 1208
+
+2) SAHTE BIRIM (tablo/sekil basligindan olusan)
+    tablo/sekil onekli eslesme: 29
+    bunlardan KORPUSTA BIRIM olan: 27
+    ornekler: ['1.1', '2.1', '2.2', '3.1', '3.2', '3.3', '3.6', '9.1', '9.2', '9.3', '10.1', '10.3', '10.4', '10.5', '11.1', '11.2']
+
+3) KAYNASMIS BIRIM (govdesinde gomulu baslik tasiyan)
+    311/1208 birim  (0.257)
+    yutulan bent sayisi (toplam gomulu baslik): 500
+
+4) ETKILENEN IDDIALAR (TBDY, n=155)
+    icerigi gomulu bir baslIktan SONRA gelen : 21
+    birimin basinda, temiz                   : 110
+    icerik birimde bulunamadi                : 24
+    ETKILENME ORANI: 0.1355
+
+    prob dagilimi: {'P5_capraz': 9, 'P1_dogrudan': 12}
+    altin dagilimi: {'YANLIS': 9, 'DOGRU': 12}
+
+5) ALTIN HATASI ADAYLARI  (P1, altin=DOGRU ama atif yanlis bende)
+    12 madde. Bunlarda iddia bir bende atif yapiyor ya da
+    kaynak olarak o bendi gosteriyor, fakat cumle GERCEKTE baska
+    bir bende ait. Bu, P5_maddeshift ile ayni hata sinifidir ve
+    altin DOGRU yerine YANLIS olmalidir.
+
+    id    sablon                csv         iddia atfi  GERCEK      
+    246   P1_madde_atifli       2.1.2       2.1.2       2.2.3       
+    257   P1_madde_atifli       2.1.2       2.1.2       2.2.2       
+    360   P1_madde_atifli       2.1.2       2.1.2       2.2.1       
+    127   P1_verbatim           6.2.3       (atifsiz)   6.2         
+    304   P1_madde_atifli       7.2.1.4     7.2.1.4     7.2.4       
+    382   P1_madde_atifli       7.2.1.4     7.2.1.4     7.2.4       
+    278   P1_verbatim           14.5        (atifsiz)   14.15.4     
+    393   P1_madde_atifli       14.5        14.5        14.15.4     
+    364   P1_madde_atifli       15.1        15.1        15.3.1      
+    426   P1_verbatim           15.2.1.3    (atifsiz)   15.2.2      
+    444   P1_verbatim           15.2.11.3   (atifsiz)   15.2.12     
+    323   P1_verbatim           16.11.1     (atifsiz)   16.6        

@@ -1,0 +1,126 @@
+﻿==============================================================================
+RUHSAT-Bench — BELGE GUNCELLIK DENETIMI
+==============================================================================
+iddia kumesi: data\iddialar\uretilen_iddialar_v6_onarilmis.csv  (473 iddia)
+olcut: kaynak_alinti'nin 6-gram kapsanmasi; korpus vs taze metin
+
+------------------------------------------------------------------------------
+### 6331   (6331 sayılı Kanun)
+  korpus: 6331_isg_kanunu.pdf                 71025 kr  kunye   63
+  taze  : _6331_taze.pdf                      70906 kr  kunye   64
+  fark  : -119 kr  (%0.168)
+  alintili iddia: 59
+  POZITIF KONTROL — korpustaki kapsanma medyani: 0.96 (beklenen 1.00, GECTI)
+  taze metindeki kapsanma medyani     : 1.00
+  kapsanmasi dusen iddia (dusus > 0.15): 0
+    sebep BOZUK KELIME (korpus artigi, taze metin saglam): 0
+    sebep BELIRSIZ (gercek degisiklik adayi)             : 0
+  => Butun iddialarin dayanagi taze metinde de duruyor.
+  DEGISIKLIK TARIHI KUMESI  (uretici bagimsiz olcut)
+    korpus 57 tarih | taze 58 tarih
+    korpus alinma tarihi (PDF ustverisi): 09.12.2025
+    alinma tarihinden sonraki yeni degisiklik tarihi YOK -> korpus guncel.
+    (yalniz tazede ama ESKI: 1 -> 21/12/2011 — korpusta bolunmus, render artigi)
+  cumle farki: yalniz korpusta 178 | yalniz tazede 187
+  (bilgi) tazede kunye tasiyan farkli cumle: 32
+  NOT: bu sayi ZAYIF bir sinyaldir. Iki render cumleyi farkli yerden
+  boldugu icin ayni kunye iki tarafta da farkli cumleye dusebilir.
+  Belirleyici olcut yukaridaki TARIH KUMESI ve kapsanma testidir.
+      taze+ 4/4/2015-6645/4 md.) Çalışan sayısıyla çarpılarak verilen idari para cezalarında üçüncü fıkra hüküml
+      taze+ [13] c) Risk değerlendirmesi ile ilgili olarak;
+      taze+ [9] 9/1/2025 tarihli ve 7538 sayılı Kanunun 21 inci maddesi ile bu fıkranın ikinci cümlesinde yer al
+      taze+ Güvenlik raporu veya büyük kaza önleme politika belgesi MADDE 29 – (1) İşletmeye başlanmadan önce, b
+      taze+ yapılacak işlerde karşılaşılacak sağlık ve güvenlik riskleri ile ilgili yeterli bilgi ve talimatları
+      taze+ Kamu kurum ve kuruluşları, organize sanayi bölgeleri ile Türk Ticaret Kanununa göre faaliyet göstere
+      korpus+ Yönetim, işyerlerinde iş sağlığı ve güvenliği yönünden diğer işyerle rini etkileyecek tehlikeler hus
+      korpus+ Çalışan istihdam eden gerçek veya tüzel kişi yahut tüzel kişiliğ iolmayan kurum ve kuruluşları, h) İ
+      korpus+ Çalışanların bilgilendirilmesi MADDE 16 – (1) İşyerinde iş sağlığı ve güvenliğinin sağlanması ve sür
+      korpus+ MADDE 35 – 14/7/1965 tarihli ve 657 sa yılı Devlet Memurları Kanunu ile ilgili olup yerine işlenmişt
+      korpus+ İş sağlığı ve güvenliği kurulu MADDE 22 – (1) Elli ve daha fazla çalışanın bulunduğu ve altı aydan f
+      korpus+ 4/4/2015-6645/4 md.) Yer altı maden işletmelerinde çalışanların bulundukl arı yeri ve giriş çıkışlar
+
+------------------------------------------------------------------------------
+### 4708   (4708 sayılı Kanun)
+  korpus: 4708_yapi_denetimi.pdf              55563 kr  kunye  118
+  taze  : _4708_taze.pdf                      55505 kr  kunye  111
+  fark  : -58 kr  (%0.104)
+  alintili iddia: 21
+  POZITIF KONTROL — korpustaki kapsanma medyani: 0.96 (beklenen 1.00, GECTI)
+  taze metindeki kapsanma medyani     : 0.96
+  kapsanmasi dusen iddia (dusus > 0.15): 0
+    sebep BOZUK KELIME (korpus artigi, taze metin saglam): 0
+    sebep BELIRSIZ (gercek degisiklik adayi)             : 0
+  => Butun iddialarin dayanagi taze metinde de duruyor.
+  DEGISIKLIK TARIHI KUMESI  (uretici bagimsiz olcut)
+    korpus 39 tarih | taze 40 tarih
+    korpus alinma tarihi (PDF ustverisi): 22.05.2026
+    alinma tarihinden sonraki yeni degisiklik tarihi YOK -> korpus guncel.
+    (yalniz tazede ama ESKI: 1 -> 3/5/1985 — korpusta bolunmus, render artigi)
+  cumle farki: yalniz korpusta 133 | yalniz tazede 151
+  (bilgi) tazede kunye tasiyan farkli cumle: 48
+  NOT: bu sayi ZAYIF bir sinyaldir. Iki render cumleyi farkli yerden
+  boldugu icin ayni kunye iki tarafta da farkli cumleye dusebilir.
+  Belirleyici olcut yukaridaki TARIH KUMESI ve kapsanma testidir.
+      taze+ 1) Bu fıkranın (d) bendine göre verilen cezanın ilan edilmesinden sonra, aynı türden cezayı gerektir
+      taze+ [24] 7/5/2026 tarihli ve 7579 sayılı Kanunun 23 üncü maddesiyle bu fıkraya “hizmet bedelinin belirle
+      taze+ [7] 14/2/2020 tarihli ve 7221 sayılı Kanunun 25 inci maddesiyle, bu fıkrada yer alan “İdari para cez
+      taze+ 1) Alet ve cihaz kalibrasyonlarının zamanında yaptırılmaması, 2) (Değişik:
+      taze+ 1) 2 nci maddenin dördüncü fıkrasının (a) bendinde belirtilen görevlerin yerine getirilmediğinin tes
+      taze+ 2020/53 sayılı Kararı ile) (…) (Değişik fıkra:14/2/2020-7221/25 md.) Yeni iş almaktan men ve faaliye
+      korpus+ Laboratuvar kuruluşlarının personel, tesis, makine, teçhizat ve kalite kontrol sisteminde olumsuz yö
+      korpus+ 3 8/8/2011 tarihli ve 648 sayılı KHK’ nın 26 ncı maddesi ile bu madde başlığı “Yapı denetim komisyon
+      korpus+ Madde 7 – 1 inci maddede belirtilen diploma veya ruhsatnamelerden birini haiz olmayanlar Türkiye’de 
+      korpus+ 4708 SAYILI KANUNA DEĞİŞİKLİK GETİREN MEVZUATIN VEYA ANAYASA MAHKEMESİ KARARLARININ YÜRÜRLÜĞE GİRİŞ 
+      korpus+ 20 13/7/2010 tarihli ve 27640 sayılı Resmi Gazete’de yayımlanan 14/6/2010 tarihli ve 2010/624 sayılı
+      korpus+ 15/2/2018 -7099/15 md.) Yapı denetim kuruluşları öncelikle risk bazlı denetim yapar.
+
+------------------------------------------------------------------------------
+### 3194   (3194 sayılı Kanun)
+  korpus: 3194_imar_kanunu.pdf               158417 kr  kunye  189
+  taze  : _3194_taze.pdf                     158504 kr  kunye  170
+  fark  : +87 kr  (%0.055)
+  alintili iddia: 99
+  POZITIF KONTROL — korpustaki kapsanma medyani: 1.00 (beklenen 1.00, GECTI)
+  taze metindeki kapsanma medyani     : 1.00
+  kapsanmasi dusen iddia (dusus > 0.15): 0
+    sebep BOZUK KELIME (korpus artigi, taze metin saglam): 0
+    sebep BELIRSIZ (gercek degisiklik adayi)             : 0
+  => Butun iddialarin dayanagi taze metinde de duruyor.
+  DEGISIKLIK TARIHI KUMESI  (uretici bagimsiz olcut)
+    korpus 137 tarih | taze 137 tarih
+    korpus alinma tarihi (PDF ustverisi): 14.07.2026
+    alinma tarihinden sonraki yeni degisiklik tarihi YOK -> korpus guncel.
+  cumle farki: yalniz korpusta 165 | yalniz tazede 196
+  (bilgi) tazede kunye tasiyan farkli cumle: 32
+  NOT: bu sayi ZAYIF bir sinyaldir. Iki render cumleyi farkli yerden
+  boldugu icin ayni kunye iki tarafta da farkli cumleye dusebilir.
+  Belirleyici olcut yukaridaki TARIH KUMESI ve kapsanma testidir.
+      taze+ Bu kontroller, belediyelerin ilgili itfaiye teşkilatı veya itfaiyenin gerekli gördüğü durumlarda bin
+      taze+ Çevre düzeni planında açıkça belirtilmediği takdirde, ihtiyaç duyulması hâlinde, köyün gelişme potan
+      taze+ Yapı kayıt belgesi alınan taşınmazların satışa konu edilen kısımlarından yapı kayıt belgesi tarihi i
+      taze+ (Ek fıkra:4/7/2019-7181/9 md.) Parselasyon planı yapılmadan ifraz ve tevhit edilerek tescil edilen p
+      taze+ [44] 7/5/2026 tarihli ve 7579 sayılı Kanunun 14 üncü maddesiyle bu fıkraya “yapının inşa edilmesi” i
+      taze+ [55] 8/4/2022 tarihli ve 7394 sayılı Kanunun 13 üncü maddesiyle bu fıkranın ikinci cümlesinde yer al
+      korpus+ 17 4/7/2019 tarihli ve 7181 sayılı Kanunun 8 inci maddesiyle bu bölüm başlığı “İfraz ve Tevhid İşler
+      korpus+ yapı sahibine bin Türk Lirası idari para cezası verilir.
+      korpus+ 8 10/6/2022 tarihli ve 741 0 sayılı Kanunun 9 uncu maddesiyle bu paragrafta yer alan “İmar planların
+      korpus+ %25’ibüyükşehir belediyesinin ilgili hesabına, %25’iilgili ilçe belediyesinin ilgili hesabına, %25’i
+      korpus+ İlgili id aresince verilecek süre ruhsat veya izin tarihinden itibaren başlar.
+      korpus+ bütün belgeler ile mimarlık ve mühendislik hizmetleri raporunu idareye vermek ve yapı kullanma izin 
+
+------------------------------------------------------------------------------
+### ISGRISK   (İSG Risk Değerlendirmesi Yönetmeliği)
+  korpus: isg_risk_yonetmeligi.pdf            16703 kr  kunye    0
+  taze  : _ISGRISK_konsolide.pdf              16703 kr  kunye    0
+  fark  : +0 kr  (%0.000)
+  => METINLER BIREBIR AYNI. Bu belge icin guncellik sorusu kapali.
+
+------------------------------------------------------------------------------
+### TBDY   (TBDY 2018)
+  taze kopya yok -> karsilastirilamadi. Kaynak: TBDY_2018.pdf
+  Bu belge icin makalede 'alinma tarihindeki haliyle' notu gerekir.
+
+------------------------------------------------------------------------------
+### YDUY   (Yapı Denetimi Uygulama Yönetmeliği)
+  taze kopya yok -> karsilastirilamadi. Kaynak: yapi_denetim_uygulama_yon.pdf
+  Bu belge icin makalede 'alinma tarihindeki haliyle' notu gerekir.

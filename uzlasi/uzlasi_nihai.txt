@@ -1,0 +1,36 @@
+﻿============================================================================
+UZLASI BIRLESTIRME
+============================================================================
+  kodlayici 1: kodlayıcı1_uzlasi_kitabi_doldurulmus.xlsx
+  kodlayici 2: kodlayıcı2_uzlasi_kitabi_taslak_secenek1.xlsx
+
+TANIM SAYFASI  (n=5)
+  kod    kodlayici1  kodlayici2  durum
+  115    DOGRU       DOGRU       uyum
+  122    DOGRU       DOGRU       uyum
+  213    DOGRU       DOGRU       uyum
+  315    YANLIS      DOGRU       *** AYRISMA
+  417    YANLIS      DOGRU       *** AYRISMA
+  uyum: 3/5
+
+OLGU SAYFASI  (n=7)
+  iki kodlayici da ONAY: 7  -> ['246', '257', '304', '360', '364', '382', '393']
+  ayrisma: 0
+
+============================================================================
+v7 ALTIN KUMELERI
+============================================================================
+  v6  (orijinal)     : 230 DOGRU / 243 YANLIS
+  v7a (BIRINCIL)     : 223 DOGRU / 250 YANLIS   (7 donus: OLGU oybirligi)
+  v7b (DUYARLILIK)   : 221 DOGRU / 252 YANLIS   (9 donus: + ['315', '417'])
+
+  BIRINCIL KURAL: Secenek 1 (kodlayici 2).
+  Gerekce: Secenek 3, atifsiz iddialarda kapsam dusurulmesine dair
+  SEMANTIK yargi gerektirir; yalnizca denetlenen 138 maddede yapildi.
+  Kalan 335 maddede yapilmadigi icin uygulanirsa denetlenen ve
+  denetlenmeyen maddeler FARKLI OLCUTLE etiketlenmis olur.
+  Secenek 1 butun kumeye tekduze uygulanabilir. Secim sonuca degil,
+  tekduze uygulanabilirlige dayanir.
+
+  yazildi: data/iddialar/uretilen_iddialar_v7a.csv
+  yazildi: data/iddialar/uretilen_iddialar_v7b.csv

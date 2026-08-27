@@ -1,0 +1,217 @@
+﻿==============================================================================
+RUHSAT-Bench — CERRAHI TEMIZLIK v3.8  (kural kapsami duzeltildi)
+==============================================================================
+girdi: data/iddialar/uretilen_iddialar_v1.csv  (486 iddia)
+kural kapsami: R1-R5 YALNIZCA kaynak_alinti. iddia metni atma gerekcesi degil.
+
+[0] IDDIA METNINDEKI 'NNNN sayılı' ISABETLERI  (v3.7'nin atma sebebi)
+  iddia cercevesinde kanun numarasi gecen ve alintisi TEMIZ olan satir: 176
+    uretici kalibindan gelen (zararsiz)            : 176
+    kaliba uymayan / incelenmeli                   : 0
+  KARAR: bunlar v3.8'de ATILMIYOR. 'NNNN sayılı' iddia metninde uretim
+  kalibinin parcasidir; kaynak cumlenin kusuru degildir.
+
+[1] BOZUK KAYNAK CUMLELER  (yalnizca alinti uzerinden)
+  26 farkli kaynak cumle en az bir kurala takildi.
+    [R1_fikra_ici_parcalanma] (1) Yapı denetim kuruluşuna ortak olabilmek için mimarlık, inşaat mühendisliği, makine mühendisliği veya elekt
+    [R1_fikra_ici_parcalanma] (Başlığı ile Birlikte Değişik:RG-29/12/2018-30640) (4) (Değişik:RG-12/6/2025-32924) (1) Bakanlıkça belirlenen 
+    [R1_fikra_ici_parcalanma] (1) İlgili idare, Kanun ve ilgili mevzuat ile belirlenen görevlerini mevzuatta gösterilen süreler içinde tam v
+    [R1_fikra_ici_parcalanma] (Değişik:RG-22/8/2015-29453) (3) (1) Bu Yönetmelik hükümlerini (Değişik ibare:RG-23/12/2022-32052) Çevre, Şehi
+    [R1_fikra_ici_parcalanma] (Değişik:RG-11/12/2020-31331) (1) Bu Yönetmeliğin amacı, 29/6/2001 tarihli ve 4708 sayılı Yapı Denetimi Hakkın
+    [R1_fikra_ici_parcalanma] (Değişik:RG-29/12/2018-30640) (4) (1) Yapı denetim kuruluşunun denetleyebileceği toplam yapı inşaat alanı 360.
+    [R1_fikra_ici_parcalanma] (Ek:RG-22/8/2015-29453) (1) (Değişik ibare:RG-12/6/2025-32924) Bakanlıkça; a) Yapı denetim kuruluşlarından 385
+    [R2_capraz_kanun_atfi] 2634 sayılı Turizmi Teşvik Kanunu, 2863 sayılı Kültür ve Tabiat Varlıklarını Koruma Kanunu, bu Kanunun ilgili 
+    [R1_fikra_ici_parcalanma] (1) (Değişik:RG-23/12/2022-32052) (6) Yapı denetim kuruluşu; a) Bir proje ve uygulama denetçisi mimarı (Şantiy
+    [R1_fikra_ici_parcalanma] (1) Toplam inşaat alanı (Değişik ibare:RG-29/12/2018-30640) (4) üç bin m2’yi (dâhil) geçmeyen yapıların deneti
+    [R2_capraz_kanun_atfi] Bu Kanunda hüküm bulunmayan hallerde 3194 sayılı İmar Kanunu ve ilgili mevzuat hükümleri uygulanır. (Değişik i
+    [R1_fikra_ici_parcalanma] (Ek:RG-22/8/2015-29453) (Değişik:RG-11/12/2020-31331) (1) İzin belgesi alma aşamasında gerçeğe aykırı beyanda 
+    [R1_fikra_ici_parcalanma] (Başlığı ile birlikte değişik:RG-5/2/2013-28550) (1) Merkez Yapı Denetim Komisyonu; a) Başkanın yazılı veya sö
+    [R1_fikra_ici_parcalanma] (Değişik:RG-23/12/2022-32052) (1) Kanunun uygulanmasına ilişkin olarak ortaya çıkabilecek ihtilaflar, taraflar
+    [R1_fikra_ici_parcalanma] (Başlığı ile Birlikte Değişik:RG-29/12/2018-30640) (4) (1) Yapı denetimi hizmet bedeli, hizmet bedeline esas y
+    [R1_fikra_ici_parcalanma] (1) (Değişik:RG-29/12/2018-30640) (4) Kanun kapsamına giren yapıların sahipleri, yapının uygulama projeleri bi
+    [R2_capraz_kanun_atfi] (1) Bu Kanunun; a) (Değişik: 12/7/2013-6495/56 md.) 6 ve 7 nci maddeleri; 1) 4857 sayılı İş Kanununun mülga 81
+    [R1_fikra_ici_parcalanma] (1) (Değişik:RG-29/12/2018-30640) (4) Yapı ruhsatı alındıktan sonra iki yıl içinde inşaata başlanmadığı veya b
+    [R1_fikra_ici_parcalanma] (Başlığı ile birlikte değişik:RG-5/2/2013-28550) (1) Merkez Yapı Denetim Komisyonu, konu ile ilgili Bakanlık p
+    [R1_fikra_ici_parcalanma] (Değişik:RG-23/6/2021-31520) (1) Bakanlıkça belirlenen yapılardan iş bitirme aşamasına gelenler için (Değişik 
+
+[2] KURAL BASINA ATILAN IDDIA
+    R1_fikra_ici_parcalanma      35
+    R2_capraz_kanun_atfi         9
+    R3_bolum_basligi             0
+    R4_bolunmus_ek               5
+    R5_caps_basligi              0
+    TOPLAM                       49
+
+  atilan iddialar (id | probe | gold | sebep):
+    #14    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 10. maddesinde 2020 yılında değişiklik yapılmıştır.
+    #19    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 17. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #20    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 4. maddesinde 2018 yılında değişiklik yapılmıştır.
+    #27    P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 31. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #39    P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 10. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #73    P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 36. maddesinde 2022 yılında değişiklik yapılmıştır.
+    #81    P1_dogrudan     DOGRU    R4_bolunmus_ek
+           6331 sayılı Kanun'a göre işveren, iş sağlığı ve güvenliği yönü nden risk değerlendirmesi yapmak veya
+    #84    P5_capraz       YANLIS   R4_bolunmus_ek
+           6331 sayılı Kanun'un 2. maddesine göre işveren, iş sağlığı ve güvenliği yönü nden risk değerlendirme
+    #87    P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 17. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #114   P1_dogrudan     DOGRU    R4_bolunmus_ek
+           TBDY 2018'e göre ankraj çubukları malzeme sinin kopma uzaması oranı %14 değerinden az olmayacaktır.
+    #116   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 1. maddesinde 2020 yılında değişiklik yapılmıştır.
+    #120   P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 11. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #134   P5_capraz       YANLIS   R1_fikra_ici_parcalanma
+           6331 sayılı Kanun'a göre uygulama denetçisi inşaat mühendisi veya (4) ilgili yardımcı kontrol eleman
+    #135   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 11. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #153   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 32. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #156   P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 4. maddesi, ilk yayımlandığı 1985 yılından bu yana hiç değiştirilmemiştir.
+    #157   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 16. maddesinde 2022 yılında değişiklik yapılmıştır.
+    #162   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 31. maddesinde 2022 yılında değişiklik yapılmıştır.
+    #176   P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 1. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değişt
+    #177   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 27. maddesinde 2018 yılında değişiklik yapılmıştır.
+    #198   P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           4708 sayılı Kanun'un 12. maddesinde 2024 yılında değişiklik yapılmıştır.
+    #202   P2_sayisal      YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'ne göre uygulama denetçisi inşaat mühendisi veya (8) ilgili yardı
+    #247   P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 33. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #248   P5_capraz       YANLIS   R4_bolunmus_ek
+           TBDY 2018'in 15.7.1.2 numaralı bendine göre ankraj çubukları malzeme sinin kopma uzaması oranı %14 d
+    #254   P2_sayisal      YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'ne göre maddede sayılan işlemler, ihtisas konusuna göre ilgili (8
+    #255   P5_capraz       YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 35. maddesine göre maddede sayılan işlemler, ihtisas konusuna
+    #265   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 19. maddesinde 2022 yılında değişiklik yapılmıştır.
+    #272   P1_dogrudan     DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'ne göre uygulama denetçisi inşaat mühendisi veya (4) ilgili yardı
+    #282   P1_dogrudan     DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'ne göre maddede sayılan işlemler, ihtisas konusuna göre ilgili (4
+    #290   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 20. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #291   P1_dogrudan     DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 45. maddesine göre aLTINCI BÖLÜM 2960 Sayılı Boğaziçi Kanunu ile İlgili Hükümle
+    #308   P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 32. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #319   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 26. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #325   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 21. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #326   P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 26. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #342   P2_sayisal      YANLIS   R4_bolunmus_ek
+           TBDY 2018'e göre ankraj çubukları malzeme sinin kopma uzaması oranı %28 değerinden az olmayacaktır.
+    #358   P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           3194 sayılı Kanun'un 4. maddesinde 2016 yılında değişiklik yapılmıştır.
+    #378   P2_sayisal      YANLIS   R2_capraz_kanun_atfi
+           3194 sayılı Kanun'a göre aLTINCI BÖLÜM 1480 Sayılı Boğaziçi Kanunu ile İlgili Hükümler
+    #385   P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 2. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değişt
+    #397   P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 4. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değişt
+    #398   P5_capraz       YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'a göre aLTINCI BÖLÜM 2960 Sayılı Boğaziçi Kanunu ile İlgili Hükümler
+    #402   P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 38. maddesi, ilk yayımlandığı 2012 yılından bu yana hiç değiştirilmemiştir.
+    #414   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 23. maddesinde 2025 yılında değişiklik yapılmıştır.
+    #424   P6_guncellik    YANLIS   R2_capraz_kanun_atfi
+           4708 sayılı Kanun'un 12. maddesi, ilk yayımlandığı 2001 yılından bu yana hiç değiştirilmemiştir.
+    #425   P6_guncellik    YANLIS   R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 19. maddesi, ilk yayımlandığı 2008 yılından bu yana hiç değiş
+    #440   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 18. maddesinde 2022 yılında değişiklik yapılmıştır.
+    #456   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 33. maddesinde 2022 yılında değişiklik yapılmıştır.
+    #459   P6_guncellik    DOGRU    R1_fikra_ici_parcalanma
+           Yapı Denetimi Uygulama Yönetmeliği'nin 2. maddesinde 2020 yılında değişiklik yapılmıştır.
+    #461   P6_guncellik    DOGRU    R2_capraz_kanun_atfi
+           6331 sayılı Kanun'un 38. maddesinde 2013 yılında değişiklik yapılmıştır.
+
+[3] TEMIZ SETIN YAPISI
+  486 -> 437 iddia  (-49, %10.1)
+    gold DOGRU     243 ->  217  (%49.7)
+    gold YANLIS    243 ->  220  (%50.3)
+
+  probe dagilimi (probe / probe_alt):
+    P1_dogrudan       168 ->  163  (%37.3)
+        P1_verbatim            83
+        P1_madde_atifli        80
+    P2_sayisal         41 ->   37  (%8.5)
+    P3_anakronizm      19 ->   19  (%4.3)
+        P3_yil                 12
+        P3_yil_dogru            6
+        P3_yururluk             1
+    P4_uydurma         13 ->   13  (%3.0)
+        P4_belge               10
+        P4_tbdy                 3
+    P5_capraz         126 ->  121  (%27.7)
+        P5_maddeshift          89
+        P5_lawshuffle          32
+    P6_guncellik      119 ->   84  (%19.2)
+        P6_yil                 47
+        P6_degismedi           37
+
+[4] KAYNAK BELGE KIRILIMI  (karisim testi — v3.7'nin sessiz hasari buradaydi)
+    TBDY        158 ->  155  (hayatta %98)
+    YDUY        122 ->   87  (hayatta %71)
+    3194        101 ->   96  (hayatta %95)
+    6331         62 ->   58  (hayatta %94)
+    4708         26 ->   24  (hayatta %92)
+    ISGRISK      17 ->   17  (hayatta %100)
+  temiz: hayatta kalma orani belgeler arasinda dengeli.
+
+[5] R6 TANI (ATMAZ) — alinti icinde coklu bosluk = sokulmus (Değişik:...) etiketi
+  bosluk izi tasiyan iddia: 7  (farkli cumle: 3)
+    + fikra isareti de var (GERCEK KUSUR, R1 zaten atiyor): 6
+    yalniz etiket bosluğu (ZARARSIZ, kalir)               : 1
+  Yorum: [B2]'deki 0.44-0.50 kapsanma bu bosluklardan gelir; n-gram
+  bosluk uzerinden atlayamadigi icin kapsanma duser. Kapsanmanin dusuk
+  olmasi tek basina altin hatasi DEGILDIR.
+      #391   P1_dogrudan     gold=DOGRU   Denetçi mimar ve denetçi mühendis olarak görev yapabilmek için, ilgililerin Merk
+
+[6] KONTROLLER
+  pozitif kontrol (DUSMESI zorunlu):
+    #134   GECTI   (alinti ortasinda (4))
+    #202   GECTI   (alinti ortasinda (4))
+    #254   GECTI   (alinti ortasinda (4))
+    #255   GECTI   (alinti ortasinda (4))
+    #272   GECTI   (alinti ortasinda (4))
+    #282   GECTI   (alinti ortasinda (4))
+    #378   GECTI   (alintida 2960 Sayılı / ALTINCI BÖLÜM)
+  negatif kontrol (YASAMASI beklenir):
+    #5     YASIYOR
+    #6     YASIYOR
+    #10    YASIYOR
+    #16    YASIYOR
+    #48    YASIYOR
+    #66    YASIYOR
+    #391   YASIYOR
+
+[7] v3.7 ILE FARK
+  v3.7 temiz: 239 | v3.8 temiz: 437
+  v3.8'de GERI GELEN iddia: 198
+  v3.8'de yeni dusen       : 0
+    geri gelenlerin probe dagilimi : P1_dogrudan=55, P2_sayisal=13, P3_anakronizm=13, P4_uydurma=10, P5_capraz=48, P6_guncellik=59
+    geri gelenlerin kaynak dagilimi: 3194=96, 4708=24, 6331=58, ISGRISK=7, YDUY=13
+
+[8] DENGE NOTU
+  P5 alt-turleri: maddeshift 89 / lawshuffle 32
+  ! dengesiz (2.8x). F4'te AYRI raporlanacak.
+  40'in altinda kalan probe'lar: P2_sayisal=37, P3_anakronizm=19, P4_uydurma=13
+
+  (--kuru) dosya yazilmadi.

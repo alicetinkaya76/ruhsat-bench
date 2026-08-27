@@ -1,0 +1,62 @@
+RUHSAT-Bench F4 — ON KAYIT EK-2  (varyant B sonrasi, ANALIZ ONCESI)
+===================================================================
+Tarih   : 28.07.2026
+Durum   : Varyant A (18 model) ve varyant B (6 model) kosulari tamamlandi
+          ve AYRI AYRI puanlandi. Bu ek, varyantlar ARASI karsilastirma
+          hesaplanmadan once yazildi.
+
+1. VARYANT B'NIN ROLU DEGISIYOR
+-------------------------------
+Ana on kayit madde 5 soyle diyordu:
+  "Her kosul icin iki prompt varyanti. Birincil sonuc varyant A;
+   varyant B TUTARLILIK KONTROLU olarak raporlanir."
+
+Bu ifade, B'nin A'yi DOGRULAYACAGI beklentisini tasiyor. Olculen sonuc
+bunun tersidir: ayni model, ayni 473 madde, yalnizca sistem promptunun
+yeniden ifade edilmesiyle radikal biçimde farkli davraniyor.
+
+Ornekler (varyant A -> varyant B):
+    gemma3:4b / E1           kacinma  %10 -> %93
+    qwen2.5:32b / E1         kacinma  %83 -> %98
+    qwen2.5:7b-q4 / E1       kacinma  %99 -> %66
+    gemma3:12b / E1          P1/P5    0.70/0.39 -> 0.21/0.82
+    llama3.2:3b-fp16 / E1    P1/P5    0.83/0.24 -> 0.01/1.00
+
+Buna karsilik lambda (yanlilikten arindirilmis bilgi) her iki varyantta da
+sifira yakin kalir ve savrulmaz.
+
+Dolayisiyla varyant B, A'nin bir DOGRULAMASI degil, olcumun KARARLILIGININ
+kontrollu bir manipulasyonudur. Sonucu tutarlilik degil KARARSIZLIK'tir ve
+bu bir sapma degil, bulgunun kendisidir. Results'ta bu cerceveyle yazilacaktir.
+
+2. EKLENEN ANALIZ (KESIFSEL, ON KAYITTA YOKTU)
+----------------------------------------------
+VARYANTLAR ARASI KARARLILIK. Iki varyantta da kosulmus her model x kosul
+hucresi icin sunlar karsilastirilir:
+
+    kacinma orani            (yanlilik/politika olcusu)
+    P(DOGRU | taahhut)       (yanlilik olcusu)
+    taahhut dogrulugu        (ham basari olcusu)
+    lambda                   (yanliliktan arindirilmis bilgi olcusu)
+    donme orani              (iki varyantta da cevaplanan maddelerde
+                              kararin degisme yuzdesi; McNemar ile test)
+
+HIPOTEZ (post-hoc, isaretlenmistir): yanlilik turu olcutler varyantlar
+arasinda buyuk olcude savrulur; lambda savrulmaz. Bu dogruysa, yanlilik
+duzeltmesi icermeyen tek-kosullu dogruluk raporlari model degil PROMPT
+olcuyor demektir.
+
+Bu analiz KESIFSELDIR; coklu karsilastirma duzeltmesi uygulanmaz ve
+hipotez testi olarak degil buyukluk karsilastirmasi olarak raporlanir.
+
+3. SINIRLILIK
+-------------
+Varyant B yalnizca 6 model uzerinde kosuldu (12 hucre). Kararsizlik
+bulgusu bu altyapiyla sinirlidir; butun matris uzerinde tekrarlanmamistir.
+Iki prompt varyanti, prompt uzayindan alinmis iki noktadir; savrulmanin
+buyuklugu hakkinda alt sinir verir, dagilimi hakkinda bilgi vermez.
+
+4. DEGISMEYENLER
+----------------
+Ana on kaydin 1, 2, 3, 4, 6, 7 numarali maddeleri ve EK-1 aynen gecerlidir.
+Promptlar, tohum, siralama ve alt-tur raporlamasi degismemistir.
