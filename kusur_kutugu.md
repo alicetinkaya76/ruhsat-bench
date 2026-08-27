@@ -53,3 +53,17 @@ ortalama 0.0046, maks 0.0347; hiçbir niteliksel sonuç değişmedi
 (`iddia` metninde 0 geçiş, `madde` sütunu tümüyle sayısal, `atif_coz.py:50-52`
 yalnız sayısal kalıp tanıyor). Yeni `E*`/`G*` birimleri **saf eklemedir**;
 Kontrol A/B/C'yi bozamaz. Kanıt: `sonuclar/gorev1_olcum_20260827.txt`.
+| 23 | `maddeler()` bölme kalıbı `MADDE N/X-` biçimini tanımıyor (`\d+\s*[–\-—]`, `/A` araya giriyor); gövdeler önceki birime kaynaşıyor | **ÖLÇÜLDÜ:** yalnız 6331'de, 2 başlık (`MADDE 24/A-`, `MADDE 25/A –`) → 6331/24 ve 6331/25 kirli. Diğer 4 belgede 0. **Altın etkisi SIFIR** (aşağıya bak) | KÜTÜKTE — EK-5 §10'un istediği tarama yapıldı; durma kuralı gereği kovalanmıyor |
+| 24 | Belge sonundaki "Değişen veya İptal Edilen Maddeler" tablosu tiresiz satırlar içerdiği için bölünmüyor, son birime yapışıyor | **ÖLÇÜLDÜ:** 6331/39, 4708/15, 3194/50. Sayı/yıl yoğunluğu yüksek → P2 ve P6 için riskli görünüyordu; **altın etkisi SIFIR** | KÜTÜKTE — kovalanmıyor |
+| 25 | Düşen parça kendi Ek/Geçici önekini yutuyor; dizi sınırlarında önceki birimin sonunda artık önek kalıyor | **ÖLÇÜLDÜ:** 4 birim (6331/37, 3194/47, ISGRISK/17, YDUY/34), her biri metnin SONUNDA tek kelime | KÜTÜKTE — kozmetik; `maddeler2` isterse temizler |
+
+**EK-5 §10 birinci maddesi KAPANDI (ölçümle).** Beş kirli birimdeki **18 iddianın
+18'inin** `kaynak_alinti`'sı temiz bölgeden geliyor: KAYNAŞMIS 0, bulunamadı 0,
+alıntı boş 0. Kütük #2'de (`bentler()`) 7 altın etiketi dönmüştü; `maddeler()`
+kaynaşmasında **dönen etiket yok**. Kanıt: `sonuclar/gorev1_olcum_20260827.txt` §6.
+
+**Anahtar biçimi kararı (ölçümle gerekçeli):** `bent_bol.py:238-240` `~N` ekini
+atıf çözerken tabana indiriyor — `~N` semantiği *"aynı birimin ikinci geçişi"*.
+Geçici Madde 3, Madde 3'ün kopyası değil **başka bir maddedir**; `3~2` kullanmak
+R1/R2'de "Madde 3" atfına "Geçici Madde 3" metnini döndürtebilir. `~N` bu iş için
+yanlış araçtır.

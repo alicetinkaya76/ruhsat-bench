@@ -81,3 +81,59 @@ TOPLAM       158      21      71748
   Olcum  : 5 belgede yanlis etiketleme sayisi = 0.
   Sonuc  : hipotez YANLIS. Butun Ek/Gecici maddeler taban numarayla
            cakisiyor ve dusuyor; sessiz yanlis etiket vakasi YOK.
+
+========================================================================
+6. EK-5 10. MADDESININ ISTEDIGI TARAMA — maddeler() kaynasmasi
+========================================================================
+EK-5 10: "Kaynasma taramasi yalnizca TBDY icin yapildi; maddeler() ile
+ayristirilan bes belge benzer bir sinir tanima kusuru tasiyor olabilir.
+Ayni tarama onlara da uygulanacaktir."  -> BU TARAMA YAPILDI.
+
+BULUNAN 1 — 'MADDE N/X-' bicimli baslik bolme kalibina UYMUYOR:
+  6331: 2 baslik -> 'MADDE 24/A-', 'MADDE 25/A -'
+  diger 4 belge: 0
+  Sonuc: 24/A ve 25/A'nin GOVDELERI 6331/24 ve 6331/25 birimlerine kaynasti.
+  Dogrulama: korpus.jsonl'da 6331/24 (2157 kar) ve 6331/25 (3343 kar)
+  metinlerinin ICINDE bu basliklar duruyor.
+
+BULUNAN 2 — belge sonu "Degisen veya Iptal Edilen Maddeler" tablosu
+  tiresiz satirlar icerdigi icin bolunmuyor, son birime yapisiyor:
+  6331/39 (1405 kar), 4708/15 (1244 kar), 3194/50 (3896 kar)
+
+BULUNAN 3 — artik onek: 4 birim 'Ek/EK/Gecici/GECICI' ile bitiyor
+  6331/37, 3194/47, ISGRISK/17, YDUY/34
+  (dusen parca kendi onegini yutuyor; yalniz dizi sinirlarinda artik kaliyor)
+
+--- ALTIN ETKISI OLCUMU (kutuk #2 ile karsilastirma icin) ---
+Bes kirli birimde toplam 18 iddia var:
+  6331/24: 2   6331/25: 14   6331/39: 1   4708/15: 0   3194/50: 1
+
+Her iddianin kaynak_alinti'si birim metninde arandi (NFKC + bosluk
+normalize; kutuk #3 kirpmasi nedeniyle 80->60->40->25 karakter kademeli):
+
+  temiz        18
+  KAYNASMIS     0
+  bulunamadi    0
+  alinti_bos    0
+  TOPLAM       18
+
+SONUC: maddeler() kaynasmasi ALTINA DOKUNMUYOR. Kutuk #2'de (bentler)
+7 altin etiketi donmustu; burada donen etiket YOK. EK-5 10'un birinci
+maddesi bu olcumle KAPANIR.
+
+========================================================================
+7. ANAHTAR BICIMI — '~N' NEDEN KULLANILAMAZ
+========================================================================
+bent_bol.py:109-111 cift anahtari '{anah}~{k}' ile sakliyor (or. 15.3.1~2)
+ve satir 238-240 atif cozerken tabana geri indiriyor:
+    taban = {no.split("~")[0] for no in yer}
+    # "~2" ayni bendin IKINCI KOPYASIDIR, yanlis atif DEGILDIR.
+
+Yani '~N' semantigi: AYNI birimin ikinci gecisi.
+
+Gecici Madde 3, Madde 3'un kopyasi DEGILDIR; yalnizca numarayi paylasan
+BASKA bir maddedir. '3~2' kullanilirsa asagi akistaki kod bunu Madde 3
+sanar ve R1/R2 "Madde 3" atfina "Gecici Madde 3" metnini dondurebilir.
+
+=> '~N' bu is icin YANLIS aractir. Ek/Gecici ayrimini TASIYAN bir anahtar
+   gerekir. Bicim karari kullaniciya birakilir (E3/G5 mi, "Ek 3"/"Gecici 5" mi).
