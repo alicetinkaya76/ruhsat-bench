@@ -79,3 +79,14 @@ yanlış araçtır.
 ayrıştırmadan pay alıyordu?"* → **7/473 = %1,48**, ve o 7 iddia EK-5'in döndürdüğü
 7 altın etiketin **tam olarak kendisi**. Eski 473/473, korpus ile altının aynı
 yönde yanlış olmasının ürünüydü. Kanıt: `sonuclar/gorev2_raporu.txt` §1.
+
+### Görev 3'te ölçülen (2026-08-28)
+
+| # | kusur | etki ölçümü | karar |
+|---|---|---|---|
+| 28 | `llama3.2:3b-instruct-q8_0` **dayanak verilince biçim talimatını bırakıyor**: iddiayı geri yazıyor, şablonu (`ETIKET\|GUVEN`) olduğu gibi basıyor, ya da tekrar döngüsüne girip bütçeyi dolduruyor | **ÖLÇÜLDÜ:** 78 çağrıda kesilen %16,7 (32 token) → %2,56 (64/128/256 **birebir aynı** — kalan 2 kesilme bütçe değil tekrar dejenerasyonu); ayrıştırılamayan 15/78. Aynı koşuda `qwen2.5:32b-instruct` **0/78 kesilme, 0 ayrıştırılamayan** | KÜTÜKTE — betik hatası DEĞİL, model bulgusu. Dayanaklı kollarda 3B sınıfı model kullanılamaz; makalede kapasite bulgusu olarak yazılabilir |
+| 29 | **Dayanaklı kollar deterministik DEĞİL** — ORTAM.md §3'ün *"temperature 0 + sabit seed → 946/946 birebir"* ölçümüyle çelişiyor | **ÖLÇÜLDÜ (aynı model, aynı makine, aynı gün, aynı tohum):** kapalı kitap (`f4_kos.py`, 20 çağrı) **20/20 birebir**; dayanaklı (`f4_dayanak.py`, 20 çağrı) **17/20** — 3 fark, biri **kararın kendisi** (`DOGRU` → ayrıştırılamadı), biri güven (85 → 60). Fark uzun/dayanaklı istemle ilişkili | AÇIK — **taşıyıcı sonuç:** yerel dayanaklı kollar tek koşuyla raporlanamaz; API kollarındaki 3 koşu + çoğunluk oyu yordamı burada da gerekir. Sebep araştırılmadı (durma kuralı) |
+
+**EK-4 §10 uyumu (ölçüldü, `qwen2.5:32b`, 78 çağrı):** kesilen **0/78 = 0.0000**;
+her satırda `istem_sha256`, `sistem_sha256`, `korpus_sha256`, `betik_sha256`;
+R2 geri çağırma ayrı alan ve özette zorunlu. Kanıt: `sonuclar/gorev3_raporu.txt`.

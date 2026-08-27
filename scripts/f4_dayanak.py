@@ -30,6 +30,21 @@ R0 ile fark yalnizca DAYANAGIN VARLIGIDIR.
 Bu ifade EK-4'te sabitlenmemisti; HANDOVER 8 bunu acik soru olarak
 isaretlemisti. Karar burada verilmis ve kosudan once commit'lenmistir.
 
+DETERMINIZM UYARISI (28.08.2026 OLCULDU — ORTAM.md 3 ile CELISIYOR)
+-------------------------------------------------------------------
+ORTAM.md 3: "temperature 0 + sabit seed -> 946/946 birebir tekrar"
+(Windows'ta, KAPALI KITAP istemlerle olculmustu).
+
+TF-HPC'de olculen:
+  kapali kitap (f4_kos.py, 10 iddia x 2 kosul)   -> 20/20 BIREBIR
+  dayanakli    (bu betik, 20 iddia, R2/E1)       -> 17/20  (3 FARK)
+Farklardan biri KARARIN KENDISI (DOGRU -> ayristirilamadi), biri guven
+puani (85 -> 60). Ayni model, ayni makine, ayni gun, ayni tohum.
+
+SONUC: yerel dayanakli kollar TEK KOSU ile raporlanamaz. API kollarinda
+zorunlu olan 3 KOSU + COGUNLUK OYU yordami burada da uygulanmalidir.
+Sebep arastirilmadi (durma kurali); kusur kutugu #29.
+
 EK-4 10 — KOLU GECERSIZ KILAN DURUMLAR (betik bunlari OLCER)
 ------------------------------------------------------------
   * istem sha256 satir basina yazilmazsa      -> her satirda istem_sha256
@@ -245,7 +260,14 @@ def main():
     ap.add_argument("--models", nargs="+", default=[])
     ap.add_argument("--host", default="http://127.0.0.1:11434")
     ap.add_argument("--k", type=int, default=3, help="BM25 top-k (EK-4: 3)")
-    ap.add_argument("--max-token", type=int, default=32)
+    # KALIBRASYON (28.08.2026, kosudan once olculdu — sonuca gore ayarlanmadi):
+    #   llama3.2:3b, 78 cagri, kesilen orani: 32 -> %16,7 · 64 -> %2,56
+    #   64 = 128 = 256 BIREBIR AYNI; kalan 2 kesilme butce degil TEKRAR
+    #   DEJENERASYONUDUR (ham cikti: ayni cumle donguye giriyor).
+    #   qwen2.5:32b ayni kosuda 64 ile 0/78 kesilme verdi.
+    # 128 secildi: 64 zaten yetiyor, 128 ise kapali kitap frontier kollarinin
+    # yerlesik degeri (HANDOVER 3) — kollar arasi karsilastirilabilirlik icin.
+    ap.add_argument("--max-token", type=int, default=128)
     ap.add_argument("--tohum", type=int, default=42)
     ap.add_argument("--sinir", type=int, default=0, help="ilk N iddia (duman testi)")
     ap.add_argument("--kuru", action="store_true",

@@ -1,0 +1,81 @@
+# RUHSAT-Bench — GOREV 3 RAPORU (f4_dayanak.py, R1/R2/R3-bm25)
+tarih  : 2026-08-27T22:07:52Z
+ortam  : TF-HPC · Ubuntu 24.04.1 · Python 3.12.3 · ollama 0.32.14 · Quadro RTX 8000
+beyan  : EK-4 (kollar) + EK-6 (korpus) — IKISI DE KOSUDAN ONCE commit'lendi
+
+## 1. Betik hazir, kollar EK-4'e uygun
+
+  R1        n=289  atifla cozulen birimin TAM METNI istemde
+  R2        n=473  BM25 top-k=3, korpusun tamami (rank_bm25 0.2.2)
+  R3-bm25   n=473  LLM YOK, R2'nin GETIRDIGI AYNI pasajlarda dizgi eslestirme
+
+Istem tasarimi TEK DEGISKEN ilkesiyle: kapali kitap istemleri birebir
+korundu, yalniz "KAPALI KITAP: yalnizca kendi bilginle karar ver" cumlesi
+dayanak talimatiyla degistirildi. Boylece R0 ile fark yalnizca DAYANAGIN
+VARLIGIDIR. (HANDOVER 8 bu ifadeyi acik birakmisti; karar kosudan once
+verilip commit'lendi.)
+
+## 2. Kabul kriterleri (HANDOVER 5)
+
+  [x] --sinir 10 --kuru istem sha'larini basiyor
+      E1 sha bfe1811728cc7a31... · E2 sha 3644c886fe390ef7...
+  [x] R1'de istem DOGRU BIRIM metnini iceriyor — 3 rastgele ornek (tohum 42)
+      id=113 YDUY/14 · id=26 4708/9 · id=288 YDUY/4 -> ucunde de True
+  [x] R2 satirlarinda geri cagirma alani dolu
+      duman kosusu: 7/14 = 0.5000 (k=3), kacirdi 7
+
+## 3. EK-4 10 gecersizlik sartlari — OLCULDU
+
+  [x] istem sha256 satir basina        -> her satirda 4 hash
+  [x] R2 geri cagirma ayrica raporlanir -> alan + ozet satiri
+  [x] R3 yalniz id + iddia okur
+  [x] kesilen orani %1 alti             -> qwen2.5:32b ile 0/78 = 0.0000
+
+## 4. MAX_TOKEN KALIBRASYONU (kosudan once, sonuca gore ayarlanmadi)
+
+  llama3.2:3b, 78 cagri, kesilen orani:
+      32  -> 13/78 = %16,7
+      64  ->  2/78 = %2,56
+      128 ->  2/78 = %2,56   (64 ile BIREBIR AYNI)
+      256 ->  2/78 = %2,56   (64 ile BIREBIR AYNI)
+
+  Kalan 2 kesilme BUTCE DEGIL: ham cikti tekrar dongusune giriyor
+  ("YAPILAN IDDAYA 3194 SAYILI KANUNUN 49. MADDINE GORE:" x N).
+  qwen2.5:32b ayni kosuda 64 ile 0/78.
+
+  SECIM: 128. Gerekce: 64 zaten yetiyor, 128 ise kapali kitap frontier
+  kollarinin yerlesik degeri (HANDOVER 3) — kollar arasi karsilastirilabilirlik.
+
+## 5. BULGU — 3B sinifi model dayanakli kolda KULLANILAMAZ (kutuk #28)
+
+llama3.2:3b dayanak verilince biçim talimatini birakiyor:
+  * iddiayi geri yaziyor      ("YAPILAN IDDIA: ...")
+  * sablonu oldugu gibi basiyor ("ETIKET|GUVEN")
+  * dayanak pasajini geri alintiliyor
+  * tekrar dongusune giriyor
+Ayrıştırılamayan 15/78. Ayni istem, ayni korpus, qwen2.5:32b: 0/78.
+
+Bu bir BETIK HATASI DEGIL, model kapasitesi bulgusudur.
+
+## 6. BULGU — dayanakli kollar DETERMINISTIK DEGIL (kutuk #29)
+
+ORTAM.md 3 (Windows, kapali kitap): "temperature 0 + sabit seed ->
+946/946 birebir tekrar".
+
+TF-HPC'de ayni model, ayni makine, ayni gun, ayni tohum:
+  kapali kitap (f4_kos.py, 20 cagri)   -> 20/20 BIREBIR
+  dayanakli    (f4_dayanak.py, 20)     -> 17/20  (3 FARK)
+
+Farklardan biri KARARIN KENDISI (DOGRU -> ayristirilamadi), biri guven
+puani (85 -> 60). Fark uzun/dayanakli istemle iliskili gorunuyor; sebep
+ARASTIRILMADI (durma kurali).
+
+TASIYICI SONUC: yerel dayanakli kollar TEK KOSU ile raporlanamaz.
+API kollarinda zorunlu olan 3 KOSU + COGUNLUK OYU yordami burada da
+uygulanmalidir. Bu, uretim kosusunun maliyetini 3 katina cikarir.
+
+## 7. Kullaniciya kalan
+
+  * Uretim kosusu (473 iddia x 3 kol x 2 kosul x model sayisi x 3 tekrar)
+  * EK-6 3 geregi duyarlilik kolu: ayni kosu data/korpus (1366) ile
+  * 17 acik vaka (kutuk #26) tarihci karari
