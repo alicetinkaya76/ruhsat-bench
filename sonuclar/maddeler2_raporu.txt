@@ -1,0 +1,27 @@
+﻿RUHSAT-Bench — maddeler2 DOGRULAMA
+kirpma siniri : 4000 (uret_iddia_v3_6.py:104 ile ayni; kutuk #21 dokunulmadi)
+
+belge       taban  eklenen  yeni_top  insan  kurtarilan_kar
+-----------------------------------------------------------
+6331           39       11        50      0            6324
+4708           15        7        22      1            7420
+3194           49       37        86      0           50144
+ISGRISK        19        1        20      0             232
+TBDY            —        —         —      —(bent_bol.py isler)
+YDUY           36       18        54      0           11300
+-----------------------------------------------------------
+TOPLAM        158       74       232      1           75420
+
+  bayt-aynilik: 158/158 mevcut birim DEGISMEDI
+  kurtarma    : 74/75 dusen parca eklendi (0.9867)
+
+  tur dagilimi: {'Ek': 16, 'Geçici': 58}
+  yeni birimlerden kirpilan: 4 (kutuk #21 ile ayni sinir)
+
+=== needs_human_review — OTOMATIK COZULMEDI ===
+  4708 / Madde 7  (299 kar)
+    sebep      : onek yok — numarayi paylasan farkli metin; alintilanan baska kanun olabilir
+    onceki son : ...leri yürürlükten kaldırılmıştır. c) 17.6.1938 tarihli ve 3458 sayılı Mühendislik ve Mimarlık Hakkında Ka nunun 7 nci maddesi aşağıdaki şekilde değiştirilmiştir.
+    govde bas  : 1 inci maddede belirtilen diploma veya ruhsatnamelerden birini haiz olmayanlar Türkiye’de mühendis veya mimar unvan ıile istihdam olunamazlar, imzalarla sanat i...
+
+  Bu parcalar korpusa EKLENMEDI. Tarihciler karar verecek.

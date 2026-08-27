@@ -4,3 +4,5 @@ __pycache__/
 .env
 .DS_Store
 /tmp/
+data/korpus_v2/belge_tam.jsonl
+data/korpus_madde/belge_tam.jsonl

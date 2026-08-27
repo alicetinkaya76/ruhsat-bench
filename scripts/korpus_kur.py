@@ -75,6 +75,16 @@ except Exception as exc:                                    # noqa: BLE001
     print(f"! atif_coz.py import edilemedi: {exc}")
     sys.exit(1)
 
+# Rafine ediciler ITHAL edilir, KOPYALANMAZ (EK-5 4: sifirdan yazma denendi,
+# kurtarma 0.9632 -> 0.022 ile basarisiz oldu). Ithal basarisizsa --rafine
+# sessizce ham ureticiye DUSMEZ; betik hata verir.
+try:
+    from bent_bol import bent_bol as _bent_bol
+    from maddeler2 import maddeler2 as _maddeler2
+    _RAFINE_VAR = True
+except Exception as _exc:                                   # noqa: BLE001
+    _RAFINE_VAR, _RAFINE_HATA = False, _exc
+
 TIRNAK = {"\u2019": "'", "\u2018": "'", "\u201c": '"', "\u201d": '"'}
 
 
@@ -106,7 +116,30 @@ def main():
     ap.add_argument("--esik-atif", type=float, default=0.98)
     ap.add_argument("--esik-p6", type=float, default=0.95)
     ap.add_argument("--goster", type=int, default=12)
+    # --rafine: RAFINE ayristiricilar (HANDOVER 4, Gorev 1).
+    #   TBDY  -> bent_bol.py    (1208 -> 1523 birim, kutuk #2)
+    #   diger -> maddeler2.py   (158 -> 232 birim, kutuk #1)
+    # VARSAYILAN KAPALI ve bu BILINCLI: scripts/dogrula_linux.sh kabul kapisi
+    # "1366 birim / Kontrol A 440-441" degerlerini SABIT tutuyor. Varsayilani
+    # degistirmek 17/17 kapisini bozardi. Rafine korpus AYRI bir --out dizinine
+    # uretilir; kapinin guncellenmesi ayri ve BEYAN EDILEN bir adimdir.
+    # Ayristirici bazinda ayri: Gorev 1'in (maddeler2) katkisini bent_bol'un
+    # TBDY bolmesinden IZOLE edebilmek icin. Kontrol A'nin dusmesi hangisinden
+    # geliyor, ancak boyle olculur.
+    ap.add_argument("--rafine", default="yok",
+                    choices=["yok", "madde", "bent", "hepsi"],
+                    help="yok=ham uretici · madde=maddeler2 (5 belge) · "
+                         "bent=bent_bol (TBDY) · hepsi=ikisi")
     a = ap.parse_args()
+
+    if a.rafine != "yok" and not _RAFINE_VAR:
+        print(f"! --rafine={a.rafine} istendi ama rafine ediciler import edilemedi: {_RAFINE_HATA}")
+        sys.exit(1)
+    _AD = {"yok": "HAM uretici (rafine YOK)",
+           "madde": "maddeler2 (5 belge) + HAM bentler (TBDY)",
+           "bent": "HAM maddeler (5 belge) + bent_bol (TBDY)",
+           "hepsi": "maddeler2 (5 belge) + bent_bol (TBDY)"}
+    print(f"  ayristirici: {_AD[a.rafine]}")
 
     os.makedirs(a.out, exist_ok=True)
 
@@ -120,7 +153,12 @@ def main():
         ham = open(yol, "rb").read()
         metin = UR.normalize(UR.pdf_metin(yol))
         belge_metin[kod] = metin
-        birimler = UR.bentler(metin) if meta["tur"] == "tbdy" else UR.maddeler(metin)
+        if meta["tur"] == "tbdy":
+            birimler = (_bent_bol(UR.bentler(metin), metin)
+                        if a.rafine in ("bent", "hepsi") else UR.bentler(metin))
+        else:
+            birimler = (_maddeler2(metin)[0]
+                        if a.rafine in ("madde", "hepsi") else UR.maddeler(metin))
         for no, d in birimler.items():
             korpus[(kod, str(no))] = {
                 "kanun": kod, "belge_adi": meta["ad"], "birim": str(no),

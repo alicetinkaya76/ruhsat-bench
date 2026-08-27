@@ -1,0 +1,50 @@
+﻿RUHSAT-Bench — donmus kaynak belge manifesti (denetim maddesi 1.18)
+
+kanun: 6331
+dosya: 6331_isg_kanunu.pdf
+pdf_sha256: 2c4862501446271079d88776109717df747a9030dc355c941f21cf2afbec0404
+metin_sha256: 3a9d8c567103501d2b8d4371fdd290d056a1266cd28ccaf176cddba723325ae4
+karakter: 71025
+birim_sayisi: 50
+degisiklik_yili_olan_birim: 14
+
+kanun: 4708
+dosya: 4708_yapi_denetimi.pdf
+pdf_sha256: e4ad97473caf12d58bbab0b45e685e5079602d109fb8ad9c966d129199297bab
+metin_sha256: 3a1978358d749314b7ef9331561ae0d87ab2442b17094e909c89859e82e25413
+karakter: 55563
+birim_sayisi: 22
+degisiklik_yili_olan_birim: 12
+
+kanun: 3194
+dosya: 3194_imar_kanunu.pdf
+pdf_sha256: 5557b139186efcd6d61af58e563f29cae0e9fe383d0e2ef264be5d6f289fd70d
+metin_sha256: 78bd9bd09f8f3381afd0c62994a1555df43e9911fff61d0c00ad8c5850dfa255
+karakter: 158417
+birim_sayisi: 86
+degisiklik_yili_olan_birim: 47
+
+kanun: ISGRISK
+dosya: isg_risk_yonetmeligi.pdf
+pdf_sha256: 47ec8c68a5c1d931818e557a382fd6f44bb69d302182622fdb18af9fb10a27dc
+metin_sha256: 18fadf50081029c50fe21068868cd84976364ffda0b78b979ab7fb1d27393c39
+karakter: 16703
+birim_sayisi: 20
+degisiklik_yili_olan_birim: 0
+
+kanun: TBDY
+dosya: TBDY_2018.pdf
+pdf_sha256: 8d3a9a463d4a534ec2c6834c557b5f706e2ad976c2d6837f6c9b6242e38a6bb2
+metin_sha256: 387b6df226caaf7461266990b13b4d87751a481da4e50c3e15fd27b00124be75
+karakter: 870747
+birim_sayisi: 1208
+degisiklik_yili_olan_birim: 0
+
+kanun: YDUY
+dosya: yapi_denetim_uygulama_yon.pdf
+pdf_sha256: cdb4aef16da40cd2345efab42837d7586608c4f20e8ee2b81ae51e027ade7753
+metin_sha256: 3927d2136b7df795f9e88daaab8ab5cd3d5eeb3a6e1c6797e91272c085b79c64
+karakter: 94556
+birim_sayisi: 54
+degisiklik_yili_olan_birim: 43
+

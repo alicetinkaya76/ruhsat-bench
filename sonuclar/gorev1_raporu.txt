@@ -1,0 +1,102 @@
+# RUHSAT-Bench — GOREV 1 RAPORU (maddeler2 + korpusun kurulumu)
+tarih  : 2026-08-27T13:59:50Z
+ortam  : macOS · Python 3.11.9 · pypdf 5.9.0
+commit : 4362b94
+
+## 1. Teslim edilen
+
+  scripts/maddeler2.py      maddeler() rafine edicisi (Ek/Gecici/Mukerrer)
+  scripts/korpus_kur.py     --rafine {yok,madde,bent,hepsi} bayragi eklendi
+
+maddeler2, maddeler() ciktisini ITHAL eder ve uzerine ekler; ureteci
+KOPYALAMAZ (EK-5 4: sifirdan yazma denenmis, kurtarma 0.9632 -> 0.022).
+degisiklik_yillari da MUHURLU KODLA hesaplanir: govde sentetik bir
+"Madde 1 - <govde>" metnine sarilip UR.maddeler()'e verilir; regex kopyalanmaz.
+
+## 2. maddeler2 dogrulamasi
+
+belge       taban  eklenen  yeni_top  insan  kurtarilan_kar
+-----------------------------------------------------------
+6331           39       11        50      0            6324
+4708           15        7        22      1            7420
+3194           49       37        86      0           50144
+ISGRISK        19        1        20      0             232
+YDUY           36       18        54      0           11300
+-----------------------------------------------------------
+TOPLAM        158       74       232      1           75420
+
+  bayt-aynilik : 158/158 mevcut birim DEGISMEDI
+  kurtarma     : 74/75 = 0.9867   (kabul kriteri >= 0.95  -> GECTI)
+  tur dagilimi : Ek 16 · Gecici 58   (zemin olcumuyle birebir)
+  oz-test      : 5/5 (pozitif kontroller: bozulan metin ve silinen birim yakalandi)
+
+  needs_human_review: 1 — 4708 "Madde 7". EKLENMEDI.
+    Bu 4708'in maddesi degil; 4708'in DEGISTIRDIGI 3458 sayili Muhendislik ve
+    Mimarlik Hakkinda Kanun'un 7. maddesinin alintilanan metni. Eklenirse F5
+    getirimi BASKA BIR KANUNUN metnini 4708 diye dondururdu.
+    (CLAUDE.md: borderline vakalar otomatik cozulmez.)
+
+## 3. Korpus — dort mod, olculdu
+
+mod      birim   Kontrol A   Kontrol B   Kontrol C   korpus_kur cikis
+-------------------------------------------------------------------
+yok       1366   440/441     473/473     120/120     0
+madde     1440   440/441     473/473     120/120     0   <-- GOREV 1
+bent      1681   409/441     473/473     120/120     2
+hepsi     1755   409/441     473/473     120/120     2
+
+  --rafine=madde: "UC KONTROL DE GECTI. Dayanakli kol icin korpus kullanilabilir."
+
+manifest sha256 (ilk 16):
+  data/korpus         korpus.jsonl=3c925afbd9f076f8  manifest=a442b79e9850b961  1366
+  data/korpus_madde   korpus.jsonl=9fc7ea062aad2311  manifest=adbf4566c18e1b82  1440
+  data/korpus_v2      korpus.jsonl=d7eb617baf161b40  manifest=002d0dd86916d3d5  1755
+
+## 4. KABUL KRITERLERINDE COZULMESI GEREKEN CELISKI
+
+HANDOVER 5 iki kriter koyuyor ve bunlar AYNI ANDA saglanamaz:
+
+  (a) "Kontrol A >= 440/441"
+  (b) "Yeni korpusta toplam birim > 1523 + ~70"   (yani > 1593)
+
+(b) TBDY'nin bent_bol ile bolunmesini GEREKTIRIR (1208 -> 1523). Ama bolme,
+alintlari daha ince birimlere tasir; iddia CSV'si ise BOLME ONCESI birim
+kimligini tutar. Dolayisiyla (b) saglandigi anda (a) duser.
+
+OLCULDU — dususun tamami TBDY'den:
+  ham -> rafine arasinda konum degistiren alinti : 31
+  bunlarin TBDY olani                            : 31
+  maddeler2'nin yarattigi kayma                  : 0
+
+Rafine korpustaki 36 TBDY iskasinin sinifi:
+  ILISKISIZ (EK-5 duzeltme sinifi)      24   <- ornek id=70 CSV=15.1 -> 15.3.1
+  AYNI birim (~N kopyasi)                5
+  UST birim (~N kopyasi)                 2
+  belgede yok                            5
+
+  id=70 (15.1 -> 15.3.1) tam olarak dogrula_linux.sh'in bent_bol icin BASARI
+  olcutu diye kapiladigi cipa vakasidir. Yani "dusus" burada bozulma degil,
+  DUZELTMEdir; EK-5 bu sinifta 7 altin etiketi zaten dondurmustu.
+
+ONERI (uygulanmadi — karar kullanicida):
+  Kontrol A, TBDY icin CSV biriminin "~N kopyasi" ve "alt birimi"ni DOGRU
+  saymali. Bu, bent_bol.py:238-240'in kendi ilan ettigi kuraldir:
+      taban = {no.split("~")[0] for no in yer}
+      # "~2" ayni bendin IKINCI KOPYASIDIR, yanlis atif DEGILDIR.
+  Olculen etki: +5 (~N) +2 (ust ~N) = 416/441. Kalan 24 EK-5 duzeltme
+  sinifidir ve OTOMATIK COZULMEZ; needs_human_review kalir.
+
+## 5. Kapi (dogrula_linux.sh) bilincli olarak KORUNDU
+
+--rafine varsayilani "yok". Kabul kapisi "1366 birim / Kontrol A 440-441"
+degerlerini sabit tutuyor; varsayilani degistirmek 17/17'yi bozardi.
+Dogrulandi: --rafine=yok ile korpus_kur ciktisi ONCEKIYLE AYNI (1366, 440/441).
+Kapinin guncellenmesi ayri ve BEYAN EDILEN bir adimdir.
+
+## 6. Gorev 2'ye devir
+
+Gorev 2 (R3 + kontroller, duzeltilmis korpusta) hangi korpusla kosulacak,
+yukaridaki (a)/(b) celiskisi cozulmeden belirlenemez:
+  - data/korpus_madde (1440) uc kontrolu de geciyor, ama TBDY rafine degil
+  - data/korpus_v2    (1755) EK-5'in istedigi TBDY bolmesini iceriyor, ama
+                      korpus_kur'un kendi kapisi onu reddediyor (cikis 2)
