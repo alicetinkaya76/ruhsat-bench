@@ -243,6 +243,23 @@ def main():
         nerede = next((o for o in birim_ind[kod] if pg in gev_birim[(kod, o)]), None)
         if nerede is not None:
             tani[f"BASKA birimde"] += 1
+            # BIRIM-ESNEK TANI (yalniz RAPORLANIR, kapiyi DEGISTIRMEZ).
+            # bent_bol.py:238-240 kendi kuralini soyle ilan ediyor:
+            #     taban = {no.split("~")[0] for no in yer}
+            #     # "~2" ayni bendin IKINCI KOPYASIDIR, yanlis atif DEGILDIR.
+            # Rafine korpusta alinti, CSV biriminin "~N kopyasi"na ya da ALT
+            # birimine dusebilir; ikisi de birim siniri HATASI degildir.
+            # Katı sayi oldugu gibi kalir (makale ona atif yapabilir); bu satir
+            # yalnizca "dususun ne kadari gercek hata" sorusunu ayirmak icindir.
+            tb_n, tb_c = str(nerede).split("~")[0], str(no).split("~")[0]
+            if tb_n == tb_c:
+                tani["  (esnek) ayni birim ~N kopyasi"] += 1
+            elif tb_n.startswith(tb_c + "."):
+                tani["  (esnek) CSV ust birimi, alinti alt birimde"] += 1
+            elif tb_c.startswith(tb_n + "."):
+                tani["  (esnek) CSV alt birimi, alinti ust birimde"] += 1
+            else:
+                tani["  (esnek) ILISKISIZ birim — gercek sinir hatasi"] += 1
             hatalar.append((x, f"BASKA birimde: {kod}/{nerede} (beklenen {no})"))
         elif pg in gev_belge.get(kod, ""):
             tani["belgede var, birime girmemis"] += 1

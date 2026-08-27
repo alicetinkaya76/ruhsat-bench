@@ -67,3 +67,15 @@ atıf çözerken tabana indiriyor — `~N` semantiği *"aynı birimin ikinci ge�
 Geçici Madde 3, Madde 3'ün kopyası değil **başka bir maddedir**; `3~2` kullanmak
 R1/R2'de "Madde 3" atfına "Geçici Madde 3" metnini döndürtebilir. `~N` bu iş için
 yanlış araçtır.
+
+### Görev 2'de ölçülen (2026-08-27)
+
+| # | kusur | etki ölçümü | karar |
+|---|---|---|---|
+| 26 | EK-5'in altın düzeltmesi **tamamlanmamış olabilir**: aynı korpus kaymasını paylaşan iddiaların bir kısmı düzeltilmiş, bir kısmı dokunulmamış | **ÖLÇÜLDÜ:** 9 farklı kayma sınıfı var. Düzeltilen bir iddiayla **birebir aynı** kaymayı paylaşıp düzeltilmemiş **12** iddia; hiç düzeltme almamış kaymalarda **5** iddia → toplam **17** açık. Örn. `TBDY/7.2.1.4 → 7.2.4`: 5 iddiadan 2'si düzeltilmiş, 3'ü değil. **"Yalnız P1 denetlendi" demek YANLIŞ** — id=278 P1 olduğu hâlde düzeltilmemiş | AÇIK — `needs_human_review`. CLAUDE.md gereği otomatik çözülmez; tarihçiler karar verir. Kanıt: `sonuclar/gorev2_raporu.txt` §4 |
+| 27 | HANDOVER §5'in iki kabul kriteri **aynı anda sağlanamaz**: "Kontrol A ≥ 440/441" ve "toplam birim > 1593" | İkincisi TBDY bölmesini gerektirir; bölme alıntıları ince birimlere taşır, iddia CSV'si bölme öncesi kimliği tutar. **ÖLÇÜLDÜ:** kaymanın 31/31'i TBDY'den, `maddeler2`'nin payı 0 | KISMEN ÇÖZÜLDÜ — `korpus_kur.py`'ye **birim-esnek tanı** eklendi (katı sayı değişmedi, kapı değişmedi). 31'in 14'ü hata değil (5 `~N` + 2 üst-birim + 7 EK-5 düzeltmesi); 17'si açık (#26) |
+
+**EK-5 §10 ikinci maddesi KAPANDI (ölçümle).** *"R3 473/473'ün ne kadarı kaynaşmış
+ayrıştırmadan pay alıyordu?"* → **7/473 = %1,48**, ve o 7 iddia EK-5'in döndürdüğü
+7 altın etiketin **tam olarak kendisi**. Eski 473/473, korpus ile altının aynı
+yönde yanlış olmasının ürünüydü. Kanıt: `sonuclar/gorev2_raporu.txt` §1.
