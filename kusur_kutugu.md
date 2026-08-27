@@ -41,3 +41,15 @@ ortalama 0.0046, maks 0.0347; hiçbir niteliksel sonuç değişmedi
 | 18 | `/workspace/env.sh` **MarkLLM'in** ve `~/.bashrc` onu source ediyor; `bootstrap.sh` üzerine yazacaktı | Yazsaydı MarkLLM'in `HF_HOME`/`TRANSFORMERS_CACHE`/`PYTHONPATH`'i silinirdi — paylaşılan konteynerde DİĞER proje bozulurdu. Deploy öncesi `ls /workspace` ile yakalandı, hasar OLUŞMADI | KAPANDI — ortam `/workspace/ruhsat-bench/env.sh`'e taşındı; MarkLLM'in dosyasına ve `~/.bashrc` satırına dokunulmuyor |
 | 19 | numpy sürümü iki ortamda farklı: macOS 2.4.6, HPC 2.5.2 (`rank_bm25`'in geçişli bağımlılığı) | Kabul kapısından geçen zincir numpy KULLANMIYOR — 17/17 etkilenmedi (ölçüldü) | AÇIK — `f4_dayanak.py`'nin BM25'i numpy kullanacak; o koşudan önce iki sürümün aynı sıralamayı verdiği gösterilmeli ya da numpy pinlenmeli |
 | 20 | `hpc.remote sh "... &"` işi arka plana ATMIYOR: çocuk süreç koşar ama saran `/bin/bash -c` çıkmaz, çağrı zaman aşımına uğrar (300 s'de ölçüldü) | Ollama model çekimi aslında başlamıştı; yalnız istemci bekledi. Veri kaybı yok | KAPANDI — `remote.py`'de zaten doğru yapan `nohup()` vardı, CLI'ya `nohup` alt komutu olarak açıldı |
+
+### Görev 1 zemin ölçümünde bulunan (2026-08-27)
+
+| # | kusur | etki ölçümü | karar |
+|---|---|---|---|
+| 21 | `maddeler()` gövdeyi **4000 karakterde kırpıyor** (`uret_iddia_v3_6.py:104`, `govde[:4000]`); `korpus_kur.py:123` bu çıktıyı kullandığı için korpus kırpmayı DEVRALIYOR | **ÖLÇÜLDÜ:** 158 birimin **21'i** kırpık, **71.748 karakter** korpusta yok — Ek/Geçici kaybıyla (75.719) aynı büyüklükte. Birim SAYISI kapısından görünmez (158 yine 158). `korpus.jsonl`'da ≥4000 karakterlik birim sayısı 21, ölçümle tutuyor | KÜTÜKTE — durma kuralı. Görev 1'in kabul kriteri *"mevcut 158 birimin metni bayt-aynı"* olduğu için bu pass'te DÜZELTİLEMEZ; ayrı bir karar gerektirir. `bentler()` de 2500'de kırpıyor (TBDY) — ölçülmedi |
+| 22 | Düşen 75 parçanın **1'inin Ek/Geçici öneki yok**: 4708 / "Madde 7" aslında 4708'in maddesi değil, 4708'in **değiştirdiği 3458 sayılı Kanun'un** 7. maddesinin alıntı metni | Körlemesine geri eklenirse F5 getirimi **başka bir kanunun metnini** 4708 diye döndürür | AÇIK — `maddeler2` bunu 4708 birimi olarak EKLEMEYECEK; `needs_human_review` işaretlenir (CLAUDE.md: borderline vakalar otomatik çözülmez) |
+
+**Kapatılan risk (ölçüldü):** 473 iddianın hiçbiri Ek/Geçici maddeye atıf yapmıyor
+(`iddia` metninde 0 geçiş, `madde` sütunu tümüyle sayısal, `atif_coz.py:50-52`
+yalnız sayısal kalıp tanıyor). Yeni `E*`/`G*` birimleri **saf eklemedir**;
+Kontrol A/B/C'yi bozamaz. Kanıt: `sonuclar/gorev1_olcum_20260827.txt`.

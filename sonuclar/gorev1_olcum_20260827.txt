@@ -1,0 +1,83 @@
+RUHSAT-Bench — GOREV 1 ZEMIN OLCUMU (maddeler2 oncesi)
+tarih : 2026-08-27T08:59:58Z
+ortam : macOS · Python 3.11.9 · pypdf 5.9.0 · salt okuma
+
+Bu dosya, HANDOVER 8'in istedigi okuma turunun OLCUM kismidir. Hicbir sayi
+tahmin degildir; hepsi asagidaki kodun ciktisidir.
+
+========================================================================
+1. DUSEN PARCALAR — kusur kutugu #1'in dogrulanmasi
+========================================================================
+belge     kayitli  DUSEN  dusen_kar
+------------------------------------
+3194           49     37      50144
+4708           15      8       7719
+6331           39     11       6324
+ISGRISK        19      1        232
+YDUY           36     18      11300
+------------------------------------
+TOPLAM        158     75      75719
+
+  kusur kutugu #1 '75 parca ~76k karakter'  -> DOGRULANDI (75 parca, 75719 karakter)
+  kusur kutugu #1 '3194 tek basina 50k'     -> DOGRULANDI (50144 karakter)
+  kabul kriteri  'mevcut 158 birim'          -> DOGRULANDI (5 belgenin toplami = 158)
+
+  onek dagilimi: {'Ek': 11, 'EK': 5, 'Geçici': 30, '(ONEKSIZ)': 1, 'GEÇİCİ': 28}
+
+========================================================================
+2. SINIR VAKA — oneksiz dusen parca (KORLEMESINE EKLENEMEZ)
+========================================================================
+  4708 / Madde 7
+  govde (ilk 200 kar): 1 inci maddede belirtilen diploma veya ruhsatnamelerden birini haiz olmayanlar Türkiye’de mühendis veya mimar unvan ıile istihdam olunamazlar, imzalarla sanat icra edemezler, bu unvanları kullanarak r
+
+  TESHIS: bu parca 4708'in kendi maddesi DEGILDIR. 4708, 3458 sayili
+  Muhendislik ve Mimarlik Hakkinda Kanun'un 7. maddesini DEGISTIRIYOR ve
+  degistirilen metni alintiliyor. Onceki parcanin sonu bunu gosteriyor:
+    "...3458 sayili Muhendislik ve Mimarlik Hakkinda Kanunun 7 nci maddesi
+     asagidaki sekilde degistirilmistir."
+  KARAR: 4708 birimi olarak EKLENMEZ. CLAUDE.md kurali geregi otomatik
+  cozulmez -> needs_human_review olarak isaretlenir. Eklenirse F5 getirimi
+  BASKA BIR KANUNUN metnini 4708 diye dondurur.
+
+========================================================================
+3. YENI BULGU — 4000 karakter kirpmasi (kusur kutugunde YOK)
+========================================================================
+belge      birim  kirpik  kayip_kar   en_uzun
+----------------------------------------------
+3194          49       6      28900     13253
+4708          15       2      21906     24487
+6331          39       4       7656      7292
+ISGRISK       19       1        223      4223
+YDUY          36       8      13063      8925
+----------------------------------------------
+TOPLAM       158      21      71748
+
+  uret_iddia_v3_6.py:104  ->  out[no] = {"metin": govde[:4000], ...}
+  korpus_kur.py:123       ->  UR.maddeler(metin)  (kirpmayi DEVRALIR)
+  korpus.jsonl'da >=4000 karakterlik birim: 21  -> olcumle TUTUYOR
+
+  Kayip 71748 karakter, Ek/Gecici kaybiyla (75719) AYNI BUYUKLUKTE.
+  Birim SAYISI kapisindan gorunmez: 158 birim yine 158 birimdir.
+  DURMA KURALI: kutuge yazildi (#21), KOVALANMIYOR. Gorev 1'in kabul
+  kriteri 'mevcut 158 birimin metni bayt-ayni' oldugu icin bu pass'te
+  DUZELTILEMEZ - ayri bir karar gerektirir.
+
+========================================================================
+4. GUVENLIK — yeni birimler atif cozumunu bozar mi?
+========================================================================
+  473 iddia metninde 'Ek/Gecici Madde' gecisi : 0
+  madde sutununda sayisal olmayan deger       : YOK
+  atif_coz.py MADDE_KALIP (satir 50-52)        : yalniz sayisal kaliplar
+
+  SONUC: hicbir iddia Ek/Gecici maddeye ATIF YAPMIYOR. Yeni E*/G* birimleri
+  SAF EKLEMEDIR; Kontrol B (473/473 atif) ve Kontrol A/C etkilenemez.
+  Bu, Gorev 1'in en buyuk riskini (kabul kriterlerini bozma) ORTADAN KALDIRIR.
+
+========================================================================
+5. YANLIS CIKAN TAHMIN (kayda gecirilir)
+========================================================================
+  Hipotez: taban numara CAKISMAZSA 'Ek Madde N' dusmez, 'Madde N' diye
+           SESSIZCE YANLIS ETIKETLENIR.
+  Olcum  : 5 belgede yanlis etiketleme sayisi = 0.
+  Sonuc  : hipotez YANLIS. Butun Ek/Gecici maddeler taban numarayla
+           cakisiyor ve dusuyor; sessiz yanlis etiket vakasi YOK.
