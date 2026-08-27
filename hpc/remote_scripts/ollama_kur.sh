@@ -35,7 +35,19 @@ set -euo pipefail
 
 WS=/workspace
 OL="$WS/ollama"
-SURUM="${OLLAMA_SURUM:-v0.12.6}"          # sabitlenir: model dosyaları sürüme bağlı olabilir
+# SURUM SECIMI — olculerek yapildi (2026-08-27), tahminle degil:
+#   * Windows kosularinin Ollama surumu HICBIR YERDE KAYITLI DEGIL (kutuk #16),
+#     yani "eskisiyle esles" secenegi YOK. Yeni bir taban ilan ediyoruz.
+#   * v0.33.1 en yeni ama 2026-08-26'da, yani BIR GUN once yayinlandi.
+#   * v0.32.14 kullanicinin Mac'inde izole kurulumda ZATEN kosuyor
+#     (olculdu: http://127.0.0.1:11435/api/version -> {"version":"0.32.14"}).
+#     Iki ortamin ayni surumde olmasi karsilastirilabilirlik kazandirir.
+#   * v0.12.6 hala .tgz yayinliyor; v0.32+ .tar.zst'ye gecmis (varlik adlari
+#     API'den okundu). Bu yuzden acma yolu zstd.
+SURUM="${OLLAMA_SURUM:-v0.32.14}"
+VARLIK="ollama-linux-amd64.tar.zst"
+# v0.32.14 sha256sum.txt'den okundu (2026-08-27):
+BEKLENEN_SHA="c620917a71e146ab3a7f893084f066069c4c65d144ef8379a91c3cbe8b27de8f"
 KUME=asgari
 for a in "$@"; do
   case "$a" in
@@ -81,16 +93,28 @@ df -h "$WS" | tail -1 | awk '{print "  /workspace: "$4" bos"}'
 nvidia-smi --query-gpu=name,memory.total,memory.used --format=csv 2>&1 | head -3 | sed 's/^/  gpu: /'
 
 say "2/4  ollama ikilisi ($SURUM)"
+export LD_LIBRARY_PATH="$OL/lib:${LD_LIBRARY_PATH:-}"   # arsivdeki lib/ yaninda gelir
 if [ -x "$OL/bin/ollama" ] && "$OL/bin/ollama" --version >/dev/null 2>&1; then
   echo "  zaten kurulu: $("$OL/bin/ollama" --version 2>&1 | head -1)"
 else
-  TGZ=/tmp/ollama-linux-amd64.tgz
-  URL="https://github.com/ollama/ollama/releases/download/${SURUM}/ollama-linux-amd64.tgz"
-  echo "  indiriliyor: $URL"
-  curl -fL --retry 3 -o "$TGZ" "$URL"
-  # tarball kökünde bin/ ve lib/ vardır; OL altına açıyoruz
-  tar xzf "$TGZ" -C "$OL"
-  rm -f "$TGZ"
+  command -v zstd >/dev/null 2>&1 || { echo "  zstd yok -> kuruluyor"; apt-get update -qq && apt-get install -y -qq zstd >/dev/null; }
+  ARSIV="/tmp/$VARLIK"
+  URL="https://github.com/ollama/ollama/releases/download/${SURUM}/${VARLIK}"
+  echo "  indiriliyor: $URL  (~1,3 GB)"
+  curl -fL --retry 3 -o "$ARSIV" "$URL"
+  # BUTUNLUK: yarim inen dosya bozuk ikili olarak degil, BURADA hata vermeli.
+  GERCEK=$(sha256sum "$ARSIV" | awk '{print $1}')
+  if [ "$GERCEK" != "$BEKLENEN_SHA" ]; then
+    echo "  ⛔ sha256 TUTMADI"
+    echo "     beklenen: $BEKLENEN_SHA"
+    echo "     gercek  : $GERCEK"
+    echo "     (farkli bir SURUM verdiyseniz BEKLENEN_SHA'yi da guncelleyin)"
+    rm -f "$ARSIV"; exit 1
+  fi
+  echo "  sha256 dogrulandi"
+  # arsiv kokunde bin/ ve lib/ var; OL altina aciyoruz
+  tar --zstd -xf "$ARSIV" -C "$OL"
+  rm -f "$ARSIV"
   chmod +x "$OL/bin/ollama"
   echo "  kuruldu: $("$OL/bin/ollama" --version 2>&1 | head -1)"
 fi
@@ -100,6 +124,7 @@ if curl -s --max-time 3 "http://$OLLAMA_HOST/api/tags" >/dev/null 2>&1; then
   echo "  zaten ayakta: http://$OLLAMA_HOST"
 else
   setsid nohup env OLLAMA_MODELS="$OLLAMA_MODELS" OLLAMA_HOST="$OLLAMA_HOST" \
+    LD_LIBRARY_PATH="$OL/lib:${LD_LIBRARY_PATH:-}" \
     "$OL/bin/ollama" serve > "$OL/logs/serve.log" 2>&1 < /dev/null &
   echo "  başlatıldı (pid $!), log: $OL/logs/serve.log"
   for i in $(seq 1 30); do

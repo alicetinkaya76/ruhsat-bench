@@ -50,6 +50,8 @@ cat > "$REPO/env.sh" <<'EOF'
 export OLLAMA_MODELS=/workspace/ollama/models   # overlay DEGIL: yeniden baslatmada korunur
 export OLLAMA_HOST=127.0.0.1:11434              # localhost DEGIL (ORTAM.md 2.1: x4.2 yavaslama)
 export PATH=/workspace/ollama/bin:/workspace/ruhsat-bench/.venv/bin:$PATH
+# ollama v0.32+ arsivi bin/ yaninda lib/ getiriyor; ikili onu bulmali
+export LD_LIBRARY_PATH=/workspace/ollama/lib:${LD_LIBRARY_PATH:-}
 export PYTHONUNBUFFERED=1
 EOF
 # shellcheck disable=SC1091
