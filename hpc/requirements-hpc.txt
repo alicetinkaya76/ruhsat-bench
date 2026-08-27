@@ -1,0 +1,9 @@
+# hpc/ taşıma katmanının YEREL bağımlılıkları. [YEREL]
+#
+# Bilimsel pin listesi (../requirements.txt) DEĞİŞTİRİLMEZ — GECIS_LINUX.md 2.6:
+# "surumler SABIT ... pypdf'i serbest birakmayin". Taşıma katmanının paketleri
+# sonuçlara girmediği için ayrı dosyada durur ve konteynere KURULMAZ.
+requests==2.32.3
+urllib3==2.7.0
+websocket-client==1.9.0
+python-dotenv==1.2.1
