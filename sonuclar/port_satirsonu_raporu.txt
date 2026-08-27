@@ -1,0 +1,99 @@
+RUHSAT-Bench — SATIR SONU NORMALIZASYON RAPORU
+olcum: 2026-08-27T03:51:23Z · macOS · REKONSTRUKSIYON commit'i sonrasi
+
+GECIS_LINUX.md 2.5 uyarinca CRLF -> LF. YALNIZ b'\r\n' -> b'\n' donusumu
+yapildi; yalniz-CR baytlarina DOKUNULMADI (alan ici olabilir).
+Normalizasyon ONCESI baytlar bir onceki commit'te (git show) durur.
+
+etkilenen dosya: 87
+yalniz-CR tasiyan dosya: 0
+
+dosya                                                         CRLF  yalnizCR  once          sonra         
+----------------------------------------------------------------------------------------------------------
+data/iddialar/MEVZUAT-Bench-pilot_iddialar.csv                  61         0  40352d83a0d1  172dcd3b38ac  
+data/iddialar/claims.json                                        1         0  15c927916170  5307efa0f6eb  
+data/iddialar/uretilen_iddialar_v1.csv                         487         0  e19650283a47  49ad417f4c5a  
+data/iddialar/uretilen_iddialar_v2_temiz.csv                   240         0  69c539b2a2aa  1f5d7549ed15  
+data/iddialar/uretilen_iddialar_v4_temiz.csv                   473         0  d8d0c21e049f  5c99989ea66a  
+data/iddialar/uretilen_iddialar_v5_p6dengeli.csv               474         0  e3ea793f5bcd  effbef1d1294  
+data/iddialar/uretilen_iddialar_v6_onarilmis.csv               474         0  3f2b4b7b31d4  0245f88f861b  
+data/iddialar/uretilen_iddialar_v7a.csv                        474         0  9d9de6e89357  471d629ec9fd  
+data/iddialar/uretilen_iddialar_v7b.csv                        474         0  839af5a339c5  d8e0b8410ee3  
+scripts/run_local.py                                             1         0  dfc62b448ef0  244c0549691b  
+scripts/score_local.py                                           1         0  1c1cb75ba5d1  1d17b60579aa  
+sonuclar/F4_on_kayit.txt                                         1         0  eca644491a68  6bb9f631d56f  
+sonuclar/altin_adaylari.csv                                     22         0  26d042c9fead  0b2f311fef88  
+sonuclar/altin_hatalari_v2.csv                                   2         0  b9ac61053f64  e05c24108be8  
+sonuclar/belge_guncellik.txt                                   126         0  4d9f9855cc4f  15d46172cb2d  
+sonuclar/dayanak_kaybi.csv                                      32         0  bcce4c5eb9f5  a4af9bca47d2  
+sonuclar/denetim_anahtar.csv                                    55         0  e336e6e26d0e  03189e1b5711  
+sonuclar/denetim_anahtar_v2.csv                                159         0  4ecfd919cce4  fc4b52f11db4  
+sonuclar/denetim_kitabi_rapor.txt                               29         0  8308157bf795  c92661458f09  
+sonuclar/denetim_konsol.txt                                     49         0  3350dc838a2e  4fad74dee466  
+sonuclar/det1.jsonl                                             80         0  0c88be039264  3905640afd9b  
+sonuclar/det2.jsonl                                             80         0  9017dd718e01  55a327be5fa4  
+sonuclar/dus_sonda.jsonl                                        80         0  ae0a75505b71  cf54a4abb23e  
+sonuclar/f4_frontier_cogunluk.jsonl                            946         0  3fd48cb6d7b3  fcffdbecbfa5  
+sonuclar/f4_haiku_cogunluk.jsonl                               946         0  11559c6ceb0e  d25bf2a4c545  
+sonuclar/f4_metrikler.csv                                       37         0  631125ecfebe  bf3ce5249ebb  
+sonuclar/f4_metrikler_B.csv                                     13         0  28bdb767e0ea  076f5cb417e2  
+sonuclar/f4_metrikler_frontier.csv                               3         0  de01046453c3  c2cb782fb3cd  
+sonuclar/f4_metrikler_haiku.csv                                  3         0  78125c80edd4  46b8451cda22  
+sonuclar/f4_rapor.txt                                          828         0  8a785c0a2453  a9895cdab31c  
+sonuclar/f4_rapor_B.txt                                        342         0  d8ccdf32d6aa  7f9807deba8f  
+sonuclar/f4_rapor_frontier.txt                                 105         0  4abb1244308f  d39d59c5b615  
+sonuclar/f4_rapor_haiku.txt                                    107         0  e34f7e59840c  93a41a2fb33e  
+sonuclar/f4_sonnetB_cogunluk.jsonl                             946         0  95cc98189aba  cbd00799ce10  
+sonuclar/f4_sonnet_AB.jsonl                                   1892         0  2fad698f4107  7b564d8f26bf  
+sonuclar/f4_sonuclar.jsonl                                   22704         0  cfea22693177  abb77457d2e5  
+sonuclar/frontB_k1.jsonl                                       946         0  72d160436e1e  91b1525d6473  
+sonuclar/frontB_k2.jsonl                                       946         0  e5dffae2dd97  589c76accb84  
+sonuclar/frontB_k3.jsonl                                       946         0  f8f4f924f12d  21432f4cd648  
+sonuclar/frontCB_k1.jsonl                                      946         0  d8a7eb9d1aa5  1ed42d5dd60e  
+sonuclar/frontCB_k2.jsonl                                      946         0  d0fa5937e424  778201a2ab40  
+sonuclar/frontCB_k3.jsonl                                      946         0  b0ec237c3e0a  8240469e80a0  
+sonuclar/frontC_k1.jsonl                                       946         0  a512d21ccf41  ecf8ed7606cb  
+sonuclar/frontC_k2.jsonl                                       946         0  13e975744c06  0456733a7ad6  
+sonuclar/frontC_k3.jsonl                                       946         0  e0a50566d4df  5abe5d25e584  
+sonuclar/frontH_k1.jsonl                                       946         0  3b5bd2bf5028  a2493de83bce  
+sonuclar/frontH_k2.jsonl                                       946         0  30e4cf1d7457  3e31e0750514  
+sonuclar/frontH_k3.jsonl                                       946         0  13475878b751  175e8ffdfd37  
+sonuclar/front_k1.jsonl                                        946         0  f345dda023f0  09761c0f3b05  
+sonuclar/front_k2.jsonl                                        946         0  033c4423610a  9ee940e82399  
+sonuclar/front_k3.jsonl                                        946         0  2c4d6e31ab33  55ed1034718d  
+sonuclar/gecis2_raporu.txt                                      63         0  7a3747ded5ab  4fa836e93e9e  
+sonuclar/gecis2_uzlasi.csv                                       9         0  1def41b3a32d  b371e3af5070  
+sonuclar/ikinci_gecis_anahtar.csv                               61         0  c2d54526454b  7d7821ca2c16  
+sonuclar/ikinci_gecis_rapor.txt                                 17         0  a432d381a5a9  a18fc58fd2b4  
+sonuclar/kappa_raporu.txt                                       84         0  2f06493b8952  d308cf8a3200  
+sonuclar/kapsanma_kalibrasyon.txt                               65         0  006dd4441c51  0edc1585c65a  
+sonuclar/kapsanma_kalibrasyon_temiz.txt                         36         0  c8beb75fbb82  5f8eae0123fa  
+sonuclar/kararsizlik_f4_frontier_cogunluk.txt                   30         0  5ed474c1e519  0437f413f473  
+sonuclar/kararsizlik_f4_haiku_cogunluk.txt                      30         0  a3f0d86111a5  0ad21e9d1362  
+sonuclar/kararsizlik_f4_sonnetB_cogunluk.txt                    30         0  b4877d1bbf00  e6333d7163b8  
+sonuclar/kaynak_dogrulama.txt                                   34         0  0890c38781a9  09893e16831a  
+sonuclar/kaynak_dogrulama_v2.txt                                72         0  9012e9fea6f3  649635ae730a  
+sonuclar/kaynasma_etkilenen.csv                                 22         0  eda4faf0b6e4  416c17667b56  
+sonuclar/kelime_onarim.txt                                      62         0  b254900485c6  aad9a2f7c280  
+sonuclar/kitap_dogrulama.txt                                    45         0  2e21602c0b26  1ad87a985dd1  
+sonuclar/konsensus.jsonl                                      4860         0  f38f6fa0a779  4e0e8dbfe7e5  
+sonuclar/konsensus_bayrak.csv                                   74         0  6d9956e8ead4  87209b39fd1b  
+sonuclar/konsensus_dogrulama.txt                                29         0  ea3e5dafea4f  87cf049d58aa  
+sonuclar/konsensus_rapor.txt                                    95         0  ccb4dc5c1d98  077b29e1e631  
+sonuclar/konsensus_tani.csv                                     11         0  dd9f203cfa48  87a5376f783d  
+sonuclar/makale_sayilari.txt                                   165         0  14bb7b1a43e4  67f035a10006  
+sonuclar/ozet_paketi.txt                                       402         0  ed7c8196f510  7f6891a2ec27  
+sonuclar/p6_denge_raporu.txt                                    48         0  424e76934af4  c9f572e79cc2  
+sonuclar/p6_kestirilebilirlik.txt                               36         0  ee5aced83747  3ae47d82fb6b  
+sonuclar/tekrar_eden_cumleler.csv                               15         0  11ce26a88bee  89c772dc7c6e  
+sonuclar/tekrar_temiz.csv                                       15         0  11ce26a88bee  89c772dc7c6e  
+sonuclar/temizlik_raporu.txt                                   148         0  9958bdba9efb  4c2e206ce01e  
+sonuclar/temizlik_raporu_v38.txt                               217         0  952a7679be9d  91e17afdaf57  
+sonuclar/temizlik_raporu_v39.txt                               143         0  e687cda67866  20c041390c47  
+sonuclar/uyusmazliklar.csv                                       1         0  8bdabbd7c0c8  47f44cc65446  
+sonuclar/varyant_kararlilik.csv                                 13         0  f18774e893e2  dc34ea3c829d  
+sonuclar/varyant_kararlilik.txt                                 45         0  1b3980d1910f  cb0171a50c3a  
+sonuclar/varyant_kararlilik_sonnet.csv                           3         0  00ad314590ea  06b15c621988  
+sonuclar/varyant_kararlilik_sonnet.txt                          33         0  5d77c01a2253  da86df002eae  
+sonuclar/yerel_metrikler.csv                                    37         0  8864d1c91c26  8a79075ca379  
+sonuclar/yerel_sonuclar.jsonl                                 2160         0  fd0edf5de0f7  0dd00de0ad4f  
