@@ -1,0 +1,118 @@
+RUHSAT-Bench F5 — ON KAYIT EK-6  (KORPUS SECIMI, KOSU ONCESI)
+==============================================================
+Tarih   : 28.08.2026
+Durum   : Bu ek, dayanakli kollarin (R1/R2/R3-bm25) HICBIR model cagrisi
+          yapilmadan once yazildi. f4_dayanak.py o an henuz kosulmamisti;
+          yalnizca --sinir 10 --kuru (LLM'siz) dumani testi yapilacaktir.
+Kapsam  : EK-4'un 1. bolumunu (KORPUS) REVIZE eder. EK-4'un diger butun
+          bolumleri (atif cozumu, kollar, birincil/ikincil karsilastirmalar,
+          R1'in tavan olmasi, R3'un korlugu, gecersizlik sartlari) AYNEN
+          gecerlidir.
+
+
+1. NEDEN REVIZYON GEREKIYOR
+---------------------------
+EK-4 1. bolum korpusu soyle sabitlemisti:
+
+    "Alti donmus belge, iddialari ureten betigin KENDI ayristiricilariyla
+     (uret_iddia_v3_6.maddeler / .bentler) birimlere bolundu. Yeniden
+     yazilmadi; boylece dayanak birimi ile iddianin uretildigi birim
+     TANIM GEREGI AYNIDIR.  ... toplam 1366 birim"
+
+Gerekce bu son cumledeydi: dayanak birimi ile kaynak birimin OZDESLIGI.
+
+EK-5 (02.08.2026) o ozdesligin ZATEN GECERLI OLMADIGINI olctu:
+bentler() sistematik bent kaynasmasi tasiyordu (456 taninmayan baslik,
+27 sahte birim); birimler komsu bentlerin metnini yutuyordu. Yedi altin
+etiket uzman onayiyla donduruldu.
+
+Yani EK-4'un dayandigi ozdeslik VARSAYILMISTI, DOGRULANMAMISTI; ve
+olculdugunde yanlis cikti. Bu ek, ozdesligi GERI KURAN korpusu secer.
+
+
+2. OLCUMLER (28.08.2026, model cagrisi YAPILMADAN)
+--------------------------------------------------
+2.1  Atif cozumu korpustan BAGIMSIZDIR ve degismedi:
+         madde duzeyi 289 · belge duzeyi 184        (EK-4 2 ile birebir)
+
+2.2  Cozulen 289 birimin TAMAMI uc korpusta da MEVCUTTUR:
+         ham (1366)  289/289 var
+         madde (1440) 289/289 var
+         v2 (1755)    289/289 var
+     Rafine etme hicbir atif hedefini YOK ETMEZ; yalnizca metnini daraltir
+     (ust birim durur, alt birimler eklenir).
+
+2.3  R3 (kural tabanli, LLM yok) korpus x altin matrisi:
+         korpus            v6 altin    v7a altin
+         ham (kaynasmis)   473/473     466/473
+         korpus_madde      473/473     466/473
+         korpus_v2         466/473     473/473
+
+     Desen tam simetriktir. Kararı degisen 7 iddia (246 257 304 360 364
+     382 393), EK-5'in uzman onayiyla dondurdugu 7 altin etiketin TAM
+     OLARAK KENDISIDIR.
+
+2.4  Sonuc: eski 473/473, korpus ile altinin AYNI YONDE yanlis olmasindan
+     doguyordu. Ham korpusu v7a altinla eslestirmek, bu 7 iddiada modele
+     ALTINLA CELISEN metin gostermek demektir.
+
+
+3. KARAR (kosudan once, geri alinabilir degil sayilir)
+-------------------------------------------------------
+BIRINCIL KORPUS : data/korpus_v2  (1755 birim)
+                  TBDY  -> bent_bol.py   (1208 -> 1523)
+                  diger -> maddeler2.py  (158  -> 232)
+BIRINCIL ALTIN  : uretilen_iddialar_v7a.csv
+
+DUYARLILIK KOLU : data/korpus (1366 birim, EK-4'un ON KAYITLI korpusu)
+                  Ayni kollar bu korpusla da kosulur ve TABLODA YAN YANA
+                  verilir. Betik parametriktir (--korpus).
+
+Gerekce: EK-4'un AMACI dayanak biriminin kaynak birimle ozdes olmasiydi.
+1366'lik korpus o amaci SAGLAMIYOR (olculdu). 1755'lik korpus sagliyor.
+Ön kayittan sapma, ön kaydin LAFZINA degil AMACINA sadakattir; yine de
+sapma oldugu icin burada beyan edilir ve duyarlilik kolu zorunlu tutulur.
+
+
+4. ACIK BIRAKILAN — OTOMATIK COZULMEZ
+--------------------------------------
+Rafine korpusta 31 alinti CSV'nin gosterdigi birimden BASKA birimde
+bulunuyor. Dokum (olculdu):
+
+     5   ayni birimin "~N" kopyasi        -> hata DEGIL (bent_bol.py:238-240)
+     2   ust birimin "~N" kopyasi         -> hata DEGIL
+     7   EK-5'in ZATEN duzelttigi vakalar -> hata DEGIL (altin guncel)
+    17   GERCEKTEN ACIK
+     1   belgede hic bulunamiyor
+    ---
+    31 (+ 1 belgede yok)
+
+17 acik vakanin 12'si, duzeltilen bir iddiayla BIREBIR AYNI korpus
+kaymasini paylasiyor; 5'i hic duzeltme almamis kaymalarda. "Yalniz P1
+denetlendi" demek YANLIS olur: id=278 P1 oldugu halde duzeltilmemistir.
+
+KARAR: bu 17 iddia needs_human_review'dur (CLAUDE.md: borderline vakalar
+otomatik cozulmez). Kosudan CIKARILMAZLAR — cikarmak seciciligi bozar —
+ama sonuc tablolarinda AYRI BIR SATIRDA raporlanirlar ve birincil
+karsilastirmalara duyarlilik olarak girerler.
+
+Bu 17'nin listesi: sonuclar/gorev2_raporu.txt 4. bolum.
+
+
+5. EK-4 10'un GECERSIZLIK SARTLARI AYNEN GECERLI
+-------------------------------------------------
+  * Istem hash'i satir basina kaydedilmezse kol gecersizdir.
+  * Kesilen yanit orani %1'i asarsa kol gecersizdir.
+  * R2'de retrieval geri cagirma orani ayrica raporlanmazsa R2 verilemez.
+  * R3 izin verilen iki sutun disina erisirse raporlanamaz.
+
+EK-6 bunlara BIR SART EKLER:
+  * Birincil (1755) ve duyarlilik (1366) kollari ayni tabloda verilmezse
+    korpus secimi savunulmus sayilmaz.
+
+
+6. DEGISMEYENLER
+----------------
+Iddia METINLERI ve id'ler (muhurlu ureteç), E1/E2 tanimlari, siralama
+tohumu, cogunluk oyu yordami, f4_skor.py semasi, EK-1/EK-2/EK-3 ve
+EK-4'un 2-11. bolumleri degismemistir.
