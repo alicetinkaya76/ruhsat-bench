@@ -53,13 +53,37 @@ cd ~/Desktop/ruhsat-bench && .venv/bin/python -m hpc.remote nohup "cd /workspace
 
 **Kurulum bitti. Sıradaki iş bilimsel: HANDOVER §4.**
 
+## 3b. Görev 1 ve 2 BİTTİ (2026-08-27)
+
+| iş | kanıt |
+|---|---|
+| `scripts/maddeler2.py` — Ek/Geçici/Mükerrer kurtarma | 158/158 bayt-aynı, 74/75 = 0.9867, öz-test 5/5 |
+| `korpus_kur.py --rafine {yok,madde,bent,hepsi}` | `madde` modu üç kontrolü de geçiyor (1440 birim, çıkış 0) |
+| **EK-5 §10 CEVAPLANDI** | R3'ün eski 473/473'ünün **7/473 = %1,48**'i kaynaşmadan geliyormuş; o 7, EK-5'in döndürdüğü 7 altının **tam olarak kendisi** |
+| Negatif kontrol 5 tohum | `korpus_v2` ort 0.5315 · ham ort 0.5408 — bandın (0.50–0.56) içinde |
+| Kontrol A birim-esnek tanı | 31 = 5 `~N` + 2 üst-birim + 24 ilişkisiz (7'si EK-5 düzeltmesi) → 17 gerçekten açık |
+| Kapı korundu | `dogrula_linux.sh` iki kez yeniden koşuldu: **17/17** |
+
+Raporlar: `sonuclar/gorev1_raporu.txt`, `sonuclar/gorev2_raporu.txt`,
+`sonuclar/gorev1_olcum_20260827.txt`, `sonuclar/maddeler2_raporu.txt`
+
+## 3c. Görev 3 ÖNÜNDEKİ İNSAN KAPISI
+
+`korpus_kur.py` rafine korpusu kendi kapısıyla reddediyor (çıkış 2):
+*"31 alıntı BAŞKA birimde — bu maddelerde dayanaklı kol modele YANLIŞ maddeyi
+gösterir."* Ölçüm bunun 14'ünün hata olmadığını gösterdi; kalan **17 iddia**
+(kütük #26) tarihçi kararı bekliyor — CLAUDE.md gereği otomatik çözülmez.
+
+Görev 3'ün betiği bu karardan bağımsız yazılabilir; **üretim koşusu** için
+korpus seçimi bu 17'ye bağlı.
+
 ## 4. Bundan sonra — HANDOVER §4 görevleri
 
 Kabul kapısı geçtikten sonra devam edilecek sıra değişmedi:
 
-1. `maddeler2.py` + korpusun nihai kurulumu (kusur kütüğü #1: 75 parça ~76k karakter)
-2. R3 + kontroller, düzeltilmiş korpusta
-3. `f4_dayanak.py` (R1/R2 koşucusu, EK-4 şartlarıyla)
+1. ~~`maddeler2.py` + korpusun kurulumu~~ **BİTTİ**
+2. ~~R3 + kontroller, düzeltilmiş korpusta~~ **BİTTİ** (EK-5 §10 cevaplandı)
+3. `f4_dayanak.py` (R1/R2 koşucusu, EK-4 şartlarıyla) — **sıradaki**
 4. `f4_analiz.py` (kümeli çıkarım, standart ECE, P6 BAcc, risk–kapsam)
 5. Mevcut koşuların v7a ile yeniden puanlanması
 
