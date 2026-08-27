@@ -30,6 +30,21 @@ satırlar MarkLLM'in 2026-08-19 ölçümüyle yan yana verildi).
 Kanıt: `sonuclar/dogrulama_hpc_20260827.{txt,log}`, `sonuclar/ortam_kayma_hpc.json`.
 Altı belgenin altısında `metin_sha256` macOS ölçümüyle birebir (Δkarakter = 0).
 
+### Ollama (2026-08-27 ölçüldü)
+
+| | |
+|---|---|
+| sürüm | **0.32.14** — `.tar.zst` (v0.32+ `.tgz` yayınlamıyor), sha256 `c620917a…` doğrulandı |
+| hızlandırıcı | **CUDA**, compute 7.5, Quadro RTX 8000, 47,1 GiB kullanılabilir |
+| modeller | `qwen2.5:32b-instruct` · `gemma3:27b` · `llama3.2:3b-instruct-q8_0` — 3/3, 0 hata, **38 GB** |
+| model dizini | `/workspace/ollama/models` → ext4 blok cihaz, **overlay değil** |
+| sunucu | `127.0.0.1:11434`, `setsid nohup` altında |
+| uçtan uca | `scripts/f4_kos.py` iki koşuda **20/20 birebir** → deterministik |
+
+Kanıt: `sonuclar/duman/duman_ollama_20260827.txt`, `duman_k{1,2}.jsonl`.
+⚠ Windows koşularının Ollama sürümü kayıtlı olmadığı için (kütük #16) bu **yeni
+bir tabandır**; eski yerel sonuçlarla karşılaştırılamaz ve makalede beyan edilir.
+
 Windows tarafındaki eski ortam (`ORTAM.md`): Windows/RDP, PowerShell 5.1,
 Python 3.13, Quadro RTX 8000 48 GB, D: sürücüsünde ~57 GB boş.
 
@@ -112,8 +127,6 @@ Projenin kuralı "ölçülmeyeni varsayma". Bu satırlar henüz **ölçüm deği
 
 | bilinmeyen | nasıl ölçülecek |
 |---|---|
-| `ollama_kur.sh` hedef ortamda koşuyor mu | konteynerde systemd yok; tarball + `setsid nohup` yolu **belgeden yazıldı, HÂLÂ DENENMEDİ** (kütük #15) |
-| Ollama sürüm kayması | Windows'ta hangi Ollama sürümüyle koşulduğu `ORTAM.md`'de **yazmıyor** (kütük #16); yerel kollar yeniden koşulacaksa yeni sürüm sonuç dosyalarına yazılıp beyan edilecek |
 | numpy 2.4.6 ↔ 2.5.2 BM25 sıralaması | `f4_dayanak.py` koşusundan önce iki sürüm aynı sıralamayı veriyor mu gösterilecek, yoksa numpy pinlenecek (kütük #19) |
 | `/workspace` kotası | `quota` komutu yok; gerçek tüketim izlenerek ölçülecek |
 | API kolları | anahtar kullanıcıda; koşuyu kullanıcı yapar |
@@ -121,7 +134,8 @@ Projenin kuralı "ölçülmeyeni varsayma". Bu satırlar henüz **ölçüm deği
 **Kapanmış olanlar** (bu bölümden çıkarıldı, çünkü artık ölçüm): `bootstrap.sh`
 hedef ortamda koşuyor (2/5–5/5 geçti) · Python 3.12.3 ile zincir 17/17 ·
 `f4_api_v2.py` anahtarı `os.environ`'dan okuyor (`--anahtar-env`, varsayılan
-`LLM_API_KEY`) — GECIS_LINUX.md §2.7'nin açık kalemi kapandı.
+`LLM_API_KEY`) — GECIS_LINUX.md §2.7'nin açık kalemi kapandı · `ollama_kur.sh`
+koştu (kütük #15) ve yeni Ollama tabanı ilan edildi (kütük #16).
 
 ## 6. Değişmeyen kurallar
 

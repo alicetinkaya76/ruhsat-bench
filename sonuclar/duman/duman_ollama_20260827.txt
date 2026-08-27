@@ -1,0 +1,42 @@
+# RUHSAT-Bench — OLLAMA DUMAN TESTI (TF-HPC)
+
+tarih : 2026-08-27T08:38:22Z
+ortam : /workspace/ruhsat-bench · Ubuntu 24.04.1 · ollama 0.32.14
+gpu   : Quadro RTX 8000, CUDA compute 7.5, 47.1 GiB kullanilabilir
+
+## Bu DUMAN TESTIDIR — uretim kolu DEGILDIR
+
+10 iddia x 2 kosul = 20 cagri, tek model (llama3.2:3b-instruct-q8_0),
+varyant A. Amaci projenin KENDI kosucusunun (scripts/f4_kos.py) Ollama'ya
+baglandigini ve determinizm kuralinin bu ortamda da tuttugunu gostermek.
+Hicbir makale sayisi buradan alinmaz.
+
+## Kurulum olcumleri
+
+| | olculen |
+|---|---|
+| ollama surumu | 0.32.14 (sha256 c620917a... dogrulandi, 1,3 GB .tar.zst) |
+| hizlandirici  | CUDA, compute 7.5, Quadro RTX 8000, 47.1 GiB |
+| model dizini  | /workspace/ollama/models -> ext4 blok cihaz (overlay DEGIL), 38 GB |
+| modeller      | qwen2.5:32b-instruct · gemma3:27b · llama3.2:3b-instruct-q8_0 (3/3, 0 hata) |
+| sunucu        | 127.0.0.1:11434, setsid nohup altinda |
+
+## Determinizm (ORTAM.md 3'un bu ortamdaki karsiligi)
+
+Ayni girdi, temperature 0, sabit seed, IKI AYRI kosu:
+  ortak kayit 20 · birebir ayni 20 · fark 0  -> DETERMINISTIK
+Karsilastirilan alanlar: karar, guven, ham, durum.
+Veri: sonuclar/duman/duman_k1.jsonl, duman_k2.jsonl
+
+durum dagilimi: tamam 19, ayristirilamadi 1
+karar dagilimi: YANLIS 11, DOGRU 8, (ayristirilamayan) 1
+
+Not: 'ayristirilamadi' kutuk #9'un KESILEN'den ayirdigi kategoridir;
+duman testinde beklenen bir sonuctur, kusur degildir.
+
+## BEYAN — yeni Ollama tabani
+
+Windows kosularinin Ollama surumu hicbir yerde kayitli degil (kutuk #16),
+bu yuzden eskisiyle eslesmek MUMKUN DEGIL. Yeni taban ILAN EDILIYOR:
+ollama 0.32.14. Bu ortamda uretilecek her yerel kol sonucu bu surumu
+tasir ve makalede beyan edilir (GECIS_LINUX.md 7).

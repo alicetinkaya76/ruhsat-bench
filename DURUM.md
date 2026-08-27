@@ -23,6 +23,8 @@ Bu dosya "şu an neredeyiz, sıradaki ne" sorusunu cevaplar. Tarihçe için
 | **TF-HPC'de 17/17** (Ubuntu 24.04.1, Python 3.12.3, pypdf 5.9.0) | `sonuclar/dogrulama_hpc_20260827.{txt,log}` |
 | Sürüm kayması **YOK**: 6 belgenin 6'sında `metin_sha256` birebir, Δkarakter 0 | `sonuclar/ortam_kayma_hpc.json` |
 | Kütük #5 daraltıldı: 870747/870751 ayrımı işletim sistemi değil, **pypdf sürümü** farkı | üç ortamda TBDY = 870747 |
+| **Ollama 0.32.14 kuruldu**, CUDA görüyor, 3 model (38 GB) | `sonuclar/duman/duman_ollama_20260827.txt` |
+| Uçtan uca duman testi: `f4_kos.py` iki koşuda **20/20 birebir** (deterministik) | `sonuclar/duman/duman_k{1,2}.jsonl` |
 | `ortam_kayma.py` **pozitif kontrolden geçti** (planlanmış +252 karakter sapması yakalandı, çıkış 2) | bu oturumda koşuldu |
 | `f4_api_v2.py` yamadan yeniden üretildi (4/4 yama, özdoğrulama geçti) | commit `75d3bde` |
 | GECIS_LINUX.md §2.7 açık kalemi **kapandı**: anahtar zaten ortam değişkeninden okunuyor (`--anahtar-env`, varsayılan `LLM_API_KEY`) | `scripts/f4_api_v2.py:222` |
@@ -42,12 +44,14 @@ etiketi atıldı. Kodu tazelemek için:
 cd ~/Desktop/ruhsat-bench && .venv/bin/python -m hpc.deploy --sadece-gonder
 ```
 
-Kalan tek kurulum adımı Ollama (yerel model kolları; **hedef ortamda henüz
-denenmedi**, kütük #15):
+Ollama da kuruldu ve duman testinden geçti. 18 modelin tamamı gerekirse
+(disk: 278 GB boş):
 
 ```bash
-cd ~/Desktop/ruhsat-bench && .venv/bin/python -m hpc.deploy --ollama
+cd ~/Desktop/ruhsat-bench && .venv/bin/python -m hpc.remote nohup "cd /workspace/ruhsat-bench && bash hpc/remote_scripts/ollama_kur.sh --tam" --log /workspace/logs/ollama_tam.log
 ```
+
+**Kurulum bitti. Sıradaki iş bilimsel: HANDOVER §4.**
 
 ## 4. Bundan sonra — HANDOVER §4 görevleri
 

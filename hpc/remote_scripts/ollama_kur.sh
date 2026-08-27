@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # hpc/remote_scripts/ollama_kur.sh — Ollama kurulumu + model çekme. [KONTEYNERDE ÇALIŞIR]
 #
-# ⚠ BU BETİK HENÜZ HEDEF ORTAMDA KOŞULMADI (2026-08-27).
-#   Belgeden yazıldı, ÖLÇÜLMEDİ. Projenin kuralı "ölçülmeyeni varsayma" olduğu için
-#   bu uyarı ilk başarılı koşuya kadar burada kalır; koşunca çıktı hpc/README.md'ye
-#   ölçüm olarak yazılır ve bu blok silinir.
+# KOŞULDU ve ÖLÇÜLDÜ (2026-08-27, TF-HPC konteyneri):
+#   ollama 0.32.14 · sha256 doğrulandı · CUDA compute 7.5, Quadro RTX 8000, 47,1 GiB
+#   3/3 model çekildi, 0 hata, model dizini 38 GB, ext4 (overlay değil)
+#   Uçtan uca duman testi: scripts/f4_kos.py iki koşuda 20/20 BİREBİR (deterministik)
+#   Kanıt: sonuclar/duman/duman_ollama_20260827.txt
 #
 # TASARIM KARARLARI:
 #
