@@ -1,0 +1,27 @@
+== 1/6 korpus_kur ==
+  [TAMAM] birim sayisi 1366
+  [TAMAM] Kontrol A 440/441
+  [TAMAM] Kontrol B 473/473
+  [TAMAM] Kontrol C 120/120
+== 2/6 bent_bol ==
+  [TAMAM] yeni birim 1523
+  [TAMAM] kurtarma 0.9632 korunuyor
+  [TAMAM] 364 -> 15.3.1
+== 3/6 kural_taban (R3) ==
+  [TAMAM] R3 473/473
+== 4/6 negatif kontrol (5 tohum) ==
+  [TAMAM] tohum degeri 0.5137
+  [TAMAM] tohum degeri 0.5412
+  [TAMAM] tohum degeri 0.5201
+  [TAMAM] tohum degeri 0.5349
+== 5/6 uzlasi_birlestir ==
+  [TAMAM] v7a 223/250
+  [TAMAM] v7b 221/252
+== 6/6 etki_analizi ==
+  [TAMAM] etki ort 0.0046
+  [TAMAM] etki maks 0.0347
+  [TAMAM] sonnet E1 0.697->0.692
+
+================================================
+SONUC: 17 tamam, 0 hata
+Port dogrulandi: Linux ortami, Windows'ta olculen zincirle birebir.

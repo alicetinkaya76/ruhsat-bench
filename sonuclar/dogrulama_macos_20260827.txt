@@ -1,0 +1,12 @@
+# RUHSAT-Bench — rekonstruksiyon sonrasi ISLEVSEL dogrulama
+
+ortam : macOS 25.5 (darwin) · Python 3.11.9 · pypdf 5.9.0
+tarih : 2026-08-27T03:54:49Z
+commit: 80cf672
+
+SONUC : 17/17 — GECIS_LINUX.md 5'teki butun beklenen degerler birebir uretildi.
+
+NOT: bu KABUL TESTI DEGILDIR. Kabul testi Ubuntu 24 / Python 3.12.3'te kosulur
+     (referans olcum orada yapildi). Buradaki kosu Python 3.11.9 ile yapildi ve
+     yalnizca sunu kanitlar: paketlerden yeniden kurulan depo ISLEVSEL OLARAK
+     EKSIKSIZDIR — hicbir dosya, hicbir sayi kaybolmamistir.
