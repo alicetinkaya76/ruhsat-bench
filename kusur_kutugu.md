@@ -19,3 +19,16 @@ ortalama 0.0046, maks 0.0347; hiçbir niteliksel sonuç değişmedi
 | 8 | Sonda betiğinin hüküm kapısı fazla gevşekti (CI bandı kesişimi); B'nin kendi kol içi bandı yoktu | frontCB2 k1-3 ikilileri bandı verecek; analiz bekliyor | AÇIK — görev #4 içinde |
 | 9 | Kesilen ≠ ayrıştırılamayan (etiket önce yazılınca kesilme veri kaybettirmiyor) | Sonda: 3 kesilmenin 1'i kayıp | KÜTÜKTE — raporlamada iki sayaç ayrı verilecek |
 | 10 | `uretilen_iddialar_v6`'da `durum` sütunu ONAY_BEKLIYOR/YENI_EK ("frozen final" terminolojisiyle çelişiyor; denetim 1.18) | Kozmetik/terminoloji | KÜTÜKTE — v7a dondurulurken sütun güncellenmeli |
+
+---
+
+## Linux/TF-HPC geçişinde eklenenler (2026-08-27)
+
+| # | kusur | etki ölçümü | karar |
+|---|---|---|---|
+| 11 | Git geçmişi kayboldu: Windows deposu (`D:\jestech\ruhsat-bench`) erişilemez, `git bundle` alınamadı | Dosya içerikleri tam (17/17 koştu, mühürlü üreteç iki pakette aynı sha256). Kaybolan: commit tarih damgaları → ön-kayıt-önceliği git ile kanıtlanamaz | KAPANDI — `REKONSTRUKSIYON.md` beyanı yazıldı; makale cümlesi §7'de |
+| 12 | `f4_api_v2.py` hiçbir arşiv paketinde yoktu (HANDOVER dosya haritası depoda sayıyordu) | `yama_f4_api.py` ile deterministik yeniden üretildi; 4/4 yama, özdoğrulama geçti | KAPANDI |
+| 13 | `f4_api.py`/`v2` hata mesajı PowerShell biçiminde ipucu basıyor (`$env:LLM_API_KEY = ...`) | Kozmetik. Anahtar okuma zaten doğru: `os.environ.get(--anahtar-env)` | KÜTÜKTE — donmuş dosya, dokunulmuyor |
+| 14 | `uzlasi_birlestir.py` v7a/v7b'yi CRLF ile yazıyor (Linux'ta da) | İçerik etkilenmiyor (LF-normalize sonrası birebir aynı, ölçüldü); `.gitattributes` commit'te normalize ediyor | KÜTÜKTE — kovalanmıyor |
+| 15 | `ollama_kur.sh` hedef ortamda **hiç koşulmadı** (konteynerde systemd yok; tarball + `setsid nohup` yolu belgeden yazıldı) | Ölçülmedi. Deterministik zincir bundan etkilenmiyor | AÇIK — ilk `--ollama` koşusunda ölçülecek, betikteki uyarı bloğu o zaman silinir |
+| 16 | Windows koşularında kullanılan **Ollama sürümü hiçbir yerde kayıtlı değil** (`ORTAM.md` §8 model adlarını veriyor, sürümü vermiyor) | Ölçülemez (kaynak makine yok). GECIS_LINUX.md §7: model dosyalarının sürümler arası bayt-birebir aynı olacağı garanti değil | AÇIK — yerel kollar yeniden koşulursa yeni sürüm sonuç dosyalarına yazılıp beyan edilecek |
