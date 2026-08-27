@@ -64,7 +64,7 @@ def main() -> None:
                 print(f"   {f.name:10s} ATLANDI (yok)")
                 continue
             blob = f.read_bytes()
-            h.put_bytes(f"{REMOTE_ROOT}/{f.name}", blob)
+            h.put_bytes_parcali(f"{REMOTE_ROOT}/{f.name}", blob)
             toplam += len(blob)
             print(f"   {f.name:30s} {len(blob) / 1024:8.0f} KiB")
         print(f"   {'TOPLAM':30s} {toplam / 1048576:8.1f} MiB")

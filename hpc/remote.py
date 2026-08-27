@@ -49,6 +49,17 @@ ALLOWED_HOST = "tfhpc.selcuk.edu.tr"
 DEFAULT_URL = f"https://{ALLOWED_HOST}"
 REMOTE_ROOT = "/workspace/ruhsat-bench"
 
+# JupyterHub'in ONUNDEKI nginx yukleme boyutunu sinirliyor: 413 Request Entity
+# Too Large (nginx/1.18.0). Sinir 2026-08-27'de IKILI ARAMAYLA OLCULDU:
+#   704 KiB ham -> gecti · 768 KiB ham -> 413
+# 768 KiB'in base64'u tam 1024 KiB eder; yani nginx varsayilani client_max_body_size=1m.
+# MarkLLM bu duvara carpmadi cunku yalniz kucuk kod dizinleri gonderiyor, model
+# agirliklari HuggingFace'ten iniyordu. Burada kaynak PDF'ler ve arsiv jsonl'leri
+# YUKLENMEK ZORUNDA (25 MB), bu yuzden parcali yukleme sart.
+# 640 KiB secildi: olculerek gectigi bilinen en buyuk degerin altinda, base64'u
+# 853 KiB -> 1 MiB'lik gercek sinira ~170 KiB pay birakir.
+PARCA_HAM = 640 * 1024
+
 PROBE = r"""
 echo "=== GPU ==="
 nvidia-smi --query-gpu=index,name,memory.total,memory.used,utilization.gpu,driver_version --format=csv 2>&1 | head -10
@@ -172,7 +183,7 @@ class HPC:
             # env.sh TEK kaynak doğruluktur (bootstrap üretir). Buraya yol SABİT YAZMA:
             # önceki sürüm HF_HUB_CACHE'i /workspace/hf/hub sanıyordu, oysa önbellek
             # doğrudan /workspace/hf altında -> 52 GB'lık model yeniden indirilirdi.
-            cmd = "source /workspace/env.sh 2>/dev/null; " + cmd
+            cmd = f"source {REMOTE_ROOT}/env.sh 2>/dev/null; " + cmd
         # errors="replace": `tail -c N` bir UTF-8 karakterini ORTADAN kesebilir ve
         # text=True çözümlemesi UnicodeDecodeError ile TÜM çağrıyı düşürür (ölçüldü:
         # Türkçe log kuyruğu alınırken). Log izlemenin veri bozulmasından ölmemesi
@@ -196,7 +207,7 @@ class HPC:
         Bu, çekirdek hücresinde uzun iş çalıştırmaya tercih edilir: websocket kopunca
         çekirdek öldürülebilir, nohup'lanmış süreç öldürülmez.
         """
-        full = (f"source /workspace/env.sh 2>/dev/null; "
+        full = (f"source {REMOTE_ROOT}/env.sh 2>/dev/null; "
                 f"mkdir -p $(dirname {log}); "
                 f"setsid nohup bash -c {cmd!r} > {log} 2>&1 < /dev/null & echo $!")
         out, _, rc = self.sh(full, timeout=60)
@@ -229,6 +240,39 @@ class HPC:
             raise SystemExit(f"HATA: indirilemedi ({r.status_code}) {remote}\n  {r.text[:300]}")
         return base64.b64decode(r.json()["content"])
 
+    def put_bytes_parcali(self, remote: str, data: bytes) -> int:
+        """Boyut sinirini asan veriyi PARCALAR halinde yukle, uzakta birlestir.
+
+        Tek PUT nginx'in client_max_body_size'ina takilir (bkz. PARCA_HAM). Parcalar
+        `<ad>.part000` gibi adlandirilir, `cat` ile birlestirilir ve silinir.
+        Birlestirmeden sonra BOYUT DOGRULANIR: sessiz yarim yukleme, bozuk tar
+        olarak degil, burada hata olarak gorunmeli.
+        """
+        if len(data) <= PARCA_HAM:
+            self.put_bytes(remote, data)
+            return 1
+        parcalar = [data[i:i + PARCA_HAM] for i in range(0, len(data), PARCA_HAM)]
+        adlar = []
+        for i, p in enumerate(parcalar):
+            ad = f"{remote}.part{i:03d}"
+            self.put_bytes(ad, p)
+            adlar.append(ad)
+            print(f"    parca {i + 1}/{len(parcalar)}", end="\r", flush=True)
+        print(" " * 30, end="\r")
+        birlesik = " ".join(f"/workspace/{a}" for a in adlar)
+        out, err, rc = self.sh(
+            f"set -e; cat {birlesik} > /workspace/{remote}; rm -f {birlesik}; "
+            f"stat -c %s /workspace/{remote}", timeout=600)
+        if rc != 0:
+            raise SystemExit(f"HATA: parcalar birlestirilemedi (rc={rc})\n{out}\n{err}")
+        try:
+            uzak_boyut = int(out.strip().splitlines()[-1])
+        except (ValueError, IndexError):
+            raise SystemExit(f"HATA: birlesik dosya boyutu okunamadi: {out!r}")
+        if uzak_boyut != len(data):
+            raise SystemExit(f"HATA: boyut tutmuyor — yerel {len(data)}, uzak {uzak_boyut}")
+        return len(parcalar)
+
     def push_dir(self, local: Path, dest_parent: str, arcname: str | None = None) -> int:
         """Dizini TEK tar olarak gönder ve aç.
 
@@ -244,7 +288,9 @@ class HPC:
                    filter=lambda ti: None if any(p in ti.name for p in skip) else ti)
         blob = buf.getvalue()
         tmp = f"_push_{name}.tar.gz"          # nokta ile BAŞLAMAZ (bkz. put_bytes)
-        self.put_bytes(tmp, blob)
+        n_parca = self.put_bytes_parcali(tmp, blob)
+        if n_parca > 1:
+            print(f"    {n_parca} parca halinde yuklendi (nginx 1 MiB siniri)")
         out, err, rc = self.sh(
             f"set -e; mkdir -p {dest_parent}; "
             f"tar xzf /workspace/{tmp} -C {dest_parent}; rm -f /workspace/{tmp}")

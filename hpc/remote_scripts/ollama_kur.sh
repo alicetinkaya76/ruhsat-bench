@@ -68,12 +68,12 @@ TAM=(
 say "1/4  ortam"
 mkdir -p "$OL"/{bin,models,logs}
 # env.sh bootstrap.sh tarafından üretilir; yoksa burada tamamla (idempotent).
-if [ -f "$WS/env.sh" ]; then
+if [ -f "$WS/ruhsat-bench/env.sh" ]; then
   # shellcheck disable=SC1091
-  source "$WS/env.sh"
+  source "$WS/ruhsat-bench/env.sh"     # MarkLLM'in /workspace/env.sh'i DEGIL
 else
   export OLLAMA_MODELS="$OL/models" OLLAMA_HOST=127.0.0.1:11434 PATH="$OL/bin:$PATH"
-  echo "  UYARI: /workspace/env.sh yok — önce bootstrap.sh koşulmalı"
+  echo "  UYARI: /workspace/ruhsat-bench/env.sh yok — önce bootstrap.sh koşulmalı"
 fi
 echo "  OLLAMA_MODELS=$OLLAMA_MODELS"
 echo "  OLLAMA_HOST=$OLLAMA_HOST"

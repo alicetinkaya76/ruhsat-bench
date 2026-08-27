@@ -38,18 +38,24 @@ say() { printf '\n\033[1m== %s\033[0m\n' "$*"; }
 # ---------------------------------------------------------------- 1. dizinler + ortam
 say "1/5  kalıcı dizinler ve ortam değişkenleri"
 mkdir -p "$WS"/{logs,ollama} "$REPO"
-cat > "$WS/env.sh" <<'EOF'
-# /workspace/env.sh — her oturumda source edilmeli. bootstrap.sh üretir.
-# TEK KAYNAK DOĞRULUK: yol sabitleri buradan okunur, betiklere gömülmez.
-export OLLAMA_MODELS=/workspace/ollama/models   # overlay DEĞİL: yeniden başlatmada korunur
-export OLLAMA_HOST=127.0.0.1:11434              # localhost DEĞİL (ORTAM.md 2.1: ×4.2 yavaşlama)
+# ⚠ /workspace/env.sh'e YAZMIYORUZ. O dosya MarkLLM'in (2026-08-19) ve ~/.bashrc onu
+#   source ediyor; uzerine yazmak HF_HOME, TRANSFORMERS_CACHE ve PYTHONPATH'ini
+#   silerdi -- yani PAYLASILAN konteynerdeki DIGER projeyi bozardik. Olculdu:
+#   deploy oncesi `ls /workspace` env.sh'i 19 Ağu tarihli buldu. Kendi ortamimiz
+#   depo altinda yasar; MarkLLM'in dosyasina ve ~/.bashrc satirina DOKUNULMAZ.
+cat > "$REPO/env.sh" <<'EOF'
+# /workspace/ruhsat-bench/env.sh — bu depo icin ortam. bootstrap.sh uretir.
+# TEK KAYNAK DOGRULUK: yol sabitleri buradan okunur, betiklere gomulmez.
+# MarkLLM'in /workspace/env.sh'inden AYRIDIR ve onu ezmez; ikisi yan yana yasar.
+export OLLAMA_MODELS=/workspace/ollama/models   # overlay DEGIL: yeniden baslatmada korunur
+export OLLAMA_HOST=127.0.0.1:11434              # localhost DEGIL (ORTAM.md 2.1: x4.2 yavaslama)
 export PATH=/workspace/ollama/bin:/workspace/ruhsat-bench/.venv/bin:$PATH
 export PYTHONUNBUFFERED=1
 EOF
-grep -q "workspace/env.sh" ~/.bashrc 2>/dev/null || echo 'source /workspace/env.sh' >> ~/.bashrc
 # shellcheck disable=SC1091
-source "$WS/env.sh"
-echo "  OLLAMA_MODELS=$OLLAMA_MODELS  (overlay DEĞİL)"
+source "$REPO/env.sh"
+echo "  ortam dosyasi: $REPO/env.sh  (MarkLLM'in /workspace/env.sh'i KORUNDU)"
+echo "  OLLAMA_MODELS=$OLLAMA_MODELS  (overlay DEGIL)"
 
 # ---------------------------------------------------------------- 2. disk
 say "2/5  disk (mount seçeneklerinde usrquota,grpquota var; değer okunamıyor)"
@@ -123,7 +129,7 @@ echo "  derlenemeyen betik: $BOZUK"
 say "KURULUM TAMAM"
 cat <<EOF
   depo   : $REPO
-  venv   : $REPO/.venv          (source /workspace/env.sh)
+  venv   : $REPO/.venv          (source $REPO/env.sh)
   loglar : $WS/logs
 
   SIRADAKİ ADIM — KABUL KAPISI (17/17 görülmeden yeni koşu başlatma):
