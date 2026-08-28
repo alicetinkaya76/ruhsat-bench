@@ -1,0 +1,70 @@
+# RUHSAT-Bench — frontCA32_bugun SONUCU (EK-7 karar kurali uygulandi)
+tarih : 2026-08-28T19:41:30Z
+kosu  : claude-sonnet-5 · varyant A · max_token 32 · dusunme kapali
+        946 cagri · kesilen 0 · dusunme token 0
+
+## 1. EK-7'NIN KARAR KURALI (kosudan ONCE sabitlenmisti)
+
+  (a) BAcc [0.6796, 0.6986] araliginda -> BUTCE ETKISI
+  (b) BAcc <= 0.66                     -> SURUM KAYMASI
+  (c) arada                            -> AYRIM YAPILAMAZ
+
+## 2. SONUC
+
+  arsiv A@32 k1/k2/k3   BAcc 0.6832 · 0.6796 · 0.6986   -> [0.6796, 0.6986]
+  A@128 (eski gun)      BAcc 0.6395
+  >> A@32 BUGUN         BAcc 0.6422
+
+HUKUM: (b) SURUM KAYMASI.
+
+Bugunku model, ESKI BUTCEDE (32) de dusuk. A@128'in dususu BUTCEYE
+BAGLANAMAZ. HANDOVER 7'nin dallanmasi KAPANDI.
+
+## 3. ASIL BULGU — KAYMA E1'DE, E2'DE YOK
+
+                      E1        E2
+  arsiv A@32 araligi  [0.6796, 0.6986]   [0.6012, 0.6220]
+  A@32 BUGUN          0.6422             0.6090
+  hukum               ARALIK DISI        ARALIK ICI
+
+Zorunlu secimde (E2) model ESKISI GIBI. Kayma yalnizca kacinmanin
+serbest oldugu kolda.
+
+## 4. KACINMA ORANI DEGISMEDI, SECICILIGI DUSTU
+
+  kosu              E1      E2   KAZANC  kacinma
+  arsiv A@32 k1   0.6832  0.6097  0.0735     181
+  arsiv A@32 k2   0.6796  0.6012  0.0784     184
+  arsiv A@32 k3   0.6986  0.6220  0.0767     182
+  A@128 (eski)    0.6395  0.6175  0.0220     184
+  A@32 BUGUN      0.6422  0.6090  0.0332     178
+
+  arsiv kazanc araligi : [0.0735, 0.0784]  ortalama 0.0762
+  bugun                : 0.0332  -> ARALIK DISI, arsivin %44'u
+
+Model AYNI SIKLIKTA kaciniyor (178-184, hepsi ayni bantta) ama kacinma
+artik yarisindan az fayda saglıyor. Yani DEGISEN SEY, NE KADAR
+kacindigi degil, HANGI maddelerde kacindigidir: kacinmanin SECICILIGI
+dusmustur.
+
+## 5. NEDEN ONEMLI
+
+Bu kiyaslama kumesinin olcmek icin kuruldugu sey tam olarak budur.
+Zorunlu-secim degerlendirmesi (E2) bu gerilemeyi GORMEZDI: E2 sayilari
+arsiv araliginda. Gerileme yalnizca kacinma serbest birakildiginda
+gorunuyor.
+
+Donmus bir kiyaslama kumesi + korunmus arsiv kosulari, bir yetenek
+gerilemesini ZAMAN ICINDE tespit etti. Bu, makalenin savundugu
+degerlendirme bicimi icin dogrudan kanittir.
+
+## 6. SINIRLAR (iddia edilmiyor)
+
+  * Tek kosu. Arsiv tarafinda 3 kosu var, bugun 1. Kol ici band bugun
+    icin OLCULMEDI; tek kosu tek kosuyla karsilastirildi.
+  * "Surum kaymasi" ifadesi MODEL SURUMUNU degil, saglayicinin
+    claude-sonnet-5 arkasinda ne sunduğunun ZAMAN ICINDE degistigini
+    soyler. Hangi surumun kosuldugu API'den okunamadi.
+  * Arada gecen sure ve saglayici tarafindaki degisiklikler bilinmiyor.
+  * E1/E2 farkinin mekanizmasi OLCULMEDI (hangi maddelerde kacinmanin
+    kaydigi ayri bir analiz konusudur; durma kurali geregi kovalanmadi).

@@ -107,3 +107,11 @@ koşularından **farklı bir günde** koşulduğu için tarih ve bütçe karış
 
 **Yan bulgu:** B@128 (0.6992–0.7172) A@32'den (0.6796–0.6986) yüksek ve fark kol içi
 gürültünün dışında. Varyant B, varyant A'dan iyi performans veriyor.
+
+### frontCA32_bugun sonucu (2026-08-28)
+
+| # | kayit | ölçüm | karar |
+|---|---|---|---|
+| 32 | **`claude-sonnet-5` arkasındaki davranış zaman içinde DEĞİŞTİ.** EK-7'nin koşudan önce sabitlenen kuralı: BAcc ≤ 0.66 → sürüm kayması | **ÖLÇÜLDÜ:** arşiv A@32 [0.6796, 0.6986] · A@32 **bugün 0.6422** → aralık dışı, eşik altı. A@128'in düşüşü (0.6395) **bütçeye bağlanamaz** | **HANDOVER §7 dallanması KAPANDI** — sürüm kayması. Arşiv ve yeni koşular aynı tabloda karşılaştırılamaz; makalede beyan edilmeli |
+| 33 | Kayma **yalnız E1'de**; E2 etkilenmemiş | arşiv E2 [0.6012, 0.6220] · bugün **0.6090 → aralık İÇİ**. Kaçınma oranı da değişmemiş (arşiv 181/184/182, bugün 178) | KAYIT — zorunlu seçim korunmuş, kaçınma kolu gerilemiş |
+| 34 | **Kaçınmanın seçiciliği yarıya düştü.** BAcc(E1)−BAcc(E2) kazancı | arşiv [0.0735, 0.0784] ort **0.0762** · bugün **0.0332** = arşivin **%44'ü**, aralık dışı | KAYIT — makalenin ana savı için doğrudan kanıt: zorunlu-seçim değerlendirmesi bu gerilemeyi GÖRMEZDİ |
