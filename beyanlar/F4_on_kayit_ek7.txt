@@ -1,0 +1,83 @@
+RUHSAT-Bench — ON KAYIT EK-7  (frontCA32_bugun, KOSUDAN ONCE)
+==============================================================
+Tarih  : 28.08.2026
+Durum  : Bu ek, frontCA32_bugun kosusundan ONCE yazildi ve commit'lendi.
+         Hicbir API cagrisi yapilmamistir.
+Kapsam : Tek bir replikasyon kosusu. EK-4'un kollarini, karsilastirmalarini
+         ya da gecersizlik sartlarini DEGISTIRMEZ.
+
+
+1. NEDEN BU KOSU
+----------------
+HANDOVER 7 bir dallanma birakmisti: Sonnet-A @128 tek kosu BAcc 0.64 verdi
+ve bu, arsivdeki A@32 araliginin disindaydi. Soru: SURUM KAYMASI mi, BUTCE
+ETKISI mi?
+
+28.08.2026'da olculdu (sonuclar/gorev4_raporu.txt 5):
+
+    A@32  frontC_k1/k2/k3   0.6832 · 0.6796 · 0.6986   -> [0.6796, 0.6986]
+    A@128 frontCA128_k1     0.6395                     -> ARALIK DISINDA
+    B@128 frontCB2_k1/k2/k3 0.7172 · 0.7027 · 0.6992   -> [0.6992, 0.7172]
+
+Ayrica uyusma ekseninde:
+    A@32 kol ici        [0.9017, 0.9133]
+    A@128 x A@32        [0.8985, 0.9038]   -> band ile ORTUSUYOR
+
+Yani KARARLAR kol ici gurultuden ayirt edilemiyor ama BAcc ayirt ediliyor.
+Bu celiski degildir (az sayida donme tek sinifta yogunlasabilir) ama
+COZULMEMISTIR: A@128, arsiv A@32 kosularindan FARKLI BIR GUNDE kosuldu.
+TARIH ile BUTCE KARISIKTIR (confounded).
+
+
+2. KOSU (tek degisken: BUTCE)
+-----------------------------
+    model      claude-sonnet-5
+    varyant    A            (arsiv A kollariyla ayni)
+    max_token  32           (arsiv A@32 ile ayni)
+    dusunme    kapali       (ORTAM.md 4: varsayilan ACIK, kapatilmazsa
+                             butce dusunmeye gider ve text blogu olusmaz)
+    sicaklik   gonderilmez  (ORTAM.md 4: sonnet KABUL ETMIYOR, 400 doner)
+    n          473 iddia x 2 kosul = 946 cagri
+    cikti      sonuclar/frontCA32_bugun.jsonl
+
+Arsiv A@32 kosularindan TEK FARKI TARIHTIR. Bu yuzden:
+
+    frontCA32_bugun ~ arsiv A@32 araliginda cikarsa
+        -> BUGUNKU model, ESKI butcede eskisi gibi davraniyor
+        -> A@128'in dususu BUTCE ETKISIDIR
+
+    frontCA32_bugun arsiv araliginin ALTINDA cikarsa (0.64 civari)
+        -> BUGUNKU model eski butcede de dusuk
+        -> SURUM KAYMASIDIR; A@128'in dususu butceye baglanamaz
+
+
+3. KARAR KURALI (kosudan ONCE sabitlendi)
+-----------------------------------------
+Karsilastirma ESIT GRANULERLIKTE yapilir: tek kosu x tek kosu.
+Referans band, arsiv A@32'nin UC kosusunun BAcc araligidir [0.6796, 0.6986].
+
+    (a) BAcc, [0.6796, 0.6986] araliginda            -> BUTCE ETKISI
+    (b) BAcc <= 0.66                                  -> SURUM KAYMASI
+    (c) arada (0.66 - 0.6796)                         -> AYRIM YAPILAMAZ;
+        rapor edilir, ek kosu ONERILIR, zorlanmaz
+
+0.66 esigi arsiv alt siniri (0.6796) ile A@128 (0.6395) arasinin yaklasik
+orta noktasidir. DISSAL OLARAK GEREKCELENDIRILMIS DEGILDIR ve boyle yazilir.
+Esik kosu SONRASI DEGISTIRILMEYECEKTIR.
+
+
+4. GECERSIZLIK SARTLARI (EK-4 10 ile ayni ailede)
+--------------------------------------------------
+  * Kesilen yanit orani %1'i asarsa kosu gecersizdir.
+    (ORTAM.md: A kolunda @32 kesilme %0.11 olculmustu; B'de %3.75.)
+  * "dusunme 0" dogrulamasi basilmazsa kol birincil sayilmaz.
+  * Determinizm garanti DEGILDIR (ORTAM.md 4): tek kosu tek kosuyla
+    karsilastirilir; cogunluk oyu ile KARSILASTIRILMAZ.
+
+
+5. BU KOSUNUN YAPMADIGI
+-----------------------
+Bu kosu F5 dayanakli frontier kollarini (R1/R2) BASLATMAZ. O kollar
+ERTELENMISTIR: korpus henuz dondurulmadi (17 acik vaka, kutuk #26) ve
+tarihci karari sonrasi yeniden kosmak gerekebilir. Once korpus donar,
+sonra dayanakli frontier kollari kosulur.
