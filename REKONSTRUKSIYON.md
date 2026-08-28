@@ -55,6 +55,7 @@ Depo, kullanıcının Mac'inde duran **paket arşivlerinden yeniden kuruldu**.
 | `RUHSAT-Bench_teslim_paketi.zip` | `fc343dfc8fb9fc8ea85502b63ceeea14fd196ec16ab3693d2981f0dde6d590da` | 2026-08-01 | `ORTAM.md`, makale taslakları, üçüncü göz istemi |
 | `RUHSAT_uzlasi_paketi.zip` | `b410b5f118d57d68a2f2640ad8eb890a9bed1b14c99f310c8440a80634f4ed53` | 2026-08-02 | boş uzlaşı kitabı şablonu |
 | `RUHSAT-Bench_claude_devir_20260802.zip` | `fa116f6acf83b0f1144e8df9b4cb7041eb3f2fe8486b8ae819f3ad294e18c562` | (yeniden damgalı) | 15 yeni betik, EK-4/EK-5, v7a/v7b altın, `GECIS_LINUX.md`, `HANDOVER.md`, `kusur_kutugu.md` |
+| `yeni_sonuclar.zip` | ``a6169bb2b4fb9f5cfde47d5a9c30a3e0bbf4875ae988ffb2e686f6087ffdfdfd`` | 2026-08-02 | P0-1 onarimi sonrasi kosular: `frontCB2_k1..3` (Sonnet-B @128 ×3), `frontCA128_k1` (Sonnet-A @128), `r3_kural` — 28.08.2026'da eklendi |
 
 Zip'lenmemiş, tekil indirilen dosyalar (mtime 2026-08-02):
 
