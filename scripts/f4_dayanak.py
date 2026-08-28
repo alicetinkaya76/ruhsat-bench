@@ -274,7 +274,10 @@ def main():
                     help="LLM CAGIRMA; istem hash'lerini ve getirimi bas")
     a = ap.parse_args()
 
-    if not a.kuru and not a.models:
+    # R3bm25 LLM KULLANMAZ; yalniz o kol istendiyse --models GEREKMEZ.
+    # (Ilk uretim kosusunda bu kontrol R3bm25 adimini dusurdu — olculdu.)
+    llm_gerek = any(k in ("R1", "R2") for k in a.kol)
+    if not a.kuru and llm_gerek and not a.models:
         print("! --models verilmedi. LLM'siz calistirmak icin --kuru kullanin.")
         sys.exit(1)
 
