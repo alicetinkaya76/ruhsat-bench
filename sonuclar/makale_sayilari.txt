@@ -163,3 +163,42 @@ OLMAYAN hicbir sayi kullanilmaz.
   birinci gecis ornegi: 158 kod
   baglamsal kusur orani (prob bazli, ilk gecis): P1 0/22, P2 0/17,
     P3 0/15, P4 0/12, P5 0/16  (hepsi %0, GA ust sinirlari %14.9-%24.3)
+
+==========================================================================
+## DUZELTMELER — 2. TUR DENETIMI (28.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D1 — Delta ON KAYITLI DEGIL, KESIFSELDIR
+  F4_on_kayit_ek.txt 3. bolum basligi harfiyen:
+    '3. EKLENEN ANALIZ (KESIFSEL, ON KAYITTA YOKTU)'
+  ve son satiri: 'KESIFSEL olarak isaretlenir; coklu karsilastirma
+  duzeltmesi uygulanmaz.'
+  => Makalede Delta'ya ASLA 'pre-registered' DENMEZ. 'Exploratory,
+     added in EK-1 after the main pre-registration' diye yazilir.
+
+### D2 — BONFERRONI DUZELTMESI ZORUNLU (ana on kayit md.1)
+  F4_on_kayit.txt: 'Coklu karsilastirma: model sayisi uzerinden Bonferroni.'
+  18 model, alpha=0.05 -> hucre basina 0.00278 (%99.72 GA)
+
+  DUZELTILMEMIS %95 GA ile 0.5'i dislayan: 4 model
+  BONFERRONI SONRASI 0.5'i dislayan       : 2 model
+
+  model                          BAcc   %95 alt  Bonf alt  kapsam
+  qwen2.5:32b-instruct         0.6769    0.5820    0.5349   0.173  -> DISLIYOR
+  gemma3:27b                   0.5674    0.5235    0.5017   0.970  -> DISLIYOR (KIL PAYI)
+  llama3.2:3b-instruct-q8_0    0.5509    0.5077    0.4878   0.884  -> dislamiyor
+  gemma3:12b                   0.5493    0.5136    0.4915   0.987  -> dislamiyor
+
+  !! MANSET DUZELTILMELI: 'dort model' -> 'duzeltilmemis GA ile dort,
+     on-kayitli Bonferroni duzeltmesinden sonra IKI; ve ikincisinin
+     alt siniri 0.5017, yani KIL PAYI.'
+  (bootstrap 4000 yeniden orneklem, kume=kanun+madde, tohum 42)
+
+### D3 — ASGARI KAPSAM ESIGI: on kayit DUZELTILDI, kapsam KAPI DEGIL
+  Ana on kayit md.3: '%80'inden azina cevap verirse puanlanmaz'
+  EK-1 1: '%80 esigi YANIT ORANINA uygulanir. TAAHHUT ORANI BIR KAPI DEGIL'
+  EK-1 2: dogruluk turu metrikler TAAHHUT >= 30 olan hucrelerde raporlanir
+  => qwen2.5:32b (kapsam 0.173 = 82 taahhut) 30'un USTUNDE, RAPORLANIR.
+     'On-kayitli asgari kapsam esiginin altinda' demek YANLIStir.
+  => Ana on kayit ile EK-1 arasindaki bu SAPMA makalede ACIKLANMALIDIR
+     (EK-1'in kendisi 'yine de sapmadir ve makalede belirtilir' diyor).

@@ -130,3 +130,15 @@ istemleri yama öncesi/sonrası bayt-birebir** (E1 `8a8ef386b0b2b619`, E2 `64ded
 SINIR: arşiv koşuları hiç hash taşımıyor; özdeşlik kayıttan değil **arşiv kaynak kodundan**
 yeniden türetildi. Makalede böyle yazılmalı; "bizim tarafımızda hiçbir şey değişmedi"
 cümlesi bu hâliyle savunulamaz.
+
+### 2. tur makale denetimi (2026-08-28) — yine asistan hatalari
+
+| # | kusur | ölçüm | karar |
+|---|---|---|---|
+| 38 | **Δ ölçütü "ön-kayıtlı" diye etiketlendi — DEĞİL.** `F4_on_kayit_ek.txt` §3 başlığı harfiyen *"EKLENEN ANALIZ (KESIFSEL, ON KAYITTA YOKTU)"* ve son satırı *"KESIFSEL olarak isaretlenir"* | Taslakta üç yerde "pre-registered Δ" yazıyordu. Asistan bunu hem ajan talimatında hem kullanıcıya bildirimde yanlış etiketledi | **KAPANDI** — çizelgeye D1 düzeltmesi yazıldı. Post-hoc analizi ön-kayıtlı sunmak makale geri çektirir |
+| 39 | **Bonferroni düzeltmesi atlandı.** Ana ön-kayıt §1: *"Çoklu karşılaştırma: model sayısı üzerinden Bonferroni"* | **ÖLÇÜLDÜ:** düzeltilmemiş %95 GA ile 0.5'i dışlayan **4** model; Bonferroni (18 model, %99.72 GA) sonrası **2** — ve ikincisinin (`gemma3:27b`) alt sınırı **0.5017**, kıl payı | **KAPANDI** — manşet düzeltilecek |
+| 40 | Taslak `qwen2.5:32b`'yi *"ön-kayıtlı asgari kapsam eşiğinin altında, protokole uyumsuz"* ilan etti | EK-1 §1 kapsamı KAPI OLMAKTAN ÇIKARMIŞ (*"taahhüt oranı bir kapı değil"*), EK-1 §2 eşiği taahhüt ≥ 30 yapmış. 82 taahhüt > 30 → **raporlanır** | **KAPANDI** — uygunsuz sonucu olmayan bir kuralla eleme girişimiydi |
+
+**Ayrıca açıklanmamış ön-kayıt sapması:** ana ön-kayıt §3'ün eşik tanımı EK-1 §1'de
+koşu SONRASI değiştirildi. EK-1 kendisi *"yine de sapmadır ve makalede belirtilir"*
+diyor; taslakta belirtilmiyor. Makaleye girmeli.
