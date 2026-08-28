@@ -202,3 +202,44 @@ OLMAYAN hicbir sayi kullanilmaz.
      'On-kayitli asgari kapsam esiginin altinda' demek YANLIStir.
   => Ana on kayit ile EK-1 arasindaki bu SAPMA makalede ACIKLANMALIDIR
      (EK-1'in kendisi 'yine de sapmadir ve makalede belirtilir' diyor).
+
+==========================================================================
+## F5 DAYANAKLI KOLLAR — KOSULDU (29.08.2026, TF-HPC)
+==========================================================================
+  model  : qwen2.5:32b-instruct   korpus: korpus_v2 (EK-6 birincil) + v7a
+  3 kosu + COGUNLUK OYU · max_token 128 · KESILEN 0/1524 (her kosuda)
+
+  kol       kosul     n   kapsam     BAcc  dogruluk  lambda
+  R1        E1      289    0.830   0.9164    0.9208   0.987
+  R1        E2      289    1.000   0.8615    0.8720   0.988
+  R2        E1      473    0.899   0.8229    0.8235   0.804
+  R2        E2      473    1.000   0.8100    0.8161   0.829
+  R3bm25    -       473    1.000   0.5938    0.5877  -0.043
+
+  R0 (kapali kitap, ayni model) E1: BAcc 0.6769  kapsam 0.173
+  R0 (kapali kitap, ayni model) E2: BAcc 0.5493  kapsam 1.000
+
+  MANSET (HANDOVER 3): R2 - R3bm25
+    E1: 0.8229 - 0.5938 = +0.2292
+    E2: 0.8100 - 0.5938 = +0.2162
+    Yorum: AYNI getirilen pasajlar verildiginde LLM, dizgi eslestirmeye
+    ~22 puan katiyor.
+
+  R1 (tavan) - R2 (getirim): E1 +0.0935 · E2 +0.0515
+    Yorum: kusursuz atif yerine BM25 kullanmanin maliyeti.
+
+  !! DIKKAT: R2 geri cagirmasi yalnizca 0.2734 oldugu halde R2 BAcc 0.82.
+     Yani R2'nin basarisi SAF GETIRIM kaynakli DEGILDIR; getirilen
+     pasajlar cogu zaman atif yapilan birim OLMASA DA yeterli oluyor
+     ya da model parametrik bilgisiyle tamamliyor. Bu ayrilmadi.
+
+### DAYANAKLI KOLLARIN KOL ICI BANDI — kutuk #29 DARALTILDI
+  qwen2.5:32b R1: [1.0000, 1.0000]   (3 ikili, 1524 cagri/kosu)
+  qwen2.5:32b R2: [1.0000, 1.0000]
+  => TAM DETERMINISTIK.
+
+  Kutuk #29 llama3.2:3b ile 17/20 olcmustu. Yani determinizm ihlali
+  DAYANAKLI ISTEME degil, O MODELE aittir. Ayni model bicim talimatini
+  da birakiyordu (kutuk #28). Iki bulgu ayni modele ait.
+  => 'Yerel dayanakli kollar 3 kosu gerektirir' ifadesi FAZLA GENIS.
+     qwen2.5:32b icin tek kosu yeterlidir (olculdu).
