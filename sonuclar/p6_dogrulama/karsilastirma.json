@@ -1,0 +1,292 @@
+[
+ {
+  "id": "200",
+  "kanun": "3194",
+  "madde": "8",
+  "sablon": "degisiklik",
+  "yil": 2020,
+  "altin": "DOGRU",
+  "resmi": [
+   2005,
+   2013,
+   2015,
+   2017,
+   2019,
+   2020
+  ],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "32",
+  "kanun": "3194",
+  "madde": "37",
+  "sablon": "hic-degismedi",
+  "yil": 1985,
+  "altin": "YANLIS",
+  "resmi": [
+   2019
+  ],
+  "beklenen": "YANLIS",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "508",
+  "kanun": "3194",
+  "madde": "40",
+  "sablon": "degisiklik",
+  "yil": 1986,
+  "altin": "YANLIS",
+  "resmi": [
+   2026
+  ],
+  "beklenen": "YANLIS",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "447",
+  "kanun": "3194",
+  "madde": "28",
+  "sablon": "degisiklik",
+  "yil": 2026,
+  "altin": "DOGRU",
+  "resmi": [
+   2009,
+   2020,
+   2026
+  ],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "408",
+  "kanun": "3194",
+  "madde": "44",
+  "sablon": "degisiklik",
+  "yil": 2026,
+  "altin": "DOGRU",
+  "resmi": [
+   1989,
+   2009,
+   2026
+  ],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "231",
+  "kanun": "3194",
+  "madde": "32",
+  "sablon": "degisiklik",
+  "yil": 2020,
+  "altin": "DOGRU",
+  "resmi": [
+   2018,
+   2020
+  ],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "149",
+  "kanun": "3194",
+  "madde": "42",
+  "sablon": "degisiklik",
+  "yil": 2026,
+  "altin": "DOGRU",
+  "resmi": [
+   2009,
+   2020,
+   2026
+  ],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "525",
+  "kanun": "4708",
+  "madde": "5",
+  "sablon": "degisiklik",
+  "yil": 2022,
+  "altin": "YANLIS",
+  "resmi": [
+   2011,
+   2013,
+   2024
+  ],
+  "beklenen": "YANLIS",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "534",
+  "kanun": "4708",
+  "madde": "10",
+  "sablon": "hic-degismedi",
+  "yil": 2001,
+  "altin": "DOGRU",
+  "resmi": [],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "541",
+  "kanun": "6331",
+  "madde": "23",
+  "sablon": "hic-degismedi",
+  "yil": 2012,
+  "altin": "DOGRU",
+  "resmi": [],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "103",
+  "kanun": "6331",
+  "madde": "25",
+  "sablon": "hic-degismedi",
+  "yil": 2012,
+  "altin": "YANLIS",
+  "resmi": [
+   2015
+  ],
+  "beklenen": "YANLIS",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "542",
+  "kanun": "6331",
+  "madde": "39",
+  "sablon": "hic-degismedi",
+  "yil": 2012,
+  "altin": "DOGRU",
+  "resmi": [],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "535",
+  "kanun": "6331",
+  "madde": "28",
+  "sablon": "hic-degismedi",
+  "yil": 2012,
+  "altin": "DOGRU",
+  "resmi": [],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "tabakali(tohum42)"
+ },
+ {
+  "id": "91",
+  "kanun": "4708",
+  "madde": "2",
+  "sablon": "degisiklik",
+  "yil": 2022,
+  "altin": "DOGRU",
+  "resmi": [
+   2011,
+   2015,
+   2018,
+   2022
+  ],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "ek(tohum43)"
+ },
+ {
+  "id": "316",
+  "kanun": "3194",
+  "madde": "9",
+  "sablon": "hic-degismedi",
+  "yil": 1985,
+  "altin": "YANLIS",
+  "resmi": [
+   1987,
+   1994,
+   1997,
+   2005
+  ],
+  "beklenen": "YANLIS",
+  "hukum": "UYUSTU",
+  "orneklem": "ek(tohum43)"
+ },
+ {
+  "id": "537",
+  "kanun": "6331",
+  "madde": "1",
+  "sablon": "hic-degismedi",
+  "yil": 2012,
+  "altin": "DOGRU",
+  "resmi": [],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "ek(tohum43)"
+ },
+ {
+  "id": "543",
+  "kanun": "3194",
+  "madde": "22",
+  "sablon": "hic-degismedi",
+  "yil": 1985,
+  "altin": "DOGRU",
+  "resmi": [],
+  "beklenen": "DOGRU",
+  "hukum": "UYUSTU",
+  "orneklem": "ek(tohum43)"
+ },
+ {
+  "id": "166",
+  "kanun": "4708",
+  "madde": "4",
+  "sablon": "hic-degismedi",
+  "yil": 2001,
+  "altin": "YANLIS",
+  "resmi": [
+   2011
+  ],
+  "beklenen": "YANLIS",
+  "hukum": "UYUSTU",
+  "orneklem": "ek(tohum43)"
+ },
+ {
+  "id": "512",
+  "kanun": "6331",
+  "madde": "2",
+  "sablon": "degisiklik",
+  "yil": 2017,
+  "altin": "YANLIS",
+  "resmi": [
+   2014
+  ],
+  "beklenen": "YANLIS",
+  "hukum": "UYUSTU",
+  "orneklem": "ek(tohum43)"
+ },
+ {
+  "id": "390",
+  "kanun": "3194",
+  "madde": "28",
+  "sablon": "hic-degismedi",
+  "yil": 1985,
+  "altin": "YANLIS",
+  "resmi": [
+   2009,
+   2020,
+   2026
+  ],
+  "beklenen": "YANLIS",
+  "hukum": "UYUSTU",
+  "orneklem": "ek(tohum43)"
+ }
+]

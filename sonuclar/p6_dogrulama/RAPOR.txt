@@ -1,0 +1,78 @@
+# RUHSAT-Bench — P6 BAGIMSIZ DOGRULAMA (EK-4 7'nin on sarti)
+tarih : 2026-08-28T19:17:24Z
+kaynak: mevzuat.gov.tr resmi konsolide HTML metni (T.C. Cumhurbaskanligi
+        Hukuk ve Mevzuat Genel Mudurlugu), tarayici uzerinden okundu
+
+## 1. NEDEN GEREKLI
+
+EK-4 7: "P6 serhlerinden 20 maddelik bir orneklem, resmi mukerrer metne karsi
+BAGIMSIZ olarak dogrulanacaktir. Bu dogrulama yapilmadan R3'un P6 sonucu
+makalede birincil bulgu olarak verilmez."
+
+Dairesellik: korpusun degisiklik_yillari alani ile CSV'nin degisiklik_notu
+alani AYNI regex'in AYNI PDF'lere uygulanmasindan gelir. Kontrol, serhlerin
+HUKUKEN dogru oldugunu gostermez.
+
+Bu dogrulama daireyi kirar: FARKLI KAYNAK (mevzuat.gov.tr HTML, bugun) ve
+FARKLI CIKARIM YOLU (tarayici innerText, pypdf DEGIL).
+
+## 2. SONUC
+
+  20/20 UYUSTU · 0 UYUSMADI
+
+Altin etiketler, resmi metinden bagimsiz olarak cikarilan serh yillariyla
+YIRMI MADDEDE DE tutarli.
+
+## 3. IKI ALT SABLON (ilk denememde KARISTIRDIM, kayda geciyor)
+
+P6'nin iki sablonu var ve kontrol kurallari FARKLI:
+
+  (a) "X maddesinde YYYY yilinda degisiklik yapilmistir"
+      -> resmi serh yillari YYYY'yi ICERIYOR mu?
+  (b) "X maddesi, ilk yayimlandigi YYYY yilindan bu yana hic degistirilmemistir"
+      -> resmi serh yili listesi BOS mu?
+
+Ilk denememde tek regex ile yil cekip hepsini (a) sandim; 4 madde YANLISLIKLA
+"UYUSMADI" cikti. Iddia metinlerine bakinca hatanin BENDE oldugu goruldu,
+altinda degil. Duzeltilince 13/13 uyustu. Bu, "olcume guven" kuralinin
+kendi analizime uygulanmasidir.
+
+## 4. ORNEKLEM VE CERCEVE KISITI (BEYAN)
+
+  tabakali orneklem (tohum 42) : 20 madde, 4 mevzuat
+    3194: 7 · YDUY: 7 · 6331: 4 · 4708: 2
+
+  ERISILEBILEN                 : 3194, 4708, 6331  -> 13 madde
+  ERISILEMEYEN                 : YDUY              ->  7 madde
+
+YDUY (Yapi Denetimi Uygulama Yonetmeligi) mevzuat.gov.tr'nin arama API'sinde
+makul surede BULUNAMADI (MevzuatTur=7 sorgu parametreleri arama ifadesini
+yok sayiyor, en yeni yonetmelikleri donduruyor). Tahminle numara denendi,
+404 alindi. UYDURULMADI.
+
+n=20'ye ulasmak icin ERISILEBILEN UC KANUNDAN 7 madde daha cekildi
+(AYRI tohum: 43). Bu bir CERCEVE KISITIDIR ve boyle raporlanir:
+
+  >> Dogrulama 20 madde uzerinde yapilmistir ancak orneklem cercevesi
+  >> UC KANUNLA (3194, 4708, 6331) SINIRLIDIR; YDUY bu dogrulamanin
+  >> DISINDADIR. YDUY'nin 43 P6 iddiasi icin serh dogrulugu SINANMAMISTIR.
+
+Bu sinir makalede yazilmalidir. YDUY'ye erisim saglanirsa dogrulama
+genisletilmelidir.
+
+## 5. CAPRAZ KONTROL — ayristirici tutarliligi
+
+Resmi HTML metni bizim ayristiricimizla bolundugunde:
+
+  3194  49 madde   (korpus: 49)   BIREBIR
+  4708  15 madde   (korpus: 15)   BIREBIR
+  6331  39 madde   (korpus: 39)   BIREBIR
+
+Madde sayilari uc kanunda da tutuyor. Bu, ayristiricinin resmi metnin
+madde sinirlarini dogru buldugunun bagimsiz gostergesidir.
+
+## 6. VERI
+
+  sonuclar/p6_dogrulama/karsilastirma.json   20 satir, madde madde
+  sonuclar/p6_dogrulama/resmi_yillar.json    resmi metinden cikarilan yillar
+  sonuclar/p6_dogrulama/resmi_3194.txt       resmi HTML metni (3194)
