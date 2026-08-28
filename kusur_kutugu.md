@@ -115,3 +115,18 @@ gürültünün dışında. Varyant B, varyant A'dan iyi performans veriyor.
 | 32 | **`claude-sonnet-5` arkasındaki davranış zaman içinde DEĞİŞTİ.** EK-7'nin koşudan önce sabitlenen kuralı: BAcc ≤ 0.66 → sürüm kayması | **ÖLÇÜLDÜ:** arşiv A@32 [0.6796, 0.6986] · A@32 **bugün 0.6422** → aralık dışı, eşik altı. A@128'in düşüşü (0.6395) **bütçeye bağlanamaz** | **HANDOVER §7 dallanması KAPANDI** — sürüm kayması. Arşiv ve yeni koşular aynı tabloda karşılaştırılamaz; makalede beyan edilmeli |
 | 33 | Kayma **yalnız E1'de**; E2 etkilenmemiş | arşiv E2 [0.6012, 0.6220] · bugün **0.6090 → aralık İÇİ**. Kaçınma oranı da değişmemiş (arşiv 181/184/182, bugün 178) | KAYIT — zorunlu seçim korunmuş, kaçınma kolu gerilemiş |
 | 34 | **Kaçınmanın seçiciliği yarıya düştü.** BAcc(E1)−BAcc(E2) kazancı | arşiv [0.0735, 0.0784] ort **0.0762** · bugün **0.0332** = arşivin **%44'ü**, aralık dışı | KAYIT — makalenin ana savı için doğrudan kanıt: zorunlu-seçim değerlendirmesi bu gerilemeyi GÖRMEZDİ |
+
+### Makale taslagi denetiminde yakalananlar (2026-08-28) — UCU DE ASISTAN HATASI
+
+| # | kusur | ölçüm | karar |
+|---|---|---|---|
+| 35 | **"Hiçbir açık ağırlıklı model şansı aşmadı" İFADESİ YANLIŞ** — taslağın Tartışma ve Sonuç bölümlerinde vardı ve kendi Bulgular bölümüyle çelişiyordu | **ÖLÇÜLDÜ:** E1/varyant A'da **4** açık ağırlıklı modelin GA'sı 0.5'i dışlıyor: `qwen2.5:32b` [0.5833, 0.7618] · `gemma3:27b` [0.5230, 0.6115] · `llama3.2:3b-q8_0` [0.5073, 0.5963] · `gemma3:12b` [0.5139, 0.5836] | **KAPANDI** — selef makaleyi öldüren savunulamaz-iddia sınıfının aynısı. Doğru anlatı: `qwen2.5:32b` 0.6769'a **kapsam 0.173** ile ulaşıyor (82 madde); üç model ise neredeyse tam kapsamda 5–7 puan üstünde. Bu bir kapsam–isabet takasıdır |
+| 36 | **"Kaçınma oranı değişmedi" İFADESİ YANLIŞ** (kullanıcıya da böyle bildirildi) | 178 ∉ [181, 184]. Doğru ifade: kaçınma **sayısı** küçük ölçüde düştü (182 ort → 178, %2,2 göreli), **kazanç** ise yarıya indi (0.0762 → 0.0332, %56 göreli). Sıklık kabaca korunurken **seçicilik** çöktü | **KAPANDI** — sayı çizelgesine düzeltme yazıldı |
+| 37 | Sürüm kayması hükmü **tek koşuyu üç koşunun min-maks'ıyla** karşılaştırıyor; makalenin kendi kümeli bootstrap GA'sı [0.633, 0.750] ve bugünkü 0.6422 onun **İÇİNDE** | İki taban farklı soru cevaplıyor: bootstrap "başka iddialara genellenir mi" (maddeler değişken), koşu aralığı "aynı 473 maddede model değişti mi" (maddeler SABİT). Sürüm sorusu için doğru taban koşu aralığıdır | AÇIK — seçim makalede **gerekçelendirilmeli** ve bootstrap GA'sı da raporlanmalı; hakem soracaktır |
+
+**Betik zinciri doğrulandı (denetimin haklı şüphesi, ölçümle kapatıldı):** arşiv koşuları
+`f4_api.py` ile, bugünkü koşu yeniden üretilen `f4_api_v2.py` ile yapıldı. **Varyant A
+istemleri yama öncesi/sonrası bayt-birebir** (E1 `8a8ef386b0b2b619`, E2 `64dedda000ce465e`).
+SINIR: arşiv koşuları hiç hash taşımıyor; özdeşlik kayıttan değil **arşiv kaynak kodundan**
+yeniden türetildi. Makalede böyle yazılmalı; "bizim tarafımızda hiçbir şey değişmedi"
+cümlesi bu hâliyle savunulamaz.

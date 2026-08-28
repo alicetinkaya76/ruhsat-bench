@@ -1,165 +1,129 @@
-﻿========================================================================================
-RUHSAT-Bench — MAKALEDE GECEN SAYILAR (dosyalardan uretildi)
-========================================================================================
+RUHSAT-Bench — MAKALE SAYI CIZELGESI (KANONIK)
+Her sayi committed cikti dosyalarindan URETILDI. Makalede bu dosyada
+OLMAYAN hicbir sayi kullanilmaz.
+==========================================================================
 
-[4.2-4.4] YEREL KOL
-  hucre: 36 | yanit esigini gecen: 32 | metrik yeterli (n>=30): 28
-  elenen model: ['llama3.2:1b', 'llama3.2:3b-instruct-q4_K_M']
-  dengeli dogruluk : 0.48 – 0.64  (medyan 0.51, n=28)
-  Youden J         : -0.04 – 0.28  (medyan 0.03, n=28)
-  ECE              : 0.21 – 0.44  (medyan 0.35, n=28)
-  guven AUROC      : 0.46 – 0.54  (medyan 0.50, n=28)
-  kacinma (E1)     : 0.00 – 0.99  (medyan 0.31, n=16)
+## KORPUS
+  6331      6331_isg_kanunu.pdf              birim    39  karakter   71025  pdf 2c48625014462710...
+  4708      4708_yapi_denetimi.pdf           birim    15  karakter   55563  pdf e4ad97473caf12d5...
+  3194      3194_imar_kanunu.pdf             birim    49  karakter  158417  pdf 5557b139186efcd6...
+  ISGRISK   isg_risk_yonetmeligi.pdf         birim    19  karakter   16703  pdf 47ec8c68a5c1d931...
+  TBDY      TBDY_2018.pdf                    birim  1208  karakter  870747  pdf 8d3a9a463d4a534e...
+  YDUY      yapi_denetim_uygulama_yon.pdf    birim    36  karakter   94556  pdf cdb4aef16da40cd2...
+  ham korpus toplam birim: 1366
+  rafine korpus (korpus_v2, EK-6 birincil): 1755 birim
+    TBDY  bent_bol   1208 -> 1523
+    diger maddeler2   158 ->  232  (Ek 16 + Gecici 58 kurtarildi)
 
-[4.5] VARYANT KARARSIZLIGI
-  hucre: 12 | ozete giren (n>=30, iki varyant): 9
-  |A-B| P(DOGRU)             ort 0.335  medyan 0.349  en buyuk 0.723
-  |A-B| taahhut dogrulugu    ort 0.028  medyan 0.021  en buyuk 0.091
-  |A-B| lambda               ort 0.044  medyan 0.037  en buyuk 0.161
-  ORAN P(DOGRU)/lambda = x7.5
+## IDDIA KUMESI
+  toplam iddia: 473
+  altin dagilimi: {'DOGRU': 223, 'YANLIS': 250}
+  prob dagilimi : {'P1_dogrudan': 163, 'P2_sayisal': 37, 'P5_capraz': 121, 'P3_anakronizm': 19, 'P6_guncellik': 120, 'P4_uydurma': 13}
+  atif dagilimi : 289 madde duzeyi · 184 belge duzeyi
 
-[4.6] BARINDIRILAN MODELLER
-  sonnet  E1  yanit 1.0  kacinma 0.3763  n 291  bacc 0.6966  J 0.3931  ECE 0.0359  AUROC 0.5891
-  sonnet  E2  yanit 1.0  kacinma 0.0  n 473  bacc 0.6314  J 0.2629  ECE 0.0714  AUROC 0.5762
-  haiku   E1  yanit 1.0  kacinma 0.2727  n 336  bacc 0.5327  J 0.0654  ECE 0.231  AUROC 0.5807
-  haiku   E2  yanit 1.0  kacinma 0.0  n 472  bacc 0.5575  J 0.115  ECE 0.2106  AUROC 0.514
+## KAPALI KITAP — FRONTIER (v7a altin, kumeli bootstrap 10k, kume=kanun+madde)
+  claude-sonnet-5 (cogunluk)  E1  BAcc 0.6920  kapsam 0.615  lambda 0.325  ECE 0.0373
+  claude-sonnet-5 (cogunluk)  E2  BAcc 0.6242  kapsam 1.000  lambda 0.294  ECE 0.0634
+  claude-haiku-4.5 (cogunluk) E1  BAcc 0.5298  kapsam 0.710  lambda -0.026  ECE 0.2263
+  claude-haiku-4.5 (cogunluk) E2  BAcc 0.5558  kapsam 0.998  lambda 0.061  ECE 0.2070
+  (GA'lar: sonuclar/f4_analiz.csv bacc_alt/bacc_ust sutunlari)
+  claude-sonnet-5 E1 BAcc %95 GA: [0.633, 0.750]
+  claude-haiku-4.5 E1 BAcc %95 GA: [0.489, 0.570]  <- 0.5'i ICERIYOR
 
-[4.3 / 4.6] KACINMANIN BILGI DEGERI  (rapor dosyalarindan)
-  --- yerel (11 satir)
-   gemma3:27b                         459    0.54     14    0.43   +0.12   0.3905
-   gemma3:4b                          422    0.49     49    0.49   +0.00   0.9673
-   qwen2.5:14b-instruct                97    0.57    376    0.50   +0.06   0.2582
-   qwen2.5:32b-instruct                82    0.65    391    0.54   +0.11   0.0702
-   qwen2.5:3b-instruct-fp16           344    0.52    129    0.49   +0.03   0.5355
-   qwen2.5:3b-instruct-q4_K_M         458    0.54     11    0.45   +0.08   0.5774
-   qwen2.5:3b-instruct-q5_K_M         244    0.54    228    0.52   +0.01   0.7450
-   qwen2.5:3b-instruct-q8_0           311    0.53    162    0.45   +0.08   0.0861
-   qwen2.5:7b-instruct-fp16            24    0.58    445    0.48   +0.10   0.3281
-   qwen2.5:7b-instruct-q5_K_M          16    0.50    453    0.47   +0.03   0.8144
-   qwen2.5:7b-instruct-q8_0            18    0.56    440    0.48   +0.08   0.5147
-  --- sonnet (1 satir)
-   claude-sonnet-5                    291    0.70    178    0.54   +0.16   0.0005  *
-  --- haiku (1 satir)
-   claude-haiku-4-5-20251001          335    0.57    129    0.52   +0.05   0.3241
+## SURUM KAYMASI (frontCA32_bugun, EK-7)
+  arsiv A@32 E1 BAcc: 0.6832 · 0.6796 · 0.6986  -> [0.6796, 0.6986]
+  A@32 BUGUN     E1 BAcc: 0.6422  -> ARALIK DISI
+  arsiv A@32 E2 BAcc: [0.6012, 0.6220]
+  A@32 BUGUN     E2 BAcc: 0.6090  -> ARALIK ICI
+  KACINMA KAZANCI BAcc(E1)-BAcc(E2):
+    arsiv: 0.0735 · 0.0784 · 0.0767  ort 0.0762  aralik [0.0735, 0.0784]
+    bugun: 0.0332   = arsiv ortalamasinin %44'i, ARALIK DISI
+  kacinma SAYISI: arsiv 181/184/182 · bugun 178  (DEGISMEDI)
 
-[4.8] KOSULAR ARASI TEKRAR
-  --- kararsizlik_f4_frontier_cogunluk.txt
-     claude-sonnet-5 / E1                 473       0.84        0.89      0.49
-     claude-sonnet-5 / E2                 473       0.88        0.92      0.46
-     claude-sonnet-5 / E1              175/240 =  0.73   28/51 =  0.55   +0.18    0.0179  *
-     claude-sonnet-5 / E2              264/418 =  0.63   37/55 =  0.67   -0.04    0.6550
-     claude-sonnet-5 / E1                 291        0.562     0.589  -0.027
-     claude-sonnet-5 / E2                 473        0.491     0.576  -0.085
-  --- kararsizlik_f4_haiku_cogunluk.txt
-     claude-haiku-4-5-20251001 / E1       473       0.73        0.82      0.31
-     claude-haiku-4-5-20251001 / E2       473       0.81        0.87      0.31
-     claude-haiku-4-5-20251001 / E1    141/257 =  0.55   38/79 =  0.48   +0.07    0.3049
-     claude-haiku-4-5-20251001 / E2    212/381 =  0.56   51/91 =  0.56   -0.00    1.0000
-     claude-haiku-4-5-20251001 / E1       336        0.524     0.581  -0.056
-     claude-haiku-4-5-20251001 / E2       472        0.499     0.514  -0.015
-  --- kararsizlik_f4_sonnetB_cogunluk.txt
-     claude-sonnet-5 / E1                 473       0.80        0.86      0.45
-     claude-sonnet-5 / E2                 473       0.85        0.90      0.43
-     claude-sonnet-5 / E1              158/229 =  0.69   32/61 =  0.52   +0.17    0.0224  *
-     claude-sonnet-5 / E2              251/402 =  0.62   36/70 =  0.51   +0.11    0.0861
-     claude-sonnet-5 / E1                 290        0.561     0.633  -0.073
-     claude-sonnet-5 / E2                 472        0.529     0.591  -0.062
+## VARYANT ETKISI (kol ici bandlarla)
+  A@32  kol ici uyusma bandi: [0.9017, 0.9133]
+  B@128 kol ici uyusma bandi: [0.9165, 0.9228]
+  A@128 x B@128 uyusma      : [0.8266, 0.8319] ort 0.8302  -> HER IKI BANDIN ALTINDA
+  B@128 E1 BAcc: 0.6992 · 0.7027 · 0.7172
 
-[3.6] UZMAN DENETIMI
-  --- gecis 1
-   [1b] BAGIMSIZLIK KONTROLU  (kappa'nin on sarti)
-       dogrulandigi icin bu bir sorun degil, ama kappa=1.00 yorumlanmali:
-       => bagimsiz gorunuyor, kappa hesaplanabilir.
-   [3] KODLAYICILAR ARASI UYUM (Cohen kappa)
-         %95 TEK YONLU UST SINIR: %2.50
-         oraninin sifir oldugunu degil, ust sinirin bu degerde oldugunu gosterir.
-         %95 TEK YONLU UST SINIR: %2.50
-         oraninin sifir oldugunu degil, ust sinirin bu degerde oldugunu gosterir.
-  --- gecis 2
-       Cohen kappa = 0.722   po=0.897 pe=0.628 n=58
-         CERCEVE TAHMINI: %6.7  %95GA [%1.6, %11.8]   (birinci gecis ornegi = 138 madde)
-         BILESIK AGIRLIKLA (butun kumeye yansitilmis): %8.8
-         CERCEVE TAHMINI: hicbir olay gozlenmedi (0/58)
-         %95 TEK YONLU UST SINIR: %6.2
-       N: 5/33 = %15.2   T: 1/25 = %4.0   kaldirac x3.8   Fisher p = 0.2216
+## R3 (kural tabanli taban, LLM YOK)
+  ham korpus + v6 altin   : 473/473
+  ham korpus + v7a altin  : 466/473
+  korpus_v2 + v7a altin   : 473/473
+  -> eski 473/473'un 7/473 = %1.48'i kaynasmis ayristirmadan
+  -> o 7 iddia, uzmanlarin dondurdugu 7 altinin TAM KENDISI (246 257 304 360 364 382 393)
+  negatif kontrol (karistirilmis esleme, 5 tohum, korpus_v2+v7a):
+    0.5349 · 0.5349 · 0.5159 · 0.5370 · 0.5349  ort 0.5315
 
-========================================================================================
-VERI ERISILEBILIRLIK — sonuclar/ altindaki dosyalar
-========================================================================================
-       1,975 bayt  F4_on_kayit.txt
-       3,211 bayt  F4_on_kayit_ek.txt
-       2,842 bayt  F4_on_kayit_ek2.txt
-       2,701 bayt  F4_on_kayit_ek3.txt
-         146 bayt  altin_hatalari_v2.csv
-       9,256 bayt  belge_guncellik.txt
-       8,956 bayt  dayanak_kaybi.csv
-       2,167 bayt  denetim_anahtar.csv
-      11,326 bayt  denetim_anahtar_v2.csv
-       1,516 bayt  denetim_kitabi_rapor.txt
-       7,719 bayt  denetim_konsol.txt
-      17,264 bayt  det1.jsonl
-      17,176 bayt  det2.jsonl
-      21,304 bayt  dus_sonda.jsonl
-     316,499 bayt  f4_frontier_cogunluk.jsonl
-     325,365 bayt  f4_haiku_cogunluk.jsonl
-       3,487 bayt  f4_metrikler.csv
-       1,283 bayt  f4_metrikler_B.csv
-         365 bayt  f4_metrikler_frontier.csv
-         385 bayt  f4_metrikler_haiku.csv
-      60,473 bayt  f4_rapor.txt
-      24,624 bayt  f4_rapor_B.txt
-       7,234 bayt  f4_rapor_frontier.txt
-       7,421 bayt  f4_rapor_haiku.txt
-     317,715 bayt  f4_sonnetB_cogunluk.jsonl
-     634,313 bayt  f4_sonnet_AB.jsonl
-   5,363,512 bayt  f4_sonuclar.jsonl
-     206,305 bayt  frontB_k1.jsonl
-     206,262 bayt  frontB_k2.jsonl
-     206,290 bayt  frontB_k3.jsonl
-     254,244 bayt  frontCB_k1.jsonl
-     254,559 bayt  frontCB_k2.jsonl
-     253,850 bayt  frontCB_k3.jsonl
-     253,792 bayt  frontC_k1.jsonl
-     253,951 bayt  frontC_k2.jsonl
-     253,875 bayt  frontC_k3.jsonl
-     261,543 bayt  frontH_k1.jsonl
-     261,725 bayt  frontH_k2.jsonl
-     261,552 bayt  frontH_k3.jsonl
-     205,575 bayt  front_k1.jsonl
-     205,800 bayt  front_k2.jsonl
-     205,656 bayt  front_k3.jsonl
-       3,403 bayt  gecis2_raporu.txt
-       2,584 bayt  gecis2_uzlasi.csv
-       3,904 bayt  ikinci_gecis_anahtar.csv
-         961 bayt  ikinci_gecis_rapor.txt
-       4,334 bayt  kappa_raporu.txt
-       4,324 bayt  kapsanma_kalibrasyon.txt
-       1,999 bayt  kapsanma_kalibrasyon_temiz.txt
-       1,737 bayt  kararsizlik_f4_frontier_cogunluk.txt
-       1,734 bayt  kararsizlik_f4_haiku_cogunluk.txt
-       1,741 bayt  kararsizlik_f4_sonnetB_cogunluk.txt
-       1,777 bayt  kaynak_dogrulama.txt
-       4,458 bayt  kaynak_dogrulama_v2.txt
-       3,505 bayt  kelime_onarim.txt
-       2,013 bayt  kitap_dogrulama.txt
-     649,973 bayt  konsensus.jsonl
-      34,046 bayt  konsensus_bayrak.csv
-       1,863 bayt  konsensus_dogrulama.txt
-       5,944 bayt  konsensus_rapor.txt
-       1,285 bayt  konsensus_tani.csv
-       8,627 bayt  makale_sayilari.txt
-      34,267 bayt  ozet_paketi.txt
-       2,401 bayt  p6_denge_raporu.txt
-       2,245 bayt  p6_kestirilebilirlik.txt
-       1,838 bayt  tekrar_eden_cumleler.csv
-       1,838 bayt  tekrar_temiz.csv
-      11,811 bayt  temizlik_raporu.txt
-      15,790 bayt  temizlik_raporu_v38.txt
-       7,636 bayt  temizlik_raporu_v39.txt
-         207 bayt  uyusmazliklar.csv
-       1,371 bayt  varyant_kararlilik.csv
-       3,284 bayt  varyant_kararlilik.txt
-         356 bayt  varyant_kararlilik_sonnet.csv
-       1,922 bayt  varyant_kararlilik_sonnet.txt
-       3,568 bayt  yerel_metrikler.csv
-     303,304 bayt  yerel_sonuclar.jsonl
+## BM25 GETIRIM (R2, korpus_v2, k=3, 1755 birim)
+  geri cagirma: 79/289 = 0.2734   (kacirdi 210)
+
+## P6 BAGIMSIZ DOGRULAMA (mevzuat.gov.tr resmi HTML)
+  20/20 UYUSTU · 0 UYUSMADI
+  cerceve KISITI: 3194, 4708, 6331 (YDUY DISARIDA — 43 P6 iddiasi sinanmadi)
+  capraz kontrol: resmi metin bizim ayristiricimizla 3194:49, 4708:15, 6331:39 -> BIREBIR
+
+## KALIBRASYON (standart ECE, kova ortalama guveni)
+  pozitif kontrol: R3'e 0.0000 (arsiv orta-nokta formulu 0.0500 basiyordu)
+  8/56 hucrede guven tasiyan kayit < 50 -> ECE/Brier BASTIRILDI (az-n)
+
+==========================================================================
+## EK — DENETIMIN EKSIK BULDUGU SAYILAR (28.08.2026'da eklendi)
+==========================================================================
+
+### ACIK AGIRLIKLI MODELLER — E1 / varyant A, BAcc %95 kumeli GA
+  yerel model sayisi (E1/A hucresi olan): 18
+
+  model                             BAcc   GA alt   GA ust  kapsam  0.5'i disliyor mu
+  qwen2.5:7b-instruct-q4_K_M      0.7500   0.5000   0.8750   0.013  hayir
+  qwen2.5:32b-instruct            0.6769   0.5833   0.7618   0.173  EVET
+  gemma3:27b                      0.5674   0.5230   0.6115   0.970  EVET
+  llama3.2:3b-instruct-q8_0       0.5509   0.5073   0.5963   0.884  EVET
+  qwen2.5:14b-instruct            0.5509   0.4839   0.6159   0.205  hayir
+  gemma3:12b                      0.5493   0.5139   0.5836   0.987  EVET
+  llama3.2:3b-instruct-fp16       0.5434   0.4999   0.5879   0.886  hayir
+  llama3.2:3b-instruct-q5_K_M     0.5318   0.4963   0.5676   0.943  hayir
+  qwen2.5:7b-instruct-fp16        0.5286   0.4048   0.6353   0.051  hayir
+  qwen2.5:7b-instruct-q8_0        0.5250   0.3500   0.6375   0.038  hayir
+  qwen2.5:3b-instruct-q8_0        0.5176   0.4915   0.5436   0.657  hayir
+  qwen2.5:3b-instruct-fp16        0.5126   0.4922   0.5336   0.727  hayir
+  qwen2.5:3b-instruct-q5_K_M      0.5124   0.4898   0.5350   0.516  hayir
+  gemma3:4b                       0.5114   0.4766   0.5456   0.896  hayir
+  llama3.2:3b-instruct-q4_K_M     0.5040   0.4663   0.5422   0.668  hayir
+  qwen2.5:3b-instruct-q4_K_M      0.5029   0.4886   0.5183   0.968  hayir
+  llama3.2:1b                     0.4850   0.4604   0.5000   0.233  hayir
+  qwen2.5:7b-instruct-q5_K_M      0.4603   0.2778   0.6143   0.034  hayir
+
+  >> 0.5'i DISLAYAN acik agirlikli model: 4
+     qwen2.5:32b-instruct, gemma3:27b, llama3.2:3b-instruct-q8_0, gemma3:12b
+
+  !! DIKKAT: 'hicbir acik agirlikli model sansi asmadi' ifadesi YANLIStir.
+     qwen2.5:32b-instruct E1/A BAcc 0.6769 [0.5833, 0.7618] — barindirilan
+     claude-sonnet-5'in 0.6920 [0.633, 0.750] degeriyle ORTUSUYOR.
+
+### KACINMA SAYISI — DUZELTME
+  arsiv A@32 k1/k2/k3: 181 · 184 · 182   -> aralik [181, 184]
+  A@32 BUGUN         : 178                -> ARALIK DISINDA (az da olsa)
+  !! 'kacinma orani DEGISMEDI' ifadesi YANLIStir. Dogru ifade:
+     kacinma sayisi kucuk olculde dustu (182 ort -> 178, %2.2 goreli),
+     KAZANC ise yariya indi (0.0762 -> 0.0332, %56 goreli dusus).
+     Yani kacinma SIKLIGI kabaca korunurken SECICILIGI coktu.
+
+### BETIK ZINCIRI (surum kaymasi iddiasinin on kosulu)
+  arsiv frontC_k1/k3 : betik_sha256 YOK (yama oncesi f4_api.py)
+  frontCA128_k1      : betik_sha256 11a5d5a3b7b7af20 (ozgun f4_api_v2.py)
+  frontCA32_bugun    : betik_sha256 002df510703fb0a7 (yeniden uretilen v2)
+  VARYANT A ISTEMLERI yama oncesi/sonrasi BIREBIR (kaynaktan yeniden turetildi):
+    E1 8a8ef386b0b2b619   E2 64dedda000ce465e
+  SINIR: arsiv kosulari hic hash TASIMIYOR; ozdeslik kayittan degil
+  arsiv KAYNAK KODUNDAN turetildi. Makalede boyle yazilmali.
+
+### KIYAS TABANI SECIMI (denetimin itirazi)
+  arsiv E1 kumeli bootstrap GA: [0.633, 0.750]  -> bugunku 0.6422 ICINDE
+  arsiv E1 kosu-arasi araligi : [0.6796, 0.6986] -> bugunku 0.6422 DISINDA
+  Bu iki taban FARKLI SORU cevaplar:
+    bootstrap GA  : 'baska iddialara genellenir mi' (maddeler degisken)
+    kosu araligi  : 'ayni 473 maddede model degisti mi' (maddeler SABIT)
+  Surum kaymasi sorusu icin dogru taban KOSU ARALIGIDIR, cunku madde
+  kumesi donmustur. Ama bu secim makalede GEREKCELENDIRILMELIDIR ve
+  bootstrap GA'si da RAPORLANMALIDIR (hakem soracaktir).
