@@ -96,6 +96,29 @@ gösterir."* Ölçüm bunun 14'ünün hata olmadığını gösterdi; kalan **17 
 Görev 3'ün betiği bu karardan bağımsız yazılabilir; **üretim koşusu** için
 korpus seçimi bu 17'ye bağlı.
 
+## 3e. Görev 4 ve 5 BİTTİ (2026-08-28)
+
+`scripts/f4_analiz.py` — `f4_skor.py`'ye **dokunulmadan**.
+
+| iş | sonuç |
+|---|---|
+| Standart ECE (kütük **#6 KAPANDI**) | pozitif kontrol 3 çiftte, standart **0.0000** vs arşiv **0.0500** |
+| Kümeli bootstrap (10k, küme=kanun+madde) | Sonnet E1 **0.692 [0.633, 0.750]**; Haiku E1 0.530 **[0.489, 0.570] → 0.5'i içeriyor** |
+| B kol içi bandı (kütük **#8 KAPANDI**) | A@32 [0.9017, 0.9133] · B@128 [0.9165, 0.9228] · A×B **0.8302 → band altı** |
+| P6 prob içi BAcc | tek sınıflı tabakalar "altın sınıfı seçme oranı" diye etiketlendi |
+| Risk–kapsam | E1 güven eşiği taranarak model başına |
+| Üç altın tek tabloda | 56 hücre, v7a birincil + v6/v7b duyarlılık |
+| **Görev 5** | `sonuclar/f4_analiz_raporu.txt` (885 satır) + `f4_analiz.csv` (56 hücre) |
+
+**Yeni bulgular:** varyant etkisi hükmü **tersine döndü** (kütük #30) — düzeltilmiş
+B koluyla A×B uyuşması her iki bandın altında; `yama_f4_api.py`'nin eski hükmü
+artık geçersiz. Ve kendi analizimde bir kusur çıkıp kapandı (kütük #31): güven
+taşıyan kaydı az olan hücreler "ECE 0.000" basıyordu.
+
+**Mühürlü dosyalar doğrulandı:** `uret_iddia_v3_6.py`, `f4_skor.py`, `f4_api.py`,
+`f4_kos.py`, `bent_bol.py`, `bentler2.py`, `atif_coz.py`, `kural_taban.py` —
+rekonstrüksiyondan beri **hiçbiri değişmedi** (HANDOVER §5 son kriteri).
+
 ## 4. Bundan sonra — HANDOVER §4 görevleri
 
 Kabul kapısı geçtikten sonra devam edilecek sıra değişmedi:
@@ -103,8 +126,10 @@ Kabul kapısı geçtikten sonra devam edilecek sıra değişmedi:
 1. ~~`maddeler2.py` + korpusun kurulumu~~ **BİTTİ**
 2. ~~R3 + kontroller, düzeltilmiş korpusta~~ **BİTTİ** (EK-5 §10 cevaplandı)
 3. ~~`f4_dayanak.py` (R1/R2 koşucusu)~~ **BİTTİ** (EK-6 beyanıyla)
-4. `f4_analiz.py` (kümeli çıkarım, standart ECE, P6 BAcc, risk–kapsam) — **sıradaki**
-5. Mevcut koşuların v7a ile yeniden puanlanması
+4. ~~`f4_analiz.py`~~ **BİTTİ**
+5. ~~v7a ile yeniden puanlama~~ **BİTTİ** (Görev 4 çıktısı)
+
+**HANDOVER §4'ün beş görevi de kapandı.** Kalan iş koşu ve yazım — HANDOVER'da "sende değil" diye işaretli.
 
 ## 5. Kullanıcıda bekleyen (asistanda değil)
 
