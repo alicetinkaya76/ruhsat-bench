@@ -1,0 +1,108 @@
+# RUHSAT-Bench — GOREV 4 RAPORU (analiz katmani)
+tarih  : 2026-08-28T03:31:29Z
+ortam  : macOS · Python 3.11.9
+commit : e5029f2
+
+f4_skor.py'ye DOKUNULMADI (HANDOVER 6: arsiv karsilastirilabilirligi icin
+donduruldu). Butun duzeltmeler scripts/f4_analiz.py'de yasar.
+
+## 1. STANDART ECE — kutuk #6 KAPANDI
+
+Pozitif kontrol UC cift uzerinde kosuldu ve AYIRT EDIYOR:
+
+  cift                                     onkosul   standart   arsiv(orta nokta)
+  korpus_v2 R3 + v7a                       saglandi    0.0000    0.0500
+  arsiv R3 + v6                            saglandi    0.0000    0.0500
+  arsiv R3 + v7a (dogruluk 0.9852)         SAGLANMADI  0.0148    0.0352
+
+Kutuk #6'nin ongordugu 0.050 birebir cikti.
+
+ONKOSUL DERSI (ilk denemede ATLANMISTI, kontrol beni yakaladi): "R3'e ECE=0
+vermeli" ancak model KUSURSUZ ve guveni SABIT ise gecerlidir. Arsiv R3, v7a'ya
+karsi 466/473'tur; oradaki 0.0148 DOGRU davranistir, kusur degil. Kontrol
+artik onkosulu ONCE dogrular.
+
+## 2. KUMELI BOOTSTRAP (10.000, kume = kanun+madde, tohum 42)
+
+Ayirt edici sonuc:
+
+  model               ko   BAcc    %95 GA            hukum
+  claude-sonnet-5     E1  0.692  [0.633, 0.750]     sanstan AYRI
+  claude-sonnet-5-B   E1  0.650  [0.591, 0.707]     sanstan AYRI
+  claude-haiku-4.5    E1  0.530  [0.489, 0.570]     GA 0.5'i ICERIYOR
+  kural_taban_r3      E1  0.986  [0.970, 0.998]     sanstan AYRI
+
+Yerel 18 modelin cogunda GA 0.5'i iceriyor. Sonnet E1'in 0.692'si HANDOVER'in
+v7a icin verdigi degerle BIREBIR tuttu (capraz dogrulama).
+
+## 3. KENDI ANALIZIMDE BULUNAN KUSUR — az-n kapisi
+
+llama3.2:3b-instruct-fp16 / E1 / B hucresi "ECE 0.000, Brier 0.000" basiyordu.
+Sebep: 410 taahhutten YALNIZ 1'i guven degeri tasiyor. Sekiz hucrede guven
+tasiyan kayit 60'in altinda.
+
+Duzeltme: tabloya gvn_n sutunu eklendi; gvn_n < 50 olan hucrelerde ECE/Brier
+"az-n" diye BASTIRILIYOR ve CSV'ye de yazilmiyor. 50 esigi DISSAL OLARAK
+GEREKCELENDIRILMIS DEGILDIR.
+
+Duzeltilmeseydi rapor, sansa yakin bir modeli KUSURSUZ KALIBRE gosterecekti.
+
+## 4. B KOLU KOL ICI BANDI — kutuk #8 KAPANDI
+
+Tek kosu x tek kosu (es granulerlik; cogunluk oyu ile tek kosu KARSILASTIRILMAZ):
+
+  A@32  kol ici (3 ikili)   [0.9017, 0.9133]  ort 0.9070
+  B@128 kol ici (3 ikili)   [0.9165, 0.9228]  ort 0.9193
+  A@128 x B@128 (3 ikili)   [0.8266, 0.8319]  ort 0.8302
+  A@128 x A@32  (3 ikili)   [0.8985, 0.9038]  ort 0.9003
+
+HUKUM 1 — VARYANT ETKISI GERCEK:
+  A x B uyusmasi (0.8302) HER IKI kol ici bandin ALTINDA.
+  Bu, yama oncesi hukmu TERSINE CEVIRIR: yama_f4_api.py "kollar arasi uyusma
+  kol ici araligin ICINDE, iki kol ayni kosulun alti kosusundan ibarettir"
+  demisti — ama o olcum YANLIS YONLENDIRILMIS B kolunda yapilmisti (B etiketi
+  tasiyip A istemi gonderen kosular). Duzeltilmis B koluyla sonuc DEGISIYOR.
+
+HUKUM 2 — BUTCE ETKISI AYIRT EDILEMEZ (uyusma ekseninde):
+  A@128 x A@32 (0.8985-0.9038) A'nin kendi bandiyla (0.9017-0.9133) ORTUSUYOR.
+
+## 5. GERILIM — kararlar band ICINDE, BAcc band DISINDA
+
+Kosu basina BAcc (v7a, E1):
+
+  A@32  frontC_k1/k2/k3    0.6832 · 0.6796 · 0.6986   -> [0.6796, 0.6986]
+  A@128 frontCA128_k1      0.6395                     -> ARALIK DISINDA
+  B@128 frontCB2_k1/k2/k3  0.7172 · 0.7027 · 0.6992   -> [0.6992, 0.7172]
+
+Uyusma ekseninde A@128 ile A@32 ayirt edilemezken BAcc ekseninde A@128
+aralik DISINDA. Celiski degil: az sayida karar donmesi TEK SINIFTA
+yogunlasirsa uyusmayi az, BAcc'yi cok oynatir.
+
+COZULMEDI: A@128 arsiv A@32 kosularindan FARKLI BIR GUNDE kosuldu; tarih ve
+butce KARISIK (confounded). HANDOVER 7'nin bekledigi frontCA32_bugun kosusu
+hala GEREKLI ve kullanicidadir. Bu rapor o ihtiyaci ORTADAN KALDIRMAZ,
+NICELESTIRIR.
+
+AYRICA: B@128 (0.6992-0.7172) A@32'den (0.6796-0.6986) YUKSEK. Varyant B,
+varyant A'dan iyi performans veriyor ve fark kol ici gurultunun disinda.
+
+## 6. PROB ICI BAcc ve RISK-KAPSAM
+
+Tek sinifli tabakalar "TEK SINIF (...) — altin sinifi secme orani" diye
+ETIKETLENDI (ornegin P2_sayisal cogu modelde tek sinif). HANDOVER 3'un
+uyarisi uygulandi: bu tabakalarda BAcc TANIMSIZDIR ve deger bilgi olcmez.
+
+Risk-kapsam egrisi E1'de guven esigi taranarak model basina uretildi
+(rapor bolum 3).
+
+## 7. UC ALTIN TEK TABLODA
+
+v7a birincil, v6 ve v7b duyarlilik olarak yan yana (56 hucre). R3 disinda
+farklar kucuk; etki testinin (|dBAcc| ort 0.0046, maks 0.0347) beklentisiyle
+tutarli. R3'te fark buyuk ve BEKLENEN: v6 1.0000, v7a 0.9860, v7b 0.9821 —
+cunku arsiv R3 kosusu kaynasmis korpusla yapilmisti (Gorev 2).
+
+## 8. Uretilen dosyalar
+
+  sonuclar/f4_analiz_raporu.txt   tam rapor (5 bolum)
+  sonuclar/f4_analiz.csv          hucre olculeri + GA + ece_gecerli bayragi

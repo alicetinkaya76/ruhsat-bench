@@ -14,9 +14,9 @@ ortalama 0.0046, maks 0.0347; hiçbir niteliksel sonuç değişmedi
 | 3 | `kaynak_alinti` sütunu ~200 karakterde kırpık; P1/P2/P5'in %15'inde iddia içeriği alıntıdan uzun | Denetim 1. geçişinde uzmanlar kırpık alıntı gördüyse κ=1.00'a ek açıklama olabilir; `denetim_kitabi.py`'nin hangi alanı bastığı BAKILMADI | KÜTÜKTE — makale sınırlılığına aday; kovalanmıyor |
 | 4 | id=391 (YDUY/14): `temizle_v39` şerh ayıklaması alıntı ortasına denk gelmiş, 441'de 1 katı eşleşme kaybı | Ölçüldü, tek madde, gevşek eşleşme buluyor | KAPANDI — dipnot |
 | 5 | pypdf sürüm farkı: TBDY metni iki ortamda 870747/870751 karakter | Birim sayısı, kontroller, aday listesi AYNI çıktı (ölçüldü). **2026-08-27 DARALTILDI:** fark işletim sistemine değil, yalnız pypdf SÜRÜMÜNE bağlı — pypdf 5.9.0 ile macOS/py3.11.9 ve Ubuntu/py3.12.3 altı belgenin altısında da bayt-birebir metin verdi (Δkarakter=0, `metin_sha256` eşit) | KÜTÜKTE — makalede pypdf sürümü + metin hash verilecek; artık "iki ortam" değil "iki pypdf sürümü" diye yazılır |
-| 6 | `f4_skor.py` ECE'si kova orta noktası kullanıyor (denetim 1.10; R3 ile kanıtlandı: doğru değer 0 iken 0.050 basıyor) | Sonnet ECE'si ~0.014 şişkin | **DÜZELTİLECEK** — analiz katmanında; R3 pozitif kontrol (ECE=0 vermeli) |
+| 6 | `f4_skor.py` ECE'si kova orta noktası kullanıyor (denetim 1.10; R3 ile kanıtlandı: doğru değer 0 iken 0.050 basıyor) | Sonnet ECE'si ~0.014 şişkin | **KAPANDI** (28 Ağu) — `f4_analiz.py` standart ECE (kova ortalama güveni) kullanıyor. Pozitif kontrol 3 çift üzerinde: önkoşulu sağlayan iki çiftte standart **0.0000** / arşiv **0.0500**; önkoşulu sağlamayan çifti kontrol doğru şekilde ayırt ediyor. `f4_skor.py` DEĞİŞMEDİ |
 | 7 | `f4_skor.py` başlığı varyanttan bağımsız "varyant A" basıyor | Kozmetik | KÜTÜKTE |
-| 8 | Sonda betiğinin hüküm kapısı fazla gevşekti (CI bandı kesişimi); B'nin kendi kol içi bandı yoktu | frontCB2 k1-3 ikilileri bandı verecek; analiz bekliyor | AÇIK — görev #4 içinde |
+| 8 | Sonda betiğinin hüküm kapısı fazla gevşekti (CI bandı kesişimi); B'nin kendi kol içi bandı yoktu | frontCB2 k1-3 ikilileri bandı verecek; analiz bekliyor | **KAPANDI** (28 Ağu) — bandlar ölçüldü: A@32 [0.9017, 0.9133] · B@128 [0.9165, 0.9228]. Eş granülerlikte (tek koşu × tek koşu) A×B = 0.8302 → **her iki bandın altında** |
 | 9 | Kesilen ≠ ayrıştırılamayan (etiket önce yazılınca kesilme veri kaybettirmiyor) | Sonda: 3 kesilmenin 1'i kayıp | KÜTÜKTE — raporlamada iki sayaç ayrı verilecek |
 | 10 | `uretilen_iddialar_v6`'da `durum` sütunu ONAY_BEKLIYOR/YENI_EK ("frozen final" terminolojisiyle çelişiyor; denetim 1.18) | Kozmetik/terminoloji | KÜTÜKTE — v7a dondurulurken sütun güncellenmeli |
 
@@ -90,3 +90,20 @@ yönde yanlış olmasının ürünüydü. Kanıt: `sonuclar/gorev2_raporu.txt` �
 **EK-4 §10 uyumu (ölçüldü, `qwen2.5:32b`, 78 çağrı):** kesilen **0/78 = 0.0000**;
 her satırda `istem_sha256`, `sistem_sha256`, `korpus_sha256`, `betik_sha256`;
 R2 geri çağırma ayrı alan ve özette zorunlu. Kanıt: `sonuclar/gorev3_raporu.txt`.
+
+### Görev 4'te ölçülen (2026-08-28)
+
+| # | kusur | etki ölçümü | karar |
+|---|---|---|---|
+| 30 | **Varyant etkisi hükmü TERSİNE DÖNDÜ.** `yama_f4_api.py` docstring'i *"kollar arası uyuşma kol içi aralığın İÇİNDE; iki kol aynı koşulun altı koşusundan ibarettir"* diyor — ama o ölçüm **yanlış yönlendirilmiş** B kolunda (B etiketi taşıyıp A istemi gönderen koşular) yapılmıştı | **ÖLÇÜLDÜ (düzeltilmiş B ile, eş granülerlik):** A@32 kol içi [0.9017, 0.9133] · B@128 kol içi [0.9165, 0.9228] · A×B [0.8266, 0.8319]. A×B **her iki bandın altında** → varyant etkisi GERÇEK | KÜTÜKTE — makalede `yama_f4_api.py` docstring'indeki eski hüküm ARTIK GEÇERSİZ; düzeltilmiş sonuç raporlanmalı |
+| 31 | `f4_analiz.py` ilk sürümü, güven taşıyan kaydı çok az olan hücrelerde anlamsız ECE/Brier basıyordu | **ÖLÇÜLDÜ:** `llama3.2:3b-instruct-fp16/E1/B` hücresinde 410 taahhütten **1'i** güven taşıyor → "ECE 0.000" (kusursuz kalibrasyon görünümü). 8/56 hücrede gvn_n < 60 | **KAPANDI** — `gvn_n` sütunu + `--min-guven-n` (varsayılan 50) kapısı; eşik altında `az-n`. Eşik dışsal olarak gerekçelendirilmiş DEĞİL |
+
+**Hâlâ açık — `frontCA32_bugun` GEREKLİ.** Uyuşma ekseninde A@128 ile A@32 ayırt
+edilemiyor (0.8985–0.9038 vs band 0.9017–0.9133) ama **BAcc ekseninde A@128
+(0.6395) A@32 aralığının (0.6796–0.6986) DIŞINDA**. Çelişki değil: az sayıda karar
+dönmesi tek sınıfta yoğunlaşırsa uyuşmayı az, BAcc'yi çok oynatır. A@128 arşiv
+koşularından **farklı bir günde** koşulduğu için tarih ve bütçe karışık; bu rapor
+`frontCA32_bugun` ihtiyacını ortadan kaldırmaz, **niceleştirir**.
+
+**Yan bulgu:** B@128 (0.6992–0.7172) A@32'den (0.6796–0.6986) yüksek ve fark kol içi
+gürültünün dışında. Varyant B, varyant A'dan iyi performans veriyor.
