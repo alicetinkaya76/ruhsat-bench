@@ -534,3 +534,13 @@ OLMAYAN hicbir sayi kullanilmaz.
   (once kume anahtari YANLIS alinmisti -> GA sifir genislikte cikti;
    dogrusu altin[id]['kume']. Hata pozitif kontrol konmadan once
    yakalandi cunku sifir genislikli GA imkansizdir.)
+
+### R1/E2 ESLI FARKININ ALT SINIRI NEDEN TAM SIFIR (yuvarlama degil)
+  4000 kume yeniden orneklemesinin dagilimi:
+    negatif fark  :    0
+    TAM SIFIR     :  534
+    pozitif       : 3466
+  sifirdan kucuk-esit pay: 0.1335
+  Sebep: iki korpus bu hucrede yalnizca 4/289 iddiada ayrisir; o kumeleri
+  icermeyen bir yeniden orneklem iki kol icin AYNI skoru verir.
+  => %2.5 yuzdeligi tam 0.0000'dir; aralik sifira DEGER, dislamaz.

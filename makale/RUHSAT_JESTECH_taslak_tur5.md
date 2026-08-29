@@ -875,9 +875,13 @@ corpora are evaluated on the identical claims.
 
 **No arm shows a corpus effect that excludes zero.** Every point estimate favours
 the refined corpus, by between 0.007 and 0.019 in balanced accuracy, and every
-paired interval contains zero. The R1 / E2 interval has a lower bound of exactly
-+0.0000 at the resolution reported and so touches zero without excluding it; it
-is read here as not excluding zero. Decision agreement between the two corpora is
+paired interval contains zero. The R1 / E2 interval is the one to look at
+twice: its lower bound is exactly zero, and that is not a rounding artefact. Of
+its 4,000 cluster resamples, none produced a negative difference and 534
+produced a difference of exactly zero — the two corpora disagree on only 4 of
+289 claims in that cell, so a resample that omits those clusters returns an
+identical score for both. The 2.5th percentile is therefore exactly zero, the
+interval touches zero, and the difference is read here as not established. Decision agreement between the two corpora is
 high but not total — 421 of 473 for R2 under E1, 447 of 473 under E2, 280 of 289
 and 285 of 289 for R1 — so the corpora do produce different individual decisions,
 and the null result is a statement about the aggregate rather than about the
