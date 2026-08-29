@@ -144,3 +144,43 @@ koşu SONRASI değiştirildi. EK-1 kendisi *"yine de sapmadır ve makalede belir
 diyor; taslakta belirtilmiyor. Makaleye girmeli.
 
 | 41 | Asistan **"yerel dayanaklı kollar 3 koşu gerektirir, maliyet 3×"** dedi (kullanıcıya da bildirildi) — FAZLA GENİŞ | **ÖLÇÜLDÜ:** `qwen2.5:32b` R1/R2 kol içi uyuşma **1.0000** (3 ikili, koşu başına 1524 çağrı). #29'un ihlali `llama3.2:3b`'ye ait ve o model biçim talimatını da bırakıyor (#28) | **KAPANDI** — 27B+ modeller için tek koşu yeterli; 3 koşu yalnız dejenere olan modeller için |
+
+---
+
+## #42 — `makale_sayilari.txt` iki farkli buyuk/kucuk harfle aniliyor
+
+**Bulundu:** 29.08.2026, 5. tur yazimi sirasinda.
+**Durum:** ACIK (kusur avi kapali; kayda geciriliyor, kovalanmiyor).
+
+Diskteki ve git'teki gercek ad `sonuclar/makale_sayilari.txt` (kucuk harf).
+`makale/RUHSAT_JESTECH_taslak_tur2.md` ve bu oturumdaki bazi komutlar
+`sonuclar/MAKALE_SAYILARI.txt` yaziyor. macOS dosya sistemi buyuk/kucuk
+harf duyarsiz oldugu icin ikisi de ACILIYOR; **Linux'ta (TF-HPC) acilmaz.**
+
+Etkisi bugun sifir: guncel taslak (tur5) dosyaya hic ad vermiyor, calisan
+hicbir betik bu yolu kullanmiyor. Risk gelecege ait — biri Linux'ta
+buyuk harfli yolu kullanirsa sessizce "dosya yok" alir.
+
+**Yapilmasi gereken (tek satir):** taslaklarda gecen adi kucuk harfe cek.
+**Yapilmayacak:** dosya adini degistirmek (git gecmisi ve capraz gondermeler).
+
+---
+
+## #43 — F5 kayitlari model DIGEST'i tutmuyor, yalnizca model ADINI tutuyor
+
+**Bulundu:** 29.08.2026, EK-8 duyarlilik kolu hazirlanirken.
+**Durum:** ACIK — makalede SINIR olarak beyan edilecek.
+
+`sonuclar/f5/*.jsonl` her kayitta `betik_sha256`, `istem_sha256`,
+`sistem_sha256` ve `korpus_sha256` tutuyor; **model agirliklarinin
+digest'ini tutmuyor.** Dolayisiyla iki farkli makinede ayni model adiyla
+kosulan iki kolun ayni agirliklari kullandigi KAYITTAN kanitlanamaz.
+
+Bu, kagit uzerinde surum kaymasi bulgusunun karsi tarafidir: makale
+"ayni ad, farkli davranis" diyor; ayni acik yerel kollar icin de gecerli.
+
+**Bugun nasil karsilandi:** EK-8 3, kayit yerine DAVRANISSAL ozdeslik
+kapisi koydu — birincil korpusla ayni 120 cagri iki makinede kosulur ve
+`ham` alani birebir karsilastirilir. Kanit kayitta degil, olcumde.
+
+**Faz 2 icin:** kosucular `/api/show` digest'ini kayda yazmali.
