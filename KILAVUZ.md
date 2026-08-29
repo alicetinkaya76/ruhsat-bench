@@ -34,10 +34,10 @@ kalmadığı için bu konu makaleyi etkilemiyor: v7a değişmedi.
 
 ## SIRA 2 — Taslağı oku. Ama sadece çerçeveyi.
 
-**Dosya:** `makale/RUHSAT_JESTECH_taslak_tur2.md`
+**Dosya:** `makale/RUHSAT_JESTECH_taslak_tur4.md` (en güncel)
 
-**Bu taslak gönderilemez** ve sayılarında bilinen hatalar var — onları ben
-düzelteceğim. Senden istediğim tek şey **çerçeve onayı**. İki karara bak:
+Dört tur denetimden geçti. **Mühendis hakem 4. turda "artık gönderirdim" dedi**;
+bilimsel içerikte kalan red gerekçesi yok. Kalan işler biçimsel ve bende. Senden istediğim tek şey **çerçeve onayı**. İki karara bak:
 
 1. **Vargı değişti.** Makale artık "hiçbir şey çalışmıyor" demiyor. Ölçtüğümüz şu:
    kapalı kitapta `qwen2.5:32b` E2'de 0.5493 (şans), ama **yöneten madde
@@ -87,12 +87,20 @@ tek bir sıfat yok; denetim bunu iki kez taradı.
 
 ## BENİM SIRADAKİ İŞİM (sen beklemiyorsun)
 
-Üçüncü tur yazım: Δ'nın **keşifsel** diye etiketlenmesi (ön-kayıtlı değil, ben yanlış
-söylemiştim), Bonferroni manşeti (4 model değil **2**), kapsam-eşiği iddiasının
-kaldırılması, ön-kayıt sapmasının beyanı, F5 sonuçlarının girmesi, üç atıf yılının
-düzeltilmesi, 17 vaka için gerekçeli öneriler.
+Beşinci ve son tur. İçindekiler:
 
----
+* **Ön-kayıtlı birincil hipotezler H1/H2 metne girecek** — hesaplandı, dördü de
+  sıfırı dışlıyor. Bunlar EK-4 §4'ün birincil ailesi ve makalede hiç yoktu.
+* **Bonferroni ailesi düzeltmesi** — kaçınma kontrastına yanlış aile (Bonferroni-2)
+  uygulanmıştı; doğrusu 17 model üzerinden. Sonuç ayakta ama kıl payı: Sonnet
+  +0.0678, [+0.0018, +0.1343].
+* **Δ aralıkları** — hesaplandı ve bir iddiamı zayıflattı: Δ ekseninde bugün ile
+  arşiv ayırt edilemiyor. Sürüm kayması bulgusu BAcc-farkına dayanıyor.
+* **EK-6'nın zorunlu tuttuğu ham korpus (1366) duyarlılık kolu** — TF-HPC'de
+  koşuyor, ~3 saat. Ön-kayıtta söz verip yapmadığım işti.
+* Küçükler: §5.4'teki "aralıklar değiyor" hatası (ayrıklar), EK-7 karar kuralının
+  metne yazılması, λ'nın tek tanımı, A_nc/A_abs gösterimi, kaynakça künyeleri,
+  Abstract/Keywords/yazar bloğu.
 
 ## SANA TARAFLI İKİ TAVSİYE DAHA
 
