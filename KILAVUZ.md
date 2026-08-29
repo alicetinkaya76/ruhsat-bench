@@ -34,9 +34,9 @@ kalmadığı için bu konu makaleyi etkilemiyor: v7a değişmedi.
 
 ## SIRA 2 — Taslağı oku. Ama sadece çerçeveyi.
 
-**Dosya:** `makale/RUHSAT_JESTECH_taslak_tur4.md` (en güncel)
+**Dosya:** `makale/RUHSAT_JESTECH_taslak_tur5.md` (en güncel)
 
-Dört tur denetimden geçti. **Mühendis hakem 4. turda "artık gönderirdim" dedi**;
+Beş tur denetimden geçti. **Mühendis hakem 4. turda "artık gönderirdim" dedi**;
 bilimsel içerikte kalan red gerekçesi yok. Kalan işler biçimsel ve bende. Senden istediğim tek şey **çerçeve onayı**. İki karara bak:
 
 1. **Vargı değişti.** Makale artık "hiçbir şey çalışmıyor" demiyor. Ölçtüğümüz şu:
@@ -96,11 +96,22 @@ Beşinci ve son tur. İçindekiler:
   +0.0678, [+0.0018, +0.1343].
 * **Δ aralıkları** — hesaplandı ve bir iddiamı zayıflattı: Δ ekseninde bugün ile
   arşiv ayırt edilemiyor. Sürüm kayması bulgusu BAcc-farkına dayanıyor.
-* **EK-6'nın zorunlu tuttuğu ham korpus (1366) duyarlılık kolu** — TF-HPC'de
-  koşuyor, ~3 saat. Ön-kayıtta söz verip yapmadığım işti.
-* Küçükler: §5.4'teki "aralıklar değiyor" hatası (ayrıklar), EK-7 karar kuralının
-  metne yazılması, λ'nın tek tanımı, A_nc/A_abs gösterimi, kaynakça künyeleri,
-  Abstract/Keywords/yazar bloğu.
+* ~~**EK-6'nın zorunlu tuttuğu ham korpus (1366) duyarlılık kolu**~~ **BİTTİ.**
+  TF-HPC'den indirildi (sha256 uzaktakiyle birebir), makaleye §4.6.5 + Tablo 7
+  olarak girdi. **Sonuç senin lehine:** hiçbir kolda korpus seçimi sıfırı
+  dışlayan bir fark üretmiyor — yani makalenin dayanaklı sonuçları ön kayıttan
+  sapan korpus tercihine dayanmıyor. Yan ürün: ham korpus daha iyi *getiriyor*
+  (0.3010 vs 0.2734) ama dört hücrenin dördünde de biraz daha *kötü* puan
+  alıyor; "getirim oranı doğruluğa tavan koyar" sezgisinin ikinci bağımsız
+  çürütmesi.
+* ~~Küçükler~~ **BİTTİ:** §5.4'teki "aralıklar değiyor" hatası düzeltildi
+  (ayrıklar), EK-7 karar kuralı metne yazıldı, λ'nın tek tanımı sabitlendi,
+  gösterim her yerde A_nc, kaynakça künyeleri doğrulandı,
+  Abstract/Keywords/yazar bloğu yazıldı (yazar alanları bilerek boş).
+
+**Bu turda giren tek yeni sayı `0.6395`'ti** (A@128) ve mühürlü `f4_skor.py`
+ile v7a altına karşı yeniden üretildi. Taslaktaki 291 ondalık değerin tamamı
+tarandı; kanonik çizelgede olmayan hiçbir yeni sayı kalmadı.
 
 ## SANA TARAFLI İKİ TAVSİYE DAHA
 
