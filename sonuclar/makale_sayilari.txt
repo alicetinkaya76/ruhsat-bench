@@ -297,3 +297,42 @@ OLMAYAN hicbir sayi kullanilmaz.
   !! MAKALE SU AN YALNIZ IYI OLAN KAPPA'YI (1.000 / 0.860) RAPORLUYOR.
      Ikinci gecis anilmadan altin etiket kalitesi iddiasi EKSIKTIR ve
      3.6 tablosu zaten 'Bolum 4'te raporlanacak' diye SOZ VERIYOR.
+
+### ON-KAYITLI KAPILARIN UYGULANMASI — acik agirlikli E1/varyant A (18 hucre)
+  yanit orani = (n - ayristirilamadi)/n     taahhut = DOGRU|YANLIS verilen madde
+
+  model                             n  ayrist   YANIT  taahhut  durum
+  qwen2.5:32b-instruct            473       0   1.000       82  puanlanir
+  gemma3:27b                      473       0   1.000      459  puanlanir
+  llama3.2:3b-instruct-q8_0       473      54   0.886      418  puanlanir
+  qwen2.5:14b-instruct            473       0   1.000       97  puanlanir
+  gemma3:12b                      473       0   1.000      467  puanlanir
+  llama3.2:3b-instruct-fp16       473      53   0.888      419  puanlanir
+  llama3.2:3b-instruct-q5_K_M     473      27   0.943      446  puanlanir
+  qwen2.5:3b-instruct-q8_0        473       0   1.000      311  puanlanir
+  qwen2.5:3b-instruct-fp16        473       0   1.000      344  puanlanir
+  qwen2.5:3b-instruct-q5_K_M      473       1   0.998      244  puanlanir
+  gemma3:4b                       473       0   1.000      424  puanlanir
+  qwen2.5:3b-instruct-q4_K_M      473       4   0.992      458  puanlanir
+  llama3.2:3b-instruct-q4_K_M     473     154   0.674      316  ELENDI (yanit<%80)
+  llama3.2:1b                     473     215   0.545      110  ELENDI (yanit<%80)
+  qwen2.5:7b-instruct-q4_K_M      473       0   1.000        6  PUANLANMAZ (taahhut<30)
+  qwen2.5:7b-instruct-fp16        473       0   1.000       24  PUANLANMAZ (taahhut<30)
+  qwen2.5:7b-instruct-q8_0        473       0   1.000       18  PUANLANMAZ (taahhut<30)
+  qwen2.5:7b-instruct-q5_K_M      473       0   1.000       16  PUANLANMAZ (taahhut<30)
+
+  PUANLANIR 12 · yanit kapisindan ELENEN 2 · taahhut<30 PUANLANMAZ 4   = 18
+
+  !! DUZELTME: '14 hucre puanlanir' YANLIS, dogrusu 12.
+  !! DUZELTME: '[SAYI YOK: per-model parsable-response rates]' OLGUSAL
+     OLARAK YANLIS — oranlar yukarida, f4_analiz.csv'den turetiliyor.
+  !! qwen2.5:32b (82 taahhut) IKI KAPIYI DA GECER, puanlanir.
+
+### DOGRULAYICI KONTRAST — BAcc(E1) - BAcc(E2), BONFERRONI-2
+  EK-4 4: birincil aile IKI kontrast icerir -> Bonferroni-2 (%97.5 GA)
+  (esli kumeli bootstrap, 4000, kume=kanun+madde, tohum 42, altin v7a)
+
+  claude-sonnet-5   fark +0.0678  %95 [+0.0243, +0.1106]  Bonf-2 [+0.0190, +0.1170]
+                    -> SIFIRI DISLIYOR: kacinma dogrulugu ARTIRIYOR
+  claude-haiku-4.5  fark -0.0260  %95 [-0.0612, +0.0130]  Bonf-2 [-0.0659, +0.0183]
+                    -> DISLAMIYOR: kacinmanin olculebilir faydasi YOK
