@@ -414,3 +414,24 @@ OLMAYAN hicbir sayi kullanilmaz.
   NOT: normal yaklasim n=58'de KABADIR; makalede 'yaklasik' diye
        nitelendirilmeli. Birinci gecis kappa'si 1.000 [1.000, 1.000] idi;
        iki aralik ORTUSMUYOR.
+
+### PROB AILELERININ SINIF BILESIMI (v7a) — lambda tanimini SABITLER
+
+  prob                n   DOGRU  YANLIS   tek sinifli
+  P1_dogrudan       163     156       7   hayir
+  P2_sayisal         37       0      37   EVET (hepsi YANLIS)
+  P3_anakronizm      19       7      12   hayir
+  P4_uydurma         13       0      13   EVET (hepsi YANLIS)
+  P5_capraz         121       0     121   EVET (hepsi YANLIS)
+  P6_guncellik      120      60      60   hayir
+
+  !! MAKALEDEKI IKI TANIM DA TAM DOGRU DEGIL:
+     4.1 'accuracy on the always-true family plus accuracy on the
+         always-false family, minus one' -> P1 ALWAYS-TRUE DEGIL (7 YANLIS var)
+     5.4 'lambda = accuracy(P1) + accuracy(P5) - 1' -> KODLA UYUMLU, dogru
+
+  TEK TANIM KULLANILACAK (f4_skor.py [1.4] ile ayni):
+     lambda = dogruluk(P1_dogrudan) + dogruluk(P5_capraz) - 1
+  Ingilizce tarif: 'accuracy on the predominantly-true direct family (163
+  claims, 156 true) plus accuracy on the all-false cross-reference family
+  (121 claims), minus one'. Yanlilikla calisan bir model lambda ~ 0 verir.
