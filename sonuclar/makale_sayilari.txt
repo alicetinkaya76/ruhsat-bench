@@ -621,3 +621,56 @@ OLMAYAN hicbir sayi kullanilmaz.
      (metin gercek, ATIF yanlis); icerme kurali yanlis atfi goremez.
   >> Bu, R2 - R3-BM25 mansetini ZAYIFLATMAZ, GUCLENDIRIR: dizgi tabani
      pasajlardan hicbir sey cikarmiyor.
+
+### D5.6 — EK-1 1'in "ORIJINAL KAPI" DUYARLILIK KOLU (verilmemisti, olculdu)
+  Orijinal kural: %80 esigi TAAHHUT oranina uygulanir (E1/varyant A, 20 hucre;
+  kural_taban_r3 haric)
+    orijinal kuralla PUANLANIR :  7
+    orijinal kuralla ELENIR    : 13
+  Duzeltilmis kuralla puanlanan 12 (bkz. 4.2).
+
+  Orijinal kuralla ELENEN ama duzeltilmis kuralla puanlanan (taahhut orani):
+    claude-sonnet-5            0.615   <-- MAKALENIN BARINDIRILAN MANSETI
+    claude-haiku-4.5           0.710   <-- IKINCI BARINDIRILAN MODEL
+    qwen2.5:32b-instruct       0.173   <-- DAYANAKLI MERDIVENIN MODELI
+    qwen2.5:14b-instruct       0.205
+    qwen2.5:3b-instruct-fp16   0.727
+    qwen2.5:3b-instruct-q8_0   0.657
+    qwen2.5:3b-instruct-q5_K_M 0.516
+    llama3.2:3b-q4_K_M 0.668 · llama3.2:1b 0.233
+    qwen2.5:7b (dort varyant)  0.013 · 0.034 · 0.038 · 0.051
+
+  >> HUKUM: Korpus sapmasinin AKSINE, kapi sapmasi TASIYICIDIR. Orijinal
+     kuralla makalenin uc ana oznesi de (sonnet, haiku, 32B) PUANLANMAZDI.
+     Bu MAKALEDE ACIKCA YAZILMALIDIR. Duzeltmenin gerekcesi kavramsaldir
+     (kacinma bagimli degiskendir) ve veriden bagimsizdir; ama sonucu
+     buyuktur ve okuyucu bunu bilmelidir.
+
+### D5.7 — EK-6 4'un 17 needs_human_review IDDIASI (raporlanmamisti)
+  idler: 25 38 60 70 123 159 189 203 211 278 310 323 351 426 444 455 476
+  (kaynak: uzlasi/ACIK_17_VAKA_karar_kitabi.xlsx; insan denetimi sonucu
+   HICBIRINDE etiket degismedi — uzlasi/17_VAKA_KARARLARI_ve_DOGRULAMA.md)
+
+  AYRI SATIR (EK-6 4'un istedigi):
+    R1     E1   n= 8  taahhut= 7  dogruluk 1.0000
+    R1     E2   n= 8  taahhut= 8  dogruluk 1.0000
+    R2     E1   n=17  taahhut=16  dogruluk 0.8125
+    R2     E2   n=17  taahhut=17  dogruluk 0.8824
+    R3bm25 -    n=17  taahhut=17  dogruluk 0.5294
+
+  DUYARLILIK — manset 17 HARIC:
+    E1  DAHIL +0.2292 [+0.1932, +0.2639] n=473
+        HARIC +0.2312 [+0.1943, +0.2672] n=456
+    E2  DAHIL +0.2162 [+0.1829, +0.2512] n=473
+        HARIC +0.2154 [+0.1798, +0.2504] n=456
+  >> 17 iddia mansetin YERINI DEGISTIRMIYOR.
+
+### D5.8 — EK-5 8'in ZORUNLU v6/v7 CIFTE ALTIN RAPORLAMASI (yapilmamisti)
+  Kaynak: f4_analiz_raporu.txt 5. bolum, 56 hucre, uc altin yan yana.
+  |v7a - v6| dagilimi (model hucreleri, kural_taban_r3 haric):
+    ortalama 0.0039 · en buyuk 0.0346 (qwen2.5:32b-instruct E1)
+    ikinci   0.0208 (llama3.2:1b E2)
+  kural_taban_r3 (R3-rule): v7a 0.9860 · v6 1.0000 · fark -0.0140
+    (bu, 4.5'te zaten anlatilan EK-5 duzeltmesinin ta kendisidir)
+  >> Altin surumu hicbir modelin hukmunu degistirmiyor; en buyuk kayma
+     qwen2.5:32b'nin E1 hucresinde ve o hucre zaten dusuk kapsamli.
