@@ -722,3 +722,26 @@ OLMAYAN hicbir sayi kullanilmaz.
   goreli dusus = (182.33 - 178) / 182.33 = 0.0238 -> %2.4
   ONCEKI "%2.2" degeri ortalamayi degil 182'yi (medyani) kullaniyordu; YANLIS.
   Duzeltildi: makale artik "%2.4, arsiv ortalamasi 182.33'e karsi" diyor.
+
+### D5.12 — 158 / 150 / 138 SAYILARININ UZLASTIRILMASI (denetim itirazi)
+  Muhurlu betik yeniden kosuldu (scripts/denetim_ikinci_gecis.py, tohum
+  20260729) ve tabakalari BIREBIR yeniden uretti: N 33 · T 105 · K 2.
+
+  Dokum:
+    158  birinci gecis kitabindaki kod (denetim_anahtar_v2.csv)
+    - 8  tuzak/kontrol kodu (T1..T8)
+    = 150  gercek iddia            <- Cohen kappa BU 150 uzerinde (n=150)
+    -12  v6_onarilmis kume dISINDA kalan kod
+    = 138  ikinci gecisin ORNEKLEME CERCEVESI = 33 (N) + 105 (T)
+
+  Dusen 12 kod: 16 42 92 180 198 220 308 385 407 440 441 461
+    12'sinin 12'si uretilen_iddialar_v1.csv'de VAR; onarim/eleme
+    sirasinda kumeden cikmislar. Ikinci gecis, artik kumede olmayan
+    iddiayi ornekleyemeyecegi icin cerceve 138'dir.
+
+  >> Bu bir SAYI HATASI DEGIL, ANLATIM BOSLUGUDUR: makale 150 ve 138'i
+     yan yana kullaniyor ama aradaki 12'yi hic aciklamiyor. Bir cumle
+     eklenir.
+  >> NOT: bu oturumda dolu calisma kitaplarindan elle yapilan bir
+     yeniden sayim T havuzunu 117 bulmustu; O SAYIM YANLIStir, cunku
+     v6 kume filtresini uygulamiyordu. Muhurlu betik hakemdir.
