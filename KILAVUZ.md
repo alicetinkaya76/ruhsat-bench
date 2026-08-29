@@ -6,40 +6,33 @@ tersini yap — ama o zaman bilerek yapmış olursun.
 
 ---
 
-## SIRA 1 — 17 vakayı çöz. İmzalardan ÖNCE.
-
-**Dosya:** `uzlasi/ACIK_17_VAKA_karar_kitabi.xlsx`
-
-**Neden önce bu:** Bu 17'nin **12'si**, uzmanların zaten düzelttiği bir iddiayla
-**birebir aynı korpus kaymasını** paylaşıyor. Örnek: `TBDY/7.2.1.4 → 7.2.4`
-kaymasındaki 5 iddiadan 2'si (304, 382) düzeltilmiş, 3'ü (25, 123, 211) değil.
-
-Bir hakem bunu görürse soracağı soru şu: *"Aynı kaymada iki iddiayı düzeltip üçünü
-neden bırakmışsınız?"* Cevabın yoksa bu, altın etiketlerin tutarsız olduğu anlamına
-gelir ve makalenin dayanağını yıkar.
-
-**Benim önerim** (kitapta satır satır gerekçesiyle var): düzeltilmiş bir iddiayla
-aynı kaymayı paylaşan 12'sinde **aynı kararı uygula**. Kalan 5'i ayrı bak — onlar
-hiç düzeltme almamış kaymalarda ve gerçekten tek tek değerlendirme istiyor.
-
-**Süre:** 12'si mekanik (tutarlılık kararı), 5'i düşünmek gerektirir. Bir oturum.
-
----
-
-## SIRA 2 — İmzaları al. Ama 17'den sonra.
+## SIRA 1 — İmzalar. Artık tek engel bu.
 
 **Dosya:** `uzlasi/IMZA_SAYFASI_v7a.md`
 
-İmza sayfası kodlayıcılara şunu soruyor: *"v7a şimdi mi donsun, önce 17 vaka mı
-çözülsün?"* Sıra 1'i yaparsan bu soru kendiliğinden cevaplanmış olur ve imza tek
-turda alınır. Ters sırada yaparsan iki kez imza toplarsın.
+**17 vaka kapandı ve sonuç: hiçbiri etiket değişikliği gerektirmiyor.** İmza
+sayfası kodlayıcılara *"v7a şimdi mi donsun, önce 17 vaka mı çözülsün"* diye
+soruyordu — o sorunun cevabı artık net: **çözüldü, v7a şimdi dondurulabilir.**
 
-**Ben imza atamam.** Kodlayıcı adına imza, olmayan bir insan beyanı üretmek olur —
-ve makalenin altın etiketlerinin dayandığı şey tam olarak o beyandır.
+Kodlayıcılara iletilmesi gereken bir düzeltme var: 29 Ağustos'ta üç iddia
+(278, 426, 444) için "altını YANLIŞ yap" kararı verilmişti, ben o kararları
+**geri aldım**. Sebep kendi yargılarında değil, benim tarif ettiğim görevde:
+karar kitabında CSV'nin `madde` sütununu iddianın atıf yaptığı yer gibi
+sunmuştum. EK-4 §2 tersini söylüyor — o sütun metnin **kaynağını** tutar.
+Üç iddia da *"TBDY 2018'e göre..."* diyor, yani **belge düzeyinde** atıf
+yapıyor; içerikleri TBDY'de var, sadece başka maddede. EK-4 §9(d) böyle
+atıfları belgenin tamamında arar, dolayısıyla iddialar doğrudur.
 
----
+Bu hatayı **R3 yakaladı**: kural tabanlı taban v7a ile 473/473 verirken
+değiştirilmiş altınla 470/473'e düştü ve uyuşmadığı üç id tam olarak bunlardı.
 
-## SIRA 3 — Taslağı oku. Ama sadece çerçeveyi.
+Ayrıca 323 için verilen `degisiklik_yok` kararı **doğruydu** ve duruyor.
+
+**Not — provenans:** doldurulan kitapta `KODLAYICI` alanı "GPT-5.6 Pro"
+yazıyordu. İnsan onayı sonradan alındı ama artık bir etiket değişikliği
+kalmadığı için bu konu makaleyi etkilemiyor: v7a değişmedi.
+
+## SIRA 2 — Taslağı oku. Ama sadece çerçeveyi.
 
 **Dosya:** `makale/RUHSAT_JESTECH_taslak_tur2.md`
 
@@ -61,7 +54,7 @@ Yöntem ve Bulgular bölümlerini okumana gerek yok, sayıları ben denetletiyor
 
 ---
 
-## SIRA 4 — JESTECH'e gönder. Kapak mektubunda şunu yaz.
+## SIRA 3 — JESTECH'e gönder. Kapak mektubunda şunu yaz.
 
 Bu makalenin **tek gerçek red riski** şu: mühendis hakem *"bu bir NLP makalesi,
 yanlış dergiye gelmiş"* der. Denetimde bunu açıkça sorduk ve ilk turda hakem
