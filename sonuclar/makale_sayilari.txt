@@ -243,3 +243,57 @@ OLMAYAN hicbir sayi kullanilmaz.
   da birakiyordu (kutuk #28). Iki bulgu ayni modele ait.
   => 'Yerel dayanakli kollar 3 kosu gerektirir' ifadesi FAZLA GENIS.
      qwen2.5:32b icin tek kosu yeterlidir (olculdu).
+
+==========================================================================
+## EK — 3. TUR DENETIMININ ISTEDIGI SAYILAR (29.08.2026)
+==========================================================================
+
+### F5 DAYANAKLI KOLLAR — KUMELI BOOTSTRAP %95 GA
+  (4000 yeniden orneklem, kume = kanun+madde, tohum 42, altin v7a)
+
+  kol       kosul     BAcc    GA alt    GA ust
+  R1        E1      0.9164    0.8804    0.9494
+  R1        E2      0.8615    0.8207    0.8987
+  R2        E1      0.8229    0.7866    0.8579
+  R2        E2      0.8100    0.7763    0.8415
+  R3bm25    -       0.5938    0.5598    0.6261
+
+### MANSET FARKININ GA'si — R2 - R3bm25 (ESLI, ayni kumeler)
+  E1: +0.2292   %95 GA [+0.1939, +0.2635]   -> SIFIRI DISLIYOR
+  E2: +0.2162   %95 GA [+0.1818, +0.2493]   -> SIFIRI DISLIYOR
+  Yorum: AYNI getirilen pasajlar verildiginde LLM'in dizgi eslestirmeye
+  kattigi fark istatistiksel olarak sifirdan ayrilir.
+
+### IKINCI GECIS UZMAN DENETIMI — MAKALEDE HIC ANILMIYOR, ANILMALI
+  Kaynak: sonuclar/gecis2_raporu.txt (KOSULDU, olumsuz cikti)
+
+  Cohen kappa = 0.722   po=0.897  pe=0.628  n=58
+    (birinci gecis KARAR ekseni 1.000 idi; ikinci gecis DUSUK)
+  uyusmazlik 6, yon dagilimi {(YANLIS, DOGRU): 6}
+  isaret testi p = 0.0312  -> UYUSMAZLIK SISTEMATIK, rastgele DEGIL
+
+  Raporun kendi hukmu (aynen):
+    'Iki uzman farkli bir KURAL uyguluyor. Bu bir olcum hatasi degil
+     TANIM sorunudur ve ortalamayla kapatilamaz; uzlasi toplantisi gerekir.'
+
+  POZITIF KONTROL DUSTU:
+    K tabakasi 2 bilinen altin hatasi. KESIN kural (iki uzman da) 0/2
+    yakaladi; GEVSEK kural (en az biri) 1/2 yakaladi.
+    Rapor: 'Birincil olcut GEVSEK kural olmalidir; KESIN kural alt sinir
+    verir. Birinci gecisteki 0/150 sonucu da bu isikta okunmalidir.'
+
+  BAGLAMSAL HATA ORANI (tabaka agirlikli, GEVSEK kural):
+    N tabakasi 5/33 = %15.2 [%6.7, %30.9]
+    T tabakasi 1/25 = % 4.0 [%0.7, %19.5]
+    CERCEVE TAHMINI %6.7  %95GA [%1.6, %11.8]  (birinci gecis ornegi 138 madde)
+    BILESIK AGIRLIKLA (butun kumeye yansitilmis) %8.8
+  KESIN kural: 0/58 olay; %95 tek yonlu ust sinir %6.2
+
+  BIRINCI GECIS KALITE BAYRAGININ YORDAYICI GECERLILIGI:
+    N %15.2 vs T %4.0, kaldirac x3.8, Fisher p = 0.2216
+    -> yon dogru ama ANLAMLI DEGIL; 'egilim' diye raporlanmali,
+       yordayici gecerlilik IDDIA EDILMEMELI.
+
+  !! MAKALE SU AN YALNIZ IYI OLAN KAPPA'YI (1.000 / 0.860) RAPORLUYOR.
+     Ikinci gecis anilmadan altin etiket kalitesi iddiasi EKSIKTIR ve
+     3.6 tablosu zaten 'Bolum 4'te raporlanacak' diye SOZ VERIYOR.
