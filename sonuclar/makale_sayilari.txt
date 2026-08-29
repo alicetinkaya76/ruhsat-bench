@@ -808,3 +808,30 @@ OLMAYAN hicbir sayi kullanilmaz.
      YANLIStir. Dogrusu: 17 iddia HALA needs_human_review'dur; bir
      dil modeli pasi uc etiket degisikligi onerdi; oneriler on kayit
      gerekcesiyle geri alindi; HICBIR ALTIN ETIKET DEGISMEDI.
+
+### D6.6 — ALT-TUR KIRILIMLARININ GUVEN ARALIKLARI (on kayit md.2 "GA ile")
+  Wilson %95 (iddia duzeyi; bu kirilimlar KESIFSEL ve betimseldir,
+  kumeli bootstrap uygulanmaz — hucre basina 30 iddia tek tabakadan gelmiyor)
+    P5_lawshuffle       26/32 = 0.812  [0.647, 0.911]
+    P5_maddeshift       60/89 = 0.674  [0.571, 0.763]
+    P6_degismedi        30/30 = 1.000  [0.886, 1.000]
+    P6_degismedi_dogru   1/30 = 0.033  [0.006, 0.167]
+    P6_yil               0/30 = 0.000  [0.000, 0.114]
+    P6_yil_yanlis       30/30 = 1.000  [0.886, 1.000]
+  P5 iki alt turun GA'lari ORTUSUYOR (0.647-0.911 ve 0.571-0.763):
+  on kayit md.2'nin ongordugu gibi bu kontrast GUCSUZDUR.
+
+### D6.7 — P6'DAKI SABIT CEVABIN DOGRU TARIFI
+  Iddia metinleri iki bicimde:
+    P6_degismedi / P6_degismedi_dogru : "... hic degistirilmemistir"
+    P6_yil / P6_yil_yanlis            : "... N yilinda degisiklik yapilmistir"
+  Model her ikisine de YANLIS diyor. Yani:
+    "degismedi" iddialarina YANLIS = "degismistir"
+    "N yilinda degisti" iddialarina YANLIS = "o yil degismemistir"
+  >> Tek tutarli tarif: model kendisine sunulan HER guncellik onermesini
+     REDDEDIYOR. "Her zaman degisti diyor" tarifi YANLIStir; iddialarin
+     yarisinda anlam tersine doner.
+
+### D6.8 — 0.0025 = 0.05/20, Bonferroni-20'nin hucre basina duzeyi
+  Karsiligi %99.75 aralik. (Diger paydalar: 0.05/18 = 0.00278 -> %99.72,
+  0.05/17 = 0.00294 -> %99.71, 0.05/21 = 0.00238 -> %99.76.)

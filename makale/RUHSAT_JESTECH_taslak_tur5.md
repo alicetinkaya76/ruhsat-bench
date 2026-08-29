@@ -84,7 +84,7 @@ Automating these checks is a long-standing goal in construction informatics. Rul
 
 2. A measured **coverage–accuracy trade-off** among open-weight models rather than a blanket failure. Eighteen open-weight configurations were run to an E1 cell under prompt variant A; twelve of those cells are scored. Two are removed by the pre-registered gate on the parsable-response rate, which requires a parsable answer on at least 80 % of items: llama3.2:3b-instruct-q4_K_M (0.674) and llama3.2:1b (0.545). Four qwen2.5:7b variants are left unscored because they commit on fewer than 30 items — 6 (q4_K_M), 24 (fp16), 18 (q8_0) and 16 (q5_K_M) committed items — which is the floor below which accuracy-type metrics are not reported; their balanced-accuracy values accordingly support no statement anywhere in this paper. Read with uncorrected 95 % cluster-bootstrap intervals, four of the twelve scored cells exclude 0.5. The pre-registration requires a Bonferroni correction over the number of models — 18 models, a per-cell level of 0.00278, that is 99.72 % intervals — and after that correction two survive: qwen2.5:32b-instruct, balanced accuracy 0.6769, lower bound 0.5820 uncorrected and 0.5349 corrected, at coverage 0.173; and gemma3:27b, balanced accuracy 0.5674, lower bound 0.5235 uncorrected and 0.5017 corrected, at coverage 0.970. The second clears chance by less than two thousandths of a point and should be read as marginal. The two that do not survive the correction are llama3.2:3b-instruct-q8_0 (0.5509, corrected lower bound 0.4878) and gemma3:12b (0.5493, corrected lower bound 0.4915). The 32B model's uncorrected interval overlaps that of the hosted claude-sonnet-5 (0.6920 [0.633, 0.750], coverage 0.615), but it reaches its score while committing on roughly one claim in six — 82 committed items, above the floor of 30, so the cell is scored, and its accuracy and its coverage have to be read as one figure rather than two. Which operating point is preferable depends on the workflow, and Section 2.2 argues the choice cannot be made by accuracy alone.
 
-3. An account of abstention as a measured quantity rather than an assumed safety feature. Two summaries are reported side by side. The confirmatory contrast BAcc(E1) − BAcc(E2) is item 1.2 of the main pre-registration, whose prescribed correction is Bonferroni over the number of models — eighteen were run, giving 99.72 % intervals: for claude-sonnet-5 it is +0.0678 [+0.0018, +0.1343], which excludes zero, so permitting abstention raises accuracy, though the corrected lower bound is under two thousandths of a point and the effect is established rather than large; for claude-haiku-4.5 it is −0.0260 [−0.0765, +0.0347], which does not, so abstention buys that model no measurable accuracy. The conclusion is insensitive to the family size: the sonnet interval excludes zero for every family from two to twenty-one (§4.3.1). The second summary is Δ, the difference in forced-choice accuracy between the items a model committed to and the items it did not commit to. Δ is exploratory, added in EK-1 after the main pre-registration; it is not part of the confirmatory set and carries no multiple-comparison correction. Both are given because they do not agree in magnitude, and reporting only one would let an author choose the larger effect.
+3. An account of abstention as a measured quantity rather than an assumed safety feature. Two summaries are reported side by side. The confirmatory contrast BAcc(E1) − BAcc(E2) is item 1.2 of the main pre-registration, whose prescribed correction is Bonferroni over the number of models — twenty were run, giving 99.75 % intervals: for claude-sonnet-5 it is +0.0678 [+0.0018, +0.1359], which excludes zero, so permitting abstention raises accuracy, though the corrected lower bound is under two thousandths of a point and the effect is established rather than large; for claude-haiku-4.5 it is −0.0260 [−0.0765, +0.0377], which does not, so abstention buys that model no measurable accuracy. The conclusion is insensitive to the family size: the sonnet interval excludes zero for every family from two to twenty-one (§4.3.1). The second summary is Δ, the difference in forced-choice accuracy between the items a model committed to and the items it did not commit to. Δ is exploratory, added in EK-1 after the main pre-registration; it is not part of the confirmatory set and carries no multiple-comparison correction. Both are given because they do not agree in magnitude, and reporting only one would let an author choose the larger effect.
 
 4. A re-qualification result: on a frozen claim set and prompts we verified to be byte-identical, a re-run of one hosted configuration falls outside the archived run-to-run range while remaining inside the archived clustered bootstrap interval. We report both baselines and justify which one answers the version question (Section 5).
 
@@ -174,7 +174,7 @@ Applying rule 3 to the eighteen E1 / variant A cells, using the commitment count
 
 One cell sits close to the boundary and is worth naming here rather than in the results. qwen2.5:32b-instruct answers every claim in a parsable form (response rate 1.000) while committing on 82 of them (coverage 0.173). It clears the response-rate gate outright and clears the minimum-n rule by 52 items, so it is scored. Describing it as falling below a pre-registered minimum-coverage threshold would be incorrect: EK-1 §1 removed coverage from the gate, and no such threshold exists in the protocol.
 
-**Pre-registration, and one deviation from it.** The main pre-registration (`sonuclar/F4_on_kayit.txt`) was frozen before the runs. Its item 3 applied the 0.80 gate to whether a cell "answers" the claims, and that phrase covers two distinct quantities: whether the model emitted a parsable label at all, and whether that label was a commitment rather than an abstention. Addendum EK-1 (`sonuclar/F4_on_kayit_ek.txt`, 28 July 2026) re-defined the gate onto the first of the two. The addendum was written after the closed-book calls had completed — 18 models × 2 conditions × 473 claims = 17,028 calls — but before any accuracy metric had been computed; only response and abstention counts had been inspected at that point, and the addendum records that state. The reason for the change is a definition rather than an observation: applying an 0.80 floor to the commitment rate would classify the study's dependent variable as protocol non-compliance, so that a model producing fully parsable output while abstaining on 467 of 473 claims would be scored as non-compliant when it is in fact following the instruction exactly. The correct definition does not depend on what the data turned out to show. It is nonetheless a deviation from the frozen document, EK-1 itself states that it must be declared in the paper, and we declare it here. Both rules are reported, and the sensitivity arm the addendum requires is given here rather than deferred, because its result is not a formality. Applying the original 0.80 gate to the *commitment* rate, over the twenty E1 / variant A cells excluding the rule baseline, leaves **7 cells scored and removes 13**. The 13 removed include every system this paper's findings rest on: `claude-sonnet-5` at a commitment rate of 0.615, `claude-haiku-4.5` at 0.710, and `qwen2.5:32b-instruct` at 0.173, the model that carries the entire grounded ladder of §4.6. The seven survivors are the high-commitment, near-chance configurations. **This deviation is therefore load-bearing in a way the corpus deviation of §4.6.5 is not**, and a reader who rejects the redefinition should read this paper as reporting only those seven cells. We think the redefinition is correct — a 0.80 floor on the commitment rate classifies the study's dependent variable as non-compliance, so a system that emits perfectly parsable output while declining 467 of 473 claims would be recorded as protocol-violating when it is following the instruction exactly — and the argument for it does not depend on which systems it happens to retain. But the fact that it retains precisely the systems we go on to discuss is a reason for the reader to weigh the argument rather than the outcome. The minimum-n rule above is likewise post hoc, is a reporting convention only, and is used in no hypothesis test.
+**Pre-registration, and one deviation from it.** The main pre-registration (`sonuclar/F4_on_kayit.txt`) was frozen before the runs. Its item 3 applied the 0.80 gate to whether a cell "answers" the claims, and that phrase covers two distinct quantities: whether the model emitted a parsable label at all, and whether that label was a commitment rather than an abstention. Addendum EK-1 (`sonuclar/F4_on_kayit_ek.txt`, 28 July 2026) re-defined the gate onto the first of the two. The addendum was written after the closed-book calls had completed — 18 models × 2 conditions × 473 claims = 17,028 calls — but before any accuracy metric had been computed; only response and abstention counts had been inspected at that point, and the addendum records that state. The reason for the change is a definition rather than an observation: applying an 0.80 floor to the commitment rate would classify the study's dependent variable as protocol non-compliance, so that a model producing fully parsable output while abstaining on 467 of 473 claims would be scored as non-compliant when it is in fact following the instruction exactly. The correct definition does not depend on what the data turned out to show. It is nonetheless a deviation from the frozen document, EK-1 itself states that it must be declared in the paper, and we declare it here. Both rules are reported, and the sensitivity arm the addendum requires is given here rather than deferred, because its result is not a formality. Applying the original 0.80 gate to the *commitment* rate, over the twenty E1 / variant A cells excluding the rule baseline, leaves **7 cells scored and removes 13**. The 13 removed include three of the four systems this paper's findings rest on: `claude-sonnet-5` at a commitment rate of 0.615, `claude-haiku-4.5` at 0.710, and `qwen2.5:32b-instruct` at 0.173, the model that carries the entire grounded ladder of §4.6. The fourth, `gemma3:27b`, commits on 0.970 and survives the original gate; it is also the marginal cell of §4.2. The seven survivors are the high-commitment configurations, which on this claim set are the near-chance ones. **This deviation is therefore load-bearing in a way the corpus deviation of §4.6.5 is not**, and a reader who rejects the redefinition should read this paper as reporting only those seven cells. We think the redefinition is correct — a 0.80 floor on the commitment rate classifies the study's dependent variable as non-compliance, so a system that emits perfectly parsable output while declining 467 of 473 claims would be recorded as protocol-violating when it is following the instruction exactly — and the argument for it does not depend on which systems it happens to retain. But the fact that it retains precisely the systems we go on to discuss is a reason for the reader to weigh the argument rather than the outcome. The minimum-n rule above is likewise post hoc, is a reporting convention only, and is used in no hypothesis test.
 
 ## 3.5 Grounded arms
 
@@ -222,7 +222,7 @@ The first-pass κ of 1.000 is a property of the instrument rather than evidence 
 **Design of the second pass.** The second pass was built to reach the class the first cannot: a sentence that, lifted from its article, no longer says what the article says. Raters opened the source and read the whole article. Its sampling frame is 138 items, and the step from 150 to 138 is worth stating because both numbers appear in this paper: the first-pass workbook holds 158 codes, of which 8 are seeded traps, leaving the 150 real claims on which the first-pass κ is computed; 12 of those 150 were removed from the claim set during the repair that produced the version this pass samples from, and an item no longer in the set cannot be sampled. The frame is therefore the 138 that survive, split 33 N + 105 T; the N stratum was taken whole, the T stratum was sampled at 25 of 105, and 2 items with known gold errors were seeded as a positive control. Analysis was specified as follows.
 
 1. *Two decision rules, declared in advance of interpretation.* An item counts as a contextual defect under the **lenient** rule if at least one rater's verdict differs from gold, and under the **strict** rule if both do. The two rules bracket the quantity from opposite sides and both are reported.
-2. *Which rule is primary is decided by the seeded control, not by preference.* The rule that recovers the known-bad items is the primary measure; the other is reported as a bound. The control result is given in §4.7, and it selects the lenient rule. One consequence must be carried back to the paragraph above: the strict rule is the rule under which the first pass returned zero defects in every family, and the strict rule failed the seeded control here. The first-pass zeros are therefore a lower bound on the contextual defect rate, not an estimate of it, and are read that way throughout.
+2. *Which rule is primary is decided by the seeded control, not by preference.* The rule that recovers the known-bad items is the primary measure; the other is reported as a bound. The control result is given in §4.7, and it selects the lenient rule. One consequence must be carried back to the paragraph above: the strict rule is the rule under which the first pass returned zero defects in each of the five families it sampled, and the strict rule failed the seeded control here. The first-pass zeros are therefore a lower bound on the contextual defect rate, not an estimate of it, and are read that way throughout.
 3. *Stratum weighting.* Rates are computed per stratum and combined with the design weights implied by the sampling: 33/33 for N and 105/25 for T. A frame estimate for the 138 first-pass items is reported, and separately a compound-weighted figure projecting to the whole claim set; the two are distinct quantities and are labelled as such.
 4. *Zero-event strata.* Where a stratum records no events, a one-sided 95 % upper bound is reported. The form "0.0 % [0.0 %, 0.0 %]" is not used.
 5. *Direction of disagreement.* Rater disagreements are cross-tabulated by direction and tested with a sign test, because a disagreement that runs one way is evidence of two rules being applied rather than of noise around one rule, and the two call for different remedies — the first cannot be closed by averaging.
@@ -251,12 +251,12 @@ Both arms are then scored on E2, so the denominator of each is the number of cla
 
 **Statistical treatment.** Uncertainty on any single configuration is a cluster bootstrap, clusters being (law, article) pairs, seed 42, gold v7a. The 473 claims fall into 183 such clusters, and it is those 183 units that are resampled: several claims are generated from one article, they are not independent, and resampling claims individually would narrow every interval in this paper artificially. Contrasts between two arms measured on the same claims — the E1-versus-E2 difference for one model, and the differences between grounded arms — are computed as **paired** cluster bootstraps over the same clusters, so that the interval is an interval on the difference rather than an overlap judgement between two separate intervals. Differences are reported with those intervals and not as bare point values.
 
-Four interval levels appear in this paper and each is labelled wherever it is used.
+Three interval levels govern the analyses reported here — nominal 95 %, 97.5 % and 99.75 % — and the last is reached by one family only. Table 3b additionally prints four family-size sensitivity levels (97.5 %, 99.71 %, 99.72 % and 99.76 %) that belong to that row alone and are labelled in it. Every level is named wherever it is used.
 
 - *Nominal 95 %*, 10,000 resamples for the closed-book cells and 4,000 for the grounded arms and the paired contrasts, describing one configuration or one difference on its own.
 - *99.72 %*, from the main pre-registration item 1, which requires a Bonferroni correction over the number of models: 18 models at α = 0.05 gives a per-cell level of 0.00278. Computed with 4,000 resamples. This level governs the open-weight closed-book comparison of §4.2. The correction is taken over all 18 models that produced an E1 / variant A cell, which is the more conservative choice, since only 12 of those cells survive the gates of §3.4 and carry a scored accuracy figure.
 - *97.5 %*, from EK-4 §4, which declares a confirmatory family of two contrasts — the grounded-arm hypotheses H1 and H2 of §4.6.3 — and prescribes Bonferroni-2. Computed with 4,000 resamples. Both the uncorrected 95 % and the Bonferroni-2 interval are printed for each member of that family.
-- *99.72 %*, from the main pre-registration §1.2, whose correction is Bonferroni over the number of models. Eighteen models were run, so the per-comparison level is 0.05/18 = 0.00278. This level governs the condition contrast BAcc(E1) − BAcc(E2) of §4.3.1, and it is a different family from the one above; the two are not interchangeable and §4.3.1 says why.
+- *99.75 %*, from the main pre-registration §1.2, whose correction is Bonferroni over the number of models. Twenty models were run — eighteen open-weight configurations and two hosted ones — so the per-comparison level is 0.05/20 = 0.0025. This level governs the condition contrast BAcc(E1) − BAcc(E2) of §4.3.1, and it is a different family from the one above; the two are not interchangeable and §4.3.1 says why.
 
 Both the corrected and the uncorrected intervals are reported for every confirmatory comparison, because they lead to different counts of configurations separated from the null and a reader is entitled to see which threshold produced which count. Δ, being exploratory, carries no correction and is reported with 95 % intervals only.
 
@@ -377,7 +377,9 @@ between 0.886 and 0.998 of them.
 
 Second, the **minimum-n reporting rule** (EK-1 §2, post hoc). Accuracy-type
 metrics are reported only where the model committed to at least 30 claims; the
-committed count is coverage × 473. Four cells fall below that floor — 6, 24, 18
+committed count is the count recorded for the cell, which coverage reports as a
+proportion of 473 rounded to three places; the counts below are the recorded
+integers, not that product. Four cells fall below that floor — 6, 24, 18
 and 16 committed answers, all four qwen2.5:7b variants — and are printed as
 *not scored* rather than removed, so that the reader can see that the
 configurations were run and why they carry no number.
@@ -390,7 +392,8 @@ or described as non-compliant on account of low coverage.
 
 **Table 2. Open-weight models, E1 / variant A.** Response rate is the share of
 the 473 items returning a parsable label of any kind; committed *n* is
-coverage × 473. The gate outcome column records which of the two rules of
+the recorded committed count for the cell, of which coverage is the rounded
+proportion. The gate outcome column records which of the two rules of
 Section 3.4 the cell meets. The interval is the **uncorrected** 95% interval;
 the pre-registered correction is applied in Table 2b.
 
@@ -513,12 +516,23 @@ carried information about which items the system would get wrong.
 **Which correction family this contrast belongs to.** This study carries two
 distinct confirmatory families and they must not be merged. The contrast
 BAcc(E1) − BAcc(E2) is item 1.2 of the main pre-registration, whose stated
-correction is "Bonferroni over the number of models". Eighteen models were run,
-so the per-comparison level is 0.05/18 = 0.00278 and the corresponding interval
-is a 99.72% interval. Eighteen is the same denominator Section 4.2 uses, and for
-the same reason: correcting over the models that were run rather than over the
-subset that survived the reporting gates is the conservative choice, and it does
-not require the family to be defined by an outcome. The family of two, at 97.5%,
+correction is "Bonferroni over the number of models". Twenty models were run —
+the eighteen open-weight configurations of Table 2 and the two hosted ones — so
+the per-comparison level is 0.05/20 = 0.0025 and the corresponding interval is a
+99.75% interval. Correcting over the models that were run, rather than over the
+subset that survived the reporting gates, is the conservative choice and does
+not require the family to be defined by an outcome.
+
+Two different denominators therefore appear in this paper and the difference is
+deliberate. Section 4.2 corrects the open-weight comparison against chance over
+the **eighteen** open-weight configurations that produced a cell in it; this
+section corrects the condition contrast over the **twenty** models that were run
+at all, since both hosted models are in its scope. Each family is the set of
+models eligible for the comparison it governs, and each is larger than the
+number of comparisons actually made in it — twelve and two respectively — so
+both are conservative. Nothing turns on the choice: Table 3b reports this
+contrast at every denominator from two to twenty-one and the verdict is the same
+throughout. The family of two, at 97.5%,
 belongs to annex EK-4 §4 and covers the grounded-arm hypotheses H1 and H2 of
 Section 4.6.3, not this contrast. An earlier draft of this paper applied the
 family of two here, which understates the correction, and a later one asserted a
@@ -527,23 +541,28 @@ paper; the figures below use eighteen.
 
 **Table 3. Confirmatory contrast BAcc(E1) − BAcc(E2), hosted arm.** Paired
 cluster bootstrap, 4,000 resamples, clusters = law + article, seed 42, v7a gold.
-Correction: Bonferroni over 18 models (main pre-registration §1.2).
+Correction: Bonferroni over 20 models (main pre-registration §1.2).
 
-| system | BAcc(E1) − BAcc(E2) | 95% CI | Bonferroni-18 (99.72%) CI | excludes 0 after correction |
+| system | BAcc(E1) − BAcc(E2) | 95% CI | Bonferroni-20 (99.75%) CI | excludes 0 after correction |
 |---|---|---|---|---|
-| claude-sonnet-5 | +0.0678 | [+0.0243, +0.1106] | [+0.0018, +0.1343] | **yes, narrowly** |
-| claude-haiku-4.5 | −0.0260 | [−0.0612, +0.0130] | [−0.0765, +0.0347] | no |
+| claude-sonnet-5 | +0.0678 | [+0.0243, +0.1106] | [+0.0018, +0.1359] | **yes, narrowly** |
+| claude-haiku-4.5 | −0.0260 | [−0.0612, +0.0130] | [−0.0765, +0.0377] | no |
 
-**Table 3b. The same contrast under every family size we could justify.** The
-family denominator is a judgement call, so its effect is reported rather than
-argued. Same bootstrap; only the interval level changes.
+**Table 3b. The same contrast across a range of family sizes.** The denominator
+is a judgement call, so its effect is reported rather than argued. The range
+spans every count that could be defended from the run record — two (the wrong
+family, retained here only because an earlier draft used it), seventeen and
+eighteen (counts an earlier draft asserted but which no rule in this paper
+produces), twenty (the number of models run, used above) and twenty-one (every
+scored model × variant pair). Same bootstrap; only the interval level changes.
 
 | family | level | claude-sonnet-5 | excludes 0 | claude-haiku-4.5 | excludes 0 |
 |---|---|---|---|---|---|
 | none | 95 % | [+0.0243, +0.1106] | yes | [−0.0612, +0.0130] | no |
 | 2 | 97.5 % | [+0.0190, +0.1170] | yes | [−0.0659, +0.0183] | no |
 | 17 | 99.71 % | [+0.0018, +0.1343] | yes | [−0.0765, +0.0347] | no |
-| **18** | **99.72 %** | **[+0.0018, +0.1343]** | **yes** | **[−0.0765, +0.0347]** | **no** |
+| 18 | 99.72 % | [+0.0018, +0.1343] | yes | [−0.0765, +0.0347] | no |
+| **20** | **99.75 %** | **[+0.0018, +0.1359]** | **yes** | **[−0.0765, +0.0377]** | **no** |
 | 21 | 99.76 % | [+0.0009, +0.1359] | yes | [−0.0783, +0.0377] | no |
 
 Neither verdict changes anywhere in that range, so the choice of denominator does
@@ -625,35 +644,55 @@ they are large — 27.6 points for the P5 contrast, 33.4 for the P6 cells — so
 pre-registration anticipated that these comparisons would be underpowered. They
 are reported here because one of them is not a null.
 
-**P5, cross-reference claims, claude-sonnet-5 under E2.** Accuracy is 0.812 on
-the 32 law-shuffle items and 0.674 on the 89 article-shift items, a difference
-of 13.8 points against a minimum detectable difference of 27.6. The direction is
-plausible — swapping the statute is a coarser error than moving to a neighbouring
-article — but the comparison has no power to establish it and is reported as
-descriptive only.
+Intervals in this subsection are Wilson intervals on the claim-level proportion
+rather than the cluster bootstrap used elsewhere. These cells are small and each
+draws on many articles, so a cluster bootstrap would be resampling a handful of
+clusters; the pre-registration asks for intervals on these breakdowns and this is
+the interval the data support. They are descriptive and carry no correction.
+
+**P5, cross-reference claims, claude-sonnet-5 under E2.** Every P5 claim is
+false, so there is no balanced accuracy to report and the quantity below is the
+rate at which the system selects the gold class — the term §3.1 uses for
+single-class strata, and the term the pre-registration requires here in place of
+"accuracy". That rate is 0.812 [0.647, 0.911] on the 32 law-shuffle items and
+0.674 [0.571, 0.763] on the 89 article-shift items, a difference of 13.8 points
+against a minimum detectable difference of 27.6. The intervals overlap across
+most of their range. The direction is plausible — swapping the statute is a
+coarser error than moving to a neighbouring article — but the comparison has no
+power to establish it and is reported as descriptive only.
 
 **P6, currency of amendment, claude-sonnet-5 under E2.** This breakdown is not a
 null, and it changes how the aggregate should be read.
 
-| cell | n | gold | model's answers | accuracy |
-|---|---|---|---|---|
-| P6_degismedi | 30 | false | false ×30 | 1.000 |
-| P6_degismedi_dogru | 30 | true | false ×29, true ×1 | 0.033 |
-| P6_yil | 30 | true | false ×30 | 0.000 |
-| P6_yil_yanlis | 30 | false | false ×30 | 1.000 |
+Each cell is single-class, so these are gold-class selection rates, with Wilson
+intervals.
+
+| cell | n | what the claim asserts | gold | model's answers | gold-class rate | 95 % CI |
+|---|---|---|---|---|---|---|
+| P6_degismedi | 30 | "never amended" | false | false ×30 | 1.000 | [0.886, 1.000] |
+| P6_degismedi_dogru | 30 | "never amended" | true | false ×29, true ×1 | 0.033 | [0.006, 0.167] |
+| P6_yil | 30 | "amended in year N" | true | false ×30 | 0.000 | [0.000, 0.114] |
+| P6_yil_yanlis | 30 | "amended in year N" | false | false ×30 | 1.000 | [0.886, 1.000] |
 
 The model answers **false to 119 of 120 P6 claims**. Its aggregate P6 accuracy of
 0.508 is not chance-level performance; it is the arithmetic of a design balanced
 60 true against 60 false meeting a constant response. Read without the
 breakdown, that 0.508 would be described as coin-flipping on questions of
-amendment currency, and the description would be wrong in a way that matters: a
-system that always says "this provision has changed" fails differently from one
-that guesses, and it fails predictably. `claude-haiku-4.5` shows the same
+amendment currency, and the description would be wrong in a way that matters.
+
+The constant answer is a constant answer *to the claim*, not a constant belief
+about amendment, and the two halves of the design make that explicit. Where the
+claim asserts that a provision has never been amended, "false" asserts that it
+was; where the claim asserts an amendment in a named year, "false" denies that
+amendment. The single description that fits all four cells is that the system
+rejects whatever currency proposition it is shown. That fails differently from
+guessing, and it fails predictably: on this evidence it would reject a correct
+statement about a provision's amendment history as readily as an incorrect one. `claude-haiku-4.5` shows the same
 constancy on the two *degismedi* cells (false ×30 and false ×30) and behaves
 close to randomly on the two *yil* cells (15/15 and 18/12), so the pattern is
 model-specific rather than a property of the probe.
 
-This is the same phenomenon as the rule baseline of §5.4 and it is why this paper
+This is the same phenomenon as R3-BM25 shows in §5.4 and it is why this paper
 reports λ alongside accuracy: an aggregate near 0.5 can be produced either by a
 system that is guessing or by one that is answering constantly into a balanced
 design, and only a bias-corrected index or a subtype breakdown separates them.
@@ -993,9 +1032,10 @@ corpora are evaluated on the identical claims.
 | R2 | E2 | 473 | 0.8100 | [0.7763, 0.8415] | 0.8027 | [0.7633, 0.8383] | +0.0073 | [−0.0151, +0.0296] |
 | R3-BM25 | — | 473 | 0.5938 | [0.5598, 0.6261] | 0.5938 | [0.5598, 0.6261] | +0.0000 | — |
 
-**No arm shows a corpus effect that excludes zero.** Every point estimate favours
-the refined corpus, by between 0.007 and 0.019 in balanced accuracy, and every
-paired interval contains zero. The R1 / E2 interval is the one to look at
+**No arm shows a corpus effect that excludes zero.** Each of the four
+model-bearing point estimates favours the refined corpus, by between 0.007 and
+0.019 in balanced accuracy; the fifth, R3-BM25, is exactly zero. Every paired
+interval contains zero. The R1 / E2 interval is the one to look at
 twice: its lower bound is exactly zero, and that is not a rounding artefact. Of
 its 4,000 cluster resamples, none produced a negative difference and 534
 produced a difference of exactly zero — the two corpora disagree on only 4 of
@@ -1029,17 +1069,42 @@ supplied passages and largely indifferent to which unit boundaries produced them
 
 ### 4.6.6 The seventeen claims flagged for human review
 
-Building the refined corpus surfaced 31 claims whose quoted text was located in a
-unit other than the one the claim record names. Measurement resolved 14 of them
+Building the refined corpus surfaced 32 anomalies: 31 claims whose quoted text
+was located in a unit other than the one the claim record names, plus one whose
+quoted text could not be located anywhere in its document. That last one is a
+different kind of problem — a quotation with no source rather than a
+misattributed one — and it is carried in the defect log rather than in this
+count; the seventeen discussed here come from the 31. Measurement resolved 14 of them
 as artefacts of the splitting procedure or as cases the expert reconciliation had
 already corrected. The remaining **17 were declared `needs_human_review`** under
 annex EK-6 §4, which forbids resolving borderline cases automatically, keeps them
 in the run — removing them would change the selectivity being measured — and
 requires that they appear as a separate row and enter the primary comparisons as
 a sensitivity check. The claim identifiers are 25, 38, 60, 70, 123, 159, 189,
-203, 211, 278, 310, 323, 351, 426, 444, 455 and 476. They were subsequently
-adjudicated by the domain specialists and **no gold label changed**; the v7a
-labels used throughout this paper are the labels those claims already carried.
+203, 211, 278, 310, 323, 351, 426, 444, 455 and 476. **No gold label
+changed**, and the v7a labels used throughout this paper are the labels those
+claims already carried — but the route to that outcome has to be stated, because
+it is not the route the rest of the audit took.
+
+An adjudication pass over the seventeen was produced by a language model rather
+than by the two human coders whose agreement Section 4.7 measures. Thirteen of
+its rows confirmed the existing label; four proposed decisions, of which three
+were label changes. We did not adopt them. The three (claims 278, 426 and 444)
+rest on reading the `madde` field of the claim record as the provision the claim
+cites, whereas annex EK-4 §2 defines that field as the provision the claim's text
+was drawn *from*; all three cite at document level ("under TBDY 2018"), their
+content is present in that document, and EK-4 §9(d) resolves document-level
+citations against the whole document. The deterministic baseline detected the
+same thing independently: R3-rule scores 473/473 against the unaltered labels and
+drops to 470/473 against the altered ones, disagreeing on exactly those three
+claims.
+
+The seventeen therefore remain `needs_human_review`. We report them this way
+rather than as resolved because a study measuring whether language models can
+judge Turkish regulation cannot let a language model set the labels it is scored
+against without saying so; on those items the measurement would be partly
+circular. Nothing in this paper depends on the outcome either way, as the
+sensitivity check below shows.
 
 **Table 8. The seventeen flagged claims, scored separately.**
 
@@ -1147,15 +1212,31 @@ differences are small and uniform.
 Across the model cells the mean absolute difference between v7a and v6 balanced
 accuracy is 0.0039. The largest is 0.0346, at `qwen2.5:32b-instruct` under E1
 (0.6769 against 0.6423) — the low-coverage cell where 82 commitments make each
-relabelled claim weigh more — followed by 0.0208 at `llama3.2:1b` under E2. No
-verdict in Section 4 changes under v6: the same two open-weight cells exclude
-chance after correction, and the same hosted model shows a positive condition
-contrast. The one cell where the label set matters qualitatively is the rule
-baseline, R3-rule, which scores 1.0000 under v6 and 0.9860 under v7a; that gap
-is not noise but the EK-5 correction itself, and Section 4.5 is about exactly
-it. λ is the measure EK-5 predicted would be most exposed, since the P1 label
-distribution changes; it moves by less than the balanced-accuracy figures do in
-every cell we report.
+relabelled claim weigh more — followed by 0.0208 at `llama3.2:1b` under E2. **One verdict does change under v6, and it is reported rather than smoothed.**
+Recomputing the corrected intervals of Section 4.2 against v6 leaves
+`qwen2.5:32b-instruct` and `gemma3:27b` excluding chance as before, but
+`gemma3:12b` also excludes it, with a corrected lower bound of 0.5013 against
+0.4915 under v7a. Three cells survive correction under v6 where two survive
+under v7a. The additional cell clears chance by 0.0013 of balanced accuracy —
+narrower still than the 0.0017 by which `gemma3:27b` clears it under v7a — so
+what the comparison exposes is the fragility of cells sitting on the threshold
+rather than a difference in what the models can do. A reader should take from
+this that no engineering decision belongs on either marginal cell, which is what
+Section 4.2 already says about the first of them.
+
+λ is the measure EK-5 predicted would be most exposed, since the P1 label
+distribution changes, and the prediction holds: in three of the four hosted
+cells λ moves further between label sets than balanced accuracy does (0.0088
+against 0.0045, 0.0072 against 0.0029, 0.0061 against 0.0017), the exception
+being `claude-sonnet-5` under E2 (0.0061 against 0.0072). The absolute
+movements are small, but the ordering is the one the annex anticipated and it is
+reported here as such rather than the other way round.
+
+The one cell where the label set matters qualitatively is the deterministic
+baseline R3-rule, which scores 1.0000 under v6 and 0.9860 under v7a on the
+refined corpus. That gap is not noise but the EK-5 correction itself: seven gold
+labels were revised, and the baseline had been agreeing with the pre-revision
+versions. Section 4.5 is about exactly that.
 
 ### 4.7.4 What this does and does not license
 
@@ -1198,11 +1279,11 @@ The engineering reading is a trade-off between how much of the workload a system
 
 ## 5.2 Abstention frequency held; abstention selectivity fell
 
-Comparing the three archived hosted runs (variant A, 32-token budget) with the run repeated on 28.08.2026 under the same settings, the number of abstentions is close to unchanged: 181, 184 and 182 in the archive against 178 today, a relative decrease of 2.2%. What changed is what those abstentions were worth, and the two available measures of that disagree in size.
+Comparing the three archived hosted runs (variant A, 32-token budget) with the run repeated on 28.08.2026 under the same settings, the number of abstentions is close to unchanged: 181, 184 and 182 in the archive against 178 today, a relative decrease of 2.4% against the archive mean of 182.33. What changed is what those abstentions were worth, and the two available measures of that disagree in size.
 
 The condition contrast BAcc(E1) − BAcc(E2) — how much the option to say "not sure" buys in balanced accuracy — is a confirmatory measure of the main pre-registration, and it falls from an archive mean of 0.0762 (range [0.0735, 0.0784]) to 0.0332, a relative drop of 56%. The selectivity measure Δ = A_com − A_nc, where A_com is E2 accuracy on the items the model committed to under E1 and A_nc is E2 accuracy on the items it did **not** commit to under E1 — abstentions together with unparsable outputs — asks whether the items a model declined are ones it would have got wrong anyway. Its point estimate falls from an archive mean of 0.1416 to 0.1014, a relative drop of 28%, but its intervals overlap the archived intervals throughout (Section 4.4), so Δ agrees in direction and discriminates nothing. The claim of this section rests on the confirmatory contrast alone.
 
-**The confirmatory contrast across the two hosted models, corrected.** This contrast is item 1.2 of the main pre-registration and its prescribed correction is Bonferroni over the number of models, eighteen, giving 99.72% intervals (paired cluster bootstrap, 4,000 resamples, clusters = law + article, seed 42, v7a gold). It is not a member of the two-contrast family of EK-4 §4, which covers H1 and H2; that annex lists abstention behaviour among its secondary and exploratory items. For `claude-sonnet-5` the contrast is +0.0678, 95% [+0.0243, +0.1106], Bonferroni-18 [+0.0018, +0.1343]: the corrected interval excludes zero, so permitting abstention raises balanced accuracy for that model by an amount that survives the correction, though the corrected lower bound is under two thousandths of a point. For `claude-haiku-4.5` the contrast is −0.0260, 95% [−0.0612, +0.0130], Bonferroni-18 [−0.0765, +0.0347]: the interval spans zero in both directions and the point estimate is negative, so abstention has no measurable benefit for that model on this claim set. The abstention mechanism is therefore model-specific rather than a property of the prompt or of the task, which is the same conclusion the Δ figures reach from the other side (0.1557 against 0.0416, §4.3).
+**The confirmatory contrast across the two hosted models, corrected.** This contrast is item 1.2 of the main pre-registration and its prescribed correction is Bonferroni over the number of models, twenty, giving 99.75% intervals (paired cluster bootstrap, 4,000 resamples, clusters = law + article, seed 42, v7a gold). It is not a member of the two-contrast family of EK-4 §4, which covers H1 and H2; that annex lists abstention behaviour among its secondary and exploratory items. For `claude-sonnet-5` the contrast is +0.0678, 95% [+0.0243, +0.1106], Bonferroni-20 [+0.0018, +0.1359]: the corrected interval excludes zero, so permitting abstention raises balanced accuracy for that model by an amount that survives the correction, though the corrected lower bound is under two thousandths of a point. For `claude-haiku-4.5` the contrast is −0.0260, 95% [−0.0612, +0.0130], Bonferroni-20 [−0.0765, +0.0377]: the interval spans zero in both directions and the point estimate is negative, so abstention has no measurable benefit for that model on this claim set. The abstention mechanism is therefore model-specific rather than a property of the prompt or of the task, which is the same conclusion the Δ figures reach from the other side (0.1557 against 0.0416, §4.3).
 
 **Status of Δ.** Δ is an *exploratory* measure, added in the pre-registration addendum (EK-1 §3) after the main pre-registration and after the run had completed, though before any accuracy metric was computed. The addendum marks it exploratory and applies no multiple-comparison correction to it, and we follow that. It is not one of the confirmatory analyses of the main pre-registration, and it should not be read as a pre-specified test. We report it because it isolates a quantity the confirmatory contrast cannot — whether the items not committed to are the ones the model would have failed — and because reporting only the confirmatory contrast would leave that question unanswered.
 
@@ -1272,7 +1353,7 @@ Grounding moves the numbers into a different band but does not by itself settle 
 
 **Provenance of the harness comparison.** As set out in §5.3, the archived runs carry no script hash, and the identity of the variant A prompts was re-derived from archived source rather than read from run records.
 
-**Δ is exploratory.** The selectivity measure Δ was added in the pre-registration addendum (EK-1 §3) after the main pre-registration and after the run had completed, though before any accuracy metric was computed. The addendum itself marks it exploratory and applies no multiplicity correction to it. It carries the evidential weight of an exploratory analysis, not of a pre-specified test, and the paper's confirmatory abstention result is the condition contrast BAcc(E1) − BAcc(E2), reported with the Bonferroni-18 intervals of §4.3.1 and §5.2.
+**Δ is exploratory.** The selectivity measure Δ was added in the pre-registration addendum (EK-1 §3) after the main pre-registration and after the run had completed, though before any accuracy metric was computed. The addendum itself marks it exploratory and applies no multiplicity correction to it. It carries the evidential weight of an exploratory analysis, not of a pre-specified test, and the paper's confirmatory abstention result is the condition contrast BAcc(E1) − BAcc(E2), reported with the Bonferroni-20 intervals of §4.3.1 and §5.2.
 
 **Deviation from the pre-registered coverage rule.** The main pre-registration (§3) declared that a cell answering fewer than 80% of items would not be scored. The addendum (EK-1 §1) redefined that threshold to apply to the parsable-response rate rather than to the commitment rate, on the ground that commitment rate is the dependent variable and gating on it would classify the measured behaviour as non-compliance. The redefinition was made after the run completed and before any accuracy metric was computed, and it rests on the definition of the two rates rather than on what the results showed. It is nonetheless a deviation from the frozen protocol, and the addendum states that it must be declared in the paper. Two models are excluded by the corrected rule on response rate (`llama3.2:1b` at 0.545, `llama3.2:3b-instruct-q4_K_M` at 0.674), both because they echo the claim text instead of emitting a label. Four further cells — the `qwen2.5:7b-instruct` quantisations, at 6, 24, 18 and 16 committed answers — pass the response-rate gate but fall under the separate minimum-n reporting rule of EK-1 §2 and carry no scored figure. Twelve of the eighteen E1 / variant A cells are therefore scored, and the six that are not support no statement in this paper.
 
@@ -1306,7 +1387,7 @@ Four results carry over to practice.
 
 First, the open-weight closed-book arm is a coverage–accuracy trade-off rather than a flat failure, and how much of it survives depends on the correction. Eighteen local configurations produced an E1 / variant A cell and twelve of them are scored; four exclude chance on uncorrected per-cell intervals, and after the pre-registered Bonferroni correction over eighteen models, two do — `qwen2.5:32b-instruct` (lower bound 0.5349) at coverage 0.173, and `gemma3:27b` (lower bound 0.5017, a margin of 0.0017) at coverage 0.970. There is signal in the local arm, and at that strength it does not support deployment.
 
-Second, abstention frequency and abstention quality can move independently, and the value of abstention is model-specific. Across the archived and repeated hosted runs the abstention count fell 2.4% while the confirmatory condition contrast fell 56% and the exploratory selectivity measure Δ fell 28%. A deployment that monitors abstention rate alone would not have seen this. Across the two hosted models, the same confirmatory contrast is +0.0678 with a Bonferroni-18 interval of [+0.0018, +0.1343] for `claude-sonnet-5`, which excludes zero but by less than two thousandths of a point, and −0.0260 with [−0.0765, +0.0347] for `claude-haiku-4.5`, which does not: abstention is worth something for one of the two models and nothing measurable for the other.
+Second, abstention frequency and abstention quality can move independently, and the value of abstention is model-specific. Across the archived and repeated hosted runs the abstention count fell 2.4% while the confirmatory condition contrast fell 56% and the exploratory selectivity measure Δ fell 28%. A deployment that monitors abstention rate alone would not have seen this. Across the two hosted models, the same confirmatory contrast is +0.0678 with a Bonferroni-20 interval of [+0.0018, +0.1359] for `claude-sonnet-5`, which excludes zero but by less than two thousandths of a point, and −0.0260 with [−0.0765, +0.0377] for `claude-haiku-4.5`, which does not: abstention is worth something for one of the two models and nothing measurable for the other.
 
 Third, a hosted model's behaviour on a frozen item set moved outside its own previously measured run-to-run range while the harness was, as far as source inspection can establish, unchanged. Qualifying such a tool is therefore a dated statement, and it calls for a retained frozen item set and scheduled re-qualification, in the same sense in which a torque wrench carries a calibration expiry.
 
@@ -1319,7 +1400,7 @@ We do not set a numeric acceptance threshold, because the cost asymmetry that wo
 # Data and code availability
 
 The frozen source documents with their SHA-256 checksums, the 473-claim set with
-all three gold label versions, the pre-registration and its seven annexes, the
+all three gold label versions, the pre-registration and its eight annexes, the
 expert-audit workbooks including the negative second-pass result, the run records
 and the analysis code are released as a single archive.
 
