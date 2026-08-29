@@ -549,3 +549,75 @@ OLMAYAN hicbir sayi kullanilmaz.
   altin[id]['kume'] = (kanun, madde)   [f4_analiz.py:73]
   473 iddia -> 183 AYRIK kume
   (Makaledeki 'clusters being (law, article) pairs' ifadesi KODLA UYUMLU.)
+
+==========================================================================
+## EK — 5. TUR DENETIMI (30.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D5.1 — BONFERRONI AILE BUYUKLUGU "17" TURETILEMIYOR
+  f4_analiz.csv'den sayildi (56 hucre, 28 (model,varyant) cifti):
+    E1 ve E2 hucresi OLAN cift                 : 28
+    ikisi de PUANLANIR olan cift               : 21
+      bunlardan varyant A                      : 15
+    AYRIK MODEL (varyant birlestirilmis)       : 18
+  HICBIR OKUMA 17 VERMIYOR. Makaledeki 17 DAYANAKSIZDIR.
+
+  Ana on kayit: "Coklu karsilastirma: model sayisi uzerinden Bonferroni."
+  4.2 zaten muhafazakar okumayi kullaniyor: KOSULAN butun modeller = 18.
+  AYNI ILKE kacinma kontrastina da uygulanir -> BONFERRONI-18.
+
+### D5.2 — KACINMA KONTRASTI AILE BUYUKLUGUNE DAYANIKLI (yeni olcum)
+  (esli kumeli bootstrap 4000, kume=(kanun,madde), tohum 42, altin v7a)
+
+  claude-sonnet-5   fark +0.0678
+    duzeltmesiz %95  [+0.0243, +0.1106]   disliyor
+    Bonf-2           [+0.0190, +0.1170]   disliyor
+    Bonf-17          [+0.0018, +0.1343]   disliyor
+    Bonf-18          [+0.0018, +0.1343]   disliyor   <-- RAPORLANACAK
+    Bonf-21          [+0.0009, +0.1359]   disliyor
+  claude-haiku-4.5  fark -0.0260
+    duzeltmesiz %95  [-0.0612, +0.0130]   dislamiyor
+    Bonf-18          [-0.0765, +0.0347]   dislamiyor
+    Bonf-21          [-0.0783, +0.0377]   dislamiyor
+
+  >> HUKUM: sonuc 2 ile 21 arasindaki HER aile buyuklugunde ayni.
+     Makalede aile 18 olarak verilir VE bu dayaniklilik yazilir.
+
+### D5.3 — H2/E1'in R0 TABANI 30 KAPISININ ALTINDA (kendi kuralimizi ihlal)
+  qwen2.5:32b-instruct kapali kitap, 289'luk R1 alt kumesinde:
+    E1  taahhut 29/289   BAcc 0.6226   <-- EK-1 2'nin >=30 kapisinin ALTINDA
+    E2  taahhut 289/289  BAcc 0.5062   (kapi gecti)
+  (tam kumede: E1 taahhut 82, E2 473)
+
+  >> H2'nin E1 bicimi makalenin KENDI asgari-n kuralini karsilamiyor.
+     Sessizce dusurulmez; RAPORLANIR ve kapiyi gecmedigi YAZILIR.
+     H2/E2 (+0.3552) etkilenmiyor ve dayanilacak olan odur.
+     H1'in her iki bicimi de etkilenmiyor (R0 tam kumede 82 taahhut).
+
+### D5.4 — lambda'nin SIFIR NOKTASI SIFIR DEGIL
+  P1 163 iddia = 156 DOGRU + 7 YANLIS · P5 121 iddia = hepsi YANLIS
+    her zaman DOGRU diyen model : 156/163 + 0 - 1 = -0.0429
+    her zaman YANLIS diyen model:   7/163 + 1 - 1 = +0.0429
+  => "bilgi tasimayan" modelin lambda'si 0 DEGIL, +-0.0429'dur.
+     Makalenin "0 for a system that cannot separate..." ifadesi YANLIStir.
+
+### D5.5 — R3-BM25 TAM OLARAK SABIT CEVAP VERICIDIR (olculdu)
+  prob bazinda karar dagilimi:
+    P1_dogrudan   DOGRU 163  YANLIS   0
+    P5_capraz     DOGRU 121  YANLIS   0
+    P2_sayisal    DOGRU   0  YANLIS  37
+    P3_anakronizm DOGRU   0  YANLIS  19
+    P4_uydurma    DOGRU   0  YANLIS  13
+    P6_guncellik  DOGRU   0  YANLIS 120
+  DOGRU dedigi kume ile P1 u P5 kumesi BIREBIR AYNI (284 = 163 + 121).
+  P1 dogrulugu 156/163 = 0.9571 · P5 dogrulugu 0/121 = 0.0000
+  lambda = -0.0429 = sabit-DOGRU degerinin TA KENDISI.
+
+  >> R3-BM25'in lambda'si "bilgiye yakin sifir" DEGIL; P1uP5 uzerinde
+     TAM ANLAMIYLA sabit "DOGRU" cevabidir. 0.5938'lik dengeli dogrulugu
+     pasajlari okumasindan degil, P2/P3/P4/P6'nin cogunlukla YANLIS,
+     P1'in cogunlukla DOGRU olmasindan gelir.
+  >> Mekanizma tutarli: P5 zaten dizgi-icermeyi YENMEK icin tasarlandi
+     (metin gercek, ATIF yanlis); icerme kurali yanlis atfi goremez.
+  >> Bu, R2 - R3-BM25 mansetini ZAYIFLATMAZ, GUCLENDIRIR: dizgi tabani
+     pasajlardan hicbir sey cikarmiyor.
