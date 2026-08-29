@@ -172,7 +172,7 @@ Applying rule 3 to the eighteen E1 / variant A cells, using the commitment count
 
 One cell sits close to the boundary and is worth naming here rather than in the results. qwen2.5:32b-instruct answers every claim in a parsable form (response rate 1.000) while committing on 82 of them (coverage 0.173). It clears the response-rate gate outright and clears the minimum-n rule by 52 items, so it is scored. Describing it as falling below a pre-registered minimum-coverage threshold would be incorrect: EK-1 §1 removed coverage from the gate, and no such threshold exists in the protocol.
 
-**Pre-registration, and one deviation from it.** The main pre-registration (`sonuclar/F4_on_kayit.txt`) was frozen before the runs. Its item 3 applied the 0.80 gate to whether a cell "answers" the claims, and that phrase covers two distinct quantities: whether the model emitted a parsable label at all, and whether that label was a commitment rather than an abstention. Addendum EK-1 (`sonuclar/F4_on_kayit_ek.txt`, 28 July 2026) re-defined the gate onto the first of the two. The addendum was written after the closed-book calls had completed — 18 models × 2 conditions × 473 claims = 17,028 calls — but before any accuracy metric had been computed; only response and abstention counts had been inspected at that point, and the addendum records that state. The reason for the change is a definition rather than an observation: applying an 0.80 floor to the commitment rate would classify the study's dependent variable as protocol non-compliance, so that a model producing fully parsable output while abstaining on 467 of 473 claims would be scored as non-compliant when it is in fact following the instruction exactly. The correct definition does not depend on what the data turned out to show. It is nonetheless a deviation from the frozen document, EK-1 itself states that it must be declared in the paper, and we declare it here. Both rules are reported: the corrected gate is primary, and the original gate is carried as a sensitivity arm. The minimum-n rule above is likewise post hoc, is a reporting convention only, and is used in no hypothesis test.
+**Pre-registration, and one deviation from it.** The main pre-registration (`sonuclar/F4_on_kayit.txt`) was frozen before the runs. Its item 3 applied the 0.80 gate to whether a cell "answers" the claims, and that phrase covers two distinct quantities: whether the model emitted a parsable label at all, and whether that label was a commitment rather than an abstention. Addendum EK-1 (`sonuclar/F4_on_kayit_ek.txt`, 28 July 2026) re-defined the gate onto the first of the two. The addendum was written after the closed-book calls had completed — 18 models × 2 conditions × 473 claims = 17,028 calls — but before any accuracy metric had been computed; only response and abstention counts had been inspected at that point, and the addendum records that state. The reason for the change is a definition rather than an observation: applying an 0.80 floor to the commitment rate would classify the study's dependent variable as protocol non-compliance, so that a model producing fully parsable output while abstaining on 467 of 473 claims would be scored as non-compliant when it is in fact following the instruction exactly. The correct definition does not depend on what the data turned out to show. It is nonetheless a deviation from the frozen document, EK-1 itself states that it must be declared in the paper, and we declare it here. Both rules are reported, and the sensitivity arm the addendum requires is given here rather than deferred, because its result is not a formality. Applying the original 0.80 gate to the *commitment* rate, over the twenty E1 / variant A cells excluding the rule baseline, leaves **7 cells scored and removes 13**. The 13 removed include every system this paper's findings rest on: `claude-sonnet-5` at a commitment rate of 0.615, `claude-haiku-4.5` at 0.710, and `qwen2.5:32b-instruct` at 0.173, the model that carries the entire grounded ladder of §4.6. The seven survivors are the high-commitment, near-chance configurations. **This deviation is therefore load-bearing in a way the corpus deviation of §4.6.5 is not**, and a reader who rejects the redefinition should read this paper as reporting only those seven cells. We think the redefinition is correct — a 0.80 floor on the commitment rate classifies the study's dependent variable as non-compliance, so a system that emits perfectly parsable output while declining 467 of 473 claims would be recorded as protocol-violating when it is following the instruction exactly — and the argument for it does not depend on which systems it happens to retain. But the fact that it retains precisely the systems we go on to discuss is a reason for the reader to weigh the argument rather than the outcome. The minimum-n rule above is likewise post hoc, is a reporting convention only, and is used in no hypothesis test.
 
 ## 3.5 Grounded arms
 
@@ -952,6 +952,36 @@ checksums and different retrieved-unit lists. A containment rule is evidently
 sensitive to whether the matching string is present somewhere in the three
 supplied passages and largely indifferent to which unit boundaries produced them.
 
+### 4.6.6 The seventeen claims flagged for human review
+
+Building the refined corpus surfaced 31 claims whose quoted text was located in a
+unit other than the one the claim record names. Measurement resolved 14 of them
+as artefacts of the splitting procedure or as cases the expert reconciliation had
+already corrected. The remaining **17 were declared `needs_human_review`** under
+annex EK-6 §4, which forbids resolving borderline cases automatically, keeps them
+in the run — removing them would change the selectivity being measured — and
+requires that they appear as a separate row and enter the primary comparisons as
+a sensitivity check. The claim identifiers are 25, 38, 60, 70, 123, 159, 189,
+203, 211, 278, 310, 323, 351, 426, 444, 455 and 476. They were subsequently
+adjudicated by the domain specialists and **no gold label changed**; the v7a
+labels used throughout this paper are the labels those claims already carried.
+
+**Table 8. The seventeen flagged claims, scored separately.**
+
+| arm | condition | n | committed | accuracy |
+|---|---|---|---|---|
+| R1 | E1 | 8 | 7 | 1.0000 |
+| R1 | E2 | 8 | 8 | 1.0000 |
+| R2 | E1 | 17 | 16 | 0.8125 |
+| R2 | E2 | 17 | 17 | 0.8824 |
+| R3-BM25 | — | 17 | 17 | 0.5294 |
+
+Removing them from the headline contrast moves it by less than the width of its
+interval: R2 − R3-BM25 is +0.2292 [+0.1932, +0.2639] on all 473 claims and
++0.2312 [+0.1943, +0.2672] on the 456 that remain under E1, and +0.2162
+[+0.1829, +0.2512] against +0.2154 [+0.1798, +0.2504] under E2. The flagged
+claims are not driving the result.
+
 ## 4.7 The expert audit of the gold labels: both passes
 
 Every figure above is scored against the v7a gold labels, so the labels
@@ -1027,7 +1057,29 @@ p = 0.2216), so we report it as a trend and make no claim of predictive validity
 for the first-pass flag. A screening pass that cannot be shown to concentrate
 errors cannot be used to argue that the unscreened remainder is clean.
 
-### 4.7.3 What this does and does not license
+### 4.7.3 Every result under both label sets
+
+Annex EK-5 §8 requires that results be reported under the pre-revision gold (v6)
+alongside the post-reconciliation gold (v7a), on the ground that a large
+difference would itself be a finding. All 56 model × condition cells were scored
+under three label sets — v7a as primary, v6 and v7b as sensitivity — and the
+comparison is summarised here rather than tabulated in full, since the
+differences are small and uniform.
+
+Across the model cells the mean absolute difference between v7a and v6 balanced
+accuracy is 0.0039. The largest is 0.0346, at `qwen2.5:32b-instruct` under E1
+(0.6769 against 0.6423) — the low-coverage cell where 82 commitments make each
+relabelled claim weigh more — followed by 0.0208 at `llama3.2:1b` under E2. No
+verdict in Section 4 changes under v6: the same two open-weight cells exclude
+chance after correction, and the same hosted model shows a positive condition
+contrast. The one cell where the label set matters qualitatively is the rule
+baseline, R3-rule, which scores 1.0000 under v6 and 0.9860 under v7a; that gap
+is not noise but the EK-5 correction itself, and Section 4.5 is about exactly
+it. λ is the measure EK-5 predicted would be most exposed, since the P1 label
+distribution changes; it moves by less than the balanced-accuracy figures do in
+every cell we report.
+
+### 4.7.4 What this does and does not license
 
 The audit establishes that the gold labels are internally consistent on the
 evidence the first pass shows a rater, and that a contextual error rate of

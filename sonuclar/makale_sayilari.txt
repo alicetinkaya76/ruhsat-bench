@@ -674,3 +674,11 @@ OLMAYAN hicbir sayi kullanilmaz.
     (bu, 4.5'te zaten anlatilan EK-5 duzeltmesinin ta kendisidir)
   >> Altin surumu hicbir modelin hukmunu degistirmiyor; en buyuk kayma
      qwen2.5:32b'nin E1 hucresinde ve o hucre zaten dusuk kapsamli.
+
+### D5.9 — 5. TURDA METNE GIREN IKI EK DEGERIN KAYNAGI
+  0.6423 : qwen2.5:32b-instruct E1 dengeli dogruluk, v6_onarilmis altin
+           kaynak f4_analiz_raporu.txt 5. bolum (uc altin tek tabloda);
+           v7a karsiligi 0.6769, fark +0.0346 (en buyuk altin duyarliligi)
+  99.76  : Bonferroni-21'in aralik duzeyi = 100*(1 - 0.05/21) = 99.7619
+           (Tablo 3b'nin aile-buyuklugu duyarlilik satiri)
+  Diger duzeyler: Bonf-2 97.5 · Bonf-17 99.71 · Bonf-18 99.72
