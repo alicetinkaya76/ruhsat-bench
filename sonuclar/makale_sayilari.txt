@@ -435,3 +435,29 @@ OLMAYAN hicbir sayi kullanilmaz.
   Ingilizce tarif: 'accuracy on the predominantly-true direct family (163
   claims, 156 true) plus accuracy on the all-false cross-reference family
   (121 claims), minus one'. Yanlilikla calisan bir model lambda ~ 0 verir.
+
+==========================================================================
+## EK — 5. TUR (29.08.2026). EKSIK KALAN SAYILARIN KAYNAGA BAGLANMASI.
+==========================================================================
+
+### A@128 (frontCA128_k1) — EK-7'nin 0.66 esigini gerekcelendiren deger
+  Muhurlu f4_skor.py ile YENIDEN URETILDI (bu oturumda):
+    scripts/f4_skor.py --jsonl sonuclar/frontCA128_k1.jsonl \
+                       --claims data/iddialar/uretilen_iddialar_v7a.csv
+
+    claude-sonnet-5 / E1   dengeli_dogruluk 0.6395   taahhut 289/473 (0.611)
+    claude-sonnet-5 / E2   dengeli_dogruluk 0.6175   taahhut 473/473
+
+  gorev4_raporu.txt:74 ile BIREBIR (0.6395).
+  NOT: varsayilan altin (v6) ile ayni kosu 0.6443 verir. Makaledeki her
+  sayi v7a altinla uretilir; bu fark v6->v7a duzeltmesinin etkisidir.
+
+  EK-7 3'un 0.66 esigi bu deger ile arsiv alt siniri 0.6796 arasinin
+  yaklasik ORTA NOKTASIDIR. EK-7 esigin DISSAL OLARAK GEREKCELENDIRILMEMIS
+  oldugunu kendisi yaziyor; makalede boyle aktarilir.
+
+### DUYARLILIK KOLU (EK-6 3) — HENUZ ALINAMADI
+  Durum: TF-HPC'de kosuldu/kosuyor (sonuclar/f5/duyarlilik_1366.jsonl),
+  ANCAK VPN kapali oldugu icin cikti bu oturumda INDIRILEMEDI.
+  Bu bolume HICBIR SAYI YAZILMAMISTIR. Kol indirilene kadar makalede
+  "yan yana tablo" verilemez; taslakta yer tutucu ACIK BIRAKILDI.
