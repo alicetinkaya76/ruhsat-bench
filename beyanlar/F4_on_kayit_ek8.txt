@@ -1,0 +1,78 @@
+RUHSAT-Bench — ON KAYIT EK-8  (EK-6 DUYARLILIK KOLUNUN YEREL KOSUMU)
+=====================================================================
+Tarih  : 29.08.2026
+Durum  : Bu ek, duyarlilik kolunun YEREL kosumundan ONCE yazildi ve
+         commit'lendi. Yerel makinede henuz hicbir tam kol kosulmamistir.
+Kapsam : YALNIZCA kosum ortami ve model etiketi. EK-6'nin korpus kararini,
+         EK-4'un kollarini, karsilastirmalarini ya da gecersizlik
+         sartlarini DEGISTIRMEZ.
+
+
+1. NEDEN BU EK
+--------------
+EK-6 3 duyarlilik kolunu ZORUNLU tutuyor:
+  "DUYARLILIK KOLU : data/korpus (1366 birim, EK-4'un ON KAYITLI korpusu)
+   Ayni kollar bu korpusla da kosulur ve TABLODA YAN YANA verilir."
+
+Kol TF-HPC'de baslatildi. 29.08.2026 itibariyle VPN erisimi YOK; ciktiya
+ulasilamiyor ve ne zaman ulasilacagi bilinmiyor. Makale bu tabloyu vaat
+ediyor. Vaadi tutmak icin kol YEREL makinede yeniden kosulur.
+
+
+2. DEGISEN TEK SEY: ORTAM VE MODEL ETIKETI
+-------------------------------------------
+                        BIRINCIL KOL (TF-HPC)      DUYARLILIK KOLU (yerel)
+  makine                Quadro RTX 8000            Apple Silicon (macOS)
+  ollama                0.32.14                    0.32.14 (:11435)
+  model ETIKETI         qwen2.5:32b-instruct       qwen2.5:32b
+  nicemleme             (kayitta yok)              Q4_K_M, 32.8B
+  tohum / max_token     42 / 128                   42 / 128 (AYNI)
+  korpus                korpus_v2 (1755)           korpus (1366)  <-- KOL BU
+
+Model etiketleri FARKLI YAZILIYOR. Ollama'da 'qwen2.5:32b' normalde
+'qwen2.5:32b-instruct' ile ayni manifesti gosterir ANCAK bu depoda
+KANITLANMAMISTIR: F5 kayitlari model DIGEST'i tutmuyor, yalnizca ad tutuyor.
+Bu bir ACIK SINIRDIR ve makalede boyle yazilir.
+
+
+3. POZITIF KONTROL (kosudan once sabitlendi)
+---------------------------------------------
+Duyarlilik kolu ancak asagidaki kontrol GECERSE gecerli sayilir.
+
+  Kontrol: BIRINCIL korpusla (korpus_v2) yerel makinede R2/E1+E2, ilk 60
+           iddia kosulur ve TF-HPC'nin k1 ciktisiyla karsilastirilir.
+  Olcut  : 'ham' alani (karar + guven) BIREBIR ayni olmali.
+
+  (a) 120/120 birebir  -> model davranissal olarak OZDES sayilir;
+                          duyarlilik kolu BIRINCIL kolla karsilastirilabilir.
+  (b) >=1 fark         -> ortam/model KARISMISTIR (confounded). Duyarlilik
+                          kolu yine kosulabilir ama korpus etkisi model
+                          etkisinden AYRILAMAZ; makalede tablo YAN YANA
+                          VERILMEZ, yalnizca bu KARISIKLIK raporlanir.
+
+Bu esik kosu SONRASI DEGISTIRILMEYECEKTIR.
+
+ON DAYANAK (kosudan once olculdu, kayit altinda):
+  * kuru kosu ile istem_sha256   124/124 HPC ile BIREBIR
+  * kuru kosu ile korpus_sha256  124/124 BIREBIR
+  * kuru kosu ile getirilen      124/124 BIREBIR
+  => Boru hatti ozdes; tek bilinmeyen model agirliklaridir. Kontrol
+     tam da bunu sinar.
+  * on-hiz olcumu 5 cagri: 5/5 birebir (n kucuk, kanit sayilmaz;
+    kapiyi 120 cagrilik kontrol belirler)
+
+
+4. GECERSIZLIK SARTLARI (EK-4 10 ile ayni ailede)
+--------------------------------------------------
+  * Kesilen yanit orani %1'i asarsa kol gecersizdir.
+  * R2 geri cagirma orani basilmazsa kol birincil sayilmaz.
+  * Kol ici tekrar GEREKMEZ: qwen2.5:32b icin kol ici uyusma 1.0000
+    olculmustu (makale_sayilari.txt, F5 bolumu). TEK KOSU yeterlidir.
+  * TF-HPC ciktisi sonradan ele gecerse, YEREL kol ile KARSILASTIRILIR
+    ve fark cikarsa ikisi de raporlanir; yerel kol sessizce atilmaz.
+
+
+5. BU EKIN YAPMADIGI
+--------------------
+Birincil kolu (korpus_v2, TF-HPC) DEGISTIRMEZ. Makalenin birincil
+sayilari TF-HPC kosusundan gelmeye devam eder.
