@@ -1,0 +1,52 @@
+EK-8 YEREL KOSU — DURDURULDU (29.08.2026, 23:53)
+=================================================
+Bu, EK-8 3'un pozitif kontrol kapisinin DUSMESI degildir. Kapiya
+VARILAMADI: kosu donanim sinirinda takildi ve elle durduruldu.
+
+1. NE OLCULDU (kanit)
+---------------------
+KURU KOSU (LLM'siz), birincil korpusla, TF-HPC k1 ciktisina karsi:
+    istem_sha256    124/124  BIREBIR
+    korpus_sha256   124/124  BIREBIR
+    getirilen       124/124  BIREBIR
+=> Boru hatti (korpus + BM25 getirim + istem kurulumu) iki makinede OZDES.
+
+ON HIZ OLCUMU, 5 cagri, qwen2.5:32b @127.0.0.1:11435:
+    ham alani (karar|guven) 5/5 HPC ile BIREBIR
+    ortalama 13.0 sn/cagri   (HPC ayni cagrilarda 2.2 sn/cagri)
+
+POZITIF KONTROL (hedef 120 cagri) — 12 cagrida durdu:
+    tamamlanan 12/120, hepsi 'tamam'
+    12'sinde de HPC ile karsilastirma YAPILMADI (kapi 100 cagri istiyor)
+    kismi cikti: sonuclar/f5/ek8_yerel_pk_kismi.jsonl
+
+2. NEDEN DURDU (olculdu, tahmin degil)
+--------------------------------------
+Durma aninda:
+    ollama :11435 yuklu model  qwen2.5:32b  28.2 GB
+    sistemde bos bellek        %12
+    swap                       20480 MB'in 19732 MB'i DOLU  (bos 748 MB)
+    f4_dayanak.py CPU          %0.0    (HTTP yanitini bekliyor)
+    llama-server CPU           %0.1    (ilerlemiyor)
+    son kayit ile olcum arasi  3.5 dakikadan fazla, YENI KAYIT YOK
+
+28.2 GB'lik model bu makinenin fiziksel bellegine sigmiyor; sistem
+takas alanina dusuyor ve takas da dolmus durumda. Model bellekten
+dusuruldukten sonra swap 19.7 GB -> 12.5 GB'a geriledi.
+
+3. HUKUM
+--------
+qwen2.5:32b bu makinede UZUN KOSU icin KULLANILAMAZ. Duyarlilik kolu
+1524 cagri gerektiriyor; 13 sn/cagri en iyi durumda ~5.5 saat eder,
+ancak gozlenen davranis takilma yonunde ve makine kullanilamaz hale
+geliyor. Kosu SURDURULMEDI.
+
+EK-8 gecerliligini KORUYOR: beyan kosudan once yazilmisti, kapi
+degismedi, kapiya varilamadigi burada yaziliyor. VPN gelince ya
+TF-HPC ciktisi indirilir ya da kol TF-HPC'de yeniden kosulur.
+
+4. MAKALEYE ETKISI
+------------------
+EK-6 3'un zorunlu duyarlilik kolu HALA ALINAMADI. Taslakta
+'[STATUS — TO BE COMPLETED BEFORE SUBMISSION]' isareti DURUYOR ve
+kaldirilmadi. 1366 birimlik korpustan TEK BIR SAYI makaleye girmedi.
