@@ -195,3 +195,48 @@ verilmez**, karisiklik raporlanir.
 
 Taslakta bu bosluk `[STATUS — TO BE COMPLETED BEFORE SUBMISSION]` diye
 GORUNUR birakildi; kolun sayisi gelmeden makale gonderilmez.
+
+### EK-6 DUYARLILIK KOLU — KAPANDI (30.08.2026)
+
+VPN geldi. Kol TF-HPC'de zaten bitmişti (29 Ağu 12:34, 1997 kayıt).
+İndirildi; `sha256` uzaktaki dosyayla **birebir**
+(`1cb99fb8611a4689…`). EK-4 §10 geçersizlik şartları geçti: kesilen
+0/1524, geri çağırma basıldı, 1997/1997 `tamam`.
+
+**Ön koşul sınandı:** birincil kol 3 koşunun çoğunluğu, duyarlılık kolu tek
+koşu. Üç koşu **1524/1524 birebir** olduğu için çoğunluk oyu = tek koşu;
+karşılaştırma eşit granülerlikte.
+
+**Sonuç — hiçbir kolda korpus etkisi sıfırı dışlamıyor:**
+
+| kol | koşul | 1755 | 1366 | eşli fark | %95 GA |
+|---|---|---|---|---|---|
+| R1 | E1 | 0.9164 | 0.8976 | +0.0188 | [−0.0040, +0.0475] |
+| R1 | E2 | 0.8615 | 0.8486 | +0.0128 | [+0.0000, +0.0343] |
+| R2 | E1 | 0.8229 | 0.8159 | +0.0070 | [−0.0203, +0.0354] |
+| R2 | E2 | 0.8100 | 0.8027 | +0.0073 | [−0.0151, +0.0296] |
+| R3-BM25 | — | 0.5938 | 0.5938 | +0.0000 | — |
+
+Makaleye **§4.6.5 + Tablo 7** olarak girdi; §3.2'deki yer tutucu kaldırıldı.
+
+**İki yan bulgu:**
+1. Ham korpusun BM25 geri çağırması **daha yüksek** (0.3010 vs 0.2734) ama
+   dört dayanaklı hücrenin dördünde de puanı **daha düşük**. §4.6.4'ün
+   "getirim doğruluğa tavan koymaz" bulgusunun bağımsız ikinci kanıtı.
+2. R3-BM25 iki korpusta **473/473 aynı** kararı veriyor; getirilen pasaj
+   kümesi 271/473 iddiada farklı olmasına rağmen. Boru hattı hatası
+   olmadığı korpus sha256 ve getirilen listeleri karşılaştırılarak
+   doğrulandı.
+
+**Kendi hatam, pozitif kontrolle yakalandı:** eşli bootstrap'ta küme
+anahtarını `kanun`/`madde` diye almıştım; altın kayıtta o alanlar yok,
+doğrusu `altin[id]['kume']`. Yanlış anahtar her şeyi tek kümeye topluyor ve
+**sıfır genişlikte GA** üretiyordu. Bilinen bir sonuç (R2−R3bm25 +0.2292
+[+0.1939, +0.2635]) yeniden üretilerek kapı kondu; düzeltilmiş uygulama
++0.2292 [+0.1932, +0.2639] veriyor.
+
+**Yerel koşu denemesi:** VPN yokken kol yerelde koşulmak istendi (EK-8
+beyanı koşudan önce yazıldı ve commit'lendi). 32B model bu makinenin
+belleğine sığmadı — swap 20 GB'ın 19,7 GB'ı dolu ölçüldü — ve koşu
+durduruldu. Rapor: `sonuclar/ek8_yerel_kosu_raporu.txt`. EK-8 arşivde
+kalıyor; kapıya varılamadığı yazılı.
