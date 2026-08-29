@@ -715,3 +715,10 @@ OLMAYAN hicbir sayi kullanilmaz.
     P6_yil              DOGRU 15 · YANLIS 15      (rastgeleye yakin)
     P6_yil_yanlis       YANLIS 12 · DOGRU 18      (rastgeleye yakin)
   >> haiku "degismedi" ciftinde SABIT, "yil" ciftinde rastgeleye yakin.
+
+### D5.11 — KACINMA SAYISI YUZDESININ DUZELTILMESI
+  arsiv kacinma: 181 · 184 · 182  -> ORTALAMA 182.33 (aralik [181, 184])
+  bugun        : 178
+  goreli dusus = (182.33 - 178) / 182.33 = 0.0238 -> %2.4
+  ONCEKI "%2.2" degeri ortalamayi degil 182'yi (medyani) kullaniyordu; YANLIS.
+  Duzeltildi: makale artik "%2.4, arsiv ortalamasi 182.33'e karsi" diyor.

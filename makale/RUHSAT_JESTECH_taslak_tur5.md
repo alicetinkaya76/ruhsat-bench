@@ -36,11 +36,13 @@ text changes the operating point decisively. On the pre-registered primary
 family, a 32B open-weight model gains +0.2607 in balanced accuracy under forced
 choice when three retrieved passages are supplied (95% CI [+0.2218, +0.2964])
 and +0.3552 when the cited article is supplied (95% CI [+0.3112, +0.3984]); both
-survive correction. Against a string-matching rule applied to the *same*
+survive correction. The second figure is computed on the 289 claims that cite a
+specific article, against a closed-book baseline restricted to those same claims,
+because the oracle-citation arm is not defined elsewhere. Against a string-matching rule applied to the *same*
 retrieved passages, the model adds +0.2292 under E1 (95% CI [+0.1939, +0.2635]),
 so the judgement step is separable from the presence of evidence. Third, and
-this is the qualification result: a hosted model re-run months later on the same
-frozen claim set, at the same budget and with byte-identical prompts, kept its
+this is the qualification result: a hosted model re-run about four weeks later on the
+same frozen claim set, at the same budget and with byte-identical prompts, kept its
 forced-choice accuracy but lost roughly half of what abstention had been buying
 it (BAcc(E1) − BAcc(E2) falling from 0.0762 to 0.0332) while the number of
 abstentions barely moved. A qualified component changed in a way that
@@ -72,7 +74,7 @@ Automating these checks is a long-standing goal in construction informatics. Rul
 
 **RUHSAT-Bench.** We assemble 473 claims over the six documents above, indexed against a corpus of 1,755 regulatory units, with a gold label distribution of 223 true and 250 false. Claims are organised in six probe families: direct assertion (163), numeric value (37), cross-reference (121), currency of amendment (120), anachronism (19), and fabricated provision (13). Each system is run under two conditions: abstention-permitted (E1) and forced binary choice (E2). Closed-book operation is one arm of the design, not the whole of it: a grounded ladder run on the same claims differs from the closed-book arm only in the evidence supplied and in who judges it — the cited article verbatim (R1), passages returned by an untuned BM25 retriever (R2), and those same retrieved passages judged by a lexical containment rule with no model at all (R3-BM25) — so that the study measures a mode of use rather than pronouncing on a technology. A separate deterministic control that performs no retrieval, R3-rule, is used to check the scoring path rather than to compete with the models; the two are kept apart throughout, and Section 3.5 states why.
 
-**Gold labels and what the audit does and does not certify.** Two coders audited the claim set. On the first pass — is the claim, read on its own, correctly labelled — agreement was complete on the decision axis (Cohen's κ = 1.000, n = 150) and high on the quality axis (κ = 0.860). A second pass asked a harder question: whether a claim still says what its source article says once the whole article is read. There agreement fell to κ = 0.722 (n = 58), all six disagreements ran in the same direction (sign test p = 0.0312), and the two known gold errors planted as a positive control were caught 1 of 2 by the looser adjudication rule and 0 of 2 by the strict one. The pattern is systematic rather than random: the two coders are applying different rules, which is a definitional problem and not a measurement error, and it cannot be closed by averaging. We report the first-pass figures and the second-pass figures together throughout, because the first on its own would overstate what the audit establishes. Section 4 gives the full second-pass result and Section 6 treats it as a limitation on gold-label quality. Independently of the coders, the currency-of-amendment family was checked against official HTML on mevzuat.gov.tr, where 20 of 20 sampled claims agreed.
+**Gold labels and what the audit does and does not certify.** Two coders audited the claim set. On the first pass — is the claim, read on its own, correctly labelled — agreement was complete on the decision axis (Cohen's κ = 1.000, n = 150) and high on the quality axis (κ = 0.860). A second pass asked a harder question: whether a claim still says what its source article says once the whole article is read. There agreement fell to κ = 0.722, approximate 95 % CI [0.513, 0.933] (n = 58), all six disagreements ran in the same direction (sign test p = 0.0312), and the two known gold errors planted as a positive control were caught 1 of 2 by the looser adjudication rule and 0 of 2 by the strict one. The pattern is systematic rather than random: the two coders are applying different rules, which is a definitional problem and not a measurement error, and it cannot be closed by averaging. We report the first-pass figures and the second-pass figures together throughout, because the first on its own would overstate what the audit establishes. Section 4 gives the full second-pass result and Section 6 treats it as a limitation on gold-label quality. Independently of the coders, the currency-of-amendment family was checked against official HTML on mevzuat.gov.tr, where 20 of 20 sampled claims agreed.
 
 **What would count as usable?** A benchmark number is not a verdict on its own; declaring a system unusable requires a threshold, and we could not locate a defensible one. Turkish building-inspection practice sets no accuracy requirement for advisory software, and the compliance-checking literature reports system performance without stating an acceptance level. We therefore do not issue an absolute verdict. Section 2.2 sets out the shape such a criterion would need to have — which is, we argue, a criterion on the abstention behaviour rather than on accuracy alone — and our results are reported so that a reader who does have a threshold in mind can apply it.
 
@@ -110,7 +112,7 @@ This gives the shape of a usable acceptance criterion: a stated coverage level, 
 
 A calibration certificate for a torque wrench carries an expiry date; the instrument is re-qualified on a schedule because its behaviour drifts. Hosted LLMs are updated behind a stable model identifier, and Section 4.4 reports one case in which behaviour on a fixed task changed between two dates without any announced version change. We attach no citation to the general phenomenon: we found no published account of it whose bibliographic record we could verify, and the evidence offered here for it is our own measurement. A benchmark score for such a system is therefore a measurement at a date, not a property of the name.
 
-We treat this as part of the study design rather than as a limitation note. One hosted configuration was re-run on the frozen 473-claim set months after the archived runs, under prompts whose identity we verified. Section 4.4 reports what changed and Section 5.3 sets out which baseline the comparison should use and what the provenance of the archived runs does and does not allow us to assert. The result is reported not because the direction of the change is itself of interest, but because it establishes that a score of this kind needs a date attached and a re-qualification procedure defined — which is a requirement any deployment in a regulated inspection workflow would have to meet.
+We treat this as part of the study design rather than as a limitation note. One hosted configuration was re-run on the frozen 473-claim set about four weeks after the archived runs, under prompts whose identity we verified. The interval is stated as approximate on purpose: the archived run records carry no timestamp, and four weeks is inferred from the dates of the surrounding pre-registration documents (2 August and 28 August 2026). An earlier draft said "months", which the record does not support. Section 4.4 reports what changed and Section 5.3 sets out which baseline the comparison should use and what the provenance of the archived runs does and does not allow us to assert. The result is reported not because the direction of the change is itself of interest, but because it establishes that a score of this kind needs a date attached and a re-qualification procedure defined — which is a requirement any deployment in a regulated inspection workflow would have to meet.
 
 ---
 
@@ -158,9 +160,9 @@ Citations are resolved from the claim text alone, never from the generator's boo
 
 ## 3.4 Conditions, prompt variants, runs and scoring gates
 
-Every claim is asked twice. **E1** allows abstention (true / false / not sure); **E2** forces a binary choice. Two system-prompt variants (A and B) were written for each condition; A is primary and B is a controlled re-wording. Output budget is part of the run label (A@32, A@128, B@128). For the hosted models, extended thinking was disabled so that the task matched the local arm, and this was verified per response rather than assumed.
+Every claim is asked twice. **E1** allows abstention (true / false / not sure); **E2** forces a binary choice. Two system-prompt variants (A and B) were written for each condition; A is primary and B is a controlled re-wording. Annex EK-2, written after both variants had run but before any cross-variant comparison was computed, records that B's declared role changed at that point. The main pre-registration had called B a *consistency check*, wording that presumes B would confirm A. It does not: re-wording the system prompt alone moves abstention rates by tens of points on the same claims and the same model. EK-2 therefore reframes B as a controlled manipulation of the measurement's stability, and the instability is reported as a finding rather than as a deviation (§4.4). The reframing was declared before the comparison was computed, and we note it here because a role change of this kind is otherwise indistinguishable from choosing an interpretation after seeing the result. Output budget is part of the run label (A@32, A@128, B@128). For the hosted models, extended thinking was disabled so that the task matched the local arm, and this was verified per response rather than assumed.
 
-**Repeat runs.** Each hosted configuration and each local grounded arm was executed three times and scored by majority vote. The policy was adopted because one local model, llama3.2:3b, reproduced only 17 of 20 identical calls; the same model also departed from the output-format instruction, so the two defects recorded for local inference belong to a single model rather than to local inference as such. Repetition is not required everywhere: for qwen2.5:32b-instruct the within-arm agreement across the three grounded runs was 1.0000 in both R1 and R2 (three pairwise comparisons, 1,524 calls per run), which is exact reproduction, so for that model the vote changes no record and a single run would have sufficed. We therefore state the repeat requirement per model, on measured agreement, rather than as a blanket rule for grounded or local execution. Where a majority-voted cell has no majority on a claim — the three runs disagree without a plurality — the claim carries no label in that cell, and §3.7 states how such claims are handled.
+**Repeat runs.** Each archived hosted configuration and each local grounded arm was executed three times and scored by majority vote. The one exception is the repeat run of §4.4, `frontCA32_bugun`, which is a single run compared against single runs, because annex EK-7 fixed that comparison at equal granularity and forbids comparing one run against a majority vote; §4.4 states the consequence for what that run can support. The policy was adopted because one local model, llama3.2:3b, reproduced only 17 of 20 identical calls; the same model also departed from the output-format instruction, so the two defects recorded for local inference belong to a single model rather than to local inference as such. Repetition is not required everywhere: for qwen2.5:32b-instruct the within-arm agreement across the three grounded runs was 1.0000 in both R1 and R2 (three pairwise comparisons, 1,524 calls per run), which is exact reproduction, so for that model the vote changes no record and a single run would have sufficed. We therefore state the repeat requirement per model, on measured agreement, rather than as a blanket rule for grounded or local execution. Where a majority-voted cell has no majority on a claim — the three runs disagree without a plurality — the claim carries no label in that cell, and §3.7 states how such claims are handled.
 
 **Two gates, and one quantity that is deliberately not a gate.**
 
@@ -211,11 +213,11 @@ Five deterministic layers (source identity, accidental truth, sentence cleaning,
 | Question put to the rater | is the claim consistent with the quoted sentence? | is the claim true of the whole article, read in the source? |
 | Sample | 150 items (158 codes with controls) | 60 items: 58 scored + 2 seeded controls |
 | Strata | unflagged / consensus-flagged | N: all 33 items either rater called less than clean; T: 25 drawn from the 105 both called clean; K: 2 seeded known-bad controls |
-| κ, verdict axis | 1.000, 95 % CI [1.000, 1.000] | **0.722** (p_o = 0.897, p_e = 0.628, n = 58) — analysed in §4.7 |
+| κ, verdict axis | 1.000, 95 % CI [1.000, 1.000] | **0.722**, approximate 95 % CI [0.513, 0.933] (p_o = 0.897, p_e = 0.628, n = 58) — analysed in §4.7 |
 | κ, verdict excluding "not sure" | 1.000, 95 % CI [1.000, 1.000] | — |
 | κ, item-quality axis | 0.860, 95 % CI [0.759, 0.961] | — |
 
-The first-pass κ of 1.000 is a property of the instrument rather than evidence that the labels are sound: the workbook shows the rater the quoted sentence and the recorded article, which is the same evidence the label was derived from, so the pass re-derives the generator's reasoning instead of testing it against the legislation. Contextual defect counts from the first pass are zero in every probe family sampled (P1 0/22, P2 0/17, P3 0/15, P4 0/12, P5 0/16), but with these sample sizes the 95 % upper bounds run from 14.9 % to 24.3 %, so the pass bounds the rate loosely rather than establishing it. It bounds it more loosely still once the second pass is read, for the reason given below.
+The first-pass κ of 1.000 is a property of the instrument rather than evidence that the labels are sound: the workbook shows the rater the quoted sentence and the recorded article, which is the same evidence the label was derived from, so the pass re-derives the generator's reasoning instead of testing it against the legislation. Contextual defect counts from the first pass are zero in each of the five probe families the pass sampled (P1 0/22, P2 0/17, P3 0/15, P4 0/12, P5 0/16); the sixth family, currency of amendment (P6), was not sampled by this pass and is instead checked against official sources in §4.7, so the phrase "every family" would misdescribe the coverage. With these sample sizes the 95 % upper bounds run from 14.9 % to 24.3 %, so the pass bounds the rate loosely rather than establishing it. It bounds it more loosely still once the second pass is read, for the reason given below.
 
 **Design of the second pass.** The second pass was built to reach the class the first cannot: a sentence that, lifted from its article, no longer says what the article says. Raters opened the source and read the whole article. Its sampling frame is the 138 non-control items of the first pass (33 N + 105 T); the N stratum was taken whole, the T stratum was sampled at 25 of 105, and 2 items with known gold errors were seeded as a positive control. Analysis was specified as follows.
 
@@ -249,7 +251,7 @@ Both arms are then scored on E2, so the denominator of each is the number of cla
 
 **Statistical treatment.** Uncertainty on any single configuration is a cluster bootstrap, clusters being (law, article) pairs, seed 42, gold v7a. The 473 claims fall into 183 such clusters, and it is those 183 units that are resampled: several claims are generated from one article, they are not independent, and resampling claims individually would narrow every interval in this paper artificially. Contrasts between two arms measured on the same claims — the E1-versus-E2 difference for one model, and the differences between grounded arms — are computed as **paired** cluster bootstraps over the same clusters, so that the interval is an interval on the difference rather than an overlap judgement between two separate intervals. Differences are reported with those intervals and not as bare point values.
 
-Three interval levels appear in this paper and each is labelled wherever it is used.
+Four interval levels appear in this paper and each is labelled wherever it is used.
 
 - *Nominal 95 %*, 10,000 resamples for the closed-book cells and 4,000 for the grounded arms and the paired contrasts, describing one configuration or one difference on its own.
 - *99.72 %*, from the main pre-registration item 1, which requires a Bonferroni correction over the number of models: 18 models at α = 0.05 gives a per-cell level of 0.00278. Computed with 4,000 resamples. This level governs the open-weight closed-book comparison of §4.2. The correction is taken over all 18 models that produced an E1 / variant A cell, which is the more conservative choice, since only 12 of those cells survive the gates of §3.4 and carry a scored accuracy figure.
@@ -272,6 +274,8 @@ For a version-drift question the across-run range is the appropriate reference, 
 ## 3.9 Replication protocol and the limit of its provenance
 
 The replication run held everything constant except date: same model family, same variant A prompt, same output budget as the archived A@32 runs, thinking disabled, temperature not sent (the hosted endpoint rejects it), 473 claims × 2 conditions.
+
+**Runs excluded by annex EK-3.** Six archived hosted runs (`front_k1`–`k3`, `frontB_k1`–`k3`) and two repeat probes (`det1`, `det2`) are retained in the archive and reported nowhere as results. EK-3, written before the replacement runs began, records the reason: the hosted model was called with extended thinking enabled, and on many claims the entire output budget went to thinking, leaving no text block and a `max_tokens` stop reason. Items lost that way are not lost at random — they are the items the model spent longest on — so every metric computed from those runs is biased upward by an unknown amount. The remedy fixed in the same annex was to disable thinking in the primary hosted arm, which equalises the protocol with the local models that emit a direct answer, and to verify per response that no thinking tokens were produced rather than assume it. All hosted figures in this paper come from runs made under that protocol.
 
 We do not claim that nothing on our side changed. The archived runs were executed with `f4_api.py`; the replication used `f4_api_v2.py` (script hash 002df510703fb0a7; the earlier v2 run frontCA128_k1 carries 11a5d5a3b7b7af20). The archived runs carry **no script hash at all** — the hashing was added after them. The variant A prompts are byte-identical across the change (E1 8a8ef386b0b2b619, E2 64dedda000ce465e), but that identity was re-derived from the archived source code, not read from the archived run records. This is the boundary of the provenance chain and any drift interpretation inherits it.
 
@@ -564,7 +568,14 @@ on this measure.
 
 Δ is an **exploratory measure, added in Annex EK-1 §3 after the main
 pre-registration**; the addendum labels it exploratory in those terms and states
-that no multiple-comparison correction is applied to it. It is not part of the
+that no multiple-comparison correction is applied to it. Two departures from that
+addendum's text are declared here. First, the addendum describes the second arm
+as the abstained items; we compute it as the complement of the committed set,
+which additionally contains unparsable and no-majority records, and §3.7 gives
+the reason. Second, the addendum specifies no interval for Δ and this paper
+reports one, because §3.7 undertook to report differences with intervals; the
+intervals are descriptive and carry no correction, consistent with the
+addendum's instruction. It is not part of the
 confirmatory analysis and is reported as a descriptive quantity.
 
 **Table 4. Δ (exploratory measure, EK-1 §3).** Intervals are paired cluster
@@ -604,6 +615,48 @@ Across the hosted arm, Δ is 0.1557 [+0.0724, +0.2374] for the larger model and
 first case, and in the second the interval spans zero, so it is not shown to be
 informative at all. That is the same ordering the confirmatory contrast of
 Section 4.3.1 gives.
+
+### 4.3.3 Probe and subtype breakdowns, and one result they expose
+
+Items 2 and 6 of the main pre-registration require the probe families and their
+subtypes to be broken out and reported descriptively, with intervals and not as
+hypothesis tests; item 2 fixes the minimum detectable differences in advance and
+they are large — 27.6 points for the P5 contrast, 33.4 for the P6 cells — so the
+pre-registration anticipated that these comparisons would be underpowered. They
+are reported here because one of them is not a null.
+
+**P5, cross-reference claims, claude-sonnet-5 under E2.** Accuracy is 0.812 on
+the 32 law-shuffle items and 0.674 on the 89 article-shift items, a difference
+of 13.8 points against a minimum detectable difference of 27.6. The direction is
+plausible — swapping the statute is a coarser error than moving to a neighbouring
+article — but the comparison has no power to establish it and is reported as
+descriptive only.
+
+**P6, currency of amendment, claude-sonnet-5 under E2.** This breakdown is not a
+null, and it changes how the aggregate should be read.
+
+| cell | n | gold | model's answers | accuracy |
+|---|---|---|---|---|
+| P6_degismedi | 30 | false | false ×30 | 1.000 |
+| P6_degismedi_dogru | 30 | true | false ×29, true ×1 | 0.033 |
+| P6_yil | 30 | true | false ×30 | 0.000 |
+| P6_yil_yanlis | 30 | false | false ×30 | 1.000 |
+
+The model answers **false to 119 of 120 P6 claims**. Its aggregate P6 accuracy of
+0.508 is not chance-level performance; it is the arithmetic of a design balanced
+60 true against 60 false meeting a constant response. Read without the
+breakdown, that 0.508 would be described as coin-flipping on questions of
+amendment currency, and the description would be wrong in a way that matters: a
+system that always says "this provision has changed" fails differently from one
+that guesses, and it fails predictably. `claude-haiku-4.5` shows the same
+constancy on the two *degismedi* cells (false ×30 and false ×30) and behaves
+close to randomly on the two *yil* cells (15/15 and 18/12), so the pattern is
+model-specific rather than a property of the probe.
+
+This is the same phenomenon as the rule baseline of §5.4 and it is why this paper
+reports λ alongside accuracy: an aggregate near 0.5 can be produced either by a
+system that is guessing or by one that is answering constantly into a balanced
+design, and only a bias-corrected index or a subtype breakdown separates them.
 
 ## 4.4 Change over time
 
@@ -660,9 +713,22 @@ falls outside the archive range on a measure whose archive spread is narrow
 What Δ does still establish is that abstention on today's run remains
 informative in absolute terms: its interval excludes zero.
 
+**One asymmetry in this section has to be acknowledged.** Δ is set aside above
+because its intervals overlap; the condition contrast is retained on the strength
+of point estimates and a run-to-run range, and no interval on the *change* in
+that contrast is computed. The two measures are therefore not held to the same
+standard. The reason is that the archived runs are three single runs rather than
+a distribution we can resample over, so a paired interval on the difference
+between an archive mean and a later single run is not available from what was
+recorded. What can be said is the weaker statement made here: today's value lies
+outside the range the three archived runs occupied on the confirmatory measure
+and inside the archived intervals on the exploratory one. A reader who declines
+to treat a three-run range as evidence should read this section as reporting an
+unreplicated single-run difference, and Section 6 lists that as a limitation.
+
 The number of abstentions moved little: 181/184/182 in the archive against 178
-today, a 2.2% relative drop from the archive mean and just outside the archive
-range. Frequency was roughly preserved while the difference the abstentions made
+today. Against the archive mean of 182.33 that is a 2.4% relative drop, and it
+falls just outside the archive range. Frequency was roughly preserved while the difference the abstentions made
 declined — the change is in which items were declined, not how many.
 
 **Why the run range is the comparison base.** Two baselines are available and
@@ -694,6 +760,15 @@ over time; the served version could not be read from the API, and today's figure
 rests on a single run whose own within-arm band was not measured.
 
 ## 4.5 The rule-based baseline (R3-rule)
+
+**A note required by annex EK-4 §8, before the figures.** R3-rule's verdict on
+the anachronism family (P3) is not derived from the corpus text at all: it comes
+from the `kabul` (enactment-year) field of the generator's own metadata table.
+That is the same circularity the paper flags for P6 and it is worse, because the
+corpus offers no independent channel against which the year could be checked.
+P3 is therefore reported separately for this baseline and labelled
+metadata-derived: R3-rule scores 1.0000 on the 19 P3 claims under both
+conditions, and that figure certifies the scoring path rather than any capability.
 
 **R3-rule** is a deterministic string-matching baseline with no language model:
 it reads the claim identifier and the claim text only, asserts that restriction
@@ -997,8 +1072,11 @@ The first pass put one question: is the claim consistent with the sentence
 quoted in the record? On 150 items (158 codes including controls), agreement was
 exact on the verdict axis, Cohen's κ = 1.000, 95% CI [1.000, 1.000], and
 unchanged when "not sure" responses were excluded. On the item-quality axis
-κ = 0.860, 95% CI [0.759, 0.961]. Contextual defect counts were zero in every
-probe family sampled: P1 0/22, P2 0/17, P3 0/15, P4 0/12, P5 0/16.
+κ = 0.860, 95% CI [0.759, 0.961]. Contextual defect counts were zero in each of the
+five families this pass sampled: P1 0/22, P2 0/17, P3 0/15, P4 0/12, P5 0/16.
+P6, currency of amendment, carries no first-pass count; it was verified against
+mevzuat.gov.tr instead (20 of 20 agreeing), and that check covers three of the
+six documents.
 
 Neither figure should be read as evidence that the labels are sound. A κ of
 1.000 is a property of the instrument: the workbook shows the rater the quoted
@@ -1019,7 +1097,7 @@ rater had not called clean (stratum N), 25 of the 105 both raters had called
 clean (stratum T), and 2 seeded items with known-bad gold labels as a positive
 control (stratum K).
 
-**Agreement fell.** On the 58 non-control items, Cohen's κ = 0.722
+**Agreement fell.** On the 58 non-control items, Cohen's κ = 0.722, with an approximate 95 % confidence interval of [0.513, 0.933] from the Fleiss standard-error formula. The interval is wide and the normal approximation is rough at n = 58, so it is labelled approximate; it is given because the first-pass κ is reported with an interval and reporting only the favourable one with its uncertainty would be asymmetric. The first-pass interval [1.000, 1.000] and this one do not overlap. κ = 0.722
 (observed agreement 0.897, chance agreement 0.628). Six items were scored
 differently by the two raters, and all six ran the same way: the rater who
 disagreed always moved in one direction rather than the other. A sign test on
@@ -1130,7 +1208,7 @@ The condition contrast BAcc(E1) − BAcc(E2) — how much the option to say "not
 
 Both measures are positive today and both moved in the same direction; the description "halved" applies only to the first. The archive Δ range is wide, [0.1174, 0.1791], with the third run at 0.1791, so the width of the reference band limits how firmly the size of the decrease can be stated. We report both because reporting only the larger one would overstate the effect.
 
-For a building-inspection workflow this pattern matters more than either number alone. A tool whose abstention rate is stable but whose abstentions have become less informative looks unchanged on a dashboard that monitors abstention rate. The "send this one to a human" signal remains visually intact while carrying less of the meaning it was accepted for. An operator monitoring only the abstention count would not see this change; an operator recomputing Δ against a retained gold subset would.
+For a building-inspection workflow this pattern matters more than either number alone. A tool whose abstention rate is stable but whose abstentions have become less informative looks unchanged on a dashboard that monitors abstention rate. The "send this one to a human" signal remains visually intact while carrying less of the meaning it was accepted for. An operator monitoring only the abstention count would not see this change. What would see it is the condition contrast BAcc(E1) − BAcc(E2), recomputed against a retained gold subset: that is the measure whose archive spread is narrow enough for the change to fall outside it. Δ is not the right instrument for this job even though it moves in the same direction, because its intervals on the repeated run overlap the archived intervals throughout (§4.4); a monitor built on Δ alone would have registered a drop it could not distinguish from resampling.
 
 ## 5.3 Re-qualification: a fixed test set, a changed component
 
@@ -1228,15 +1306,37 @@ Four results carry over to practice.
 
 First, the open-weight closed-book arm is a coverage–accuracy trade-off rather than a flat failure, and how much of it survives depends on the correction. Eighteen local configurations produced an E1 / variant A cell and twelve of them are scored; four exclude chance on uncorrected per-cell intervals, and after the pre-registered Bonferroni correction over eighteen models, two do — `qwen2.5:32b-instruct` (lower bound 0.5349) at coverage 0.173, and `gemma3:27b` (lower bound 0.5017, a margin of 0.0017) at coverage 0.970. There is signal in the local arm, and at that strength it does not support deployment.
 
-Second, abstention frequency and abstention quality can move independently, and the value of abstention is model-specific. Across the archived and repeated hosted runs the abstention count fell 2.2% while the confirmatory condition contrast fell 56% and the exploratory selectivity measure Δ fell 28%. A deployment that monitors abstention rate alone would not have seen this. Across the two hosted models, the same confirmatory contrast is +0.0678 with a Bonferroni-18 interval of [+0.0018, +0.1343] for `claude-sonnet-5`, which excludes zero but by less than two thousandths of a point, and −0.0260 with [−0.0765, +0.0347] for `claude-haiku-4.5`, which does not: abstention is worth something for one of the two models and nothing measurable for the other.
+Second, abstention frequency and abstention quality can move independently, and the value of abstention is model-specific. Across the archived and repeated hosted runs the abstention count fell 2.4% while the confirmatory condition contrast fell 56% and the exploratory selectivity measure Δ fell 28%. A deployment that monitors abstention rate alone would not have seen this. Across the two hosted models, the same confirmatory contrast is +0.0678 with a Bonferroni-18 interval of [+0.0018, +0.1343] for `claude-sonnet-5`, which excludes zero but by less than two thousandths of a point, and −0.0260 with [−0.0765, +0.0347] for `claude-haiku-4.5`, which does not: abstention is worth something for one of the two models and nothing measurable for the other.
 
 Third, a hosted model's behaviour on a frozen item set moved outside its own previously measured run-to-run range while the harness was, as far as source inspection can establish, unchanged. Qualifying such a tool is therefore a dated statement, and it calls for a retained frozen item set and scheduled re-qualification, in the same sense in which a torque wrench carries a calibration expiry.
 
-Fourth, the closed-book deficit is a deficit of the architecture, not of the task. Given the cited article, `qwen2.5:32b-instruct` reaches balanced accuracy 0.9164 [0.8804, 0.9494] (E1, coverage 0.830) and 0.8615 [0.8207, 0.8987] (E2); given three BM25-retrieved passages, 0.8229 [0.7866, 0.8579] and 0.8100 [0.7763, 0.8415]; asked the same claims with nothing supplied, 0.6769 on the 17% of items it will answer and 0.5493 when forced. A string-matching rule over the *same* retrieved passages reaches 0.5938 [0.5598, 0.6261], and the paired difference R2 − R3-BM25 is +0.2292 [+0.1939, +0.2635] under E1 and +0.2162 [+0.1818, +0.2493] under E2, both excluding zero: roughly 22 points of the grounded result come from the model's judgement of the evidence rather than from the evidence being present. The practical implication is direct: do not deploy a closed-book configuration against Turkish building regulation, and put engineering effort into supplying the governing provision. We add two cautions to that recommendation — the grounded arms were run on one model, and the retriever's recall of 0.2734 on the article-attributing subset shows the retrieval component is the least examined part of the pipeline, and it is the component a deployment would have to characterise against its own documents.
+Fourth, the closed-book deficit is a deficit of the architecture, not of the task. Given the cited article, `qwen2.5:32b-instruct` reaches balanced accuracy 0.9164 [0.8804, 0.9494] (E1, coverage 0.830) and 0.8615 [0.8207, 0.8987] (E2); given three BM25-retrieved passages, 0.8229 [0.7866, 0.8579] and 0.8100 [0.7763, 0.8415]; asked with nothing supplied, 0.6769 on the 17% of items it will answer and 0.5493 when forced. Those closed-book figures are computed on all 473 claims while R1 is defined on the 289 that cite an article, so the R1 comparison is not made on the same item set; §4.6.3 gives the matched form, where the closed-book baseline restricted to those 289 claims is 0.6226 under E1 and 0.5062 under E2. A string-matching rule over the *same* retrieved passages reaches 0.5938 [0.5598, 0.6261], and the paired difference R2 − R3-BM25 is +0.2292 [+0.1939, +0.2635] under E1 and +0.2162 [+0.1818, +0.2493] under E2, both excluding zero: roughly 22 points of the grounded result come from the model's judgement of the evidence rather than from the evidence being present. The practical implication is direct: do not deploy a closed-book configuration against Turkish building regulation, and put engineering effort into supplying the governing provision. We add two cautions to that recommendation — the grounded arms were run on one model, and the retriever's recall of 0.2734 on the article-attributing subset shows the retrieval component is the least examined part of the pipeline, and it is the component a deployment would have to characterise against its own documents.
 
 We do not set a numeric acceptance threshold, because the cost asymmetry that would define one was not measured. We report operating points instead, together with the limits under which they should be read: one repeated run, one untuned retriever, grounded arms on a single model, a second expert pass whose disagreement is systematic and whose consensus is not yet held, partial independent currency verification, an unmeasured mechanism, a deviation from the pre-registered coverage rule that we declare in §6, and a repository whose commit history was reconstructed.
 
 ---
+
+# Data and code availability
+
+The frozen source documents with their SHA-256 checksums, the 473-claim set with
+all three gold label versions, the pre-registration and its seven annexes, the
+expert-audit workbooks including the negative second-pass result, the run records
+and the analysis code are released as a single archive.
+
+> **[TO BE COMPLETED BEFORE SUBMISSION]** Repository URL and archival DOI. This
+> paper claims in its abstract and introduction that the material is released;
+> that claim is not true until this block carries a resolvable identifier, and
+> the paper must not be submitted with the block unfilled. Every figure reported
+> here is regenerated from committed outputs by the scripts in that archive, and
+> the number sheet mapping each figure to its producing script is part of it.
+
+*One limit on the provenance of the archive itself.* The version-control history
+of the development repository was lost before submission and the repository was
+reconstructed from dated hand-over packages, whose checksums are recorded in the
+archive. The consequence is stated where it bites: the claim that a
+pre-registration was written before its run rests on the dates written in those
+documents and on the hand-over packages that contain them, and cannot be
+independently established from commit timestamps.
 
 # References
 
