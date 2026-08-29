@@ -383,3 +383,34 @@ OLMAYAN hicbir sayi kullanilmaz.
   Makale: 'R1 and R2 intervals ... touch under E1'
   GERCEK: R1/E1 [0.8804, 0.9494] · R2/E1 [0.7866, 0.8579]
           R1 alt sinir 0.8804 > R2 ust sinir 0.8579 -> AYRIKLAR, DEGMIYORLAR
+
+### DELTA GUVEN ARALIKLARI (3.7 soz vermisti, verilmemisti)
+  (esli kumeli bootstrap 4000, kume=kanun+madde, tohum 42, altin v7a)
+
+  kosu                    Delta            %95 GA
+  arsiv A@32 k1          0.1174   [+0.0344, +0.1974]
+  arsiv A@32 k2          0.1283   [+0.0385, +0.2147]
+  arsiv A@32 k3          0.1791   [+0.0914, +0.2638]
+  A@128 (eski)           0.0670   [-0.0180, +0.1494]   sifiri ICERIYOR
+  A@32 BUGUN             0.1014   [+0.0212, +0.1833]
+  sonnet cogunluk        0.1557   [+0.0724, +0.2374]
+  haiku cogunluk         0.0416   [-0.0448, +0.1380]   sifiri ICERIYOR
+
+  !! ONEMLI NUANS — ONCEKI IFADE ZAYIFLIYOR:
+     'Delta %28 dustu, arsiv araligi DISINDA' ifadesi NOKTA TAHMINLERININ
+     min-maksina dayaniyordu. GUVEN ARALIKLARI HESABA KATILINCA bugunku
+     [+0.0212, +0.1833] arsiv aralıklariyla FAZLASIYLA ORTUSUYOR.
+     Delta EKSENINDE bugun ile arsiv AYIRT EDILEMIYOR.
+     Surum kaymasi bulgusu esas olarak BAcc(E1)-BAcc(E2) olcutune dayanir;
+     Delta AYNI YONU gosterir ama TEK BASINA AYIRT EDICI DEGILDIR.
+     Makalede boyle yazilmalidir.
+
+     Bugunku Delta yine de sifiri DISLIYOR: kacinma hala bilgi tasiyor.
+
+### IKINCI GECIS KAPPA'sinin GA'si
+  kappa = 0.7231  (po 0.897, pe 0.628, n=58)
+  SE (Fleiss yaklasimi) = 0.1073
+  %95 GA (normal yaklasim) = [0.5128, 0.9334]
+  NOT: normal yaklasim n=58'de KABADIR; makalede 'yaklasik' diye
+       nitelendirilmeli. Birinci gecis kappa'si 1.000 [1.000, 1.000] idi;
+       iki aralik ORTUSMUYOR.
