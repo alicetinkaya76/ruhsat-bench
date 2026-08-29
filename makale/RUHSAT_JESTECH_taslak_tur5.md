@@ -144,8 +144,7 @@ Six frozen Turkish regulatory documents cover permitting, building inspection, o
 | | **Total (raw corpus)** | **1,366** | |
 
 Each document is identified in the release by a SHA-256 of its extracted text. The raw segmentation was later found to merge adjacent TBDY clauses, so a refined corpus was built and made primary (EK-6): TBDY 1,208 → 1,523 units, the five remaining documents 158 → 232 units, the latter recovering annex and provisional articles that the first parser had dropped (16 annex and 58 provisional articles). The refined corpus holds 1,755 units. The raw 1,366-unit corpus is retained as a **mandatory sensitivity arm**, because it, not the refined one, is what the pre-registration named: EK-6 §3 requires the same grounded arms to be run over it and reported side by side with the primary corpus.
-
-> **[STATUS — TO BE COMPLETED BEFORE SUBMISSION]** At the time of this draft the sensitivity arm has been specified and launched but its output is not yet in hand, so no side-by-side table is given and **no figure for the 1,366-unit corpus appears anywhere in this paper**. The arm is not omitted and not estimated; it is outstanding. This paragraph is retained in the draft precisely so that the gap is visible rather than silently closed, and the paper is not submitted with it unresolved. Should the arm prove unobtainable, the correct statement is that EK-6's mandatory sensitivity analysis was not delivered, which would itself have to be reported here.
+ The arm was run and is reported side by side in Section 4.6.5; no result in this paper depends on which of the two corpora is used.
 
 ## 3.3 Claim set
 
@@ -846,6 +845,64 @@ findings are properties of that one model, not of grounded prompting, and the
 claim that local grounded arms require three runs is narrowed accordingly: for
 qwen2.5:32b-instruct a single run reproduces the result exactly, as measured.
 
+### 4.6.5 Sensitivity to the corpus choice
+
+The refined corpus was made primary by annex EK-6, which also made a sensitivity
+arm over the raw 1,366-unit corpus **mandatory** rather than optional, on the
+ground that the refinement was a deviation from what EK-4 had named. The same
+model, gold labels, output budget and seed were used; only the corpus differs.
+
+Two properties of the comparison should be stated before the numbers. First, the
+primary arm is a majority of three runs and the sensitivity arm is a single run,
+so the two are comparable only if the three primary runs agree exactly; they do,
+at 1,524 of 1,524 records for both k1–k2 and k1–k3, so the majority vote and any
+single run are the same object here. Second, the sensitivity run satisfies the
+invalidation conditions of EK-4 §10: no response was truncated (0 of 1,524) and
+the retrieval recall is reported below.
+
+**Table 7. Corpus sensitivity (EK-6 §3), qwen2.5:32b-instruct, v7a gold.**
+Intervals are 95% cluster bootstraps (4,000 resamples, seed 42); the difference
+column is a **paired** cluster bootstrap over the same clusters, since both
+corpora are evaluated on the identical claims.
+
+| arm | cond. | n | BAcc (1,755) | 95% CI | BAcc (1,366) | 95% CI | paired difference | 95% CI |
+|---|---|---|---|---|---|---|---|---|
+| R1 | E1 | 289 | 0.9164 | [0.8804, 0.9494] | 0.8976 | [0.8541, 0.9386] | +0.0188 | [−0.0040, +0.0475] |
+| R1 | E2 | 289 | 0.8615 | [0.8207, 0.8987] | 0.8486 | [0.8039, 0.8910] | +0.0128 | [+0.0000, +0.0343] |
+| R2 | E1 | 473 | 0.8229 | [0.7866, 0.8579] | 0.8159 | [0.7698, 0.8559] | +0.0070 | [−0.0203, +0.0354] |
+| R2 | E2 | 473 | 0.8100 | [0.7763, 0.8415] | 0.8027 | [0.7633, 0.8383] | +0.0073 | [−0.0151, +0.0296] |
+| R3-BM25 | — | 473 | 0.5938 | [0.5598, 0.6261] | 0.5938 | [0.5598, 0.6261] | +0.0000 | — |
+
+**No arm shows a corpus effect that excludes zero.** Every point estimate favours
+the refined corpus, by between 0.007 and 0.019 in balanced accuracy, and every
+paired interval contains zero. The R1 / E2 interval has a lower bound of exactly
++0.0000 at the resolution reported and so touches zero without excluding it; it
+is read here as not excluding zero. Decision agreement between the two corpora is
+high but not total — 421 of 473 for R2 under E1, 447 of 473 under E2, 280 of 289
+and 285 of 289 for R1 — so the corpora do produce different individual decisions,
+and the null result is a statement about the aggregate rather than about the
+runs being identical. The conclusion is that **the results of Sections 4.6.2 and
+4.6.3 do not depend on the corpus deviation declared in EK-6**, which is what
+the mandatory sensitivity arm was there to establish.
+
+**The raw corpus retrieves better and scores slightly worse.** BM25 recall of the
+cited unit is 87 of 289 (0.3010) over the raw corpus against 79 of 289 (0.2734)
+over the refined one: splitting fused units into finer ones makes the top-3 less
+likely to contain the cited unit, which is expected. What is not expected on a
+retrieval-bound account is that the arm with the *higher* recall has the
+*lower* balanced accuracy in all four grounded cells. This is a second and
+independent instance of the dissociation reported in Section 4.6.4, obtained by
+varying the corpus rather than by comparing recall against accuracy within one
+configuration.
+
+**The rule baseline is unchanged to four decimals.** R3-BM25 returns identical
+decisions on all 473 claims under both corpora, despite receiving a different set
+of retrieved passages for 271 of the 473 claims and a different recall figure.
+This was checked rather than assumed: the two runs carry different corpus
+checksums and different retrieved-unit lists. A containment rule is evidently
+sensitive to whether the matching string is present somewhere in the three
+supplied passages and largely indifferent to which unit boundaries produced them.
+
 ## 4.7 The expert audit of the gold labels: both passes
 
 Every figure above is scored against the v7a gold labels, so the labels
@@ -1002,6 +1059,8 @@ Three readings follow.
 
 **What this changes about deployment.** The closed-book operating point for this model — balanced accuracy 0.5493 at full coverage under E2, or 0.6769 on the 17% of items it will speak about under E1 — does not support use as a screening aid on Turkish building regulation. The same model, same weights, same host, given the governing article or even three lexically retrieved passages, operates between 0.7763 and 0.9494 across the four grounded intervals. The design recommendation that follows is not "use a larger model" and not "do not use language models here": it is that the provision must be supplied. An architecture that asks a model to recall the Development Law is being asked to do the one thing this benchmark measures it failing at, and the fix is a retrieval or citation-resolution step that puts the text in front of it, not a better recall.
 
+**The corpus deviation does not carry the result.** The refined corpus was a declared deviation from what the pre-registration named, and a deviation that improves the primary numbers is exactly the kind that a reader should distrust. The mandatory sensitivity arm of EK-6 §3 settles it: rerunning every grounded arm over the pre-registered 1,366-unit corpus moves balanced accuracy by between 0.007 and 0.019, and no paired interval excludes zero (§4.6.5). The refinement was adopted for a reason internal to the design — making the supplied unit the cited unit — and it turns out not to be load-bearing for any conclusion. Had it been, the honest report would have been that the paper's grounded results rest on a post hoc corpus change.
+
 ## 5.5 The rule baseline, and one circularity we cannot remove
 
 The rule-based baseline R3-rule, which uses no language model, scores 473/473 on the refined corpus with the v7a gold and 466/473 on the raw corpus with the same gold. A negative control that shuffles the claim-to-rule pairing across five seeds averages 0.5315, so the score is not an artefact of the scoring path. The seven items R3-rule fails on the raw corpus (1.48% of the set) are the seven that the expert panel had frozen: 246, 257, 304, 360, 364, 382, 393. This convergence should not be described as independent replication. R3-rule did not generate those labels; it *failed* on them, which is to say it marked the same seven items. Moreover, the gold correction and the R3-rule failure both trace to the same corpus observation — the merged-clause parsing that the refined corpus repairs. The two views are consistent, but they are two views of one observation, and we report the agreement as a consistency check rather than as corroboration by an independent instrument.
@@ -1044,7 +1103,7 @@ Grounding moves the numbers into a different band but does not by itself settle 
 
 **R2's success is not decomposed.** BM25 recall on the article-attributing subset is 0.2734 while R2 reaches balanced accuracy 0.8229 [0.7866, 0.8579]; the two mechanisms that could explain the difference — sufficient but non-cited passages, and parametric completion — were not separated by an ablation. Reported as measured.
 
-**One untuned retriever.** BM25 at k = 3 over 1,755 units is the only retrieval configuration tested. Its recall of 0.2734 characterises that configuration; and as §5.4 shows, that recall figure does not translate into a bound on grounded accuracy in either direction.
+**One untuned retriever.** BM25 at k = 3 is the only retrieval configuration tested, and its recall of 0.2734 over the 1,755-unit corpus characterises that configuration alone. Two observations bound how that recall figure may be read. Within the primary configuration it does not cap grounded accuracy (§4.6.4). Across corpora it does not order it either: the 1,366-unit corpus retrieves the cited unit more often (0.3010) and scores marginally lower in all four grounded cells (§4.6.5). Neither observation says that retrieval is unimportant; both say that this recall number is not the quantity that predicts accuracy here, and we did not measure what is.
 
 **R1 and R2 are not scored on the same items.** R1 is defined on the 289 article-attributing claims and R2 on all 473, so the R1 − R2 difference has no paired interval and is reported as a point difference only. The paired contrast in this paper is R2 − R3-BM25, which is computed on identical items and identical evidence.
 
