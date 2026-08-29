@@ -467,3 +467,70 @@ OLMAYAN hicbir sayi kullanilmaz.
     gemma3:27b'nin Bonferroni-duzeltmeli alt sinirinin sansi asma payi.
     Kaynak: D2 bolumu, 'gemma3:27b 0.5674 ... Bonf alt 0.5017'.
     Makalede ve kapak mektubunda 'clears chance by 0.0017' diye geciyor.
+
+==========================================================================
+## EK-6 3 DUYARLILIK KOLU — KOSULDU VE INDIRILDI (29.08.2026, TF-HPC)
+==========================================================================
+  cikti : sonuclar/f5/duyarlilik_1366.jsonl  (1997 kayit)
+  sha256: 1cb99fb8611a46898ceff45fbce2c5f596f78b94693d09918a50be7c3a651bff
+          (uzak makinedeki dosyayla BIREBIR dogrulandi)
+  model : qwen2.5:32b-instruct (birincil kolla AYNI) · max_token 128 · tohum 42
+  korpus: data/korpus (1366 birim) sha256 3c925afbd9f076f8...
+  EK-4 10 GECERSIZLIK SARTLARI: kesilen 0/1524 = 0.0000 (<%1) GECTI
+                                 R2 geri cagirma basildi GECTI
+  durum : 1997/1997 'tamam'
+
+### ON KOSUL — birincil kol 3 kosu COGUNLUGU, duyarlilik TEK kosu
+  k1 vs k2: 1524/1524 BIREBIR · k1 vs k3: 1524/1524 BIREBIR
+  => cogunluk oyu = tek kosu; karsilastirma esit granulerliktedir.
+
+### YAN YANA TABLO (EK-6 3'un zorunlu tuttugu)
+  kol     kos    n | 1755 kapsam  BAcc   dogr  lam | 1366 kapsam  BAcc   dogr  lam
+  R1      E1   289 |     0.830 0.9164 0.9208 0.987 |     0.844 0.8976 0.9016 0.913
+  R1      E2   289 |     1.000 0.8615 0.8720 0.988 |     1.000 0.8486 0.8581 0.938
+  R2      E1   473 |     0.899 0.8229 0.8235 0.804 |     0.888 0.8159 0.8167 0.769
+  R2      E2   473 |     1.000 0.8100 0.8161 0.829 |     1.000 0.8027 0.8076 0.782
+  R3bm25  -    473 |     1.000 0.5938 0.5877 -0.043|     1.000 0.5938 0.5877 -0.043
+
+  %95 kumeli bootstrap GA (4000, kume=altin['kume'], tohum 42):
+  R1     E1   1755 [0.8804, 0.9494]   1366 [0.8541, 0.9386]
+  R1     E2   1755 [0.8207, 0.8987]   1366 [0.8039, 0.8910]
+  R2     E1   1755 [0.7866, 0.8579]   1366 [0.7698, 0.8559]
+  R2     E2   1755 [0.7763, 0.8415]   1366 [0.7633, 0.8383]
+  R3bm25 -    1755 [0.5598, 0.6261]   1366 [0.5598, 0.6261]
+
+### ESLI FARK  BAcc(1755) - BAcc(1366)   (esli kumeli bootstrap 4000, tohum 42)
+  R1     E1   +0.0188  [-0.0040, +0.0475]  sifiri ICERIYOR   uyusma 280/289 = 0.9689
+  R1     E2   +0.0128  [+0.0000, +0.0343]  sifiri ICERIYOR   uyusma 285/289 = 0.9862
+  R2     E1   +0.0070  [-0.0203, +0.0354]  sifiri ICERIYOR   uyusma 421/473 = 0.8901
+  R2     E2   +0.0073  [-0.0151, +0.0296]  sifiri ICERIYOR   uyusma 447/473 = 0.9450
+  R3bm25 -    +0.0000  [+0.0000, +0.0000]  ozdes             uyusma 473/473 = 1.0000
+
+  >> HUKUM: HICBIR kol icin korpus secimi sifiri dislayan bir fark
+     uretmiyor. Makalenin butun dayanakli sonuclari korpus secimine
+     DUYARLI DEGILDIR. Nokta tahminlerin hepsi rafine korpus lehine ama
+     kucuk (+0.007 ... +0.019).
+  NOT: R1/E2 alt siniri tam +0.0000; sifiri DISLAMIYOR, siniri tutuyor.
+
+### BM25 GERI CAGIRMA — KORPUS KARSILASTIRMASI
+  1755 (rafine, BIRINCIL) : 79/289 = 0.2734
+  1366 (ham, DUYARLILIK)  : 87/289 = 0.3010
+  >> HAM korpusun geri cagirmasi DAHA YUKSEK oldugu halde dogrulugu
+     bir parca DAHA DUSUK. Bu, 4.6.4'un "getirim orani dayanakli
+     dogruluga tavan koymaz" bulgusunun BAGIMSIZ IKINCI kanitidir.
+
+### R3-BM25 — IKI KORPUSTA OZDES SONUC (kontrol edildi, hata degil)
+  getirilen pasaj kumesi FARKLI : 271/473 iddiada farkli
+  geri cagirma FARKLI           : 79 vs 87
+  buna ragmen karar             : 473/473 AYNI, BAcc birebir 0.5938
+  => Dizgi-icerme kurali, pasajlarin HANGISI oldugundan cok metnin
+     genelinde bulunup bulunmamasina duyarli. Bu bir boru hatti hatasi
+     DEGIL: korpus_sha256 alanlari farkli (d7eb617b... vs 3c925afb...)
+     ve getirilen listeleri farkli oldugu DOGRULANDI.
+
+### ESLI BOOTSTRAP POZITIF KONTROLU (yeni olcut, kendi kapisi)
+  Bilinen: R2/E1 - R3bm25 = +0.2292 [+0.1939, +0.2635]
+  Yeniden uretilen        : +0.2292 [+0.1932, +0.2639]   GECTI
+  (once kume anahtari YANLIS alinmisti -> GA sifir genislikte cikti;
+   dogrusu altin[id]['kume']. Hata pozitif kontrol konmadan once
+   yakalandi cunku sifir genislikli GA imkansizdir.)

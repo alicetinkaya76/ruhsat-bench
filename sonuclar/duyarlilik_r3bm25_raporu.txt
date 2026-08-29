@@ -1,0 +1,12 @@
+==========================================================================
+EK-6 3 DUYARLILIK KOLU — R3-BM25 (model YOK), altin v7a
+kumeli bootstrap 4000, kume=(kanun, madde), tohum 42
+==========================================================================
+korpus                             n dogruluk      BAcc   lambda   %95 GA
+korpus_v2 (1755, BIRINCIL)       473   0.5877    0.5938   -0.043   [0.5598, 0.6261]
+korpus (1366, DUYARLILIK)        473   0.5877    0.5938   -0.043   [0.5598, 0.6261]
+
+ortak iddia: 473
+ESLI FARK  BAcc(1755) - BAcc(1366) = +0.0000   %95 GA [+0.0000, +0.0000]
+  -> sifiri ICERIYOR (korpus secimi R3-BM25'i ANLAMLI degistirmiyor)
+iki korpusun AYNI karari verdigi iddia: 473/473 = 1.0000

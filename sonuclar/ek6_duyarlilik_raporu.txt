@@ -1,0 +1,37 @@
+==============================================================================
+POZITIF KONTROL — esli bootstrap bilinen bir sonucu yeniden uretiyor mu?
+  hesaplanan : +0.2292  [+0.1932, +0.2639]
+  beklenen   : +0.2292  [+0.1939, +0.2635]   (makale_sayilari.txt)
+  HUKUM      : GECTI
+==============================================================================
+
+ON KOSUL — birincil kolun uc kosusu birebir mi?  k1=k2 1524/1524 · k1=k3 1524/1524
+  -> BIREBIR: cogunluk oyu = tek kosu, TEK kosuluk duyarlilik kolu karsilastirilabilir
+
+EK-6 3 — YAN YANA  korpus_v2 (1755, BIRINCIL)  vs  korpus (1366, DUYARLILIK)
+altin v7a · qwen2.5:32b-instruct · max_token 128 · tohum 42 · kesilen 0/1524
+kumeli bootstrap 4000, kume = altin['kume'], tohum 42
+
+kol     kos    n | BIRINCIL 1755                  | DUYARLILIK 1366               
+                 | kapsam   BAcc   dogr  lambda | kapsam   BAcc   dogr  lambda
+R1      E1   289 |  0.830 0.9164 0.9208   0.987 |  0.844 0.8976 0.9016   0.913
+R1      E2   289 |  1.000 0.8615 0.8720   0.988 |  1.000 0.8486 0.8581   0.938
+R2      E1   473 |  0.899 0.8229 0.8235   0.804 |  0.888 0.8159 0.8167   0.769
+R2      E2   473 |  1.000 0.8100 0.8161   0.829 |  1.000 0.8027 0.8076   0.782
+R3bm25  -    473 |  1.000 0.5938 0.5877  -0.043 |  1.000 0.5938 0.5877  -0.043
+
+GA'lar (%95, kumeli bootstrap):
+  R1      E1   1755 [0.8804, 0.9494]   1366 [0.8541, 0.9386]
+  R1      E2   1755 [0.8207, 0.8987]   1366 [0.8039, 0.8910]
+  R2      E1   1755 [0.7866, 0.8579]   1366 [0.7698, 0.8559]
+  R2      E2   1755 [0.7763, 0.8415]   1366 [0.7633, 0.8383]
+  R3bm25  -    1755 [0.5598, 0.6261]   1366 [0.5598, 0.6261]
+
+ESLI FARK  BAcc(1755) - BAcc(1366):
+  R1      E1   +0.0188  [-0.0040, +0.0475]  sifiri iceriyor  karar uyusmasi 280/289 = 0.9689
+  R1      E2   +0.0128  [+0.0000, +0.0343]  sifiri iceriyor  karar uyusmasi 285/289 = 0.9862
+  R2      E1   +0.0070  [-0.0203, +0.0354]  sifiri iceriyor  karar uyusmasi 421/473 = 0.8901
+  R2      E2   +0.0073  [-0.0151, +0.0296]  sifiri iceriyor  karar uyusmasi 447/473 = 0.9450
+  R3bm25  -    +0.0000  [+0.0000, +0.0000]  sifiri iceriyor  karar uyusmasi 473/473 = 1.0000
+
+BM25 GERI CAGIRMA (k=3):  1755  79/289 = 0.2734    1366  87/289 = 0.3010
