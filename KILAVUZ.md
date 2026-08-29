@@ -113,6 +113,37 @@ Beşinci ve son tur. İçindekiler:
 ile v7a altına karşı yeniden üretildi. Taslaktaki 291 ondalık değerin tamamı
 tarandı; kanonik çizelgede olmayan hiçbir yeni sayı kalmadı.
 
+---
+
+## SIRA 4 — UZUNLUK. Tek kalan içerik kararı ve sana ait.
+
+**Taslak 26.824 kelime. JESTECH makaleleri tipik olarak 8–10 bin.** Yani ~3 katı.
+Hakem denetiminde çıkan tek büyük itiraz bu: *"önemli bulgu, özür ve niteleme
+yığınının altında kayboluyor."*
+
+**Tavsiyem: kesme, AYIR.** İçeriğin çoğu makaleyi savunulabilir kılan şey;
+silmek selef makalenin hatasını tersinden tekrarlamak olur. JESTECH ek dosya
+(supplementary material) kabul ediyor. Ana metin ~9 bin kelimede kalsın,
+şu bölümler eke gitsin ve gövdede tek cümleyle işaret edilsin:
+
+| eke gidecek | kelime | gövdede kalacak |
+|---|---|---|
+| §4.2'nin model-model dökümü (Tablo 2 + 2b tam hâli) | ~1.600 | iki cümle + "12'nin 2'si düzeltmeden sonra şansı aşıyor" |
+| §3.4'ün EK-1 kapı sapması tartışması | ~1.371 | 3 cümle: sapma var, taşıyıcı, gerekçesi kavramsal |
+| §3.6 + §4.7'nin tamamı (uzman denetimi) | ~2.400 | κ değerleri + ikinci geçişin olumsuz sonucu, 1 paragraf |
+| §4.3.3 alt-tür kırılımı | ~666 | P6 bulgusu KALSIN (bu güçlü), P5 eke |
+| §4.6.5 + §4.6.6 (duyarlılık + 17 vaka) | ~1.100 | "hiçbiri sonucu değiştirmiyor" + tablo eke |
+| §6 Sınırlamalar | ~1.619 | yarıya in; en sert üçü kalsın |
+
+Bu ~8.700 kelime çıkarır ve ana metni ~18 bine indirir. **Yetmez.** İkinci tur
+için §1 Giriş (1.982) ve §5.4 (1.388) de yarıya inmeli.
+
+**Bunu senin onayın olmadan yapmam**, çünkü neyin gövdede kalacağı bir yayın
+stratejisi kararı ve makalenin karakterini değiştirir. Bir kelime söyle,
+ayırma işini yaparım; ana metin ve ek olarak iki dosya çıkarırım.
+
+---
+
 ## SANA TARAFLI İKİ TAVSİYE DAHA
 
 **`gemma3:27b` dayanaklı kolunu koşturma.** Yarıda kestim ve iyi ettim. Bir model
