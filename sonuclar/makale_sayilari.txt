@@ -745,3 +745,66 @@ OLMAYAN hicbir sayi kullanilmaz.
   >> NOT: bu oturumda dolu calisma kitaplarindan elle yapilan bir
      yeniden sayim T havuzunu 117 bulmustu; O SAYIM YANLIStir, cunku
      v6 kume filtresini uygulamiyordu. Muhurlu betik hakemdir.
+
+==========================================================================
+## EK — 6. TUR DOGRULAMA (30.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D6.1 — KOSULAN MODEL SAYISI 18 DEGIL 20 (5. turda YANLIS yazmistim)
+  f4_analiz.csv ayrik model adi: 22
+    - kural_taban_r3      (model degil, kural tabani)
+    - claude-sonnet-5-B   (claude-sonnet-5'in varyant B kolu, ayri model degil)
+    = 20 GERCEK MODEL  (18 acik agirlikli + 2 barindirilan)
+  varyant A + E1 hucresi olan: 21; kural_taban_r3 haric 20;
+  acik agirlikli (barindirilanlar da haric) 18.
+  >> "Eighteen models were run" YANLIS. 18 yalnizca ACIK AGIRLIKLI sayidir.
+     Ana on kaydin "model sayisi uzerinden Bonferroni"si icin dogru
+     payda 20'dir.
+
+### D6.2 — KACINMA KONTRASTI, BONFERRONI-20 (RAPORLANACAK OLAN)
+  (esli kumeli bootstrap 4000, kume=(kanun,madde), tohum 42, altin v7a)
+  duzey = 100*(1 - 0.05/20) = %99.75
+    claude-sonnet-5   +0.0678  [+0.0018, +0.1359]  SIFIRI DISLIYOR
+    claude-haiku-4.5  -0.0260  [-0.0765, +0.0377]  dislamiyor
+  Dayaniklilik (D5.2 ile birlikte): sonuc aile 2-21 arasinda DEGISMIYOR.
+
+### D6.3 — lambda ALTIN SURUMUNE BAcc'DEN *DAHA COK* DUYARLI (ters yazmistim)
+  |v7a - v6| farklari:
+    model              ko    lambda    BAcc     hangisi daha oynak
+    claude-sonnet-5    E1    0.0088    0.0045   LAMBDA
+    claude-sonnet-5    E2    0.0061    0.0072   bacc
+    claude-haiku-4.5   E1    0.0072    0.0029   LAMBDA
+    claude-haiku-4.5   E2    0.0061    0.0017   LAMBDA
+  >> 4/4'un 3'unde lambda daha cok oynuyor. EK-5 8'in ONGORUSU
+     ("ozellikle lambda dogrudan etkilenir") DOGRULANDI.
+     5. turda yazdigim "lambda daha az oynuyor" ifadesi YANLIStir.
+
+### D6.4 — v6 ALTINDA BIR HUKUM DEGISIYOR ("hicbiri degismiyor" YANLIS)
+  Bonferroni-20 alt sinirlari, E1/varyant A:
+    model                        v7a BAcc  v7a alt   v6 BAcc  v6 alt   degisim
+    qwen2.5:32b-instruct           0.6769   0.5349    0.6423  0.5138   ikisi de disliyor
+    gemma3:27b                     0.5674   0.5017    0.5729  0.5076   ikisi de disliyor
+    llama3.2:3b-instruct-q8_0      0.5509   0.4878    0.5439  0.4861   ikisi de dislamiyor
+    gemma3:12b                     0.5493   0.4915    0.5562  0.5013   *** v6'DA DISLIYOR, v7a'DA DISLAMIYOR ***
+  >> v7a ile IKI hucre sansi asiyor; v6 ile UC. Ucuncusu (gemma3:12b)
+     v6'da 0.0013 payla asiyor — v7a'daki gemma3:27b'nin 0.0017'sinden
+     bile ince. Bu bir MODEL bulgusu degil, SINIRDAKI hucrelerin
+     kirilganligi bulgusudur ve EK-5 8 tam da bunun icin cifte
+     raporlama sart kosmustu.
+
+### D6.5 — 17 VAKANIN PROVENANSI (5. turda YANLIS yazmistim)
+  uzlasi/17_VAKA_KARARLARI_ve_DOGRULAMA.md 1. bolum:
+    doldurulmus kitapta KODLAYICI alani "GPT-5.6 Pro" — kararlari
+    bir DIL MODELI verdi, insan uzman degil.
+  Karar dagilimi: 13 satir 'onay' (degisiklik yok) + 4 satir karar,
+    bunlarin 3'u 'altin_YANLIS_yap', 1'i 'degisiklik_yok'.
+  Uc degisiklik onerisi (278, 426, 444) GERI ALINDI: EK-4 2 CSV'nin
+    'madde' sutununun KAYNAK oldugunu soyluyor, atif hedefi degil;
+    ucu de BELGE duzeyinde atif yapiyor ve EK-4 9(d) boyle atiflari
+    belgenin tamaminda arar.
+  R3-rule bu hatayi YAKALADI: v7a ile 473/473, degistirilmis altinla
+    470/473 ve uyusmadigi uc id tam olarak bunlar.
+  >> Makaledeki "adjudicated by the domain specialists" ifadesi
+     YANLIStir. Dogrusu: 17 iddia HALA needs_human_review'dur; bir
+     dil modeli pasi uc etiket degisikligi onerdi; oneriler on kayit
+     gerekcesiyle geri alindi; HICBIR ALTIN ETIKET DEGISMEDI.
