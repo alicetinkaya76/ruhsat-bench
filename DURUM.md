@@ -154,3 +154,44 @@ Zincir **üç ortamda da** aynı sayıları verdi. pypdf 5.9.0 sabitken metin ç
 macOS ve Linux'ta bayt-birebir — kütük #5'in "iki ortam" ifadesi artık "iki pypdf
 sürümü" diye daraltılabilir. Tek açık ortam farkı numpy; kapıdan geçen zincir
 onu kullanmıyor ama `f4_dayanak.py`'nin BM25'i kullanacak.
+
+## 7. 5. TUR — makale yazimi (29.08.2026)
+
+`makale/RUHSAT_JESTECH_taslak_tur5.md` (tur4'ten uretildi, 4. tur denetiminin
+buldugu her kalem islendi).
+
+| kalem | ne yapildi |
+|---|---|
+| Abstract + Keywords + yazar blogu | YAZILDI (yazar alanlari bilerek BOS) |
+| **Ön-kayitli birincil aile H1/H2** | YENI 4.6.3 + Tablo 6; dordu de sifiri disliyor |
+| Bonferroni ailesi | 4.3.1 duzeltildi: Bonferroni-**17** (ana on kayit 1.2), 2 degil. Sonnet [+0.0018, +0.1343] — KIL PAYI |
+| Delta | Tablo 4'e %95 GA sutunu; 7 aralikin 5'i sifiri disliyor |
+| Delta nuansi | 4.4 + 5.2: **Delta ekseninde bugun ile arsiv AYIRT EDILEMIYOR**; surum kaymasi BAcc farkina dayanir |
+| EK-7 karar kurali | 4.4'e AYNEN yazildi: [0.6796,0.6986] butce · <=0.66 kayma · arada belirsiz; 0.66'nin dissal gerekcesi YOK, boyle yaziliyor |
+| lambda | tek tanim (kodla ayni). P1 "always-true" DEGIL: 163 iddianin 156'si dogru, 7'si yanlis |
+| A_nc / A_abs | her yerde **A_nc** |
+| 5.4 aralik hatasi | "touch" -> R1/E1 alt 0.8804 > R2/E1 ust 0.8579, **AYRIKLAR** |
+| manset statusu | R2-R3bm25'in EK-4 4'te **ikincil/kesifsel** oldugu yazildi |
+| capraz gonderme | 3.7'deki "Tablo 3" -> Tablo 4 |
+| Kaynakca | tur4'te bitmisti; 17 atif OpenAlex'ten dogrulandi, 3 yil kaymasi duzeltildi |
+
+**Sayi denetimi:** taslaktaki 265 ayrik ondalik degerin tamami tarandi.
+5. turda GIREN ve kanonik cizelgede olmayan tek deger `0.6395` idi (A@128);
+muhurlu `f4_skor.py` ile v7a altina karsi YENIDEN URETILDI ve cizelgeye
+eklendi. Kalan eslesmeyenler DOI/arXiv numaralari ve bolum numaralari.
+
+### ACIK TEK KALEM — EK-6 duyarlilik kolu (1366)
+
+EK-6 3 zorunlu tutuyor ve makale bu tabloyu VAAT EDIYOR. TF-HPC kolu
+baslatilmisti ama **VPN kapali**, cikti alinamadi.
+
+Cozum: **EK-8** yazildi ve commit'lendi (kosudan ONCE), kol YEREL makinede
+kosuluyor (`sonuclar/f5/duyarlilik_1366_yerel.jsonl`).
+Kuru kosu ile HPC'ye karsi `istem_sha256` / `korpus_sha256` / `getirilen`
+**124/124 birebir** — boru hatti ozdes, tek bilinmeyen model agirliklari.
+EK-8 3 bunun icin davranissal pozitif kontrol kapisi koydu (120 cagri,
+`ham` birebir). Kapi dusetse kol yine kosulur ama **tablo yan yana
+verilmez**, karisiklik raporlanir.
+
+Taslakta bu bosluk `[STATUS — TO BE COMPLETED BEFORE SUBMISSION]` diye
+GORUNUR birakildi; kolun sayisi gelmeden makale gonderilmez.
