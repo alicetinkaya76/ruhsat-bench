@@ -461,3 +461,9 @@ OLMAYAN hicbir sayi kullanilmaz.
   ANCAK VPN kapali oldugu icin cikti bu oturumda INDIRILEMEDI.
   Bu bolume HICBIR SAYI YAZILMAMISTIR. Kol indirilene kadar makalede
   "yan yana tablo" verilemez; taslakta yer tutucu ACIK BIRAKILDI.
+
+### TUREV DEGERLER (cizelgedeki sayilardan dogrudan cikar, ayri olcum DEGIL)
+  0.0017 = 0.5017 - 0.5
+    gemma3:27b'nin Bonferroni-duzeltmeli alt sinirinin sansi asma payi.
+    Kaynak: D2 bolumu, 'gemma3:27b 0.5674 ... Bonf alt 0.5017'.
+    Makalede ve kapak mektubunda 'clears chance by 0.0017' diye geciyor.
