@@ -240,3 +240,55 @@ beyanı koşudan önce yazıldı ve commit'lendi). 32B model bu makinenin
 belleğine sığmadı — swap 20 GB'ın 19,7 GB'ı dolu ölçüldü — ve koşu
 durduruldu. Rapor: `sonuclar/ek8_yerel_kosu_raporu.txt`. EK-8 arşivde
 kalıyor; kapıya varılamadığı yazılı.
+
+## 8. DENETİM TURLARI 5 VE 6 (30.08.2026)
+
+İki tur koştu: 5. tur (5 mercek) **43 bulgu**, 6. tur doğrulama (4 mercek)
+**28 bulgu**. Hepsi işlendi. Ölçüm gerektiren yedi tanesi:
+
+| bulgu | sonuç |
+|---|---|
+| Bonferroni ailesi "17" | **türetilemiyor** — sayım 28/21/15/18/20 veriyor. Aile **20** (koşulan model) oldu; Tablo 3b aile 2–21 duyarlılığını veriyor, hüküm hiç değişmiyor |
+| "18 model koşuldu" | yanlış; 18 yalnız açık ağırlıklı. Koşulan **20** (18 + 2 barındırılan) |
+| λ'nın nötr noktası | 0 değil **±0.0429** (P1 156/163 doğru) |
+| R3-BM25'in λ'sı | −0.043 = sabit-DOĞRU değerinin ta kendisi; DOĞRU dediği küme **P1∪P5'in birebir kendisi** (284/473) |
+| H2/E1'in R0 tabanı | **29 taahhüt**, kendi 30 kapımızın altında — işaretlendi, dayanılmadı |
+| λ'nın altın duyarlılığı | 4 hücrenin **3'ünde BAcc'den fazla** oynuyor — 5. turda tersini yazmıştım |
+| v6 altında hüküm | **değişiyor**: gemma3:12b v6'da şansı aşıyor (0.5013), v7a'da aşmıyor (0.4915) |
+
+**Yerine getirilmemiş üç ön kayıt taahhüdü bulundu ve karşılandı:**
+
+* **EK-1 §1 orijinal kapı kolu** — koşuldu. Sonuç sert: orijinal kuralla
+  7 hücre puanlanır, 13 elenir; elenenler arasında sonnet (0.615),
+  haiku (0.710) ve qwen32b (0.173) var. **Bu sapma taşıyıcı**, korpus
+  sapmasının aksine. Makale artık bunu açıkça söylüyor.
+* **EK-6 §4 — 17 needs_human_review iddiası** — ayrı satır (Tablo 8) +
+  duyarlılık; manşeti hareket ettirmiyor.
+* **EK-5 §8 — v6/v7 çifte altın** — §4.7.3 olarak yazıldı, yukarıdaki
+  hüküm değişimiyle birlikte.
+* **Ana ön kayıt md.2/md.6 alt-tür kırılımı** — §4.3.3. Yeni bulgu:
+  **sonnet 120 P6 iddiasının 119'una YANLIŞ diyor**; 0.508'lik "şans"
+  görüntüsü 60/60 dengeli tasarımın artefaktı.
+* **EK-2 ve EK-3** ilk kez anıldı (varyant B'nin rol değişimi;
+  düşünme açıkken koşulan 8 arşiv koşusunun neden raporlanmadığı).
+
+**Düzeltilen ciddi provenans hatası:** §4.6.6'da 17 vakanın "uzman
+kodlayıcılarca karara bağlandığını" yazmıştım. Yanlış: kararları bir **dil
+modeli** verdi (kitapta `KODLAYICI: GPT-5.6 Pro`), üç etiket değişikliği
+önerdi, öneriler EK-4 §2/§9(d) gerekçesiyle geri alındı ve **R3-rule bunu
+bağımsız yakaladı** (473/473 → 470/473, tam o üç id). 17 iddia hâlâ
+`needs_human_review`.
+
+**Sayı disiplini:** taslaktaki 337 ayrık ondalık değerin tamamı tarandı;
+kanonik çizelgede olmayan hiçbir yeni sayı yok. Çizelgeye 5. ve 6. tur
+bölümleri eklendi (`ONCEKI SATIRLARI EZER`).
+
+### AÇIK KALAN TEK İÇERİK KARARI: UZUNLUK
+
+26.824 kelime, JESTECH tipik uzunluğunun ~3 katı. Kesme değil **ayırma**
+öneriliyor (ek dosya); somut plan `KILAVUZ.md` SIRA 4'te. Ali'nin onayı
+olmadan yapılmadı.
+
+Taslakta bilerek boş iki alan: **yazar bloğu** ve **arşiv DOI'si**. İkincisi
+için makaleye "bu blok dolmadan gönderilmez" notu konuldu, çünkü öz
+"released" diyor.
