@@ -188,7 +188,7 @@ Closed-book performance bounds an architecture rather than the task, so a ground
 
 The distinction matters because their scores differ by a wide margin, and a reader who merges them will misread both.
 
-**Execution.** The grounded ladder was run with a single model, qwen2.5:32b-instruct, on the refined corpus (corpus_v2, made primary by EK-6; EK-4 §1 had named the 1,366-unit raw corpus) against the v7a gold labels, three runs plus majority vote, 128-token output budget, seed 42. No response was truncated in any run (0 of 1,524 per run), which satisfies the invalidation condition of EK-4 §10 that set a 1 % ceiling on truncation. R0 for the same model is its closed-book cell, so R0, R1, R2 and R3-BM25 differ in the evidence supplied and in nothing else.
+**Execution.** The grounded ladder was run with a single model, qwen2.5:32b-instruct, on the refined corpus (corpus_v2, made primary by EK-6; EK-4 §1 had named the 1,366-unit raw corpus) against the v7a gold labels, three runs plus majority vote, 128-token output budget, seed 42. No response was truncated in any run (0 of 1,524 per run), which satisfies the invalidation condition of EK-4 §10 that set a 1 % ceiling on truncation. R0 for the same model is its closed-book cell, so R0, R1, R2 and R3-BM25 differ in the evidence supplied and in nothing else. The whole ladder was then re-run over the raw 1,366-unit corpus as the sensitivity arm EK-6 §3 makes mandatory, with the same model, gold, budget and seed, again with 0 of 1,524 responses truncated; that arm is reported in §4.6.5.
 
 R1 is restricted to 289 claims by the data, not by choice: the remaining 184 cite only a document, and document texts run from roughly 17k to 871k characters.
 
