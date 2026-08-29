@@ -682,3 +682,36 @@ OLMAYAN hicbir sayi kullanilmaz.
   99.76  : Bonferroni-21'in aralik duzeyi = 100*(1 - 0.05/21) = 99.7619
            (Tablo 3b'nin aile-buyuklugu duyarlilik satiri)
   Diger duzeyler: Bonf-2 97.5 · Bonf-17 99.71 · Bonf-18 99.72
+
+### D5.10 — ANA ON KAYIT md.6 ALT-TUR KIRILIMI (hic raporlanmamisti)
+  probe_alt dokumu (v7a):
+    P1_madde_atifli 80 · P1_verbatim 83 · P2_swap 37
+    P3_yil 12 · P3_yil_dogru 6 · P3_yururluk 1
+    P4_belge 10 · P4_tbdy 3
+    P5_lawshuffle 32 · P5_maddeshift 89
+    P6_degismedi 30 · P6_degismedi_dogru 30 · P6_yil 30 · P6_yil_yanlis 30
+
+  P5 alt turleri — claude-sonnet-5 (cogunluk) E2 dogruluk:
+    P5_lawshuffle  n=32  0.812
+    P5_maddeshift  n=89  0.674
+  (Ana on kayit md.2 bu farkin %80 gucte 27.6 puan gerektirdigini
+   ONCEDEN yaziyordu; gozlenen fark 13.8 puan, yani GUCSUZ. Betimsel.)
+
+  P6 DORT HUCRE — claude-sonnet-5 (cogunluk) E2, ALTIN ve KARARLAR:
+    P6_degismedi        altin YANLIS   model: YANLIS 30            dogruluk 1.000
+    P6_degismedi_dogru  altin DOGRU    model: YANLIS 29 · DOGRU 1  dogruluk 0.033
+    P6_yil              altin DOGRU    model: YANLIS 30            dogruluk 0.000
+    P6_yil_yanlis       altin YANLIS   model: YANLIS 30            dogruluk 1.000
+    TOPLAM 30+1+0+30 = 61/120 = 0.5083  (raporlanan P6 dogrulugu 0.508)
+
+  >> BULGU: sonnet 120 P6 iddiasinin 119'una YANLIS diyor. Toplam
+     "sansa yakin" 0.508 degeri, 2x2 tasariminin 60/60 dengeli olmasinin
+     ARTEFAKTIDIR; model sans seviyesinde DEGIL, SABIT cevap veriyor.
+     Bu, R3-BM25 bulgusunun (D5.5) barindirilan modeldeki karsiligidir.
+
+  P6 DORT HUCRE — claude-haiku-4.5 (cogunluk) E2:
+    P6_degismedi        YANLIS 30                 (sabit)
+    P6_degismedi_dogru  YANLIS 30                 (sabit)
+    P6_yil              DOGRU 15 · YANLIS 15      (rastgeleye yakin)
+    P6_yil_yanlis       YANLIS 12 · DOGRU 18      (rastgeleye yakin)
+  >> haiku "degismedi" ciftinde SABIT, "yil" ciftinde rastgeleye yakin.
