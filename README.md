@@ -1,12 +1,40 @@
-# RUHSAT-Bench — release archive
+# RUHSAT-Bench
 
-Companion archive to *"Measuring abstention, not accuracy: a re-qualification
+[![License: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
+[![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
+A 473-claim benchmark for measuring **whether a language model declines the
+regulatory questions it cannot answer**, over six frozen Turkish construction and
+occupational-safety documents.
+
+Companion repository to *"Measuring abstention, not accuracy: a re-qualification
 benchmark for language-model decision support on Turkish construction and
 occupational-safety regulation"* (Ali Çetinkaya, Selçuk University).
 
-This archive is the object the paper's data-availability statement points to.
+This repository is the object the paper's data-availability statement points to.
 Every number printed in the paper and in its supplementary material is
-regenerated from files in here by scripts in here.
+regenerated from files in here by scripts in here — there is a number sheet,
+`sonuclar/makale_sayilari.txt`, that maps each figure to the script that produced
+it, and no figure appears in the paper that is not in that sheet.
+
+**The paper:** `makale/RUHSAT_JESTECH_ana_metin.md` · **supplementary material:**
+`makale/RUHSAT_JESTECH_ek.md`
+
+## What the benchmark measures
+
+Each claim is asked twice: once where the system may answer *"not sure"* (E1) and
+once where it must choose true or false (E2). A compliance tool that declines a
+case hands it to a person; one that answers wrongly with the same fluency it uses
+when right does not. Benchmarks that force a binary answer are blind to that
+distinction, so this one measures both conditions on the same claims.
+
+Claims fall into six probe families — direct assertion, numeric alteration,
+cross-reference (real text attributed to the wrong provision), currency of
+amendment, anachronism, and fabricated provision — so an aggregate score can be
+decomposed rather than trusted whole. Two of the paper's findings come from that
+decomposition: a hosted model whose 0.508 on amendment-currency questions turns
+out to be a constant answer rather than guessing, and a lexical baseline whose
+0.5938 comes entirely from probe base rates.
 
 ## What is in it
 

@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: "RUHSAT-Bench: a 473-claim abstention benchmark over Turkish construction and occupational-safety regulation"
+message: "If you use this benchmark, please cite the paper and this archive."
+type: dataset
+authors:
+  - family-names: "Çetinkaya"
+    given-names: "Ali"
+    orcid: "https://orcid.org/0000-0002-7747-6854"
+    affiliation: "Department of Computer Engineering, Faculty of Technology, Selçuk University, Konya, Türkiye"
+    email: "ali.cetinkaya@selcuk.edu.tr"
+version: "1.0.0"
+license: CC-BY-4.0
+keywords:
+  - compliance checking
+  - decision-support software qualification
+  - abstention
+  - selective prediction
+  - large language models
+  - building regulation
+  - Turkish law
+abstract: >-
+  RUHSAT-Bench is a set of 473 true/false claims over six frozen Turkish
+  regulatory documents, each asked under a condition permitting an explicit
+  "not sure" and a condition forcing a binary verdict, so that abstention
+  behaviour is measured rather than assumed. The archive contains the source
+  documents with checksums, three parsed corpora, the claim set in three
+  gold-label versions, blinded expert-audit workbooks including a negative
+  second-pass result, the pre-registration and its eight annexes, every run
+  record, the scoring and analysis code, and a number sheet mapping every
+  figure in the paper to the script that produced it.
