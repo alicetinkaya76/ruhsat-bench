@@ -8,8 +8,12 @@
 > **kalifikasyon** diyor. Mektuptaki her sayı `sonuclar/makale_sayilari.txt`
 > çizelgesinden geliyor; hiçbirini elle değiştirme.
 >
-> **Göndermeden önce:** EK-6'nın zorunlu tuttuğu 1366 birimlik duyarlılık kolu
-> makaleye girmiş olmalı. Girmediyse gönderme.
+> **Göndermeden önce iki blok dolmalı:** yazar bloğu ve arşiv DOI'si. Bunların
+> dışında makale hazır — EK-6'nın zorunlu tuttuğu duyarlılık kolu koşuldu ve
+> makaleye girdi (§4.6.5).
+>
+> **Gönderilecek dosyalar:** `RUHSAT_JESTECH_ana_metin.md` (9.741 kelime) +
+> `RUHSAT_JESTECH_ek.md` (S1–S9, supplementary material olarak yüklenir).
 
 ---
 

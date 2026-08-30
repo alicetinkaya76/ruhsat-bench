@@ -34,9 +34,10 @@ kalmadığı için bu konu makaleyi etkilemiyor: v7a değişmedi.
 
 ## SIRA 2 — Taslağı oku. Ama sadece çerçeveyi.
 
-**Dosya:** `makale/RUHSAT_JESTECH_taslak_tur5.md` (en güncel)
+**Dosya:** `makale/RUHSAT_JESTECH_ana_metin.md` (9.741 kelime — okuyacağın bu)
+Yanında: `makale/RUHSAT_JESTECH_ek.md` (9.333 kelime, S1–S9; **okuman gerekmiyor**)
 
-Beş tur denetimden geçti. **Mühendis hakem 4. turda "artık gönderirdim" dedi**;
+Altı tur denetimden geçti. **Mühendis hakem 4. turda "artık gönderirdim" dedi**;
 bilimsel içerikte kalan red gerekçesi yok. Kalan işler biçimsel ve bende. Senden istediğim tek şey **çerçeve onayı**. İki karara bak:
 
 1. **Vargı değişti.** Makale artık "hiçbir şey çalışmıyor" demiyor. Ölçtüğümüz şu:
@@ -115,32 +116,25 @@ tarandı; kanonik çizelgede olmayan hiçbir yeni sayı kalmadı.
 
 ---
 
-## SIRA 4 — UZUNLUK. Tek kalan içerik kararı ve sana ait.
+## SIRA 4 — UZUNLUK: HALLEDİLDİ, bilgin olsun diye yazıyorum
 
-**Taslak 26.824 kelime. JESTECH makaleleri tipik olarak 8–10 bin.** Yani ~3 katı.
-Hakem denetiminde çıkan tek büyük itiraz bu: *"önemli bulgu, özür ve niteleme
-yığınının altında kayboluyor."*
+Hakemin tek büyük itirazı taslağın 26.824 kelime olmasıydı — JESTECH'in
+~3 katı. **Kesmedim, ayırdım:**
 
-**Tavsiyem: kesme, AYIR.** İçeriğin çoğu makaleyi savunulabilir kılan şey;
-silmek selef makalenin hatasını tersinden tekrarlamak olur. JESTECH ek dosya
-(supplementary material) kabul ediyor. Ana metin ~9 bin kelimede kalsın,
-şu bölümler eke gitsin ve gövdede tek cümleyle işaret edilsin:
+* `makale/RUHSAT_JESTECH_ana_metin.md` — **9.741 kelime**, gönderilecek olan
+* `makale/RUHSAT_JESTECH_ek.md` — **9.333 kelime**, S1–S9 ek materyal
 
-| eke gidecek | kelime | gövdede kalacak |
-|---|---|---|
-| §4.2'nin model-model dökümü (Tablo 2 + 2b tam hâli) | ~1.600 | iki cümle + "12'nin 2'si düzeltmeden sonra şansı aşıyor" |
-| §3.4'ün EK-1 kapı sapması tartışması | ~1.371 | 3 cümle: sapma var, taşıyıcı, gerekçesi kavramsal |
-| §3.6 + §4.7'nin tamamı (uzman denetimi) | ~2.400 | κ değerleri + ikinci geçişin olumsuz sonucu, 1 paragraf |
-| §4.3.3 alt-tür kırılımı | ~666 | P6 bulgusu KALSIN (bu güçlü), P5 eke |
-| §4.6.5 + §4.6.6 (duyarlılık + 17 vaka) | ~1.100 | "hiçbiri sonucu değiştirmiyor" + tablo eke |
-| §6 Sınırlamalar | ~1.619 | yarıya in; en sert üçü kalsın |
+Ana metin baştan yazıldı (yani 7.750 kelime gerçekten sıkıştırıldı, taşınmadı);
+ek ise tur5'in **denetimden geçmiş metninin birebir kendisi**, yalnız tablo
+etiketleri Table S1–S7'ye çevrildi.
 
-Bu ~8.700 kelime çıkarır ve ana metni ~18 bine indirir. **Yetmez.** İkinci tur
-için §1 Giriş (1.982) ve §5.4 (1.388) de yarıya inmeli.
-
-**Bunu senin onayın olmadan yapmam**, çünkü neyin gövdede kalacağı bir yayın
-stratejisi kararı ve makalenin karakterini değiştirir. Bir kelime söyle,
-ayırma işini yaparım; ana metin ve ek olarak iki dosya çıkarırım.
+**Ayırmanın kuralı şuydu: hiçbir dürüstlük beyanı eke gömülmeyecek.** Ana
+metinde kalanlar: EK-1 kapı sapmasının **taşıyıcı** olduğu (orijinal kuralla
+sonnet/haiku/qwen32b üçü de puanlanmazdı), λ'nın nötr noktasının ±0.0429 olduğu,
+R3-BM25'in sabit cevap verdiği, H2/E1'in 29 taahhüt üzerinde olduğu, v6 altında
+gemma3:12b hükmünün değiştiği, 17 vakayı bir **dil modelinin** karara bağladığı,
+ikinci geçiş κ'sının aralığı, ve arşiv koşularının zaman damgası taşımadığı.
+Eke giden yalnızca **dökümler ve tablolar**.
 
 ---
 
