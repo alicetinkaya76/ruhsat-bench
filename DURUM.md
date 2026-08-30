@@ -292,3 +292,31 @@ olmadan yapılmadı.
 Taslakta bilerek boş iki alan: **yazar bloğu** ve **arşiv DOI'si**. İkincisi
 için makaleye "bu blok dolmadan gönderilmez" notu konuldu, çünkü öz
 "released" diyor.
+
+## 9. MAKALE AYRILDI (30.08.2026)
+
+Hakemin tek büyük itirazı uzunluktu: 26.824 kelime, JESTECH'in ~3 katı.
+**Karar: kesme değil ayırma.**
+
+| dosya | kelime | ne |
+|---|---|---|
+| `makale/RUHSAT_JESTECH_ana_metin.md` | 9.741 | gönderilecek |
+| `makale/RUHSAT_JESTECH_ek.md` | 9.333 | S1–S9 supplementary |
+| `makale/RUHSAT_JESTECH_taslak_tur5.md` | 26.824 | kaynak, arşivde kalır |
+
+Ana metin **baştan yazıldı** — 26.824'ten 19.074'e inen fark (7.750 kelime)
+taşınmadı, sıkıştırıldı. Ek ise tur5'in denetimden geçmiş metninin **birebir
+kendisi**; yalnız tablo etiketleri Table S1–S7'ye çevrildi.
+
+**Ayırma kuralı: hiçbir dürüstlük beyanı eke gömülmedi.** Ana metinde kalanlar:
+EK-1 kapı sapmasının taşıyıcı olduğu · λ'nın nötr noktasının ±0.0429 olduğu ·
+R3-BM25'in P1∪P5 üzerinde sabit cevap verdiği · H2/E1'in 29 taahhüt üzerinde
+olduğu · v6 altında gemma3:12b hükmünün değiştiği · 17 vakayı bir dil modelinin
+karara bağladığı · ikinci geçiş κ'sının aralığı · arşiv koşularının zaman
+damgası taşımadığı · EK-2 ve EK-3. Eke giden yalnızca dökümler ve tablolar.
+
+**Doğrulandı:** ana metindeki 205 ayrık ondalık değerin tamamı kanonik
+çizelgeyle uyuşuyor (eşleşmeyen 5'i DOI parçası); ekte 0 eşleşmeyen. Kırık
+bölüm göndermesi yok. Dokuz S bölümünün dokuzuna da atıf var.
+
+**Ali'de kalan:** imzalar · yazar bloğu · arşiv DOI'si. Başka içerik kararı yok.
