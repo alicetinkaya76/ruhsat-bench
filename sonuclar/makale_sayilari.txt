@@ -835,3 +835,52 @@ OLMAYAN hicbir sayi kullanilmaz.
 ### D6.8 — 0.0025 = 0.05/20, Bonferroni-20'nin hucre basina duzeyi
   Karsiligi %99.75 aralik. (Diger paydalar: 0.05/18 = 0.00278 -> %99.72,
   0.05/17 = 0.00294 -> %99.71, 0.05/21 = 0.00238 -> %99.76.)
+
+==========================================================================
+## EK — 7. TUR: AYIRMA DENETIMI (30.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D7.1 — MANSET GA'sinin KANONIK HALI
+  R2/E1 - R3bm25 icin cizelgede IKI deger var:
+    [+0.1939, +0.2635]  3. tur eki (4000 orneklem)
+    [+0.1932, +0.2639]  6. turdaki esli-bootstrap POZITIF KONTROLU
+  Ikisi ayni buyuklugun iki bootstrap kosusudur; fark yeniden orneklem
+  sirasindandir (nokta tahmin ikisinde de +0.2292).
+  >> MAKALEDE KULLANILACAK OLAN: [+0.1939, +0.2635].
+     Pozitif kontrol degeri yalnizca D5.2/D6 bolumlerinde, kontrolun
+     kendi kaydi olarak kalir; makale metnine GIRMEZ.
+
+### D7.2 — kural_taban_r3'un f4_analiz HUCRESI HAM KORPUSTUR
+  f4_analiz.csv: kural_taban_r3  E1/E2  n=473 taahhut=473
+                 dogruluk 0.9852 (= 466/473)  bacc 0.9860
+  466/473 HAM korpus + v7a demektir (bkz. R3 bolumu).
+  RAFINE korpus + v7a = 473/473'tur ve BASKA bir kosudur.
+  >> "0.9860 ... on the refined corpus" YANLIStir; dogrusu HAM korpus.
+     Iki sayi ayni olcutun iki korpustaki degeri DEGIL: 473/473 ham
+     sayim, 0.9860 dengeli dogruluktur. Makalede ikisi ayirt edilmeli.
+
+### D7.3 — NEGATIF KONTROL BANDININ KAYNAGI (onceden ilan edildi)
+  HANDOVER.md:124, Gorev 2 KOSULMADAN ONCE yazilan gorev listesi:
+    "5 tohum negatif kontrol 0.50-0.56 bandinda"
+  Olcum (gorev2_raporu.txt:51): korpus_v2+v7a 0.5349 0.5349 0.5159
+    0.5370 0.5349 (ort 0.5315) · ham+v7a ort 0.5408 -> 10/10 band icinde.
+  >> "declared in advance" DOGRUDUR ama kaynagi bir on kayit EKI degil,
+     GOREV LISTESIDIR. Makalede boyle nitelenmeli.
+
+### D7.4 — NICEMLEME SAYISI
+  Kosulan acik agirlikli yapilandirmalarda gecen son ekler:
+    fp16 · q4_K_M · q5_K_M · q8_0
+  >> "fp16 and four quantisations" YANLIS. Dogrusu: fp16 ve UC nicemleme.
+
+### D7.5 — AYNI HUCRENIN IKI %95 ALT SINIRI (0.5820 / 0.5833)
+  qwen2.5:32b-instruct E1/A dengeli dogruluk 0.6769:
+    0.5833  ana bootstrap (10.000 yeniden orneklem, f4_analiz.csv)
+    0.5820  Bonferroni tablosunun ayri bootstrap'i (4.000 yeniden orneklem)
+  Fark ucuncu ondalikta ve yalnizca yeniden orneklem sayisindandir.
+  >> Makalede iki deger de gecerse UZLASTIRICI NOT ANA METINDE olmali.
+
+### D7.6 — P6 BAGIMSIZ DOGRULAMASININ KAPSAM SINIRI
+  20/20 uyusma; cerceve KISITI 3194, 4708, 6331.
+  YDUY DISARIDA -> 43 P6 iddiasi bagimsiz olarak SINANMADI.
+  (Bu satir zaten cizelgenin KORPUS/P6 bolumunde vardi; ayirma sirasinda
+   makaleden dusmustu, geri konuyor.)
