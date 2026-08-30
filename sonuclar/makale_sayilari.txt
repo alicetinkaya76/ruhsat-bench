@@ -919,10 +919,10 @@ OLMAYAN hicbir sayi kullanilmaz.
   E1 / varyant A:
 
     model                      BAcc   alt sinirlar (tohum 42/1/7/2026/99)      0.5'i asan
-    qwen2.5:32b-instruct     0.6769   .5349 .5438 .5448 .5315 .5290            5/5
-    gemma3:27b               0.5674   .5017 .4987 .4979 .5016 .4981            2/5  <<<
-    gemma3:12b               0.5493   .4915 .4911 .4961 .4938 .4967            0/5
-    llama3.2:3b-q8_0         0.5509   .4878 .4826 .4846 .4853 .4853            0/5
+    qwen2.5:32b-instruct     0.6769   0.5349 0.5438 0.5448 0.5315 0.5290       5/5
+    gemma3:27b               0.5674   0.5017 0.4987 0.4979 0.5016 0.4981       2/5  <<<
+    gemma3:12b               0.5493   0.4915 0.4911 0.4961 0.4938 0.4967       0/5
+    llama3.2:3b-q8_0         0.5509   0.4878 0.4826 0.4846 0.4853 0.4853       0/5
 
   >> HUKUM: yalnizca **BIR** model (qwen2.5:32b-instruct) duzeltmeden sonra
      sansi DAYANIKLI bicimde asiyor. gemma3:27b'nin 0.0017'lik payi
@@ -941,3 +941,42 @@ OLMAYAN hicbir sayi kullanilmaz.
      ihlal edip OpenAlex yilini (2019) kullanmisim. Dogrusu **2020**.
      Diger uc JESTECH kunyesi Crossref ile DOGRU: Abanda 2017-04 20(2),
      Turan 2024-06 c54, Chen 2025-10 c70.
+
+### D8.4 — CIZELGEDE OLMAYAN IKI DEGERIN KAYNAGA BAGLANMASI
+  27.6 ve 33.4 — asgari saptanabilir fark (MDE), on kayit md.2'de ONCEDEN yazili:
+    sonuclar/F4_on_kayit.txt:
+      "P5_maddeshift(89) vs P5_lawshuffle(32) : 27.6 puan (18 modelde 36.9)"
+      "P6 2x2 hucreleri (30/30)               : 33.4 puan"
+  Makale 4.3.3'te ikisini de kullaniyor; ana on kayittan gelirler ve
+  bu satirla cizelgeye baglanmislardir.
+
+### D8.5 — MANSET GA'larinin KANONIK HALI (E1 ve E2, D7.1'i genisletir)
+  Cizelgede iki kosudan gelen iki deger var; NOKTA TAHMINLER AYNI.
+    E1  +0.2292  [+0.1939, +0.2635]  <- KANONIK (3. tur eki)
+                 [+0.1932, +0.2639]     (6. tur pozitif kontrolu, metne GIRMEZ)
+    E2  +0.2162  [+0.1818, +0.2493]  <- KANONIK (3. tur eki)
+                 [+0.1829, +0.2512]     (6. tur 17-vaka duyarliligi, metne GIRMEZ)
+  >> Ana metin ve ek AYNI cifti kullanir: E1 [+0.1939, +0.2635],
+     E2 [+0.1818, +0.2493].
+
+### D8.6 — ANA ON KAYIT md.1'IN DORT KONTRASTI (yalnizca 1.2 raporlanmisti)
+  Barindirilan kol, varyant A, v7a altin (f4_analiz.csv'den):
+
+    model              ko   kapsam    BAcc    duyarlilik   lambda
+    claude-sonnet-5    E1   0.6152   0.6920     0.6357     0.3254
+    claude-sonnet-5    E2   1.0000   0.6242     0.4484     0.2936
+    claude-haiku-4.5   E1   0.7104   0.5298     0.5361    -0.0255
+    claude-haiku-4.5   E2   0.9979   0.5558     0.5695     0.0611
+
+  1.1 KAPSAM farki (E1-E2):  sonnet -0.3848 · haiku -0.2875
+  1.2 BAcc farki           :  sonnet +0.0678 · haiku -0.0260  (raporlanan)
+  1.4 LAMBDA farki (E1-E2) :  sonnet +0.0318 · haiku -0.0866
+  1.3 (BAcc / Youden J)    :  BAcc ile ayni bilgiyi tasiyor; J = 2*BAcc - 1
+      oldugu icin BAcc kontrastinin monoton donusumudur ve AYRI bir
+      dogrulayici degildir. Bu, makalede boyle beyan edilmelidir.
+
+  >> Makale 1.2'yi "the confirmatory measure" diye anlatiyordu; ana on kayit
+     DORT nicelik sayiyor. 1.1 tanim geregi negatif (E1'de kacinma var, E2'de
+     yok) ve bir hipotez testi degil betimsel bir olcudur. 1.4 sonnet icin
+     pozitif, haiku icin negatif — 1.2 ile AYNI yonu veriyor.
+     Makale bunlari raporlamali ve hangisinin test edildigini acikca demeli.

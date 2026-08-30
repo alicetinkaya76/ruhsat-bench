@@ -227,7 +227,11 @@ belongs to annex EK-4 §4 and covers the grounded-arm hypotheses H1 and H2 of
 Section 4.6.3, not this contrast. An earlier draft of this paper applied the
 family of two here, which understates the correction, and a later one asserted a
 family of seventeen, which cannot be derived from any counting rule used in this
-paper; the figures below use twenty, the number of models run, as the main text §4.3.1 explains.
+paper; the figures below use twenty, the number of models run, as the main text
+§4.3.1 explains. Eighteen, which §4.2 uses for the open-weight comparison, is a
+different and equally derivable count — the eighteen open-weight configurations
+eligible for *that* comparison. Neither number is arbitrary and neither is
+interchangeable with the other; what was arbitrary was seventeen.
 
 **Table S3. Confirmatory contrast BAcc(E1) − BAcc(E2), hosted arm.** Paired
 cluster bootstrap, 4,000 resamples, clusters = law + article, seed 42, v7a gold.
@@ -509,7 +513,7 @@ sensitivity check below shows.
 Removing them from the headline contrast moves it by less than the width of its
 interval: R2 − R3-BM25 is +0.2292 [+0.1939, +0.2635] on all 473 claims and
 +0.2312 [+0.1943, +0.2672] on the 456 that remain under E1, and +0.2162
-[+0.1829, +0.2512] against +0.2154 [+0.1798, +0.2504] under E2. The flagged
+[+0.1818, +0.2493] against +0.2154 [+0.1798, +0.2504] under E2. The flagged
 claims are not driving the result.
 
 
@@ -619,7 +623,7 @@ errors cannot be used to argue that the unscreened remainder is clean.
 
 ## S9 — Every result under both label sets
 
-> The main text §4.7 states the one verdict that changes; the full comparison is here.
+> The main text §4.7 states the one verdict that changes and the summary statistics; this section gives the comparison in prose rather than as a 56-row table. The full 56-cell table under all three gold versions is in the released archive (`sonuclar/f4_analiz_raporu.txt`, section 5); it is not reproduced here because every row but the ones discussed differs in the third decimal or less.
 
 Annex EK-5 §8 requires that results be reported under the pre-revision gold (v6)
 alongside the post-reconciliation gold (v7a), on the ground that a large

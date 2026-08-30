@@ -39,8 +39,10 @@ audit is reported in full, including its negative result.
 Three findings are reported. First, closed book, the systems tested sit at a
 coverage–accuracy trade-off rather than at a uniform failure: of eighteen
 open-weight configurations, twelve carry a scored accuracy figure and, after the
-pre-registered Bonferroni correction, two exclude chance — one of them by less
-than two thousandths of a point. Second, supplying the governing text changes the
+pre-registered Bonferroni correction, **one** excludes chance robustly. A second
+sits on the threshold, clearing it by 0.0017 under the reported seed and failing
+to under three of five, and we report it as undecided rather than as a
+survivor. Second, supplying the governing text changes the
 operating point decisively. On the pre-registered primary family, a 32B
 open-weight model gains +0.2607 in balanced accuracy under forced choice when
 three retrieved passages are supplied (95% CI [+0.2218, +0.2964]) and +0.3552
@@ -50,10 +52,15 @@ passages, the model adds +0.2292 under E1 (95% CI [+0.1939, +0.2635]), so the
 judgement step is separable from the presence of evidence. Third, and this is the
 qualification result: a hosted model re-run about four weeks later on the same
 frozen claim set, at the same budget and with byte-identical prompts, kept its
-forced-choice accuracy but lost roughly half of what abstention had been buying
-it — the condition contrast fell from 0.0762 to 0.0332 — while the number of
-abstentions barely moved. A qualified component changed in a way that
-forced-choice accuracy, the measure most benchmarks report, does not see.
+forced-choice accuracy inside its archived range while its abstention-permitted
+accuracy fell outside it, and the condition contrast moved from an archive mean
+of 0.0762 to 0.0332 while the number of abstentions barely changed. That drop is
+a point estimate: a paired interval on the change is −0.0434 [−0.0986, +0.0118]
+and contains zero, so the *size* of the change is not separable from resampling
+noise, and we report it as an observation on a frozen test set rather than as an
+established effect. What the observation does show is that the two conditions
+moved differently — which is the property a forced-choice benchmark cannot
+register at all.
 
 We draw a conclusion about measurement rather than a verdict on the technology.
 On this claim set and these six documents, closed-book operation of the systems
@@ -115,7 +122,7 @@ safety practice has treated the distinction as fundamental for decades
 (IEC 61508). Meeting the verification obligations such standards impose is itself
 an engineering problem rather than a formality — the cost of demonstrating
 compliance is what usually decides whether a method is adopted (Makartetskiy et
-al., 2019) — and the argument of this paper is that for a language-model
+al., 2020) — and the argument of this paper is that for a language-model
 assistant the demonstration has to be about abstention. A benchmark that forces a binary answer measures the second mode and
 is blind to the first. So we measure both, under two conditions on the same
 claims: one that permits an explicit "not sure", and one that forbids it.
@@ -142,11 +149,13 @@ that an aggregate score can be decomposed rather than trusted whole.
    under prompt variant A; twelve are scored, after two are removed by the
    pre-registered response-rate gate and four are withheld for committing on
    fewer than 30 items. With uncorrected intervals four of the twelve exclude
-   chance; after the pre-registered Bonferroni correction, two do —
-   `qwen2.5:32b-instruct` (balanced accuracy 0.6769, corrected lower bound
-   0.5349, at coverage 0.173) and `gemma3:27b` (0.5674, corrected lower bound
-   0.5017, at coverage 0.970). The second clears chance by 0.0017 and is
-   marginal. The two operating points are opposite: one answers a sixth of the
+   chance; after the pre-registered Bonferroni correction, **one** does so
+   robustly — `qwen2.5:32b-instruct` (balanced accuracy 0.6769, corrected lower
+   bound 0.5349 under the reported seed and above 0.5 under all five seeds
+   tested, at coverage 0.173). `gemma3:27b` (0.5674, corrected lower bound
+   0.5017, coverage 0.970) clears chance by 0.0017 under the reported seed and
+   fails to under three of five, so its verdict is seed-dependent and it is
+   reported as undecided. The two operating points are opposite: one answers a sixth of the
    claims well, the other nearly all of them barely above chance (§4.2, S3).
 
 3. *Abstention as a measured quantity rather than an assumed safety feature.* The
@@ -163,8 +172,11 @@ that an aggregate score can be decomposed rather than trusted whole.
    claim set about four weeks later, at the same budget and with prompts verified
    byte-identical, leaves forced-choice accuracy inside its archived range and
    moves the abstention-permitted figure outside it. Abstention frequency held
-   (182.33 archived mean against 178) while the confirmatory contrast fell 56%
-   (§4.4).
+   (182.33 archived mean against 178) while the confirmatory contrast fell from an
+   archive mean of 0.0762 to 0.0332. A paired interval on that change is
+   −0.0434 [−0.0986, +0.0118] and contains zero, so the size of the drop is not
+   established; what the run shows is that the two conditions moved differently
+   on a frozen claim set (§4.4).
 
 5. *A grounded-arm measurement showing that the closed-book figures describe a
    mode of use, not a ceiling on the task.* For `qwen2.5:32b-instruct`, supplying
@@ -358,9 +370,22 @@ sampling frames and stratum weights: S8.
 Two measures of what abstention buys are reported together, and they have
 different evidential status.
 
-The **confirmatory** measure is BAcc(E1) − BAcc(E2), item 1.2 of the main
-pre-registration, whose prescribed correction is Bonferroni over the number of
-models. Twenty models were run — eighteen open-weight configurations and two
+**The main pre-registration names four confirmatory quantities, not one, and all
+four are reported.** Item 1.1 is the coverage difference, 1.2 the difference in
+accuracy on committed items, 1.3 balanced accuracy and Youden's J, and 1.4 λ. For
+the hosted arm the four are: coverage difference −0.3848 (`claude-sonnet-5`) and
+−0.2875 (`claude-haiku-4.5`); BAcc difference +0.0678 and −0.0260; λ difference
++0.0318 and −0.0866. Item 1.1 is negative by construction — E1 permits declining
+and E2 does not — so it is a descriptive quantity rather than a test, and we do
+not correct or test it. Item 1.3 pairs balanced accuracy with Youden's J, and
+since J = 2·BAcc − 1 on this design the two are a monotone transformation of each
+other; testing both would be testing one quantity twice, so we report the
+balanced-accuracy form. Item 1.4 agrees in sign with 1.2 for both systems.
+
+The measure carried through the rest of this paper is therefore **1.2**, the
+difference in accuracy on committed items, and the reason is that it is the only
+one of the four that is both a test and not redundant with another. Its
+prescribed correction is Bonferroni over the number of models. Twenty models were run — eighteen open-weight configurations and two
 hosted ones — so the per-comparison level is 0.05/20 = 0.0025 and the interval is
 a 99.75% interval.
 
@@ -466,7 +491,8 @@ Read one cell at a time with uncorrected 95% intervals, four exclude 0.5. The
 pre-registration requires Bonferroni over the number of models; taken over all
 eighteen open-weight configurations rather than the twelve that survive the gates
 — the conservative direction — the per-cell level is 0.00278, a 99.72% interval,
-and two survive:
+and, under the reported seed, two cells clear it — but only one of those two
+verdicts survives a change of seed, as the paragraph after the table shows:
 
 **Table 2. The four uncorrected candidates, before and after correction.**
 
@@ -483,14 +509,27 @@ correction table is computed with 4,000 resamples and the main per-cell table
 with 10,000. The difference is in the third decimal and is resampling noise, not
 two measurements; nothing in this paper turns on it.
 
-The two survivors sit at opposite operating points. `qwen2.5:32b-instruct`
-reaches an interval overlapping the hosted `claude-sonnet-5` (0.6920 [0.633,
-0.750] at coverage 0.615) while committing on 82 of 473 claims — roughly one in
-six — so its accuracy and its coverage have to be read as one figure.
-`gemma3:27b` answers 459 of 473 and sits about seven points above chance on
-nearly the whole set, clearing it by 0.0017 after correction: a margin no
-engineering decision should rest on. We report it as surviving the stated test,
-not as a demonstrated capability. Which operating point is preferable depends on
+**Only one of those two verdicts is stable.** The 0.0017 by which `gemma3:27b`
+clears chance is inside the noise of the bootstrap itself: repeating the
+correction with five different resampling seeds gives corrected lower bounds of
+0.5017, 0.4987, 0.4979, 0.5016 and 0.4981, so the cell excludes chance under two
+seeds of five and does not under three. `qwen2.5:32b-instruct` excludes chance
+under all five (0.5349, 0.5438, 0.5448, 0.5315, 0.5290). We therefore report
+**one** open-weight configuration as exceeding chance after the pre-registered
+correction, and `gemma3:27b` as sitting on the threshold with a verdict that
+depends on the seed. Reporting it as a survivor, as an earlier version of this
+paper did, would be reporting an artefact of one arbitrary choice.
+
+The two cells sit at opposite operating points and that contrast is the result of
+this section, independently of which side of the threshold the second one falls.
+`qwen2.5:32b-instruct` reaches an interval overlapping the hosted
+`claude-sonnet-5` (0.6920 [0.633, 0.750] at coverage 0.615) while committing on
+82 of 473 claims — roughly one in six — so its accuracy and its coverage have to
+be read as one figure. `gemma3:27b` answers 459 of 473 and sits about seven
+points above chance on nearly the whole set. One is accurate on a small
+self-selected fraction; the other is barely better than chance on almost
+everything. Neither is a usable closed-book compliance checker, and they are
+unusable for different reasons. Which operating point is preferable depends on
 the workflow, and §2.2 argues the choice cannot be made by accuracy alone.
 
 ## 4.3 What abstention buys
@@ -595,7 +634,8 @@ Under forced choice the run sits inside the archived range; the divergence appea
 only where abstention is permitted.
 
 The confirmatory contrast falls from a mean of 0.0762 to 0.0332, a 56% relative
-drop, outside the archive range [0.0735, 0.0784]. The number of abstentions moved
+drop, outside the archive range of point estimates [0.0735, 0.0784] — but see the
+interval on that change below, which contains zero. The number of abstentions moved
 little: against the archive mean of 182.33 the drop to 178 is 2.4%. Frequency was
 roughly preserved while the difference the abstentions made declined — the change
 is in which items were declined, not how many.
@@ -617,13 +657,27 @@ result generalises to other claims. The run-to-run range holds the 473 items fix
 and asks whether the system changed on this set. The claim set is frozen, so the
 run range is the appropriate base for the version question, and we report the
 bootstrap interval as well: a reader interested in generalisation to other claims
-should use it and would not find the change established. The asymmetry is that Δ
-is set aside on the strength of intervals while the confirmatory contrast is
-retained on the strength of a three-run range, with no interval on the *change*.
-That is because the archived runs are three single runs rather than a distribution
-we can resample over. A reader who declines to treat a three-run range as evidence
-should read this section as reporting an unreplicated single-run difference, and
-§6 lists that as a limitation.
+should use it and would not find the change established.
+
+**An interval on the change is available, and it does not exclude zero.** An
+earlier version of this section held the two measures to different standards: Δ
+was set aside because its intervals overlapped, while the condition contrast was
+retained on a three-run range, on the stated ground that no interval on the
+*change* could be computed. That ground was wrong, and the correction matters
+enough to state plainly. All four runs are scored on the same 473 claims, so the
+same clusters can be resampled once and all four contrasts recomputed inside each
+resample. The difference between today's contrast and the archive mean is then
+**−0.0434, 95 % interval [−0.0986, +0.0118]**, which contains zero.
+
+The consequence is specific. The *direction* is consistent across every
+comparison in this section. The *magnitude* — the 56 % relative drop — is a point
+estimate whose interval spans no change at all, so Δ and the condition contrast
+end up in the same position and neither separates the two dates by an interval
+excluding zero. What does not depend on an interval is that the two conditions
+moved differently: forced-choice balanced accuracy stayed inside the range the
+archived runs occupied and abstention-permitted balanced accuracy did not. That
+is an observation on a frozen test set from a single repeat run, and §6 records
+it as such.
 
 **Prompt wording moves outputs more than run-to-run noise does.** Within the A@32
 arm, run-to-run agreement is [0.9017, 0.9133]; within B@128 it is [0.9165,
@@ -737,7 +791,15 @@ full-set R0 cell with 82 commitments.
 
 All four corrected intervals exclude zero. The E1 intervals are much wider than
 the E2 intervals because R0 under E1 commits on few items; the E2 comparison,
-where both arms answer everything, is the better-conditioned one.
+where both arms answer everything, is the better-conditioned one. There is a
+further reason to prefer it. Under E1 the two arms of each contrast are scored on
+*different subsets of claims* — each arm's own committed set — because balanced
+accuracy is defined on committed items only. The E1 differences therefore
+confound the effect of supplying evidence with a change in which items are being
+scored, and the same caution applies to the E1 column of Table 3 and to the E1
+row of every grounded comparison. Under E2 both arms answer every claim and the
+confound does not arise. We report the E1 figures because coverage is itself a
+result, and we rest the conclusions on the E2 forms.
 
 ### 4.6.4 What the retrieval figure does and does not bound
 
@@ -837,8 +899,8 @@ The additional cell clears chance by 0.0013 — narrower still than the 0.0017 b
 which `gemma3:27b` clears it under v7a — so what this exposes is the fragility of
 threshold cells, not a difference in what the models can do. λ is the measure
 EK-5 predicted would be most exposed, and it is: in three of four hosted cells λ
-moves further between label sets than balanced accuracy does. The
-cell-by-cell comparison is in S9.
+moves further between label sets than balanced accuracy does. S9 gives the comparison in full, and the complete 56-cell table under all
+three gold versions is in the released archive.
 
 **What the audit does and does not license.** It establishes that the labels are
 internally consistent on the evidence the first pass shows a rater, and that a
@@ -854,8 +916,9 @@ failed to exclude.
 ## 5.1 A trade-off, not a uniform failure
 
 The open-weight arm does not fail uniformly. Twelve of eighteen cells are scored;
-four exceed chance with uncorrected intervals and two survive the pre-registered
-correction, at opposite operating points. `qwen2.5:32b-instruct` answers one claim
+four exceed chance with uncorrected intervals; after the pre-registered
+correction one does so robustly and a second is seed-dependent. The two sit at
+opposite operating points, and that contrast is the finding rather than the count. `qwen2.5:32b-instruct` answers one claim
 in six and is accurate on those; `gemma3:27b` answers nearly all of them barely
 above chance. Neither is usable as a closed-book compliance checker, but they are
 unusable for different reasons, and only the second would be caught by an accuracy
@@ -869,7 +932,9 @@ accuracy stayed inside its archived range. The abstention count barely moved:
 181, 184 and 182 in the archive against 178 today, a relative decrease of 2.4%
 against the archive mean of 182.33. What changed is what the abstentions were
 worth. The confirmatory contrast fell from 0.0762 to 0.0332, a 56% relative drop
-and outside the archive range.
+against the archive range of point estimates — a difference whose own interval,
+−0.0434 [−0.0986, +0.0118], contains zero, so the magnitude is not established
+and only the pattern is.
 
 For a building-inspection workflow this pattern matters more than either number
 alone. A tool whose abstention rate is stable but whose abstentions have become
@@ -941,10 +1006,9 @@ experts corrected.
 ## 5.6 What would count as acceptable
 
 We decline to state a threshold, because the cost of a missed defect relative to
-the cost of a routed case is a property of a workflow and not of a benchmark. Reporting an interval alongside a
-prediction, and making the basis of the prediction inspectable, is becoming
-standard practice for machine-learning decision support in construction (Chen et
-al., 2025); what this paper adds is that for a system that may decline, the
+the cost of a routed case is a property of a workflow and not of a benchmark. Recent work on machine-learning
+decision support in construction pairs predictions with confidence intervals and
+with post-hoc explanations of what drove them (Chen et al., 2025); what this paper adds is that for a system that may decline, the
 interval and the explanation are not enough on their own — the decision to
 decline is itself a measured quantity. What a qualification argument would need,
 and what this paper supplies the instruments for, is: a joint statement over coverage and accuracy on committed items rather
@@ -967,10 +1031,14 @@ interval to about 12% and a composite projection of 8.8%, and its own positive
 control was missed under the strict rule. Differences of a few thousandths — such
 as `gemma3:27b` clearing chance by 0.0017 — sit inside that uncertainty.
 
-**The drift result is one run against three.** The archived runs are three single
-runs, not a distribution, so no interval on the *change* is available and the
-comparison rests on a range. The repeat run's own within-arm band was not
-measured.
+**The drift result is one run against three, and its magnitude is not
+established.** A paired interval on the change *is* computable and is
+−0.0434 [−0.0986, +0.0118] (§4.4); it contains zero, so the size of the drop in
+the value of abstention is not separable from resampling noise. What the run
+shows is a difference in *which* condition moved, on a frozen claim set, from a
+single repeat whose own within-arm band was not measured. Any reading that treats
+the 56 % figure as an established effect size is stronger than the data support,
+and we have withdrawn that reading from this paper.
 
 **"Version drift" is our label for a behavioural difference, not a claim about the
 provider.** We did not observe, and were not told, any vendor release, weight
@@ -1017,9 +1085,11 @@ compliance checking would have to measure, and we conclude that forced-choice
 accuracy is not sufficient for it.
 
 Closed book, the systems tested sit at a coverage–accuracy trade-off. Twelve of
-eighteen open-weight cells are scored and two exclude chance after the
-pre-registered correction, one of them by 0.0017 — a margin inside the label noise
-the expert audit could not exclude. Neither operating point supports a compliance
+eighteen open-weight cells are scored and, after the pre-registered correction,
+one excludes chance robustly. A second clears it by 0.0017 under the reported
+seed and not under three of five others — a margin inside both the bootstrap's own
+noise and the label noise the expert audit could not exclude, so we report it as
+undecided. Neither operating point supports a compliance
 decision on this material.
 
 Abstention has to be measured per system rather than assumed. It is worth +0.0678
@@ -1040,11 +1110,14 @@ to put engineering effort into supplying the governing provision rather than int
 selecting a closed-book model — with the cautions that this was measured on one
 model and that the retrieval component is the least examined part of the pipeline.
 
-Finally, a qualified component changed. Re-running one hosted configuration four
+Finally, a qualified component changed. Re-running one hosted configuration about four
 weeks later on the frozen claim set left forced-choice accuracy inside its
-archived range while the value of abstention fell by 56% and the number of
-abstentions barely moved. Whatever its cause, an acceptance criterion that looked
-only at accuracy, or only at abstention rate, would not have seen it. A
+archived range while abstention-permitted accuracy fell outside it, with the
+number of abstentions barely moving. The size of the drop in what abstention was
+worth is not established — its interval, −0.0434 [−0.0986, +0.0118], contains
+zero — and we make no claim about it. What the run does show is that the two
+conditions moved differently, and an acceptance criterion that looked only at
+accuracy, or only at abstention rate, would have registered nothing at all. A
 qualification file for this class of tool needs a date, a retained gold subset,
 and a measure stated over abstention behaviour.
 
@@ -1093,10 +1166,12 @@ archive.
 
 # References
 
-*Every entry below was checked against the OpenAlex record on 29.08.2026 and
-appears in the archive's citation-verification record. No source that failed
-verification is cited. Author initials, volume and page numbers are to be
-completed from publisher records at proof stage.*
+*Every entry below was resolved against its Crossref record on 30.08.2026, and
+the year given is the issue year from the `published-print` field rather than the
+online-first date; two entries carried the wrong year in an earlier draft for
+exactly that reason and are corrected here. Entries without a registered DOI say
+so. No source that failed verification is cited. The verification record is
+released with the archive.*
 
 Abanda, Kamsu-Foguem and Tah, 2017. BIM — new rules of measurement ontology for construction cost estimation. *Engineering Science and Technology, an International Journal* 20(2), 443–459. doi:10.1016/j.jestch.2017.01.007
 
@@ -1122,7 +1197,7 @@ Kadavath, et al., 2022. Language models (mostly) know what they know. arXiv:2207
 
 Lin, et al., 2022. Teaching models to express their uncertainty in words. arXiv:2205.14334
 
-Makartetskiy, Marchetto, Sisto, Valenza and Virgilio, 2019. (User-friendly) formal requirements verification in the context of ISO26262. *Engineering Science and Technology, an International Journal* 23(3), 494–506. doi:10.1016/j.jestch.2019.09.005
+Makartetskiy, Marchetto, Sisto, Valenza and Virgilio, 2020. (User-friendly) formal requirements verification in the context of ISO26262. *Engineering Science and Technology, an International Journal* 23(3), 494–506. doi:10.1016/j.jestch.2019.09.005 — *online October 2019, June 2020 issue; cited by issue year.*
 
 Magesh, et al., 2025. Hallucination-free? Assessing the reliability of leading AI legal research tools. *Journal of Empirical Legal Studies*. doi:10.1111/jels.12413
 

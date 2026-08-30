@@ -884,3 +884,99 @@ OLMAYAN hicbir sayi kullanilmaz.
   YDUY DISARIDA -> 43 P6 iddiasi bagimsiz olarak SINANMADI.
   (Bu satir zaten cizelgenin KORPUS/P6 bolumunde vardi; ayirma sirasinda
    makaleden dusmustu, geri konuyor.)
+
+==========================================================================
+## EK — 8. TUR: EDITOR/HAKEM DENETIMI (30.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D8.1 *** SURUM KAYMASI: DEGISIM ARALIGI HESAPLANABILIYOR VE SIFIRI ICERIYOR
+  Makale "arsiv kosulari uc tek kosudur, degisim icin aralik YOK" diyordu.
+  YANLIS. Dort kosu (bugun + frontC_k1/k2/k3) AYNI kumelerle birlikte
+  yeniden orneklenerek her orneklemde dort kontrast birden hesaplanabilir.
+
+  ON KOSUL (dosya dogrulamasi) — nokta tahminler cizelgeyle BIREBIR:
+    bugun     E1 0.6422  E2 0.6090  kontrast +0.0332
+    frontC_k1 E1 0.6832  E2 0.6097  kontrast +0.0735
+    frontC_k2 E1 0.6796  E2 0.6012  kontrast +0.0784
+    frontC_k3 E1 0.6986  E2 0.6220  kontrast +0.0767
+
+  ESLI KUMELI BOOTSTRAP (4000, kume=(kanun,madde), tohum 42, 4000/4000 gecerli):
+    BUGUN kontrasti - ARSIV ORT kontrasti
+      nokta  -0.0434
+      %95 GA [-0.0986, +0.0118]   -> *** SIFIRI ICERIYOR ***
+
+  >> HUKUM: kacinma degerindeki dususte YON dogru ama BUYUKLUK yeniden
+     orneklemeden ayirt EDILEMIYOR. "%56 dustu" bir NOKTA TAHMINDIR ve
+     araligi sifiri kapsar. Makalenin ucuncu manseti bu olcude
+     ZAYIFLATILMALIDIR. "Aralik hesaplanamaz" gerekcesi de YANLIS ve
+     kaldirilmalidir.
+  >> Bulgunun kalan kismi ayakta: BAcc(E1) bugun 0.6422, arsiv kosu
+     araliginin [0.6796, 0.6986] DISINDA; E2 ICINDE. Bu, aralikli bir
+     iddia degil AMA olculmus bir olgudur ve boyle sunulmalidir.
+
+### D8.2 *** "IKI MODEL SANSI ASIYOR" HUKMU TOHUMA DAYANIKSIZ
+  Bonferroni-18 (alpha/18=0.00278), 5 tohum x 4000 yeniden orneklem,
+  E1 / varyant A:
+
+    model                      BAcc   alt sinirlar (tohum 42/1/7/2026/99)      0.5'i asan
+    qwen2.5:32b-instruct     0.6769   0.5349 0.5438 0.5448 0.5315 0.5290       5/5
+    gemma3:27b               0.5674   0.5017 0.4987 0.4979 0.5016 0.4981       2/5  <<<
+    gemma3:12b               0.5493   0.4915 0.4911 0.4961 0.4938 0.4967       0/5
+    llama3.2:3b-q8_0         0.5509   0.4878 0.4826 0.4846 0.4853 0.4853       0/5
+
+  >> HUKUM: yalnizca **BIR** model (qwen2.5:32b-instruct) duzeltmeden sonra
+     sansi DAYANIKLI bicimde asiyor. gemma3:27b'nin 0.0017'lik payi
+     bootstrap tohumunun gurultusu icindedir ve 5 tohumun 3'unde kayboluyor.
+     "Iki model asiyor" ifadesi TOHUM SECIMINE dayanmaktadir ve
+     DUZELTILMELIDIR: bir model asiyor, ikincisi esikte ve karari
+     tohuma bagli.
+  >> Bu, makalenin kendi "0.0017'lik pay hicbir muhendislik kararinin
+     dayanagi olamaz" cumlesini GUCLENDIRIR ama manseti degistirir.
+
+### D8.3 — MAKARTETSKIY KUNYESI: YIL 2019 DEGIL 2020
+  Crossref 10.1016/j.jestch.2019.09.005:
+    published-print [2020,6] · journal-issue [2020,6] · created [2019,10,1]
+    cilt 23 sayi 3 ss 494-506
+  >> 7. turda kendi yazdigim kurali ("sayi yili esastir") bir adim sonra
+     ihlal edip OpenAlex yilini (2019) kullanmisim. Dogrusu **2020**.
+     Diger uc JESTECH kunyesi Crossref ile DOGRU: Abanda 2017-04 20(2),
+     Turan 2024-06 c54, Chen 2025-10 c70.
+
+### D8.4 — CIZELGEDE OLMAYAN IKI DEGERIN KAYNAGA BAGLANMASI
+  27.6 ve 33.4 — asgari saptanabilir fark (MDE), on kayit md.2'de ONCEDEN yazili:
+    sonuclar/F4_on_kayit.txt:
+      "P5_maddeshift(89) vs P5_lawshuffle(32) : 27.6 puan (18 modelde 36.9)"
+      "P6 2x2 hucreleri (30/30)               : 33.4 puan"
+  Makale 4.3.3'te ikisini de kullaniyor; ana on kayittan gelirler ve
+  bu satirla cizelgeye baglanmislardir.
+
+### D8.5 — MANSET GA'larinin KANONIK HALI (E1 ve E2, D7.1'i genisletir)
+  Cizelgede iki kosudan gelen iki deger var; NOKTA TAHMINLER AYNI.
+    E1  +0.2292  [+0.1939, +0.2635]  <- KANONIK (3. tur eki)
+                 [+0.1932, +0.2639]     (6. tur pozitif kontrolu, metne GIRMEZ)
+    E2  +0.2162  [+0.1818, +0.2493]  <- KANONIK (3. tur eki)
+                 [+0.1829, +0.2512]     (6. tur 17-vaka duyarliligi, metne GIRMEZ)
+  >> Ana metin ve ek AYNI cifti kullanir: E1 [+0.1939, +0.2635],
+     E2 [+0.1818, +0.2493].
+
+### D8.6 — ANA ON KAYIT md.1'IN DORT KONTRASTI (yalnizca 1.2 raporlanmisti)
+  Barindirilan kol, varyant A, v7a altin (f4_analiz.csv'den):
+
+    model              ko   kapsam    BAcc    duyarlilik   lambda
+    claude-sonnet-5    E1   0.6152   0.6920     0.6357     0.3254
+    claude-sonnet-5    E2   1.0000   0.6242     0.4484     0.2936
+    claude-haiku-4.5   E1   0.7104   0.5298     0.5361    -0.0255
+    claude-haiku-4.5   E2   0.9979   0.5558     0.5695     0.0611
+
+  1.1 KAPSAM farki (E1-E2):  sonnet -0.3848 · haiku -0.2875
+  1.2 BAcc farki           :  sonnet +0.0678 · haiku -0.0260  (raporlanan)
+  1.4 LAMBDA farki (E1-E2) :  sonnet +0.0318 · haiku -0.0866
+  1.3 (BAcc / Youden J)    :  BAcc ile ayni bilgiyi tasiyor; J = 2*BAcc - 1
+      oldugu icin BAcc kontrastinin monoton donusumudur ve AYRI bir
+      dogrulayici degildir. Bu, makalede boyle beyan edilmelidir.
+
+  >> Makale 1.2'yi "the confirmatory measure" diye anlatiyordu; ana on kayit
+     DORT nicelik sayiyor. 1.1 tanim geregi negatif (E1'de kacinma var, E2'de
+     yok) ve bir hipotez testi degil betimsel bir olcudur. 1.4 sonnet icin
+     pozitif, haiku icin negatif — 1.2 ile AYNI yonu veriyor.
+     Makale bunlari raporlamali ve hangisinin test edildigini acikca demeli.

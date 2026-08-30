@@ -1,24 +1,4 @@
-# JESTECH kapak mektubu — RUHSAT-Bench
-
-> **Ali için not (Türkçe).** Aşağıdaki İngilizce metin olduğu gibi
-> gönderilebilir. Köşeli parantezli alanları sen doldur. Mektubun tek işi
-> **"bu bir NLP makalesi, yanlış dergiye gelmiş"** itirazını ÖNDEN karşılamak;
-> denetimde ilk turda hakem tam olarak bunu söyleyip "göndermezdim" demişti,
-> çerçeve düzelince fikrini değiştirdi. O yüzden ilk paragraf teknoloji değil
-> **kalifikasyon** diyor. Mektuptaki her sayı `sonuclar/makale_sayilari.txt`
-> çizelgesinden geliyor; hiçbirini elle değiştirme.
->
-> **Göndermeden önce iki blok dolmalı:** yazar bloğu ve arşiv DOI'si. Bunların
-> dışında makale hazır — EK-6'nın zorunlu tuttuğu duyarlılık kolu koşuldu ve
-> makaleye girdi (§4.6.5).
->
-> **Gönderilecek dosyalar:** `RUHSAT_JESTECH_ana_metin.md` (9.741 kelime) +
-> `RUHSAT_JESTECH_ek.md` (S1–S9, supplementary material olarak yüklenir).
->
-> **Depo ve DOI hazır:** github.com/alicetinkaya76/ruhsat-bench ·
-> DOI 10.5281/zenodo.22168590 (tüm sürümler) / .22168624 (v1.0.1, makaledeki sayıların üretildiği hâl).
-
----
+# Cover letter
 
 To the Editor,
 *Engineering Science and Technology, an International Journal*
@@ -64,14 +44,16 @@ Three results seem to us to be of engineering interest.
    +0.2292 in balanced accuracy (95% CI [+0.1939, +0.2635]). Supplying the text
    is not by itself what produces the result.
 
-3. **A qualified component changed without notice, and forced-choice accuracy
-   did not see it.** A hosted model re-run months later on the frozen claim set,
-   at the same budget and with byte-identical prompts, held its forced-choice
-   accuracy but lost roughly half of what abstention had been buying it — the
-   condition contrast fell from 0.0762 to 0.0332 — while the number of
-   abstentions barely moved. In engineering practice this is a verified tool
-   changing underneath a qualification, and it is invisible to the measure most
-   benchmarks report.
+3. **A qualified component behaved differently on a frozen test set, and
+   forced-choice accuracy did not register it.** A hosted model re-run about four weeks later on the frozen claim set,
+   at the same budget and with byte-identical prompts, held its forced-choice accuracy
+   inside its archived range while its abstention-permitted accuracy fell
+   outside it, with the number of abstentions barely moving. We do not claim the
+   size of that change: its paired interval contains zero, and the manuscript
+   says so. What the run shows is that the two conditions moved differently,
+   which is precisely what a forced-choice benchmark cannot register. In
+   engineering practice this is the situation of a qualified tool whose
+   behaviour on its own acceptance test is no longer what it was.
 
 The study was pre-registered before the runs, and every deviation from the
 pre-registration is declared in the paper rather than absorbed. Where a
@@ -96,12 +78,3 @@ Ali Çetinkaya
 Department of Computer Engineering, Faculty of Technology
 Selçuk University, Konya, Türkiye
 ali.cetinkaya@selcuk.edu.tr · ORCID 0000-0002-7747-6854
-
----
-
-## Önerilen hakem alanları (istenirse)
-
-Dergi hakem önerisi isterse, alan olarak **otomatik mevzuat/kod denetimi
-(automated code compliance checking)** ve **karar-destek yazılımının
-doğrulanması-geçerlenmesi (V&V)** yaz; saf NLP alanı YAZMA — mektubun bütün
-çerçevesini kendi elinle bozmuş olursun.

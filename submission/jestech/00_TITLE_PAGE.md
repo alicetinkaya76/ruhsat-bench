@@ -22,7 +22,7 @@ Ali Çetinkaya · ali.cetinkaya@selcuk.edu.tr
 Full-length research article
 
 **Word count**
-Main text 10,933 words (excluding supplementary material S1–S9, 9,438 words)
+Main text 12,297 words (excluding supplementary material S1–S9, 9,526 words)
 
 **Data and code**
 https://github.com/alicetinkaya76/ruhsat-bench
