@@ -941,17 +941,17 @@ and a measure stated over abstention behaviour.
 
 # Acknowledgements
 
-> **[TO BE COMPLETED BEFORE SUBMISSION]** The two domain specialists who
-> performed the blinded gold-label audit reported in §4.7 are not authors of this
-> paper. Their names and affiliations belong here, with their consent, together
-> with a one-line statement of what they contributed. The audit is load-bearing
-> for the paper's central claim about label quality, so this block is not
-> optional.
+The author thanks the two domain specialists — one in civil engineering, one in
+occupational health and safety — who carried out the blinded gold-label audit
+reported in §4.7. They worked without sight of the gold labels, the probe
+families or the sampling strata, and the negative result of the second pass is
+theirs as much as the positive result of the first. The audit is what allows this
+paper to treat its labels as a measured object rather than an assumption.
 
 # Declarations
 
-**Funding.** [TO BE COMPLETED — state the funding source, or "This research
-received no specific grant from any funding agency."]
+**Funding.** This research received no specific grant from any funding agency in
+the public, commercial, or not-for-profit sectors.
 
 **Conflict of interest.** The author declares no conflict of interest.
 
