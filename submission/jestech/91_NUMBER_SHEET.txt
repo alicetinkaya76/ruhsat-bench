@@ -1,0 +1,886 @@
+RUHSAT-Bench — MAKALE SAYI CIZELGESI (KANONIK)
+Her sayi committed cikti dosyalarindan URETILDI. Makalede bu dosyada
+OLMAYAN hicbir sayi kullanilmaz.
+==========================================================================
+
+## KORPUS
+  6331      6331_isg_kanunu.pdf              birim    39  karakter   71025  pdf 2c48625014462710...
+  4708      4708_yapi_denetimi.pdf           birim    15  karakter   55563  pdf e4ad97473caf12d5...
+  3194      3194_imar_kanunu.pdf             birim    49  karakter  158417  pdf 5557b139186efcd6...
+  ISGRISK   isg_risk_yonetmeligi.pdf         birim    19  karakter   16703  pdf 47ec8c68a5c1d931...
+  TBDY      TBDY_2018.pdf                    birim  1208  karakter  870747  pdf 8d3a9a463d4a534e...
+  YDUY      yapi_denetim_uygulama_yon.pdf    birim    36  karakter   94556  pdf cdb4aef16da40cd2...
+  ham korpus toplam birim: 1366
+  rafine korpus (korpus_v2, EK-6 birincil): 1755 birim
+    TBDY  bent_bol   1208 -> 1523
+    diger maddeler2   158 ->  232  (Ek 16 + Gecici 58 kurtarildi)
+
+## IDDIA KUMESI
+  toplam iddia: 473
+  altin dagilimi: {'DOGRU': 223, 'YANLIS': 250}
+  prob dagilimi : {'P1_dogrudan': 163, 'P2_sayisal': 37, 'P5_capraz': 121, 'P3_anakronizm': 19, 'P6_guncellik': 120, 'P4_uydurma': 13}
+  atif dagilimi : 289 madde duzeyi · 184 belge duzeyi
+
+## KAPALI KITAP — FRONTIER (v7a altin, kumeli bootstrap 10k, kume=kanun+madde)
+  claude-sonnet-5 (cogunluk)  E1  BAcc 0.6920  kapsam 0.615  lambda 0.325  ECE 0.0373
+  claude-sonnet-5 (cogunluk)  E2  BAcc 0.6242  kapsam 1.000  lambda 0.294  ECE 0.0634
+  claude-haiku-4.5 (cogunluk) E1  BAcc 0.5298  kapsam 0.710  lambda -0.026  ECE 0.2263
+  claude-haiku-4.5 (cogunluk) E2  BAcc 0.5558  kapsam 0.998  lambda 0.061  ECE 0.2070
+  (GA'lar: sonuclar/f4_analiz.csv bacc_alt/bacc_ust sutunlari)
+  claude-sonnet-5 E1 BAcc %95 GA: [0.633, 0.750]
+  claude-haiku-4.5 E1 BAcc %95 GA: [0.489, 0.570]  <- 0.5'i ICERIYOR
+
+## SURUM KAYMASI (frontCA32_bugun, EK-7)
+  arsiv A@32 E1 BAcc: 0.6832 · 0.6796 · 0.6986  -> [0.6796, 0.6986]
+  A@32 BUGUN     E1 BAcc: 0.6422  -> ARALIK DISI
+  arsiv A@32 E2 BAcc: [0.6012, 0.6220]
+  A@32 BUGUN     E2 BAcc: 0.6090  -> ARALIK ICI
+  KACINMA KAZANCI BAcc(E1)-BAcc(E2):
+    arsiv: 0.0735 · 0.0784 · 0.0767  ort 0.0762  aralik [0.0735, 0.0784]
+    bugun: 0.0332   = arsiv ortalamasinin %44'i, ARALIK DISI
+  kacinma SAYISI: arsiv 181/184/182 · bugun 178  (DEGISMEDI)
+
+## VARYANT ETKISI (kol ici bandlarla)
+  A@32  kol ici uyusma bandi: [0.9017, 0.9133]
+  B@128 kol ici uyusma bandi: [0.9165, 0.9228]
+  A@128 x B@128 uyusma      : [0.8266, 0.8319] ort 0.8302  -> HER IKI BANDIN ALTINDA
+  B@128 E1 BAcc: 0.6992 · 0.7027 · 0.7172
+
+## R3 (kural tabanli taban, LLM YOK)
+  ham korpus + v6 altin   : 473/473
+  ham korpus + v7a altin  : 466/473
+  korpus_v2 + v7a altin   : 473/473
+  -> eski 473/473'un 7/473 = %1.48'i kaynasmis ayristirmadan
+  -> o 7 iddia, uzmanlarin dondurdugu 7 altinin TAM KENDISI (246 257 304 360 364 382 393)
+  negatif kontrol (karistirilmis esleme, 5 tohum, korpus_v2+v7a):
+    0.5349 · 0.5349 · 0.5159 · 0.5370 · 0.5349  ort 0.5315
+
+## BM25 GETIRIM (R2, korpus_v2, k=3, 1755 birim)
+  geri cagirma: 79/289 = 0.2734   (kacirdi 210)
+
+## P6 BAGIMSIZ DOGRULAMA (mevzuat.gov.tr resmi HTML)
+  20/20 UYUSTU · 0 UYUSMADI
+  cerceve KISITI: 3194, 4708, 6331 (YDUY DISARIDA — 43 P6 iddiasi sinanmadi)
+  capraz kontrol: resmi metin bizim ayristiricimizla 3194:49, 4708:15, 6331:39 -> BIREBIR
+
+## KALIBRASYON (standart ECE, kova ortalama guveni)
+  pozitif kontrol: R3'e 0.0000 (arsiv orta-nokta formulu 0.0500 basiyordu)
+  8/56 hucrede guven tasiyan kayit < 50 -> ECE/Brier BASTIRILDI (az-n)
+
+==========================================================================
+## EK — DENETIMIN EKSIK BULDUGU SAYILAR (28.08.2026'da eklendi)
+==========================================================================
+
+### ACIK AGIRLIKLI MODELLER — E1 / varyant A, BAcc %95 kumeli GA
+  yerel model sayisi (E1/A hucresi olan): 18
+
+  model                             BAcc   GA alt   GA ust  kapsam  0.5'i disliyor mu
+  qwen2.5:7b-instruct-q4_K_M      0.7500   0.5000   0.8750   0.013  hayir
+  qwen2.5:32b-instruct            0.6769   0.5833   0.7618   0.173  EVET
+  gemma3:27b                      0.5674   0.5230   0.6115   0.970  EVET
+  llama3.2:3b-instruct-q8_0       0.5509   0.5073   0.5963   0.884  EVET
+  qwen2.5:14b-instruct            0.5509   0.4839   0.6159   0.205  hayir
+  gemma3:12b                      0.5493   0.5139   0.5836   0.987  EVET
+  llama3.2:3b-instruct-fp16       0.5434   0.4999   0.5879   0.886  hayir
+  llama3.2:3b-instruct-q5_K_M     0.5318   0.4963   0.5676   0.943  hayir
+  qwen2.5:7b-instruct-fp16        0.5286   0.4048   0.6353   0.051  hayir
+  qwen2.5:7b-instruct-q8_0        0.5250   0.3500   0.6375   0.038  hayir
+  qwen2.5:3b-instruct-q8_0        0.5176   0.4915   0.5436   0.657  hayir
+  qwen2.5:3b-instruct-fp16        0.5126   0.4922   0.5336   0.727  hayir
+  qwen2.5:3b-instruct-q5_K_M      0.5124   0.4898   0.5350   0.516  hayir
+  gemma3:4b                       0.5114   0.4766   0.5456   0.896  hayir
+  llama3.2:3b-instruct-q4_K_M     0.5040   0.4663   0.5422   0.668  hayir
+  qwen2.5:3b-instruct-q4_K_M      0.5029   0.4886   0.5183   0.968  hayir
+  llama3.2:1b                     0.4850   0.4604   0.5000   0.233  hayir
+  qwen2.5:7b-instruct-q5_K_M      0.4603   0.2778   0.6143   0.034  hayir
+
+  >> 0.5'i DISLAYAN acik agirlikli model: 4
+     qwen2.5:32b-instruct, gemma3:27b, llama3.2:3b-instruct-q8_0, gemma3:12b
+
+  !! DIKKAT: 'hicbir acik agirlikli model sansi asmadi' ifadesi YANLIStir.
+     qwen2.5:32b-instruct E1/A BAcc 0.6769 [0.5833, 0.7618] — barindirilan
+     claude-sonnet-5'in 0.6920 [0.633, 0.750] degeriyle ORTUSUYOR.
+
+### KACINMA SAYISI — DUZELTME
+  arsiv A@32 k1/k2/k3: 181 · 184 · 182   -> aralik [181, 184]
+  A@32 BUGUN         : 178                -> ARALIK DISINDA (az da olsa)
+  !! 'kacinma orani DEGISMEDI' ifadesi YANLIStir. Dogru ifade:
+     kacinma sayisi kucuk olculde dustu (182 ort -> 178, %2.2 goreli),
+     KAZANC ise yariya indi (0.0762 -> 0.0332, %56 goreli dusus).
+     Yani kacinma SIKLIGI kabaca korunurken SECICILIGI coktu.
+
+### BETIK ZINCIRI (surum kaymasi iddiasinin on kosulu)
+  arsiv frontC_k1/k3 : betik_sha256 YOK (yama oncesi f4_api.py)
+  frontCA128_k1      : betik_sha256 11a5d5a3b7b7af20 (ozgun f4_api_v2.py)
+  frontCA32_bugun    : betik_sha256 002df510703fb0a7 (yeniden uretilen v2)
+  VARYANT A ISTEMLERI yama oncesi/sonrasi BIREBIR (kaynaktan yeniden turetildi):
+    E1 8a8ef386b0b2b619   E2 64dedda000ce465e
+  SINIR: arsiv kosulari hic hash TASIMIYOR; ozdeslik kayittan degil
+  arsiv KAYNAK KODUNDAN turetildi. Makalede boyle yazilmali.
+
+### KIYAS TABANI SECIMI (denetimin itirazi)
+  arsiv E1 kumeli bootstrap GA: [0.633, 0.750]  -> bugunku 0.6422 ICINDE
+  arsiv E1 kosu-arasi araligi : [0.6796, 0.6986] -> bugunku 0.6422 DISINDA
+  Bu iki taban FARKLI SORU cevaplar:
+    bootstrap GA  : 'baska iddialara genellenir mi' (maddeler degisken)
+    kosu araligi  : 'ayni 473 maddede model degisti mi' (maddeler SABIT)
+  Surum kaymasi sorusu icin dogru taban KOSU ARALIGIDIR, cunku madde
+  kumesi donmustur. Ama bu secim makalede GEREKCELENDIRILMELIDIR ve
+  bootstrap GA'si da RAPORLANMALIDIR (hakem soracaktir).
+
+### ON-KAYITLI OLCUT — EK-1 3: Delta = A_tah - A_kac
+  A_tah = E1'de TAAHHUT edilen maddelerde E2 dogrulugu
+  A_kac = E1'de KACINILAN maddelerde E2 dogrulugu
+  Delta > 0 -> kacinma BILGI TASIYOR
+
+  kosu                  A_tah    n    A_kac    n    DELTA
+  arsiv A@32 k1        0.6644  292   0.5470  181   0.1174
+  arsiv A@32 k2        0.6609  289   0.5326  184   0.1283
+  arsiv A@32 k3        0.7010  291   0.5220  182   0.1791
+  A@128 (eski)         0.6540  289   0.5870  184   0.0670
+  A@32 BUGUN           0.6576  295   0.5562  178   0.1014
+  haiku cogunluk       0.5672  335   0.5255  137   0.0416
+  sonnet cogunluk      0.6942  291   0.5385  182   0.1557
+
+  arsiv A@32 Delta araligi: [0.1174, 0.1791]  ort 0.1416
+  A@32 BUGUN            : 0.1014  -> ARALIK DISI (altinda)
+
+  !! IKI OLCUT AYNI YONU GOSTERIR AMA ETKI BUYUKLUKLERI FARKLIDIR:
+     BAcc(E1)-BAcc(E2): 0.0762 -> 0.0332   %56 goreli dusus
+     Delta (on kayitli): 0.1416 -> 0.1014  %28 goreli dusus
+     'Yariya indi' ifadesi YALNIZ birinci olcut icin dogrudur.
+     Delta'nin arsiv araligi GENIS (k3 sapkin: 0.1791); bu belirsizlik
+     makalede yazilmalidir.
+
+### UZMAN DENETIMI (kodlayicilar arasi uyum)
+  KARAR (3 kategori)          Cohen k = 1.000  %95GA [1.000, 1.000]  n=150
+  KARAR (EMIN_DEGILIM haric)  Cohen k = 1.000  %95GA [1.000, 1.000]  n=150
+  KALITE (3 kategori)         Cohen k = 0.860  %95GA [0.759, 0.961]  n=150
+  ikinci gecis (baglamda dogruluk): 60 madde
+    N tabakasi (en az bir uzman TEMIZ demedi): 33/33 secildi
+    T tabakasi (ikisi de TEMIZ dedi)         : 105 havuzdan 25 secildi
+    K tabakasi (bilinen altin hatasi, kontrol):  2/2 secildi
+  birinci gecis ornegi: 158 kod
+  baglamsal kusur orani (prob bazli, ilk gecis): P1 0/22, P2 0/17,
+    P3 0/15, P4 0/12, P5 0/16  (hepsi %0, GA ust sinirlari %14.9-%24.3)
+
+==========================================================================
+## DUZELTMELER — 2. TUR DENETIMI (28.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D1 — Delta ON KAYITLI DEGIL, KESIFSELDIR
+  F4_on_kayit_ek.txt 3. bolum basligi harfiyen:
+    '3. EKLENEN ANALIZ (KESIFSEL, ON KAYITTA YOKTU)'
+  ve son satiri: 'KESIFSEL olarak isaretlenir; coklu karsilastirma
+  duzeltmesi uygulanmaz.'
+  => Makalede Delta'ya ASLA 'pre-registered' DENMEZ. 'Exploratory,
+     added in EK-1 after the main pre-registration' diye yazilir.
+
+### D2 — BONFERRONI DUZELTMESI ZORUNLU (ana on kayit md.1)
+  F4_on_kayit.txt: 'Coklu karsilastirma: model sayisi uzerinden Bonferroni.'
+  18 model, alpha=0.05 -> hucre basina 0.00278 (%99.72 GA)
+
+  DUZELTILMEMIS %95 GA ile 0.5'i dislayan: 4 model
+  BONFERRONI SONRASI 0.5'i dislayan       : 2 model
+
+  model                          BAcc   %95 alt  Bonf alt  kapsam
+  qwen2.5:32b-instruct         0.6769    0.5820    0.5349   0.173  -> DISLIYOR
+  gemma3:27b                   0.5674    0.5235    0.5017   0.970  -> DISLIYOR (KIL PAYI)
+  llama3.2:3b-instruct-q8_0    0.5509    0.5077    0.4878   0.884  -> dislamiyor
+  gemma3:12b                   0.5493    0.5136    0.4915   0.987  -> dislamiyor
+
+  !! MANSET DUZELTILMELI: 'dort model' -> 'duzeltilmemis GA ile dort,
+     on-kayitli Bonferroni duzeltmesinden sonra IKI; ve ikincisinin
+     alt siniri 0.5017, yani KIL PAYI.'
+  (bootstrap 4000 yeniden orneklem, kume=kanun+madde, tohum 42)
+
+### D3 — ASGARI KAPSAM ESIGI: on kayit DUZELTILDI, kapsam KAPI DEGIL
+  Ana on kayit md.3: '%80'inden azina cevap verirse puanlanmaz'
+  EK-1 1: '%80 esigi YANIT ORANINA uygulanir. TAAHHUT ORANI BIR KAPI DEGIL'
+  EK-1 2: dogruluk turu metrikler TAAHHUT >= 30 olan hucrelerde raporlanir
+  => qwen2.5:32b (kapsam 0.173 = 82 taahhut) 30'un USTUNDE, RAPORLANIR.
+     'On-kayitli asgari kapsam esiginin altinda' demek YANLIStir.
+  => Ana on kayit ile EK-1 arasindaki bu SAPMA makalede ACIKLANMALIDIR
+     (EK-1'in kendisi 'yine de sapmadir ve makalede belirtilir' diyor).
+
+==========================================================================
+## F5 DAYANAKLI KOLLAR — KOSULDU (29.08.2026, TF-HPC)
+==========================================================================
+  model  : qwen2.5:32b-instruct   korpus: korpus_v2 (EK-6 birincil) + v7a
+  3 kosu + COGUNLUK OYU · max_token 128 · KESILEN 0/1524 (her kosuda)
+
+  kol       kosul     n   kapsam     BAcc  dogruluk  lambda
+  R1        E1      289    0.830   0.9164    0.9208   0.987
+  R1        E2      289    1.000   0.8615    0.8720   0.988
+  R2        E1      473    0.899   0.8229    0.8235   0.804
+  R2        E2      473    1.000   0.8100    0.8161   0.829
+  R3bm25    -       473    1.000   0.5938    0.5877  -0.043
+
+  R0 (kapali kitap, ayni model) E1: BAcc 0.6769  kapsam 0.173
+  R0 (kapali kitap, ayni model) E2: BAcc 0.5493  kapsam 1.000
+
+  MANSET (HANDOVER 3): R2 - R3bm25
+    E1: 0.8229 - 0.5938 = +0.2292
+    E2: 0.8100 - 0.5938 = +0.2162
+    Yorum: AYNI getirilen pasajlar verildiginde LLM, dizgi eslestirmeye
+    ~22 puan katiyor.
+
+  R1 (tavan) - R2 (getirim): E1 +0.0935 · E2 +0.0515
+    Yorum: kusursuz atif yerine BM25 kullanmanin maliyeti.
+
+  !! DIKKAT: R2 geri cagirmasi yalnizca 0.2734 oldugu halde R2 BAcc 0.82.
+     Yani R2'nin basarisi SAF GETIRIM kaynakli DEGILDIR; getirilen
+     pasajlar cogu zaman atif yapilan birim OLMASA DA yeterli oluyor
+     ya da model parametrik bilgisiyle tamamliyor. Bu ayrilmadi.
+
+### DAYANAKLI KOLLARIN KOL ICI BANDI — kutuk #29 DARALTILDI
+  qwen2.5:32b R1: [1.0000, 1.0000]   (3 ikili, 1524 cagri/kosu)
+  qwen2.5:32b R2: [1.0000, 1.0000]
+  => TAM DETERMINISTIK.
+
+  Kutuk #29 llama3.2:3b ile 17/20 olcmustu. Yani determinizm ihlali
+  DAYANAKLI ISTEME degil, O MODELE aittir. Ayni model bicim talimatini
+  da birakiyordu (kutuk #28). Iki bulgu ayni modele ait.
+  => 'Yerel dayanakli kollar 3 kosu gerektirir' ifadesi FAZLA GENIS.
+     qwen2.5:32b icin tek kosu yeterlidir (olculdu).
+
+==========================================================================
+## EK — 3. TUR DENETIMININ ISTEDIGI SAYILAR (29.08.2026)
+==========================================================================
+
+### F5 DAYANAKLI KOLLAR — KUMELI BOOTSTRAP %95 GA
+  (4000 yeniden orneklem, kume = kanun+madde, tohum 42, altin v7a)
+
+  kol       kosul     BAcc    GA alt    GA ust
+  R1        E1      0.9164    0.8804    0.9494
+  R1        E2      0.8615    0.8207    0.8987
+  R2        E1      0.8229    0.7866    0.8579
+  R2        E2      0.8100    0.7763    0.8415
+  R3bm25    -       0.5938    0.5598    0.6261
+
+### MANSET FARKININ GA'si — R2 - R3bm25 (ESLI, ayni kumeler)
+  E1: +0.2292   %95 GA [+0.1939, +0.2635]   -> SIFIRI DISLIYOR
+  E2: +0.2162   %95 GA [+0.1818, +0.2493]   -> SIFIRI DISLIYOR
+  Yorum: AYNI getirilen pasajlar verildiginde LLM'in dizgi eslestirmeye
+  kattigi fark istatistiksel olarak sifirdan ayrilir.
+
+### IKINCI GECIS UZMAN DENETIMI — MAKALEDE HIC ANILMIYOR, ANILMALI
+  Kaynak: sonuclar/gecis2_raporu.txt (KOSULDU, olumsuz cikti)
+
+  Cohen kappa = 0.722   po=0.897  pe=0.628  n=58
+    (birinci gecis KARAR ekseni 1.000 idi; ikinci gecis DUSUK)
+  uyusmazlik 6, yon dagilimi {(YANLIS, DOGRU): 6}
+  isaret testi p = 0.0312  -> UYUSMAZLIK SISTEMATIK, rastgele DEGIL
+
+  Raporun kendi hukmu (aynen):
+    'Iki uzman farkli bir KURAL uyguluyor. Bu bir olcum hatasi degil
+     TANIM sorunudur ve ortalamayla kapatilamaz; uzlasi toplantisi gerekir.'
+
+  POZITIF KONTROL DUSTU:
+    K tabakasi 2 bilinen altin hatasi. KESIN kural (iki uzman da) 0/2
+    yakaladi; GEVSEK kural (en az biri) 1/2 yakaladi.
+    Rapor: 'Birincil olcut GEVSEK kural olmalidir; KESIN kural alt sinir
+    verir. Birinci gecisteki 0/150 sonucu da bu isikta okunmalidir.'
+
+  BAGLAMSAL HATA ORANI (tabaka agirlikli, GEVSEK kural):
+    N tabakasi 5/33 = %15.2 [%6.7, %30.9]
+    T tabakasi 1/25 = % 4.0 [%0.7, %19.5]
+    CERCEVE TAHMINI %6.7  %95GA [%1.6, %11.8]  (birinci gecis ornegi 138 madde)
+    BILESIK AGIRLIKLA (butun kumeye yansitilmis) %8.8
+  KESIN kural: 0/58 olay; %95 tek yonlu ust sinir %6.2
+
+  BIRINCI GECIS KALITE BAYRAGININ YORDAYICI GECERLILIGI:
+    N %15.2 vs T %4.0, kaldirac x3.8, Fisher p = 0.2216
+    -> yon dogru ama ANLAMLI DEGIL; 'egilim' diye raporlanmali,
+       yordayici gecerlilik IDDIA EDILMEMELI.
+
+  !! MAKALE SU AN YALNIZ IYI OLAN KAPPA'YI (1.000 / 0.860) RAPORLUYOR.
+     Ikinci gecis anilmadan altin etiket kalitesi iddiasi EKSIKTIR ve
+     3.6 tablosu zaten 'Bolum 4'te raporlanacak' diye SOZ VERIYOR.
+
+### ON-KAYITLI KAPILARIN UYGULANMASI — acik agirlikli E1/varyant A (18 hucre)
+  yanit orani = (n - ayristirilamadi)/n     taahhut = DOGRU|YANLIS verilen madde
+
+  model                             n  ayrist   YANIT  taahhut  durum
+  qwen2.5:32b-instruct            473       0   1.000       82  puanlanir
+  gemma3:27b                      473       0   1.000      459  puanlanir
+  llama3.2:3b-instruct-q8_0       473      54   0.886      418  puanlanir
+  qwen2.5:14b-instruct            473       0   1.000       97  puanlanir
+  gemma3:12b                      473       0   1.000      467  puanlanir
+  llama3.2:3b-instruct-fp16       473      53   0.888      419  puanlanir
+  llama3.2:3b-instruct-q5_K_M     473      27   0.943      446  puanlanir
+  qwen2.5:3b-instruct-q8_0        473       0   1.000      311  puanlanir
+  qwen2.5:3b-instruct-fp16        473       0   1.000      344  puanlanir
+  qwen2.5:3b-instruct-q5_K_M      473       1   0.998      244  puanlanir
+  gemma3:4b                       473       0   1.000      424  puanlanir
+  qwen2.5:3b-instruct-q4_K_M      473       4   0.992      458  puanlanir
+  llama3.2:3b-instruct-q4_K_M     473     154   0.674      316  ELENDI (yanit<%80)
+  llama3.2:1b                     473     215   0.545      110  ELENDI (yanit<%80)
+  qwen2.5:7b-instruct-q4_K_M      473       0   1.000        6  PUANLANMAZ (taahhut<30)
+  qwen2.5:7b-instruct-fp16        473       0   1.000       24  PUANLANMAZ (taahhut<30)
+  qwen2.5:7b-instruct-q8_0        473       0   1.000       18  PUANLANMAZ (taahhut<30)
+  qwen2.5:7b-instruct-q5_K_M      473       0   1.000       16  PUANLANMAZ (taahhut<30)
+
+  PUANLANIR 12 · yanit kapisindan ELENEN 2 · taahhut<30 PUANLANMAZ 4   = 18
+
+  !! DUZELTME: '14 hucre puanlanir' YANLIS, dogrusu 12.
+  !! DUZELTME: '[SAYI YOK: per-model parsable-response rates]' OLGUSAL
+     OLARAK YANLIS — oranlar yukarida, f4_analiz.csv'den turetiliyor.
+  !! qwen2.5:32b (82 taahhut) IKI KAPIYI DA GECER, puanlanir.
+
+### DOGRULAYICI KONTRAST — BAcc(E1) - BAcc(E2), BONFERRONI-2
+  EK-4 4: birincil aile IKI kontrast icerir -> Bonferroni-2 (%97.5 GA)
+  (esli kumeli bootstrap, 4000, kume=kanun+madde, tohum 42, altin v7a)
+
+  claude-sonnet-5   fark +0.0678  %95 [+0.0243, +0.1106]  Bonf-2 [+0.0190, +0.1170]
+                    -> SIFIRI DISLIYOR: kacinma dogrulugu ARTIRIYOR
+  claude-haiku-4.5  fark -0.0260  %95 [-0.0612, +0.0130]  Bonf-2 [-0.0659, +0.0183]
+                    -> DISLAMIYOR: kacinmanin olculebilir faydasi YOK
+
+==========================================================================
+## EK — 4. TUR DENETIMI (29.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### DUZELTME — IKI AYRI DOGRULAYICI AILE VAR, KARISTIRILMISTI
+  ANA ON KAYIT (F4_on_kayit.txt 1): 1.1-1.4 kontrastlari
+    icinde 1.2 'E1 vs E2 bagli dogruluk farki' = BAcc(E1)-BAcc(E2)
+    duzeltme: 'model sayisi uzerinden Bonferroni'
+  EK-4 4: birincil aile H1 (R2-R0) ve H2 (R1-R0)
+    duzeltme: Bonferroni-2
+  !! Kacinma kontrastina Bonferroni-2 uygulanmisti — YANLIS aile.
+
+### DOGRULAYICI 1.2 — BAcc(E1)-BAcc(E2), DOGRU BONFERRONI
+  aile: E1 ve E2'si de puanlanan model sayisi = 17 -> alpha/17 = 0.00294
+        (%99.71 GA, esli kumeli bootstrap 4000, kume=kanun+madde)
+
+  claude-sonnet-5   +0.0678  %95 [+0.0243, +0.1106]  Bonf-17 [+0.0018, +0.1343]
+                    -> SIFIRI DISLIYOR ama KIL PAYI (alt sinir 0.0018)
+  claude-haiku-4.5  -0.0260  %95 [-0.0612, +0.0130]  Bonf-17 [-0.0765, +0.0347]
+                    -> dislamiyor
+
+### EK-4 4 BIRINCIL AILE — H1 ve H2 (qwen2.5:32b, Bonferroni-2 %97.5)
+  H1 = R2 - R0 (tam kume)      H2 = R1 - R0 (289'luk alt kume)
+
+  H1 E1: 0.8229 - 0.6769 = +0.1460  n=473
+         %95 [+0.0503, +0.2455]  Bonf-2 [+0.0367, +0.2575]  SIFIRI DISLIYOR
+  H2 E1: 0.9164 - 0.6226 = +0.2938  n=289
+         %95 [+0.1361, +0.4479]  Bonf-2 [+0.1118, +0.4717]  SIFIRI DISLIYOR
+  H1 E2: 0.8100 - 0.5493 = +0.2607  n=473
+         %95 [+0.2218, +0.2964]  Bonf-2 [+0.2170, +0.3014]  SIFIRI DISLIYOR
+  H2 E2: 0.8615 - 0.5062 = +0.3552  n=289
+         %95 [+0.3112, +0.3984]  Bonf-2 [+0.3051, +0.4036]  SIFIRI DISLIYOR
+
+  NOT: R0'in 289'luk alt kumedeki BAcc'si tam kumedekinden farklidir
+       (E1 0.6226 vs 0.6769; E2 0.5062 vs 0.5493) — H2 ayni alt kumede
+       eslesmis olarak hesaplanmistir.
+
+  !! Bu ON-KAYITLI BIRINCIL hipotezlerdir ve makalede HIC
+     RAPORLANMIYORDU. Manset (R2 - R3-BM25) EK-4 4'te IKINCIL/KESIFSEL
+     listesindedir. Ikisi de verilmeli, hangisinin birincil oldugu
+     acikca yazilmalidir.
+
+### 5.4 SAYI HATASI
+  Makale: 'R1 and R2 intervals ... touch under E1'
+  GERCEK: R1/E1 [0.8804, 0.9494] · R2/E1 [0.7866, 0.8579]
+          R1 alt sinir 0.8804 > R2 ust sinir 0.8579 -> AYRIKLAR, DEGMIYORLAR
+
+### DELTA GUVEN ARALIKLARI (3.7 soz vermisti, verilmemisti)
+  (esli kumeli bootstrap 4000, kume=kanun+madde, tohum 42, altin v7a)
+
+  kosu                    Delta            %95 GA
+  arsiv A@32 k1          0.1174   [+0.0344, +0.1974]
+  arsiv A@32 k2          0.1283   [+0.0385, +0.2147]
+  arsiv A@32 k3          0.1791   [+0.0914, +0.2638]
+  A@128 (eski)           0.0670   [-0.0180, +0.1494]   sifiri ICERIYOR
+  A@32 BUGUN             0.1014   [+0.0212, +0.1833]
+  sonnet cogunluk        0.1557   [+0.0724, +0.2374]
+  haiku cogunluk         0.0416   [-0.0448, +0.1380]   sifiri ICERIYOR
+
+  !! ONEMLI NUANS — ONCEKI IFADE ZAYIFLIYOR:
+     'Delta %28 dustu, arsiv araligi DISINDA' ifadesi NOKTA TAHMINLERININ
+     min-maksina dayaniyordu. GUVEN ARALIKLARI HESABA KATILINCA bugunku
+     [+0.0212, +0.1833] arsiv aralıklariyla FAZLASIYLA ORTUSUYOR.
+     Delta EKSENINDE bugun ile arsiv AYIRT EDILEMIYOR.
+     Surum kaymasi bulgusu esas olarak BAcc(E1)-BAcc(E2) olcutune dayanir;
+     Delta AYNI YONU gosterir ama TEK BASINA AYIRT EDICI DEGILDIR.
+     Makalede boyle yazilmalidir.
+
+     Bugunku Delta yine de sifiri DISLIYOR: kacinma hala bilgi tasiyor.
+
+### IKINCI GECIS KAPPA'sinin GA'si
+  kappa = 0.7231  (po 0.897, pe 0.628, n=58)
+  SE (Fleiss yaklasimi) = 0.1073
+  %95 GA (normal yaklasim) = [0.5128, 0.9334]
+  NOT: normal yaklasim n=58'de KABADIR; makalede 'yaklasik' diye
+       nitelendirilmeli. Birinci gecis kappa'si 1.000 [1.000, 1.000] idi;
+       iki aralik ORTUSMUYOR.
+
+### PROB AILELERININ SINIF BILESIMI (v7a) — lambda tanimini SABITLER
+
+  prob                n   DOGRU  YANLIS   tek sinifli
+  P1_dogrudan       163     156       7   hayir
+  P2_sayisal         37       0      37   EVET (hepsi YANLIS)
+  P3_anakronizm      19       7      12   hayir
+  P4_uydurma         13       0      13   EVET (hepsi YANLIS)
+  P5_capraz         121       0     121   EVET (hepsi YANLIS)
+  P6_guncellik      120      60      60   hayir
+
+  !! MAKALEDEKI IKI TANIM DA TAM DOGRU DEGIL:
+     4.1 'accuracy on the always-true family plus accuracy on the
+         always-false family, minus one' -> P1 ALWAYS-TRUE DEGIL (7 YANLIS var)
+     5.4 'lambda = accuracy(P1) + accuracy(P5) - 1' -> KODLA UYUMLU, dogru
+
+  TEK TANIM KULLANILACAK (f4_skor.py [1.4] ile ayni):
+     lambda = dogruluk(P1_dogrudan) + dogruluk(P5_capraz) - 1
+  Ingilizce tarif: 'accuracy on the predominantly-true direct family (163
+  claims, 156 true) plus accuracy on the all-false cross-reference family
+  (121 claims), minus one'. Yanlilikla calisan bir model lambda ~ 0 verir.
+
+==========================================================================
+## EK — 5. TUR (29.08.2026). EKSIK KALAN SAYILARIN KAYNAGA BAGLANMASI.
+==========================================================================
+
+### A@128 (frontCA128_k1) — EK-7'nin 0.66 esigini gerekcelendiren deger
+  Muhurlu f4_skor.py ile YENIDEN URETILDI (bu oturumda):
+    scripts/f4_skor.py --jsonl sonuclar/frontCA128_k1.jsonl \
+                       --claims data/iddialar/uretilen_iddialar_v7a.csv
+
+    claude-sonnet-5 / E1   dengeli_dogruluk 0.6395   taahhut 289/473 (0.611)
+    claude-sonnet-5 / E2   dengeli_dogruluk 0.6175   taahhut 473/473
+
+  gorev4_raporu.txt:74 ile BIREBIR (0.6395).
+  NOT: varsayilan altin (v6) ile ayni kosu 0.6443 verir. Makaledeki her
+  sayi v7a altinla uretilir; bu fark v6->v7a duzeltmesinin etkisidir.
+
+  EK-7 3'un 0.66 esigi bu deger ile arsiv alt siniri 0.6796 arasinin
+  yaklasik ORTA NOKTASIDIR. EK-7 esigin DISSAL OLARAK GEREKCELENDIRILMEMIS
+  oldugunu kendisi yaziyor; makalede boyle aktarilir.
+
+### DUYARLILIK KOLU (EK-6 3) — HENUZ ALINAMADI
+  Durum: TF-HPC'de kosuldu/kosuyor (sonuclar/f5/duyarlilik_1366.jsonl),
+  ANCAK VPN kapali oldugu icin cikti bu oturumda INDIRILEMEDI.
+  Bu bolume HICBIR SAYI YAZILMAMISTIR. Kol indirilene kadar makalede
+  "yan yana tablo" verilemez; taslakta yer tutucu ACIK BIRAKILDI.
+
+### TUREV DEGERLER (cizelgedeki sayilardan dogrudan cikar, ayri olcum DEGIL)
+  0.0017 = 0.5017 - 0.5
+    gemma3:27b'nin Bonferroni-duzeltmeli alt sinirinin sansi asma payi.
+    Kaynak: D2 bolumu, 'gemma3:27b 0.5674 ... Bonf alt 0.5017'.
+    Makalede ve kapak mektubunda 'clears chance by 0.0017' diye geciyor.
+
+==========================================================================
+## EK-6 3 DUYARLILIK KOLU — KOSULDU VE INDIRILDI (29.08.2026, TF-HPC)
+==========================================================================
+  cikti : sonuclar/f5/duyarlilik_1366.jsonl  (1997 kayit)
+  sha256: 1cb99fb8611a46898ceff45fbce2c5f596f78b94693d09918a50be7c3a651bff
+          (uzak makinedeki dosyayla BIREBIR dogrulandi)
+  model : qwen2.5:32b-instruct (birincil kolla AYNI) · max_token 128 · tohum 42
+  korpus: data/korpus (1366 birim) sha256 3c925afbd9f076f8...
+  EK-4 10 GECERSIZLIK SARTLARI: kesilen 0/1524 = 0.0000 (<%1) GECTI
+                                 R2 geri cagirma basildi GECTI
+  durum : 1997/1997 'tamam'
+
+### ON KOSUL — birincil kol 3 kosu COGUNLUGU, duyarlilik TEK kosu
+  k1 vs k2: 1524/1524 BIREBIR · k1 vs k3: 1524/1524 BIREBIR
+  => cogunluk oyu = tek kosu; karsilastirma esit granulerliktedir.
+
+### YAN YANA TABLO (EK-6 3'un zorunlu tuttugu)
+  kol     kos    n | 1755 kapsam  BAcc   dogr  lam | 1366 kapsam  BAcc   dogr  lam
+  R1      E1   289 |     0.830 0.9164 0.9208 0.987 |     0.844 0.8976 0.9016 0.913
+  R1      E2   289 |     1.000 0.8615 0.8720 0.988 |     1.000 0.8486 0.8581 0.938
+  R2      E1   473 |     0.899 0.8229 0.8235 0.804 |     0.888 0.8159 0.8167 0.769
+  R2      E2   473 |     1.000 0.8100 0.8161 0.829 |     1.000 0.8027 0.8076 0.782
+  R3bm25  -    473 |     1.000 0.5938 0.5877 -0.043|     1.000 0.5938 0.5877 -0.043
+
+  %95 kumeli bootstrap GA (4000, kume=altin['kume'], tohum 42):
+  R1     E1   1755 [0.8804, 0.9494]   1366 [0.8541, 0.9386]
+  R1     E2   1755 [0.8207, 0.8987]   1366 [0.8039, 0.8910]
+  R2     E1   1755 [0.7866, 0.8579]   1366 [0.7698, 0.8559]
+  R2     E2   1755 [0.7763, 0.8415]   1366 [0.7633, 0.8383]
+  R3bm25 -    1755 [0.5598, 0.6261]   1366 [0.5598, 0.6261]
+
+### ESLI FARK  BAcc(1755) - BAcc(1366)   (esli kumeli bootstrap 4000, tohum 42)
+  R1     E1   +0.0188  [-0.0040, +0.0475]  sifiri ICERIYOR   uyusma 280/289 = 0.9689
+  R1     E2   +0.0128  [+0.0000, +0.0343]  sifiri ICERIYOR   uyusma 285/289 = 0.9862
+  R2     E1   +0.0070  [-0.0203, +0.0354]  sifiri ICERIYOR   uyusma 421/473 = 0.8901
+  R2     E2   +0.0073  [-0.0151, +0.0296]  sifiri ICERIYOR   uyusma 447/473 = 0.9450
+  R3bm25 -    +0.0000  [+0.0000, +0.0000]  ozdes             uyusma 473/473 = 1.0000
+
+  >> HUKUM: HICBIR kol icin korpus secimi sifiri dislayan bir fark
+     uretmiyor. Makalenin butun dayanakli sonuclari korpus secimine
+     DUYARLI DEGILDIR. Nokta tahminlerin hepsi rafine korpus lehine ama
+     kucuk (+0.007 ... +0.019).
+  NOT: R1/E2 alt siniri tam +0.0000; sifiri DISLAMIYOR, siniri tutuyor.
+
+### BM25 GERI CAGIRMA — KORPUS KARSILASTIRMASI
+  1755 (rafine, BIRINCIL) : 79/289 = 0.2734
+  1366 (ham, DUYARLILIK)  : 87/289 = 0.3010
+  >> HAM korpusun geri cagirmasi DAHA YUKSEK oldugu halde dogrulugu
+     bir parca DAHA DUSUK. Bu, 4.6.4'un "getirim orani dayanakli
+     dogruluga tavan koymaz" bulgusunun BAGIMSIZ IKINCI kanitidir.
+
+### R3-BM25 — IKI KORPUSTA OZDES SONUC (kontrol edildi, hata degil)
+  getirilen pasaj kumesi FARKLI : 271/473 iddiada farkli
+  geri cagirma FARKLI           : 79 vs 87
+  buna ragmen karar             : 473/473 AYNI, BAcc birebir 0.5938
+  => Dizgi-icerme kurali, pasajlarin HANGISI oldugundan cok metnin
+     genelinde bulunup bulunmamasina duyarli. Bu bir boru hatti hatasi
+     DEGIL: korpus_sha256 alanlari farkli (d7eb617b... vs 3c925afb...)
+     ve getirilen listeleri farkli oldugu DOGRULANDI.
+
+### ESLI BOOTSTRAP POZITIF KONTROLU (yeni olcut, kendi kapisi)
+  Bilinen: R2/E1 - R3bm25 = +0.2292 [+0.1939, +0.2635]
+  Yeniden uretilen        : +0.2292 [+0.1932, +0.2639]   GECTI
+  (once kume anahtari YANLIS alinmisti -> GA sifir genislikte cikti;
+   dogrusu altin[id]['kume']. Hata pozitif kontrol konmadan once
+   yakalandi cunku sifir genislikli GA imkansizdir.)
+
+### R1/E2 ESLI FARKININ ALT SINIRI NEDEN TAM SIFIR (yuvarlama degil)
+  4000 kume yeniden orneklemesinin dagilimi:
+    negatif fark  :    0
+    TAM SIFIR     :  534
+    pozitif       : 3466
+  sifirdan kucuk-esit pay: 0.1335
+  Sebep: iki korpus bu hucrede yalnizca 4/289 iddiada ayrisir; o kumeleri
+  icermeyen bir yeniden orneklem iki kol icin AYNI skoru verir.
+  => %2.5 yuzdeligi tam 0.0000'dir; aralik sifira DEGER, dislamaz.
+
+### BOOTSTRAP KUME SAYISI (istatistik bolumunun eksik sayisi)
+  altin[id]['kume'] = (kanun, madde)   [f4_analiz.py:73]
+  473 iddia -> 183 AYRIK kume
+  (Makaledeki 'clusters being (law, article) pairs' ifadesi KODLA UYUMLU.)
+
+==========================================================================
+## EK — 5. TUR DENETIMI (30.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D5.1 — BONFERRONI AILE BUYUKLUGU "17" TURETILEMIYOR
+  f4_analiz.csv'den sayildi (56 hucre, 28 (model,varyant) cifti):
+    E1 ve E2 hucresi OLAN cift                 : 28
+    ikisi de PUANLANIR olan cift               : 21
+      bunlardan varyant A                      : 15
+    AYRIK MODEL (varyant birlestirilmis)       : 18
+  HICBIR OKUMA 17 VERMIYOR. Makaledeki 17 DAYANAKSIZDIR.
+
+  Ana on kayit: "Coklu karsilastirma: model sayisi uzerinden Bonferroni."
+  4.2 zaten muhafazakar okumayi kullaniyor: KOSULAN butun modeller = 18.
+  AYNI ILKE kacinma kontrastina da uygulanir -> BONFERRONI-18.
+
+### D5.2 — KACINMA KONTRASTI AILE BUYUKLUGUNE DAYANIKLI (yeni olcum)
+  (esli kumeli bootstrap 4000, kume=(kanun,madde), tohum 42, altin v7a)
+
+  claude-sonnet-5   fark +0.0678
+    duzeltmesiz %95  [+0.0243, +0.1106]   disliyor
+    Bonf-2           [+0.0190, +0.1170]   disliyor
+    Bonf-17          [+0.0018, +0.1343]   disliyor
+    Bonf-18          [+0.0018, +0.1343]   disliyor   <-- RAPORLANACAK
+    Bonf-21          [+0.0009, +0.1359]   disliyor
+  claude-haiku-4.5  fark -0.0260
+    duzeltmesiz %95  [-0.0612, +0.0130]   dislamiyor
+    Bonf-18          [-0.0765, +0.0347]   dislamiyor
+    Bonf-21          [-0.0783, +0.0377]   dislamiyor
+
+  >> HUKUM: sonuc 2 ile 21 arasindaki HER aile buyuklugunde ayni.
+     Makalede aile 18 olarak verilir VE bu dayaniklilik yazilir.
+
+### D5.3 — H2/E1'in R0 TABANI 30 KAPISININ ALTINDA (kendi kuralimizi ihlal)
+  qwen2.5:32b-instruct kapali kitap, 289'luk R1 alt kumesinde:
+    E1  taahhut 29/289   BAcc 0.6226   <-- EK-1 2'nin >=30 kapisinin ALTINDA
+    E2  taahhut 289/289  BAcc 0.5062   (kapi gecti)
+  (tam kumede: E1 taahhut 82, E2 473)
+
+  >> H2'nin E1 bicimi makalenin KENDI asgari-n kuralini karsilamiyor.
+     Sessizce dusurulmez; RAPORLANIR ve kapiyi gecmedigi YAZILIR.
+     H2/E2 (+0.3552) etkilenmiyor ve dayanilacak olan odur.
+     H1'in her iki bicimi de etkilenmiyor (R0 tam kumede 82 taahhut).
+
+### D5.4 — lambda'nin SIFIR NOKTASI SIFIR DEGIL
+  P1 163 iddia = 156 DOGRU + 7 YANLIS · P5 121 iddia = hepsi YANLIS
+    her zaman DOGRU diyen model : 156/163 + 0 - 1 = -0.0429
+    her zaman YANLIS diyen model:   7/163 + 1 - 1 = +0.0429
+  => "bilgi tasimayan" modelin lambda'si 0 DEGIL, +-0.0429'dur.
+     Makalenin "0 for a system that cannot separate..." ifadesi YANLIStir.
+
+### D5.5 — R3-BM25 TAM OLARAK SABIT CEVAP VERICIDIR (olculdu)
+  prob bazinda karar dagilimi:
+    P1_dogrudan   DOGRU 163  YANLIS   0
+    P5_capraz     DOGRU 121  YANLIS   0
+    P2_sayisal    DOGRU   0  YANLIS  37
+    P3_anakronizm DOGRU   0  YANLIS  19
+    P4_uydurma    DOGRU   0  YANLIS  13
+    P6_guncellik  DOGRU   0  YANLIS 120
+  DOGRU dedigi kume ile P1 u P5 kumesi BIREBIR AYNI (284 = 163 + 121).
+  P1 dogrulugu 156/163 = 0.9571 · P5 dogrulugu 0/121 = 0.0000
+  lambda = -0.0429 = sabit-DOGRU degerinin TA KENDISI.
+
+  >> R3-BM25'in lambda'si "bilgiye yakin sifir" DEGIL; P1uP5 uzerinde
+     TAM ANLAMIYLA sabit "DOGRU" cevabidir. 0.5938'lik dengeli dogrulugu
+     pasajlari okumasindan degil, P2/P3/P4/P6'nin cogunlukla YANLIS,
+     P1'in cogunlukla DOGRU olmasindan gelir.
+  >> Mekanizma tutarli: P5 zaten dizgi-icermeyi YENMEK icin tasarlandi
+     (metin gercek, ATIF yanlis); icerme kurali yanlis atfi goremez.
+  >> Bu, R2 - R3-BM25 mansetini ZAYIFLATMAZ, GUCLENDIRIR: dizgi tabani
+     pasajlardan hicbir sey cikarmiyor.
+
+### D5.6 — EK-1 1'in "ORIJINAL KAPI" DUYARLILIK KOLU (verilmemisti, olculdu)
+  Orijinal kural: %80 esigi TAAHHUT oranina uygulanir (E1/varyant A, 20 hucre;
+  kural_taban_r3 haric)
+    orijinal kuralla PUANLANIR :  7
+    orijinal kuralla ELENIR    : 13
+  Duzeltilmis kuralla puanlanan 12 (bkz. 4.2).
+
+  Orijinal kuralla ELENEN ama duzeltilmis kuralla puanlanan (taahhut orani):
+    claude-sonnet-5            0.615   <-- MAKALENIN BARINDIRILAN MANSETI
+    claude-haiku-4.5           0.710   <-- IKINCI BARINDIRILAN MODEL
+    qwen2.5:32b-instruct       0.173   <-- DAYANAKLI MERDIVENIN MODELI
+    qwen2.5:14b-instruct       0.205
+    qwen2.5:3b-instruct-fp16   0.727
+    qwen2.5:3b-instruct-q8_0   0.657
+    qwen2.5:3b-instruct-q5_K_M 0.516
+    llama3.2:3b-q4_K_M 0.668 · llama3.2:1b 0.233
+    qwen2.5:7b (dort varyant)  0.013 · 0.034 · 0.038 · 0.051
+
+  >> HUKUM: Korpus sapmasinin AKSINE, kapi sapmasi TASIYICIDIR. Orijinal
+     kuralla makalenin uc ana oznesi de (sonnet, haiku, 32B) PUANLANMAZDI.
+     Bu MAKALEDE ACIKCA YAZILMALIDIR. Duzeltmenin gerekcesi kavramsaldir
+     (kacinma bagimli degiskendir) ve veriden bagimsizdir; ama sonucu
+     buyuktur ve okuyucu bunu bilmelidir.
+
+### D5.7 — EK-6 4'un 17 needs_human_review IDDIASI (raporlanmamisti)
+  idler: 25 38 60 70 123 159 189 203 211 278 310 323 351 426 444 455 476
+  (kaynak: uzlasi/ACIK_17_VAKA_karar_kitabi.xlsx; insan denetimi sonucu
+   HICBIRINDE etiket degismedi — uzlasi/17_VAKA_KARARLARI_ve_DOGRULAMA.md)
+
+  AYRI SATIR (EK-6 4'un istedigi):
+    R1     E1   n= 8  taahhut= 7  dogruluk 1.0000
+    R1     E2   n= 8  taahhut= 8  dogruluk 1.0000
+    R2     E1   n=17  taahhut=16  dogruluk 0.8125
+    R2     E2   n=17  taahhut=17  dogruluk 0.8824
+    R3bm25 -    n=17  taahhut=17  dogruluk 0.5294
+
+  DUYARLILIK — manset 17 HARIC:
+    E1  DAHIL +0.2292 [+0.1932, +0.2639] n=473
+        HARIC +0.2312 [+0.1943, +0.2672] n=456
+    E2  DAHIL +0.2162 [+0.1829, +0.2512] n=473
+        HARIC +0.2154 [+0.1798, +0.2504] n=456
+  >> 17 iddia mansetin YERINI DEGISTIRMIYOR.
+
+### D5.8 — EK-5 8'in ZORUNLU v6/v7 CIFTE ALTIN RAPORLAMASI (yapilmamisti)
+  Kaynak: f4_analiz_raporu.txt 5. bolum, 56 hucre, uc altin yan yana.
+  |v7a - v6| dagilimi (model hucreleri, kural_taban_r3 haric):
+    ortalama 0.0039 · en buyuk 0.0346 (qwen2.5:32b-instruct E1)
+    ikinci   0.0208 (llama3.2:1b E2)
+  kural_taban_r3 (R3-rule): v7a 0.9860 · v6 1.0000 · fark -0.0140
+    (bu, 4.5'te zaten anlatilan EK-5 duzeltmesinin ta kendisidir)
+  >> Altin surumu hicbir modelin hukmunu degistirmiyor; en buyuk kayma
+     qwen2.5:32b'nin E1 hucresinde ve o hucre zaten dusuk kapsamli.
+
+### D5.9 — 5. TURDA METNE GIREN IKI EK DEGERIN KAYNAGI
+  0.6423 : qwen2.5:32b-instruct E1 dengeli dogruluk, v6_onarilmis altin
+           kaynak f4_analiz_raporu.txt 5. bolum (uc altin tek tabloda);
+           v7a karsiligi 0.6769, fark +0.0346 (en buyuk altin duyarliligi)
+  99.76  : Bonferroni-21'in aralik duzeyi = 100*(1 - 0.05/21) = 99.7619
+           (Tablo 3b'nin aile-buyuklugu duyarlilik satiri)
+  Diger duzeyler: Bonf-2 97.5 · Bonf-17 99.71 · Bonf-18 99.72
+
+### D5.10 — ANA ON KAYIT md.6 ALT-TUR KIRILIMI (hic raporlanmamisti)
+  probe_alt dokumu (v7a):
+    P1_madde_atifli 80 · P1_verbatim 83 · P2_swap 37
+    P3_yil 12 · P3_yil_dogru 6 · P3_yururluk 1
+    P4_belge 10 · P4_tbdy 3
+    P5_lawshuffle 32 · P5_maddeshift 89
+    P6_degismedi 30 · P6_degismedi_dogru 30 · P6_yil 30 · P6_yil_yanlis 30
+
+  P5 alt turleri — claude-sonnet-5 (cogunluk) E2 dogruluk:
+    P5_lawshuffle  n=32  0.812
+    P5_maddeshift  n=89  0.674
+  (Ana on kayit md.2 bu farkin %80 gucte 27.6 puan gerektirdigini
+   ONCEDEN yaziyordu; gozlenen fark 13.8 puan, yani GUCSUZ. Betimsel.)
+
+  P6 DORT HUCRE — claude-sonnet-5 (cogunluk) E2, ALTIN ve KARARLAR:
+    P6_degismedi        altin YANLIS   model: YANLIS 30            dogruluk 1.000
+    P6_degismedi_dogru  altin DOGRU    model: YANLIS 29 · DOGRU 1  dogruluk 0.033
+    P6_yil              altin DOGRU    model: YANLIS 30            dogruluk 0.000
+    P6_yil_yanlis       altin YANLIS   model: YANLIS 30            dogruluk 1.000
+    TOPLAM 30+1+0+30 = 61/120 = 0.5083  (raporlanan P6 dogrulugu 0.508)
+
+  >> BULGU: sonnet 120 P6 iddiasinin 119'una YANLIS diyor. Toplam
+     "sansa yakin" 0.508 degeri, 2x2 tasariminin 60/60 dengeli olmasinin
+     ARTEFAKTIDIR; model sans seviyesinde DEGIL, SABIT cevap veriyor.
+     Bu, R3-BM25 bulgusunun (D5.5) barindirilan modeldeki karsiligidir.
+
+  P6 DORT HUCRE — claude-haiku-4.5 (cogunluk) E2:
+    P6_degismedi        YANLIS 30                 (sabit)
+    P6_degismedi_dogru  YANLIS 30                 (sabit)
+    P6_yil              DOGRU 15 · YANLIS 15      (rastgeleye yakin)
+    P6_yil_yanlis       YANLIS 12 · DOGRU 18      (rastgeleye yakin)
+  >> haiku "degismedi" ciftinde SABIT, "yil" ciftinde rastgeleye yakin.
+
+### D5.11 — KACINMA SAYISI YUZDESININ DUZELTILMESI
+  arsiv kacinma: 181 · 184 · 182  -> ORTALAMA 182.33 (aralik [181, 184])
+  bugun        : 178
+  goreli dusus = (182.33 - 178) / 182.33 = 0.0238 -> %2.4
+  ONCEKI "%2.2" degeri ortalamayi degil 182'yi (medyani) kullaniyordu; YANLIS.
+  Duzeltildi: makale artik "%2.4, arsiv ortalamasi 182.33'e karsi" diyor.
+
+### D5.12 — 158 / 150 / 138 SAYILARININ UZLASTIRILMASI (denetim itirazi)
+  Muhurlu betik yeniden kosuldu (scripts/denetim_ikinci_gecis.py, tohum
+  20260729) ve tabakalari BIREBIR yeniden uretti: N 33 · T 105 · K 2.
+
+  Dokum:
+    158  birinci gecis kitabindaki kod (denetim_anahtar_v2.csv)
+    - 8  tuzak/kontrol kodu (T1..T8)
+    = 150  gercek iddia            <- Cohen kappa BU 150 uzerinde (n=150)
+    -12  v6_onarilmis kume dISINDA kalan kod
+    = 138  ikinci gecisin ORNEKLEME CERCEVESI = 33 (N) + 105 (T)
+
+  Dusen 12 kod: 16 42 92 180 198 220 308 385 407 440 441 461
+    12'sinin 12'si uretilen_iddialar_v1.csv'de VAR; onarim/eleme
+    sirasinda kumeden cikmislar. Ikinci gecis, artik kumede olmayan
+    iddiayi ornekleyemeyecegi icin cerceve 138'dir.
+
+  >> Bu bir SAYI HATASI DEGIL, ANLATIM BOSLUGUDUR: makale 150 ve 138'i
+     yan yana kullaniyor ama aradaki 12'yi hic aciklamiyor. Bir cumle
+     eklenir.
+  >> NOT: bu oturumda dolu calisma kitaplarindan elle yapilan bir
+     yeniden sayim T havuzunu 117 bulmustu; O SAYIM YANLIStir, cunku
+     v6 kume filtresini uygulamiyordu. Muhurlu betik hakemdir.
+
+==========================================================================
+## EK — 6. TUR DOGRULAMA (30.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D6.1 — KOSULAN MODEL SAYISI 18 DEGIL 20 (5. turda YANLIS yazmistim)
+  f4_analiz.csv ayrik model adi: 22
+    - kural_taban_r3      (model degil, kural tabani)
+    - claude-sonnet-5-B   (claude-sonnet-5'in varyant B kolu, ayri model degil)
+    = 20 GERCEK MODEL  (18 acik agirlikli + 2 barindirilan)
+  varyant A + E1 hucresi olan: 21; kural_taban_r3 haric 20;
+  acik agirlikli (barindirilanlar da haric) 18.
+  >> "Eighteen models were run" YANLIS. 18 yalnizca ACIK AGIRLIKLI sayidir.
+     Ana on kaydin "model sayisi uzerinden Bonferroni"si icin dogru
+     payda 20'dir.
+
+### D6.2 — KACINMA KONTRASTI, BONFERRONI-20 (RAPORLANACAK OLAN)
+  (esli kumeli bootstrap 4000, kume=(kanun,madde), tohum 42, altin v7a)
+  duzey = 100*(1 - 0.05/20) = %99.75
+    claude-sonnet-5   +0.0678  [+0.0018, +0.1359]  SIFIRI DISLIYOR
+    claude-haiku-4.5  -0.0260  [-0.0765, +0.0377]  dislamiyor
+  Dayaniklilik (D5.2 ile birlikte): sonuc aile 2-21 arasinda DEGISMIYOR.
+
+### D6.3 — lambda ALTIN SURUMUNE BAcc'DEN *DAHA COK* DUYARLI (ters yazmistim)
+  |v7a - v6| farklari:
+    model              ko    lambda    BAcc     hangisi daha oynak
+    claude-sonnet-5    E1    0.0088    0.0045   LAMBDA
+    claude-sonnet-5    E2    0.0061    0.0072   bacc
+    claude-haiku-4.5   E1    0.0072    0.0029   LAMBDA
+    claude-haiku-4.5   E2    0.0061    0.0017   LAMBDA
+  >> 4/4'un 3'unde lambda daha cok oynuyor. EK-5 8'in ONGORUSU
+     ("ozellikle lambda dogrudan etkilenir") DOGRULANDI.
+     5. turda yazdigim "lambda daha az oynuyor" ifadesi YANLIStir.
+
+### D6.4 — v6 ALTINDA BIR HUKUM DEGISIYOR ("hicbiri degismiyor" YANLIS)
+  Bonferroni-20 alt sinirlari, E1/varyant A:
+    model                        v7a BAcc  v7a alt   v6 BAcc  v6 alt   degisim
+    qwen2.5:32b-instruct           0.6769   0.5349    0.6423  0.5138   ikisi de disliyor
+    gemma3:27b                     0.5674   0.5017    0.5729  0.5076   ikisi de disliyor
+    llama3.2:3b-instruct-q8_0      0.5509   0.4878    0.5439  0.4861   ikisi de dislamiyor
+    gemma3:12b                     0.5493   0.4915    0.5562  0.5013   *** v6'DA DISLIYOR, v7a'DA DISLAMIYOR ***
+  >> v7a ile IKI hucre sansi asiyor; v6 ile UC. Ucuncusu (gemma3:12b)
+     v6'da 0.0013 payla asiyor — v7a'daki gemma3:27b'nin 0.0017'sinden
+     bile ince. Bu bir MODEL bulgusu degil, SINIRDAKI hucrelerin
+     kirilganligi bulgusudur ve EK-5 8 tam da bunun icin cifte
+     raporlama sart kosmustu.
+
+### D6.5 — 17 VAKANIN PROVENANSI (5. turda YANLIS yazmistim)
+  uzlasi/17_VAKA_KARARLARI_ve_DOGRULAMA.md 1. bolum:
+    doldurulmus kitapta KODLAYICI alani "GPT-5.6 Pro" — kararlari
+    bir DIL MODELI verdi, insan uzman degil.
+  Karar dagilimi: 13 satir 'onay' (degisiklik yok) + 4 satir karar,
+    bunlarin 3'u 'altin_YANLIS_yap', 1'i 'degisiklik_yok'.
+  Uc degisiklik onerisi (278, 426, 444) GERI ALINDI: EK-4 2 CSV'nin
+    'madde' sutununun KAYNAK oldugunu soyluyor, atif hedefi degil;
+    ucu de BELGE duzeyinde atif yapiyor ve EK-4 9(d) boyle atiflari
+    belgenin tamaminda arar.
+  R3-rule bu hatayi YAKALADI: v7a ile 473/473, degistirilmis altinla
+    470/473 ve uyusmadigi uc id tam olarak bunlar.
+  >> Makaledeki "adjudicated by the domain specialists" ifadesi
+     YANLIStir. Dogrusu: 17 iddia HALA needs_human_review'dur; bir
+     dil modeli pasi uc etiket degisikligi onerdi; oneriler on kayit
+     gerekcesiyle geri alindi; HICBIR ALTIN ETIKET DEGISMEDI.
+
+### D6.6 — ALT-TUR KIRILIMLARININ GUVEN ARALIKLARI (on kayit md.2 "GA ile")
+  Wilson %95 (iddia duzeyi; bu kirilimlar KESIFSEL ve betimseldir,
+  kumeli bootstrap uygulanmaz — hucre basina 30 iddia tek tabakadan gelmiyor)
+    P5_lawshuffle       26/32 = 0.812  [0.647, 0.911]
+    P5_maddeshift       60/89 = 0.674  [0.571, 0.763]
+    P6_degismedi        30/30 = 1.000  [0.886, 1.000]
+    P6_degismedi_dogru   1/30 = 0.033  [0.006, 0.167]
+    P6_yil               0/30 = 0.000  [0.000, 0.114]
+    P6_yil_yanlis       30/30 = 1.000  [0.886, 1.000]
+  P5 iki alt turun GA'lari ORTUSUYOR (0.647-0.911 ve 0.571-0.763):
+  on kayit md.2'nin ongordugu gibi bu kontrast GUCSUZDUR.
+
+### D6.7 — P6'DAKI SABIT CEVABIN DOGRU TARIFI
+  Iddia metinleri iki bicimde:
+    P6_degismedi / P6_degismedi_dogru : "... hic degistirilmemistir"
+    P6_yil / P6_yil_yanlis            : "... N yilinda degisiklik yapilmistir"
+  Model her ikisine de YANLIS diyor. Yani:
+    "degismedi" iddialarina YANLIS = "degismistir"
+    "N yilinda degisti" iddialarina YANLIS = "o yil degismemistir"
+  >> Tek tutarli tarif: model kendisine sunulan HER guncellik onermesini
+     REDDEDIYOR. "Her zaman degisti diyor" tarifi YANLIStir; iddialarin
+     yarisinda anlam tersine doner.
+
+### D6.8 — 0.0025 = 0.05/20, Bonferroni-20'nin hucre basina duzeyi
+  Karsiligi %99.75 aralik. (Diger paydalar: 0.05/18 = 0.00278 -> %99.72,
+  0.05/17 = 0.00294 -> %99.71, 0.05/21 = 0.00238 -> %99.76.)
+
+==========================================================================
+## EK — 7. TUR: AYIRMA DENETIMI (30.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D7.1 — MANSET GA'sinin KANONIK HALI
+  R2/E1 - R3bm25 icin cizelgede IKI deger var:
+    [+0.1939, +0.2635]  3. tur eki (4000 orneklem)
+    [+0.1932, +0.2639]  6. turdaki esli-bootstrap POZITIF KONTROLU
+  Ikisi ayni buyuklugun iki bootstrap kosusudur; fark yeniden orneklem
+  sirasindandir (nokta tahmin ikisinde de +0.2292).
+  >> MAKALEDE KULLANILACAK OLAN: [+0.1939, +0.2635].
+     Pozitif kontrol degeri yalnizca D5.2/D6 bolumlerinde, kontrolun
+     kendi kaydi olarak kalir; makale metnine GIRMEZ.
+
+### D7.2 — kural_taban_r3'un f4_analiz HUCRESI HAM KORPUSTUR
+  f4_analiz.csv: kural_taban_r3  E1/E2  n=473 taahhut=473
+                 dogruluk 0.9852 (= 466/473)  bacc 0.9860
+  466/473 HAM korpus + v7a demektir (bkz. R3 bolumu).
+  RAFINE korpus + v7a = 473/473'tur ve BASKA bir kosudur.
+  >> "0.9860 ... on the refined corpus" YANLIStir; dogrusu HAM korpus.
+     Iki sayi ayni olcutun iki korpustaki degeri DEGIL: 473/473 ham
+     sayim, 0.9860 dengeli dogruluktur. Makalede ikisi ayirt edilmeli.
+
+### D7.3 — NEGATIF KONTROL BANDININ KAYNAGI (onceden ilan edildi)
+  HANDOVER.md:124, Gorev 2 KOSULMADAN ONCE yazilan gorev listesi:
+    "5 tohum negatif kontrol 0.50-0.56 bandinda"
+  Olcum (gorev2_raporu.txt:51): korpus_v2+v7a 0.5349 0.5349 0.5159
+    0.5370 0.5349 (ort 0.5315) · ham+v7a ort 0.5408 -> 10/10 band icinde.
+  >> "declared in advance" DOGRUDUR ama kaynagi bir on kayit EKI degil,
+     GOREV LISTESIDIR. Makalede boyle nitelenmeli.
+
+### D7.4 — NICEMLEME SAYISI
+  Kosulan acik agirlikli yapilandirmalarda gecen son ekler:
+    fp16 · q4_K_M · q5_K_M · q8_0
+  >> "fp16 and four quantisations" YANLIS. Dogrusu: fp16 ve UC nicemleme.
+
+### D7.5 — AYNI HUCRENIN IKI %95 ALT SINIRI (0.5820 / 0.5833)
+  qwen2.5:32b-instruct E1/A dengeli dogruluk 0.6769:
+    0.5833  ana bootstrap (10.000 yeniden orneklem, f4_analiz.csv)
+    0.5820  Bonferroni tablosunun ayri bootstrap'i (4.000 yeniden orneklem)
+  Fark ucuncu ondalikta ve yalnizca yeniden orneklem sayisindandir.
+  >> Makalede iki deger de gecerse UZLASTIRICI NOT ANA METINDE olmali.
+
+### D7.6 — P6 BAGIMSIZ DOGRULAMASININ KAPSAM SINIRI
+  20/20 uyusma; cerceve KISITI 3194, 4708, 6331.
+  YDUY DISARIDA -> 43 P6 iddiasi bagimsiz olarak SINANMADI.
+  (Bu satir zaten cizelgenin KORPUS/P6 bolumunde vardi; ayirma sirasinda
+   makaleden dusmustu, geri konuyor.)
