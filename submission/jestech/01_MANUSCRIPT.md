@@ -78,7 +78,10 @@ risk-assessment regulation, and, for structural design, the Turkish Building
 Earthquake Code TBDY 2018. The work is textual — locating the governing
 provision, reading it against a design or a site condition, and recording a
 verdict — and it is exactly the shape of work that language-model assistants are
-now offered for.
+now offered for. What is at stake in getting it right is not abstract: post-event
+surveys of the February 2023 Kahramanmaraş earthquakes attribute a large share of
+reinforced-concrete building damage to design and construction deficiencies of
+the kind code compliance is meant to prevent (Turan et al., 2024).
 
 Before such an assistant is used in an inspection workflow it has to be
 qualified, in the ordinary engineering sense: someone has to state what evidence
@@ -91,7 +94,9 @@ designs has a long line of work behind it (Eastman et al., 2009; Solihin and
 Eastman, 2015), and the bottleneck it repeatedly meets is getting the rules out of
 the prose: extracting checkable structure from regulatory text has been pursued
 with semantic NLP (Zhang and El-Gohary, 2016) and with ontology-based extraction
-from energy codes (Zhou and El-Gohary, 2017). Language models change the shape of
+from energy codes (Zhou and El-Gohary, 2017); the same ontological move has been
+applied to standard measurement rules so that BIM tools can act on them
+(Abanda et al., 2017). Language models change the shape of
 that bottleneck rather than removing it, and recent work has begun to combine them
 with rule checking for BIM compliance (Chen et al., 2024). What has also become
 clear, from the adjacent legal domain, is that fluent output is a poor guide to
@@ -107,7 +112,11 @@ equivalent. A tool that says "I cannot resolve this" hands the case to a person;
 a tool that answers wrongly with the same fluency it uses when right does not.
 The first is a fail-safe failure and the second is fail-silent, and functional
 safety practice has treated the distinction as fundamental for decades
-(IEC 61508). A benchmark that forces a binary answer measures the second mode and
+(IEC 61508). Meeting the verification obligations such standards impose is itself
+an engineering problem rather than a formality — the cost of demonstrating
+compliance is what usually decides whether a method is adopted (Makartetskiy et
+al., 2019) — and the argument of this paper is that for a language-model
+assistant the demonstration has to be about abstention. A benchmark that forces a binary answer measures the second mode and
 is blind to the first. So we measure both, under two conditions on the same
 claims: one that permits an explicit "not sure", and one that forbids it.
 
@@ -932,9 +941,13 @@ experts corrected.
 ## 5.6 What would count as acceptable
 
 We decline to state a threshold, because the cost of a missed defect relative to
-the cost of a routed case is a property of a workflow and not of a benchmark. What
-a qualification argument would need, and what this paper supplies the instruments
-for, is: a joint statement over coverage and accuracy on committed items rather
+the cost of a routed case is a property of a workflow and not of a benchmark. Reporting an interval alongside a
+prediction, and making the basis of the prediction inspectable, is becoming
+standard practice for machine-learning decision support in construction (Chen et
+al., 2025); what this paper adds is that for a system that may decline, the
+interval and the explanation are not enough on their own — the decision to
+decline is itself a measured quantity. What a qualification argument would need,
+and what this paper supplies the instruments for, is: a joint statement over coverage and accuracy on committed items rather
 than an accuracy figure alone; evidence that abstention carries information for
 the specific system, since it does for one hosted model here and not for the
 other; a decision about grounding, since the operating point moves by more than
@@ -1085,7 +1098,11 @@ appears in the archive's citation-verification record. No source that failed
 verification is cited. Author initials, volume and page numbers are to be
 completed from publisher records at proof stage.*
 
+Abanda, Kamsu-Foguem and Tah, 2017. BIM — new rules of measurement ontology for construction cost estimation. *Engineering Science and Technology, an International Journal* 20(2), 443–459. doi:10.1016/j.jestch.2017.01.007
+
 Chen, et al., 2024. Automated building information modeling compliance check through a large language model combined with deep learning. *Buildings* 14(7). doi:10.3390/buildings14071983
+
+Chen, Xu, Lim, Sharma and Tiang, 2025. Transparent and reliable construction cost prediction using advanced machine learning and explainable AI. *Engineering Science and Technology, an International Journal* 70, 102159. doi:10.1016/j.jestch.2025.102159
 
 Chow, 1970. On optimum recognition error and reject tradeoff. *IEEE Transactions on Information Theory*. doi:10.1109/tit.1970.1054406
 
@@ -1105,6 +1122,8 @@ Kadavath, et al., 2022. Language models (mostly) know what they know. arXiv:2207
 
 Lin, et al., 2022. Teaching models to express their uncertainty in words. arXiv:2205.14334
 
+Makartetskiy, Marchetto, Sisto, Valenza and Virgilio, 2019. (User-friendly) formal requirements verification in the context of ISO26262. *Engineering Science and Technology, an International Journal* 23(3), 494–506. doi:10.1016/j.jestch.2019.09.005
+
 Magesh, et al., 2025. Hallucination-free? Assessing the reliability of leading AI legal research tools. *Journal of Empirical Legal Studies*. doi:10.1111/jels.12413
 
 Naeini, et al., 2015. Obtaining well calibrated probabilities using Bayesian binning. *AAAI*. doi:10.1609/aaai.v29i1.9602
@@ -1112,6 +1131,8 @@ Naeini, et al., 2015. Obtaining well calibrated probabilities using Bayesian bin
 Robertson and Zaragoza, 2009. The probabilistic relevance framework: BM25 and beyond. *Foundations and Trends in Information Retrieval*. doi:10.1561/1500000019
 
 Solihin and Eastman, 2015. Classification of rules for automated BIM rule checking development. *Automation in Construction*. doi:10.1016/j.autcon.2015.03.003
+
+Turan, Çelik, Kumbasaroğlu and Yalçıner, 2024. Assessment of reinforced concrete building damages following the Kahramanmaraş earthquakes in Malatya, Turkey (February 6, 2023). *Engineering Science and Technology, an International Journal* 54, 101718. doi:10.1016/j.jestch.2024.101718
 
 Xiong, et al., 2024. Can LLMs express their uncertainty? An empirical evaluation of confidence elicitation in LLMs. *International Conference on Learning Representations (ICLR) 2024*. arXiv:2306.13063 — *the preprint is dated 2023 and the conference version 2024; this paper cites the conference version throughout.*
 

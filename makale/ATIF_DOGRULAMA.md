@@ -82,3 +82,46 @@ gönderimden önce IEC kataloğundan tamamlanmalıdır. Bu, bu belgede
 
 18 künyenin **18'i** de gövdede en az bir kez anılıyor (kaynakçadan önceki
 bölümlerde betikle sayıldı). Yetim atıf yok.
+
+---
+
+# JESTECH'in kendi literatürü — arama ve eleme (2026-08-30)
+
+**Yöntem.** OpenAlex'te dergi ISSN **2215-0986** ile çözüldü
+(`S2764510487`, Elsevier, 2.031 eser). Yalnız bu kaynağa filtrelenmiş 20 tema
+sorgusu koşuldu; her aday için tam künye ve özet ayrıca çekildi.
+
+**Eleme kuralı:** "aynı dergide yayımlandı" atıf gerekçesi DEĞİLDİR. Her aday
+için "makalenin hangi cümlesine, hangi gerekçeyle" sorusu soruldu; cevabı
+olmayan elendi.
+
+## ATIF VERİLDİ (4)
+
+| künye | DOI | nereye | gerekçe |
+|---|---|---|---|
+| Makartetskiy, Marchetto, Sisto, Valenza & Virgilio 2019, JESTECH 23(3) 494–506 | 10.1016/j.jestch.2019.09.005 | §2.1, IEC 61508 cümlesinin ardına | ISO 26262 kapsamında biçimsel doğrulama yükümlülüğünün **maliyetinin** yöntem seçimini belirlediğini gösteriyor; makalenin "kalifikasyon bir mühendislik problemidir" iddiasının dergi içi dayanağı |
+| Abanda, Kamsu-Foguem & Tah 2017, JESTECH 20(2) 443–459 | 10.1016/j.jestch.2017.01.007 | §1, ontoloji hattının yanına | Standart ölçüm kurallarını makine-okunur ontolojiye dökme işi; Zhou & El-Gohary hattının inşaat tarafındaki karşılığı |
+| Chen, Xu, Lim, Sharma & Tiang 2025, JESTECH 70 102159 | 10.1016/j.jestch.2025.102159 | §5.6, kabul ölçütü tartışması | İnşaatta ML karar desteğinde **güven aralığı + açıklanabilirlik** artık standart; makale buna "kaçınma da ölçülmeli" diye ekliyor |
+| Turan, Çelik, Kumbasaroğlu & Yalçıner 2024, JESTECH 54 101718 | 10.1016/j.jestch.2024.101718 | §1, ilk paragraf | 6 Şubat 2023 Kahramanmaraş sonrası betonarme hasarının tasarım/yapım kusurlarına bağlanması; uyum denetiminin **neden** önemli olduğunun somut dayanağı |
+
+Dördü de tam künye + özetle doğrulandı (OpenAlex kayıt çekimi, 30.08.2026).
+
+## ZAYIF İLGİ — ATIF VERİLMEDİ (2)
+
+| künye | DOI | neden verilmedi |
+|---|---|---|
+| Demir & Topçu 2022, Graph-based Turkish text normalization, JESTECH 35 101192 | 10.1016/j.jestch.2022.101192 | Türkçe NLP ve aynı dergi — ama konusu **gürültülü kullanıcı metni**; bizim korpusumuz temiz resmî mevzuat. Bağlanacak gerçek bir cümle yok; sırf "Türkçe + aynı dergi" diye atıf vermek editöre sırıtır |
+| Ortakcı 2024, SBERT text clustering, JESTECH 55 101730 | 10.1016/j.jestch.2024.101730 | Dergide LLM çalışması olduğunu gösteriyor ama bizim hiçbir iddiamıza dayanak değil. Kapsam uyumu göstermek için atıf vermek, kendi eleme kuralımızın ihlali olurdu |
+
+## BULUNAMAYAN
+
+JESTECH'te **otomatik mevzuat/yönetmelik uyum denetimi** (automated regulatory
+compliance checking) doğrudan konulu yayın **bulunamadı**. On temada tarandı:
+uyum denetimi, BIM, inşaat proje yönetimi, iş güvenliği risk değerlendirmesi,
+deprem yönetmeliği, doğal dil işleme, büyük dil modeli, doğrulama-geçerleme,
+belirsizlik kestirimi, bilgi tabanlı sistemler.
+
+Bu bir eksiklik değil, **kapsam argümanının kendisidir**: derginin yayımladığı
+şey mühendislik problemleridir ve bu makale mevzuat uyumunu bir mühendislik
+kalifikasyon problemi olarak kuruyor. Kapak mektubunda bu şekilde
+kullanılabilir.
