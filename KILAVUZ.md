@@ -55,6 +55,31 @@ Yöntem ve Bulgular bölümlerini okumana gerek yok, sayıları ben denetletiyor
 
 ---
 
+## SIRA 2b — Üç boşluk kaldı, üçü de sende
+
+Yazar bloğu doldu (Ali Çetinkaya, Selçuk Üniv. Teknoloji Fak. Bilgisayar Müh.,
+ORCID 0000-0002-7747-6854, ali.cetinkaya@selcuk.edu.tr). Kapak mektubu tek yazara
+çevrildi. Kalan üç blok:
+
+**1. İki kodlayıcının Teşekkür'de adı.** Makaleyi tek yazarlı yaptım çünkü bana
+tek isim verdin. Ama iki uzman 150 + 58 maddelik körlemesine denetim yaptı ve
+makalenin **altın etiket kalitesi iddiası tamamen onların işine dayanıyor**.
+İki seçenek var ve karar senin:
+
+* Teşekkür'e adlarını yaz (izinleriyle) — şu an taslakta bunun için işaretli
+  boşluk var, "opsiyonel değil" notuyla.
+* Ya da yazar olarak ekle. Elsevier'in katkı ölçütlerine göre veri toplama +
+  doğrulama tek başına yazarlığa yetmeyebilir, ama bu sınırda bir vaka ve
+  **dergi hakemi de sorabilir**. Ben senin yerine karar vermedim.
+
+**2. Fon beyanı.** Fon yoksa "This research received no specific grant..." diye
+yaz; boş bırakma, Elsevier zorunlu tutuyor.
+
+**3. Arşiv DOI'si.** Öz ve Giriş "released" diyor. O blok dolmadan gönderme —
+taslakta bunu söyleyen bir uyarı var, göndermeden önce sil.
+
+---
+
 ## SIRA 3 — JESTECH'e gönder. Kapak mektubunda şunu yaz.
 
 Bu makalenin **tek gerçek red riski** şu: mühendis hakem *"bu bir NLP makalesi,
