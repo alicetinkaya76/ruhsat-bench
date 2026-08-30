@@ -965,10 +965,14 @@ expert-audit workbooks including the negative second-pass result, the run record
 and the analysis code are released as a single archive, together with the
 supplementary material S1–S9.
 
-> **[TO BE COMPLETED BEFORE SUBMISSION]** Repository URL and archival DOI. This
-> paper claims in its abstract and introduction that the material is released;
-> that claim is not true until this block carries a resolvable identifier, and the
-> paper must not be submitted with the block unfilled.
+Repository: **https://github.com/alicetinkaya76/ruhsat-bench**
+
+> **[TO BE COMPLETED BEFORE SUBMISSION]** Archival DOI. The repository above is
+> public, but a repository can be moved, rewritten or deleted, so the paper also
+> needs a fixed archival identifier for the exact state the reported figures were
+> produced from. That identifier is minted when release v1.0.0 is deposited, and
+> this block must carry it before submission: the abstract and introduction claim
+> the material is released, and that claim is only fully true once it resolves.
 
 *One limit on the provenance of the archive itself.* The version-control history
 of the development repository was lost before submission and the repository was

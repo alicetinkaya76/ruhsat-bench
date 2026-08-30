@@ -1,106 +1,58 @@
-# Arşiv DOI'si — ne olduğu ve nasıl alınacağı
+# Arşiv DOI'si — GitHub üzerinden Zenodo
 
-**Kısa cevap: 5 dakikalık bir iş, dosya hazır.**
+**Depo açıldı ve canlı:** https://github.com/alicetinkaya76/ruhsat-bench
+(public, 291 dosya, `main` dalı)
 
-## Arşiv DOI'si nedir
+Şimdi geriye tek şey kaldı: bu depoyu Zenodo'ya bağlamak ve bir **release**
+yayımlamak. Zenodo o release'i arşivler ve sana kalıcı bir DOI verir.
 
-Makalenin özü ve girişi *"kod ve veri yayımlandı"* diyor. Bir hakem bunu okur ve
-sorar: *nerede?* Bir GitHub bağlantısı yeterli değil, çünkü depo silinebilir,
-taşınabilir ya da içeriği sessizce değişebilir. Dergiler bu yüzden **kalıcı
-tanımlayıcı** ister: dosyayı bir arşiv servisine yatırırsın, servis sana
-`10.5281/zenodo.XXXXXXX` biçiminde bir **DOI** verir, ve o DOI **o anki dosyaya**
-sonsuza kadar bağlı kalır. Sen depoyu silsen bile arşiv durur.
+## Neden hem depo hem DOI
 
-Bunu daha önce iki projede yaptın (Bankspeak ve *Answering Less*), aynı yer:
-**Zenodo**. Aynı hesabı kullan.
+Depo adresi hakem için yeterli değil: depo taşınabilir, yeniden yazılabilir,
+silinebilir. DOI ise **o anki dosyaların dondurulmuş hâline** bağlanır ve
+değişmez. Makalede ikisi de yer alacak — depo "burada çalışılıyor", DOI "makale
+şu hâlden üretildi" demek.
 
-## Dosya hazır
+GitHub–Zenodo bağlantısının güzel yanı: bundan sonra her yeni release otomatik
+arşivlenir ve kendi DOI'sini alır. Bir de üstünde duran "concept DOI" olur, o
+hep en son sürüme gider.
 
-    /Users/alicetinkaya/Desktop/RUHSAT-Bench-v1.0.0.zip     (12 MB)
+## Senin yapacağın — 3 adım, ~3 dakika
 
-İçinde 287 dosya: altı kaynak PDF, üç korpus, 473 iddia ve üç altın sürümü,
-ön kayıt + sekiz ek, bütün koşu kayıtları, puanlama ve analiz çıktıları,
-sayı çizelgesi, betikler, makale ve eki, kusur kütüğü.
+**1. Zenodo'yu GitHub'a bağla**
 
-**Kontrol edildi:** `.env` YOK (API anahtarların girmedi), önbellek YOK,
-kişisel ad YOK (uzmanlar yalnız `INS_MUH` / `ISG_UZM` rol koduyla geçiyor).
-Kapak mektubu çıkarıldı — o yazışma, araştırma çıktısı değil.
-Her dosyanın SHA-256'sı `MANIFEST.sha256` içinde.
+* zenodo.org → giriş yap (daha önce Bankspeak ve *Answering Less* için
+  kullandığın hesap)
+* Sağ üst → **Settings** → sol menüden **GitHub**
+* Sayfada depolarının listesi çıkar. `ruhsat-bench` satırını bul ve
+  anahtarı **ON** yap.
+* Liste boşsa **Sync now** düğmesine bas.
 
-## Adımlar
+**2. Bana haber ver**
 
-1. **zenodo.org** → giriş yap → sağ üstte **New upload**.
-2. Zip dosyasını sürükle.
-3. Alanları aşağıdaki kutudan kopyala.
-4. **Publish**. Zenodo `10.5281/zenodo.XXXXXXX` verir.
-5. **Bana DOI'yi yolla**, makaleye ben yerleştiririm (tek yerde, veri
-   erişilebilirliği bloğunda).
+Anahtar açıldıktan sonra release'i ben yayımlarım (`v1.0.0`, notları hazır).
+İstersen kendin de yapabilirsin: GitHub'da depo → sağdaki **Releases** →
+**Create a new release** → tag `v1.0.0` → **Publish release**.
 
-> Yayımlamadan önce **Reserve DOI** düğmesine basarsan DOI'yi önceden alırsın ve
-> makaleye yazabilirsin; yayımlama sonra da olur. Gönderim sırası açısından bu
-> daha rahat, ama şart değil.
+> **Sıra önemli:** anahtar ÖNCE açılmalı. Release'i önce yayımlarsan Zenodo
+> onu görmez ve tag'i silip yeniden oluşturman gerekir.
 
-## Zenodo alanları — kopyala yapıştır
+**3. DOI'yi bana yolla**
 
-**Resource type:** Dataset
-*(Zenodo "Software" da kabul eder; burada ağırlık veri ve koşu kayıtlarında,
-o yüzden Dataset daha doğru.)*
+Zenodo dakikalar içinde `10.5281/zenodo.XXXXXXX` üretir. Numarayı bana ver,
+makaleye ben yerleştiririm — tek yerde, "Data and code availability" bloğunda.
 
-**Title:**
+## Zenodo metadatasını dert etme
 
-    RUHSAT-Bench: a 473-claim abstention benchmark over Turkish construction and occupational-safety regulation — data, code and pre-registration
+Depoda `.zenodo.json` var; Zenodo başlığı, yazarı, ORCID'i, lisansı ve açıklamayı
+oradan okur. Elle bir şey doldurman gerekmiyor. `CITATION.cff` de eklendi, bu
+sayede GitHub sayfasında "Cite this repository" kutusu çıkıyor.
 
-**Creators:**
+## Lisans (bilgin olsun)
 
-    Çetinkaya, Ali — Selçuk University, Faculty of Technology, Department of Computer Engineering — ORCID 0000-0002-7747-6854
+* Kod (`scripts/`, `hpc/`) → MIT
+* Veri, çıktılar, makale → CC BY 4.0
+* Kaynak mevzuat PDF'leri → Resmî Gazete metinleri, olduğu gibi yeniden
+  dağıtılıyor, üzerlerinde ek hak iddia edilmiyor
 
-**Description:**
-
-    Release archive for the paper "Measuring abstention, not accuracy: a
-    re-qualification benchmark for language-model decision support on Turkish
-    construction and occupational-safety regulation".
-
-    RUHSAT-Bench is a set of 473 true/false claims over six frozen Turkish
-    regulatory documents (Laws 3194, 4708 and 6331, the Building Inspection
-    Implementation Regulation, the OHS Risk Assessment Regulation, and the
-    Turkish Building Earthquake Code TBDY 2018). Each claim is asked under two
-    conditions: one permitting an explicit "not sure" and one forcing a binary
-    verdict, so that abstention behaviour is measured rather than assumed.
-
-    The archive contains the source documents with checksums, three parsed
-    corpora, the claim set in three gold-label versions, the blinded expert-audit
-    workbooks including the negative second-pass result, the pre-registration and
-    its eight annexes, every run record, the scoring and analysis code, and a
-    number sheet mapping every figure in the paper to the file and script that
-    produced it.
-
-    Two limits are stated in the archive README: the development repository's
-    version history was lost and the repository was reconstructed from dated
-    hand-over packages, so pre-registration timing rests on document dates rather
-    than commit timestamps; and the expert coders are identified only by role.
-
-**Keywords:**
-
-    compliance checking; decision-support software qualification; abstention;
-    selective prediction; large language models; building regulation; Turkish law;
-    benchmark
-
-**Licence:** Creative Commons Attribution 4.0 International (CC BY 4.0)
-*(Kodun MIT olduğu arşiv README'sinde yazıyor; Zenodo tek lisans alanı istiyor,
-oraya CC BY 4.0 yaz.)*
-
-**Version:** 1.0.0
-
-**Language:** English
-
-**Related identifiers:** makale yayımlandığında
-`is supplement to` → makalenin DOI'si. Şimdilik boş bırak.
-
-## Sonrası
-
-DOI geldiğinde makalede tek bir blok değişir:
-
-    makale/RUHSAT_JESTECH_ana_metin.md → "Data and code availability"
-
-Orada şu an duran `[TO BE COMPLETED BEFORE SUBMISSION]` uyarısı silinir ve
-yerine DOI yazılır. Bunu ben yaparım; sen sadece numarayı ver.
+Bu ayrım `LICENSE` dosyasında yazılı.
