@@ -27,4 +27,4 @@ Main text 12,297 words (excluding supplementary material S1–S9, 9,526 words)
 **Data and code**
 https://github.com/alicetinkaya76/ruhsat-bench
 Archive (all versions): https://doi.org/10.5281/zenodo.22168590
-Archive (state reported here, v1.0.1): https://doi.org/10.5281/zenodo.22168624
+Archive (state reported here, v1.0.2): https://doi.org/10.5281/zenodo.22180708

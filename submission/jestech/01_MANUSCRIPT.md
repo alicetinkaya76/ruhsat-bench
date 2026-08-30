@@ -1150,10 +1150,15 @@ supplementary material S1–S9.
 Repository: **https://github.com/alicetinkaya76/ruhsat-bench**
 
 Archive: **https://doi.org/10.5281/zenodo.22168590** — this identifier resolves to
-the most recent archived version. The exact state from which every figure in this
-paper was produced is release v1.0.1,
-**https://doi.org/10.5281/zenodo.22168624**. Readers checking a specific number
-should use the second; readers wanting the benchmark should use the first.
+the most recent archived version and is the one to cite for the benchmark itself.
+The exact state from which every figure in this paper was produced is release
+v1.0.2, **https://doi.org/10.5281/zenodo.22180708**; readers checking a specific
+number should use that one. One consequence of depositing the manuscript inside
+its own archive should be stated: the copy of this text held in any given release
+was written before that release had an identifier, so the DOI printed above was
+inserted in the working repository after v1.0.2 was minted and appears in full
+only from the next deposit onward. The data, code and run records are identical
+across that boundary.
 
 The repository is where the work continues and the archive is what does not
 change; a repository can be moved, rewritten or deleted, so the reproducibility
