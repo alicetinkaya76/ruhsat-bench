@@ -1065,8 +1065,8 @@ Repository: **https://github.com/alicetinkaya76/ruhsat-bench**
 
 Archive: **https://doi.org/10.5281/zenodo.22168590** — this identifier resolves to
 the most recent archived version. The exact state from which every figure in this
-paper was produced is release v1.0.0,
-**https://doi.org/10.5281/zenodo.22168591**. Readers checking a specific number
+paper was produced is release v1.0.1,
+**https://doi.org/10.5281/zenodo.22168624**. Readers checking a specific number
 should use the second; readers wanting the benchmark should use the first.
 
 The repository is where the work continues and the archive is what does not
