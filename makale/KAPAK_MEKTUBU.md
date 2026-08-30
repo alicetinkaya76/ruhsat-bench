@@ -22,7 +22,7 @@ To the Editor,
 
 Dear Editor,
 
-We submit for your consideration **"Measuring abstention, not accuracy: a
+I submit for your consideration **"Measuring abstention, not accuracy: a
 re-qualification benchmark for language-model decision support on Turkish
 construction and occupational-safety regulation."**
 
@@ -84,14 +84,15 @@ pre-registrations, the expert audit workbooks and the analysis code are released
 so that the re-qualification measurement can be repeated by others on their own
 schedule, which is the point of the paper.
 
-The manuscript is original, is not under consideration elsewhere, and all
-authors have approved the submission. We declare no conflict of interest.
+The manuscript is original and is not under consideration elsewhere. I declare
+no conflict of interest.
 
 Yours sincerely,
 
-[AUTHOR 1], on behalf of the authors
-[affiliation]
-[e-mail]
+Ali Çetinkaya
+Department of Computer Engineering, Faculty of Technology
+Selçuk University, Konya, Türkiye
+ali.cetinkaya@selcuk.edu.tr · ORCID 0000-0002-7747-6854
 
 ---
 

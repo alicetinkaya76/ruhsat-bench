@@ -1,15 +1,16 @@
 # RUHSAT-Bench — JESTECH ana metin
 
-<!-- YAZAR BLOGU — gonderim oncesi doldurulur. Bos birakilan her alan bilerek bostur. -->
-
 **Title.** Measuring abstention, not accuracy: a re-qualification benchmark for
 language-model decision support on Turkish construction and occupational-safety
 regulation
 
-**Authors.** [AUTHOR 1], [AUTHOR 2] — *affiliations, ORCIDs and the corresponding
-author to be supplied at submission.*
+**Author.** Ali Çetinkaya <sup>a,\*</sup>
 
-**Corresponding author.** [e-mail]
+<sup>a</sup> Department of Computer Engineering, Faculty of Technology,
+Selçuk University, Konya, Türkiye
+ORCID: 0000-0002-7747-6854
+
+<sup>\*</sup> Corresponding author. E-mail: ali.cetinkaya@selcuk.edu.tr
 
 > **Note on structure.** Supporting tables, the full model-by-model listings, the
 > pre-registration compliance record and the complete expert-audit report are in
@@ -937,6 +938,24 @@ abstentions barely moved. Whatever its cause, an acceptance criterion that looke
 only at accuracy, or only at abstention rate, would not have seen it. A
 qualification file for this class of tool needs a date, a retained gold subset,
 and a measure stated over abstention behaviour.
+
+# Acknowledgements
+
+> **[TO BE COMPLETED BEFORE SUBMISSION]** The two domain specialists who
+> performed the blinded gold-label audit reported in §4.7 are not authors of this
+> paper. Their names and affiliations belong here, with their consent, together
+> with a one-line statement of what they contributed. The audit is load-bearing
+> for the paper's central claim about label quality, so this block is not
+> optional.
+
+# Declarations
+
+**Funding.** [TO BE COMPLETED — state the funding source, or "This research
+received no specific grant from any funding agency."]
+
+**Conflict of interest.** The author declares no conflict of interest.
+
+**Data and code.** See below.
 
 # Data and code availability
 
