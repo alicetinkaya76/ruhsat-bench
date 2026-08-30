@@ -1,53 +1,84 @@
-# Atıf doğrulama — RUHSAT-Bench (JESTECH taslağı)
+# Atıf doğrulama — RUHSAT-Bench (JESTECH)
 
-**Tarih:** 2026-08-29 · **Kaynak:** OpenAlex API (`api.openalex.org`), tarayıcı üzerinden
+**Son tur: 2026-08-30 · Kaynak: Crossref REST API (`api.crossref.org/works/<DOI>`)
++ OpenAlex.** Önceki tur (2026-08-29, yalnız OpenAlex) bu belgeyi **eziyor.**
 
-> Selef makale kısmen **doğrulanmamış ve kaymış atıflar** yüzünden reddedildi.
-> Taslaktaki her atıf tek tek sorgulandı. Aşağıdaki künyeler OpenAlex kaydından
-> alınmıştır; doğrulanmayan hiçbir atıf makaleye girmez.
+> Selef makale kısmen doğrulanmamış ve kaymış atıflar yüzünden reddedildi.
+> Bu turda her DOI **çözdürüldü** ve künye alanları tek tek karşılaştırıldı.
 
-## Doğrulandı — künye ve yıl doğru (13)
+---
 
-| atıf | tam künye | DOI |
+## ⚠ ÖNCEKİ TURUN ÜRETTİĞİ İKİ HATA — DÜZELTİLDİ
+
+29 Ağustos turu OpenAlex'e bakıp iki künyenin yılını "düzeltti". **İkisi de
+yanlıştı.** Sebep: OpenAlex'in verdiği tarih ile derginin **sayı (issue)**
+tarihi farklı; makaleler online-first çıkıp aylar/yıllar sonra sayıya girmiş.
+Atıfta kullanılacak olan **sayı yılıdır**.
+
+| künye | önceki tur ne yaptı | Crossref gerçeği | ŞİMDİ |
+|---|---|---|---|
+| Zhang & El-Gohary | 2016 → **2013** yaptı | `published-print` **2016-03**, cilt 30(2); `created` 2013-07-25 | **2016** |
+| Zhou & El-Gohary | 2017 → **2016** yaptı | `published-print` **2017-02**, cilt 74, ss. 103–117; `created` 2016-12-01 | **2017** |
+
+**Ders:** OpenAlex'in `publication_year`'ı online-first tarihini verebiliyor.
+Künye yılı için Crossref `published-print` / `journal-issue` alanı esas alınır.
+
+---
+
+## ⚠ GEÇERSİZ DOI — KALDIRILDI
+
+**El-Yaniv & Wiener 2010.** Taslakta `doi:10.5555/1756006.1859904` yazıyordu.
+`https://doi.org/10.5555/1756006.1859904` → **HTTP 404, çözülmüyor.**
+`10.5555` ön eki ACM Digital Library'nin, DOI'si olmayan kayıtlar için
+kullandığı yer tutucu ad alanıdır; tescilli bir DOI değildir. JMLR makalelerinin
+çoğunun DOI'si yoktur.
+
+**Yeni hâli:** *Journal of Machine Learning Research* **11**, 1605–1641 (DOI yok).
+Cilt ve sayfa OpenAlex kaydından doğrulandı.
+
+---
+
+## Crossref'te DOĞRULANDI (11 künye)
+
+Her satır için yıl, yazar soyadları, başlık ve dergi adı karşılaştırıldı.
+
+| künye | DOI | Crossref yıl | dergi |
+|---|---|---|---|
+| Chen et al. 2024 | 10.3390/buildings14071983 | 2024 | Buildings |
+| Chow 1970 | 10.1109/tit.1970.1054406 | 1970 | IEEE Trans. Inf. Theory |
+| Dahl et al. 2024 | 10.1093/jla/laae003 | 2024 | J. Legal Analysis |
+| Eastman et al. 2009 | 10.1016/j.autcon.2009.07.002 | 2009 | Automation in Construction |
+| Jiang et al. 2021 | 10.1162/tacl_a_00407 | 2021 | TACL |
+| Magesh et al. 2025 | 10.1111/jels.12413 | 2025 | J. Empirical Legal Studies |
+| Naeini et al. 2015 | 10.1609/aaai.v29i1.9602 | 2015 | AAAI |
+| Robertson & Zaragoza 2009 | 10.1561/1500000019 | 2009 | Found. Trends Inf. Retr. |
+| Solihin & Eastman 2015 | 10.1016/j.autcon.2015.03.003 | 2015 | Automation in Construction |
+| Zhang & El-Gohary **2016** | 10.1061/(ASCE)CP.1943-5487.0000346 | 2016 | J. Comput. Civ. Eng. 30(2) |
+| Zhou & El-Gohary **2017** | 10.1016/j.autcon.2016.09.004 | 2017 | Automation in Construction 74 |
+
+**Not:** Crossref'in döndürdüğü Jiang ve Magesh başlıkları HTML işaretlemesi
+(`<i>`, `<scp>`) içeriyor; makaledeki düz metin hâlleri doğrudur.
+
+## DOI'siz, arXiv ile anılanlar (4 künye)
+
+Bunlar önbaskı olarak anılıyor; arXiv numaraları OpenAlex'te doğrulandı.
+
+| künye | arXiv | not |
 |---|---|---|
-| Chow 1970 | On optimum recognition error and reject tradeoff. *IEEE Trans. Inf. Theory* | 10.1109/tit.1970.1054406 |
-| Eastman et al. 2009 | Automatic rule-based checking of building designs. *Automation in Construction* | 10.1016/j.autcon.2009.07.002 |
-| Solihin & Eastman 2015 | Classification of rules for automated BIM rule checking development. *Automation in Construction* | 10.1016/j.autcon.2015.03.003 |
-| El-Yaniv & Wiener 2010 | On the Foundations of Noise-free Selective Classification. *JMLR* | 10.5555/1756006.1859904 |
-| Naeini et al. 2015 | Obtaining Well Calibrated Probabilities Using Bayesian Binning. *AAAI* | 10.1609/aaai.v29i1.9602 |
-| Guo et al. 2017 | On Calibration of Modern Neural Networks. *ICML* | arXiv 1706.04599 |
-| Geifman & El-Yaniv 2017 | Selective Classification for Deep Neural Networks | arXiv 1705.08500 |
-| Robertson & Zaragoza 2009 | The Probabilistic Relevance Framework: BM25 and Beyond. *FnTIR* | 10.1561/1500000019 |
-| Jiang et al. 2021 | How Can We Know When Language Models Know? *TACL* | 10.1162/tacl_a_00407 |
-| Kadavath et al. 2022 | Language Models (Mostly) Know What They Know | arXiv 2207.05221 |
-| Lin et al. 2022 | Teaching Models to Express Their Uncertainty in Words | arXiv 2205.14334 |
-| Dahl et al. 2024 | Large Legal Fictions: Profiling Legal Hallucinations in LLMs. *J. Legal Analysis* | 10.1093/jla/laae003 |
-| Magesh et al. 2025 | Hallucination-Free? Assessing the Reliability of Leading AI Legal Research Tools. *J. Empirical Legal Studies* | 10.1111/jels.12413 |
-
-## DÜZELTİLECEK — yıl kayması (3)
-
-| taslakta | GERÇEK | ne yapılmalı |
-|---|---|---|
-| **Zhou & El-Gohary 2017** | *Ontology-based automated information extraction from building energy conservation codes*, **2016**, Automation in Construction, 10.1016/j.autcon.2016.09.004 | yıl **2016** olacak |
-| **Zhang & El-Gohary 2016** | Taslağın tarif ettiği çalışma (*Semantic NLP-Based Information Extraction from Construction Regulatory Documents*) **2013**, J. Comput. Civ. Eng., 10.1061/(asce)cp.1943-5487.0000346 | ya yıl **2013** yapılacak ya da gerçekten 2016 tarihli farklı bir Zhang & El-Gohary çalışması bulunup künyesi yazılacak. **Şu hâliyle kullanılamaz** |
-| **Xiong et al. 2024** | arXiv sürümü **2023** (2306.13063); ICLR sürümü 2024 | Hangi sürüme atıf yapıldığı **seçilip tutarlı** kullanılacak |
-
-## [ATIF GEREKLİ] boşlukları için bulunan aday (1)
-
-Taslakta *"[ATIF GEREKLI: LLM-based automated compliance checking in construction, 2023–2025]"*
-işareti vardı. Doğrulanmış aday:
-
-- **Chen et al. 2024** — *Automated Building Information Modeling Compliance Check
-  through a Large Language Model Combined with Deep Learning*, **Buildings** 14(7),
-  10.3390/buildings14071983
-
-İkinci boşluk — *"risk-based acceptance thresholds for decision-support software in
-construction"* — için doğrulanmış kaynak **BULUNAMADI**. Uydurulmadı; makalede
-kabul eşiği konusunun literatürde yerleşik olmadığı zaten yazılıyor, o boşluk
-atıfsız bırakılabilir ya da kaldırılabilir.
+| Geifman & El-Yaniv 2017 | 1705.08500 | arXiv sürümüyle anılıyor |
+| Guo et al. 2017 | 1706.04599 | ICML 2017; arXiv ile anılıyor |
+| Kadavath et al. 2022 | 2207.05221 | önbaskı |
+| Lin et al. 2022 | 2205.14334 | önbaskı |
+| Xiong et al. 2024 | 2306.13063 | önbaskı 2023, ICLR sürümü 2024; makale **ICLR 2024** sürümünü anıyor ve künyede bunu belirtiyor |
 
 ## Standart
 
-- **IEC 61508** — Functional safety of electrical/electronic/programmable electronic
-  safety-related systems. Bir dergi makalesi değil, standart; künyesi standart
-  biçiminde verilmeli. IEC kataloğundan **doğrulanmadı** (OpenAlex kapsamı dışında).
+**IEC 61508** — dergi makalesi değil, standart. OpenAlex/Crossref kapsamı
+dışında; künye IEC kataloğundan **doğrulanmadı**. Edisyon ve bölüm numarası
+gönderimden önce IEC kataloğundan tamamlanmalıdır. Bu, bu belgede
+**doğrulanmamış** olarak duran tek kalemdir.
+
+## Metin içi atıf denetimi
+
+18 künyenin **18'i** de gövdede en az bir kez anılıyor (kaynakçadan önceki
+bölümlerde betikle sayıldı). Yetim atıf yok.

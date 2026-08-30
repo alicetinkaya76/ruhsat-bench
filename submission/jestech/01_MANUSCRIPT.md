@@ -90,8 +90,8 @@ Automating this kind of check is not a new goal. Rule-based checking of building
 designs has a long line of work behind it (Eastman et al., 2009; Solihin and
 Eastman, 2015), and the bottleneck it repeatedly meets is getting the rules out of
 the prose: extracting checkable structure from regulatory text has been pursued
-with semantic NLP (Zhang and El-Gohary, 2013) and with ontology-based extraction
-from energy codes (Zhou and El-Gohary, 2016). Language models change the shape of
+with semantic NLP (Zhang and El-Gohary, 2016) and with ontology-based extraction
+from energy codes (Zhou and El-Gohary, 2017). Language models change the shape of
 that bottleneck rather than removing it, and recent work has begun to combine them
 with rule checking for BIM compliance (Chen et al., 2024). What has also become
 clear, from the adjacent legal domain, is that fluent output is a poor guide to
@@ -1093,7 +1093,7 @@ Dahl, et al., 2024. Large legal fictions: profiling legal hallucinations in larg
 
 Eastman, et al., 2009. Automatic rule-based checking of building designs. *Automation in Construction*. doi:10.1016/j.autcon.2009.07.002
 
-El-Yaniv and Wiener, 2010. On the foundations of noise-free selective classification. *Journal of Machine Learning Research*. doi:10.5555/1756006.1859904
+El-Yaniv and Wiener, 2010. On the foundations of noise-free selective classification. *Journal of Machine Learning Research* 11, 1605–1641. — *no registered DOI; the identifier 10.5555/1756006.1859904 that appears in some indexes is an ACM placeholder and does not resolve.*
 
 Geifman and El-Yaniv, 2017. Selective classification for deep neural networks. arXiv:1705.08500
 
@@ -1113,11 +1113,11 @@ Robertson and Zaragoza, 2009. The probabilistic relevance framework: BM25 and be
 
 Solihin and Eastman, 2015. Classification of rules for automated BIM rule checking development. *Automation in Construction*. doi:10.1016/j.autcon.2015.03.003
 
-Xiong, et al., 2024. Can LLMs express their uncertainty? An empirical evaluation of confidence elicitation in LLMs. *ICLR 2024*. arXiv:2306.13063.
+Xiong, et al., 2024. Can LLMs express their uncertainty? An empirical evaluation of confidence elicitation in LLMs. *International Conference on Learning Representations (ICLR) 2024*. arXiv:2306.13063 — *the preprint is dated 2023 and the conference version 2024; this paper cites the conference version throughout.*
 
-Zhang and El-Gohary, 2013. Semantic NLP-based information extraction from construction regulatory documents for automated compliance checking. *Journal of Computing in Civil Engineering*. doi:10.1061/(asce)cp.1943-5487.0000346
+Zhang and El-Gohary, 2016. Semantic NLP-based information extraction from construction regulatory documents for automated compliance checking. *Journal of Computing in Civil Engineering* 30(2). doi:10.1061/(ASCE)CP.1943-5487.0000346 — *the article carries a 2013 online-first date and a March 2016 issue date; it is cited by its issue year.*
 
-Zhou and El-Gohary, 2016. Ontology-based automated information extraction from building energy conservation codes. *Automation in Construction*. doi:10.1016/j.autcon.2016.09.004
+Zhou and El-Gohary, 2017. Ontology-based automated information extraction from building energy conservation codes. *Automation in Construction* 74, 103–117. doi:10.1016/j.autcon.2016.09.004 — *online December 2016, February 2017 issue; cited by issue year.*
 
 ## Standard
 
