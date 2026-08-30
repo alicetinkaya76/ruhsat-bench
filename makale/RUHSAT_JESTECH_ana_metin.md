@@ -12,10 +12,14 @@ ORCID: 0000-0002-7747-6854
 
 <sup>\*</sup> Corresponding author. E-mail: ali.cetinkaya@selcuk.edu.tr
 
-> **Note on structure.** Supporting tables, the full model-by-model listings, the
-> pre-registration compliance record and the complete expert-audit report are in
-> the supplementary material (referred to below as S1–S9). Every figure quoted in
-> this text appears there with its producing script.
+> **Note on structure.** Nine supplementary sections, referred to below as S1–S9,
+> carry the full model-by-model listings, the pre-registration compliance record,
+> the family-size and corpus sensitivity analyses, the probe-subtype breakdowns
+> and the complete expert-audit report. The number sheet mapping each figure to
+> the script that produced it is in the released archive rather than in either
+> document. This paper contains tables and no plotted figures: every quantity it
+> reports is a point estimate with an interval, and we found no chart that carried
+> more than the table it would have been drawn from.
 
 ---
 
@@ -81,6 +85,21 @@ qualified, in the ordinary engineering sense: someone has to state what evidence
 would justify relying on it, gather that evidence, and define what would trigger
 re-checking. This paper is about the measurement that a qualification of this
 kind requires. It is not about which model is best.
+
+Automating this kind of check is not a new goal. Rule-based checking of building
+designs has a long line of work behind it (Eastman et al., 2009; Solihin and
+Eastman, 2015), and the bottleneck it repeatedly meets is getting the rules out of
+the prose: extracting checkable structure from regulatory text has been pursued
+with semantic NLP (Zhang and El-Gohary, 2013) and with ontology-based extraction
+from energy codes (Zhou and El-Gohary, 2016). Language models change the shape of
+that bottleneck rather than removing it, and recent work has begun to combine them
+with rule checking for BIM compliance (Chen et al., 2024). What has also become
+clear, from the adjacent legal domain, is that fluent output is a poor guide to
+correctness: hallucination rates in legal question answering are substantial
+(Dahl et al., 2024), and even retrieval-grounded commercial legal research tools
+do not eliminate them (Magesh et al., 2025). That is the pairing this paper takes
+as its starting point — a task where the text is the ground truth, and a tool
+class whose errors do not announce themselves.
 
 Our claim is that for this class of tool the qualification criterion cannot be
 accuracy alone. A compliance check has two failure modes and they are not
@@ -165,6 +184,23 @@ modes have different consequences and a qualification argument has to address
 them separately. Accuracy on a forced-choice benchmark collapses them into one
 number.
 
+Treating the option to decline as part of what a classifier is for is old: the
+error–reject trade-off was formalised by Chow (1970) and developed as **selective
+prediction**, in which a system is evaluated jointly on the fraction of inputs it
+answers and its accuracy on them (El-Yaniv and Wiener, 2010; Geifman and
+El-Yaniv, 2017). That framing is what this paper's two conditions implement. A
+neighbouring literature asks whether a model's stated confidence can be trusted
+as the basis for declining — modern networks are typically miscalibrated (Guo et
+al., 2017), calibration error is estimated over confidence buckets (Naeini et
+al., 2015), and language models specifically have been examined for whether their
+confidence tracks their accuracy in question answering (Jiang et al., 2021), for
+whether they can be said to know what they know (Kadavath et al., 2022), and for
+whether confidence expressed in words carries usable information (Lin et al.,
+2022; Xiong et al., 2024). We report calibration error alongside the abstention
+measures for this reason, but the paper's criterion is behavioural rather than
+introspective: what is measured is whether the system declines the items it would
+have got wrong, not whether it says it is uncertain.
+
 ## 2.2 An acceptance criterion has to be about abstention
 
 Suppose an organisation sets a threshold — say, the tool must be right on 90% of
@@ -180,9 +216,11 @@ supplies the measurement the threshold would be stated over.
 
 ## 2.3 Benchmarks expire, so systems have to be re-qualified
 
-A qualification is a statement about a component at a time. Hosted models change
-behind a stable name, and the change is not announced or versioned in a way a
-downstream user can audit. If the only measure in the qualification file is
+A qualification is a statement about a component at a time. It is widely assumed
+among practitioners that hosted models change behind a stable name without an
+announcement a downstream user can audit; we cite no source for that assumption
+because we found no verifiable publication establishing it, and §4.4 reports an
+observation consistent with it rather than a confirmation of it. If the only measure in the qualification file is
 forced-choice accuracy, a change that leaves accuracy intact while degrading the
 system's ability to recognise its own limits will not appear. §4.4 reports such a
 case, on a frozen claim set, with prompts verified identical.
@@ -198,7 +236,7 @@ code computes it: accuracy on the direct-citation family P1 plus accuracy on the
 cross-reference family P5, minus one. P1 holds 163 claims of which 156 are true
 and P5 holds 121, all false, so λ's neutral point is not zero: a system answering
 "true" throughout scores −0.0429 and one answering "false" throughout scores
-+0.0429. Those two values, not 0, are the reference points (§4.3.3 shows a
++0.0429. Those two values, not 0, are the reference points (§4.6.2 shows a
 measured system sitting on one of them exactly). **Intervals** are cluster
 bootstraps; the resampled unit is the (law, article) pair, of which the 473 claims
 form 183, because several claims come from one article and resampling claims
@@ -225,8 +263,10 @@ the choice (§4.6.5, S7).
 ## 3.3 Claim set
 
 473 claims, 223 true and 250 false, in six probe families: direct assertion
-(163), numeric value (37), cross-reference (121), currency of amendment (120),
-anachronism (19), fabricated provision (13). By citation form, 289 cite a
+(P1, 163), numeric value (P2, 37), cross-reference (P5, 121), currency of
+amendment (P6, 120), anachronism (P3, 19), fabricated provision (P4, 13). The
+codes are used throughout; their numbering follows the order in which the
+families were written, not the order above. By citation form, 289 cite a
 specific article and 184 cite only a document. Claims were generated by a sealed
 script from the frozen text; that script was not modified after the runs began.
 
@@ -277,8 +317,8 @@ than the outcome. Full listing: S2.
 Four arms differ in the evidence supplied and in nothing else. **R0** is closed
 book. **R1** supplies the full text of the cited article, defined only on the 289
 article-attributing claims; it is a ceiling, not a deployable configuration.
-**R2** supplies the top three passages returned by an untuned BM25 retriever over
-the 1,755 refined units. **R3-BM25** supplies those same three passages to a
+**R2** supplies the top three passages returned by an untuned BM25 retriever
+(Robertson and Zaragoza, 2009) over the 1,755 refined units. **R3-BM25** supplies those same three passages to a
 literal string-containment rule with no model, isolating what the model
 contributes to identical evidence. A separate deterministic control that performs
 no retrieval, **R3-rule**, resolves claims against the whole corpus; it checks the
@@ -368,11 +408,14 @@ bootstraps over (law, article) pairs, seed 42.
 ## 4.1 The evaluated systems
 
 Twenty models were run: eighteen open-weight configurations served locally
-(qwen2.5, llama3.2 and gemma3 families at 1B–32B, in fp16 and four quantisations)
+(qwen2.5, llama3.2 and gemma3 families at 1B–32B, in fp16 and three quantisations: q4_K_M, q5_K_M and q8_0)
 and two hosted (`claude-sonnet-5`, `claude-haiku-4.5`). Quantisation variants of
 one model are counted separately because they are separate deployments and, as
 §4.2 shows, they do not behave identically. Full listing with per-cell response
 rates: S3.
+
+The hosted arm is summarised in Table 1; the open-weight arm follows in §4.2 and
+Table 2.
 
 **Table 1. Hosted arm, majority of three runs, closed book.**
 
@@ -383,8 +426,21 @@ rates: S3.
 | claude-haiku-4.5 | E1 | 0.5298 | [0.489, 0.570] | 0.710 | −0.026 | 0.2263 |
 | claude-haiku-4.5 | E2 | 0.5558 | — | 0.998 | 0.061 | 0.2070 |
 
-The haiku E1 interval contains 0.5. On this claim set that system is not shown to
-be above chance in either condition.
+**ECE** is expected calibration error, the average gap between the confidence a
+system states and the accuracy it achieves at that confidence, computed over
+buckets of stated confidence and weighted by bucket size; a well-calibrated system
+approaches 0. The estimator was positive-controlled against the deterministic
+baseline, which states 100 on every claim it answers and answers almost all of
+them correctly: it returns 0.0000, where an earlier mid-point formula returned
+0.0500 on the same records.
+
+**Table 1 is uncorrected, and its E2 rows carry no interval.** Corrected
+intervals were computed for the open-weight comparison of §4.2 and for the
+condition contrast of §4.3.1; they were not computed for the hosted cells in this
+form, and the E2 cells have no interval in the frozen number set at all. The
+haiku E1 interval contains 0.5, so on this claim set that system is not shown to
+be above chance under E1. No statement is made here about haiku under E2, because
+the figure to support one was not produced.
 
 ## 4.2 The coverage–accuracy trade-off
 
@@ -412,6 +468,12 @@ and two survive:
 | llama3.2:3b-instruct-q8_0 | 0.5509 | 0.5077 | 0.4878 | 0.884 | no |
 | gemma3:12b | 0.5493 | 0.5136 | 0.4915 | 0.987 | no |
 
+*On two figures for one cell.* The uncorrected lower bound for
+`qwen2.5:32b-instruct` is 0.5820 here and 0.5833 in Table 4, because the
+correction table is computed with 4,000 resamples and the main per-cell table
+with 10,000. The difference is in the third decimal and is resampling noise, not
+two measurements; nothing in this paper turns on it.
+
 The two survivors sit at opposite operating points. `qwen2.5:32b-instruct`
 reaches an interval overlapping the hosted `claude-sonnet-5` (0.6920 [0.633,
 0.750] at coverage 0.615) while committing on 82 of 473 claims — roughly one in
@@ -425,6 +487,8 @@ the workflow, and §2.2 argues the choice cannot be made by accuracy alone.
 ## 4.3 What abstention buys
 
 ### 4.3.1 The confirmatory contrast
+
+The contrast is given in Table 3.
 
 **Table 3. BAcc(E1) − BAcc(E2), hosted arm.** Paired cluster bootstrap, 4,000
 resamples, seed 42. Correction: Bonferroni over 20 models (§3.7).
@@ -495,7 +559,12 @@ index or a subtype breakdown separates them.
 
 The same configuration (`claude-sonnet-5`, variant A, 32-token budget) was re-run
 on the frozen claim set about four weeks after the archived runs, under a rule
-fixed beforehand in annex EK-7. That rule set three outcomes against the archived
+fixed beforehand in annex EK-7. **The interval is approximate and inferred, not
+recorded.** The archived run records carry no timestamp; four weeks is the gap
+between the dates written on the surrounding pre-registration documents, 2 August
+and 28 August 2026. An earlier draft of this work said "months", which the record
+does not support, and nothing in this section rests on the precise length of the
+gap. That rule set three outcomes against the archived
 A@32 range [0.6796, 0.6986]: a value inside it would be read as a **budget
 effect**; a value at or below **0.66** as **version drift**; a value between as
 **indeterminate**, reported and not forced. The 0.66 threshold is approximately
@@ -556,7 +625,12 @@ the instability EK-2 reframed variant B to measure.
 ## 4.5 The rule-based baseline
 
 **R3-rule** is deterministic, uses no language model, performs no retrieval, and
-resolves each claim against the corpus by literal matching. A note required by
+resolves each claim against the corpus by literal matching. Two properties of it
+are conditions of reporting it at all, fixed in annex EK-4 §6, and are asserted at
+start-up by the script itself: it never reads the gold label, and it resolves a
+claim using the claim text and identifier only. Without both, a baseline scoring
+473/473 would be measuring its own access to the answer key rather than the
+scoring path. A note required by
 annex EK-4 §8 comes first: its verdict on the anachronism family P3 is derived not
 from corpus text but from the enactment-year field of the generator's own metadata
 table. That is the same circularity the paper flags for P6 and it is worse,
@@ -570,8 +644,10 @@ Against the raw corpus R3-rule scored 473/473 with the pre-revision gold (v6) an
 with v7a. The earlier perfect score was therefore partly an artefact: **7 of 473**
 came from the corpus and the gold being wrong in the same direction, and those
 seven are exactly the seven labels the expert reconciliation later corrected. A
-negative control with shuffled claim–unit pairings over five seeds averages 0.5315,
-inside the 0.50–0.56 band declared in advance.
+negative control with shuffled claim–unit pairings over five seeds averages
+0.5315, inside a 0.50–0.56 acceptance band. That band was fixed in the task
+specification before the control was run, not in a pre-registration annex, and we
+label it that way rather than as pre-registered.
 
 ## 4.6 Grounded arms: supplying the text
 
@@ -581,6 +657,8 @@ BM25 at k = 3 over the 1,755 refined units places the cited unit in the supplied
 context for 79 of the 289 article-attributing claims, a recall of 0.2734.
 
 ### 4.6.2 End-to-end results
+
+Table 4 gives the four arms on the same claim set.
 
 **Table 4. Grounded arms, `qwen2.5:32b-instruct`, refined corpus + v7a gold,
 majority of three runs.** Cluster bootstrap, 4,000 resamples, seed 42.
@@ -628,6 +706,8 @@ grounded arms, with Bonferroni over two (97.5% intervals). **H1 is R2 − R0** a
 article-attributing claims against an R0 baseline restricted to those same claims,
 which is not the same number as R0 on the full set: R0 scores 0.6226 under E1 and
 0.5062 under E2 on the subset, against 0.6769 and 0.5493 on all 473.
+
+Table 5 reports both hypotheses in both conditions.
 
 **Table 5. Pre-registered primary family (EK-4 §4), `qwen2.5:32b-instruct`.**
 
@@ -716,8 +796,10 @@ width (S7).
 sampled (P1 0/22, P2 0/17, P3 0/15, P4 0/12, P5 0/16); with these sample sizes the
 95% upper bounds run from 14.9% to 24.3%, so the pass bounds the rate loosely.
 P6 carries no first-pass count and was checked against official HTML on
-mevzuat.gov.tr instead, where 20 of 20 sampled claims agreed — a check covering
-three of the six documents.
+mevzuat.gov.tr instead, where 20 of 20 sampled claims agreed. That check is
+framed to three of the six documents — Laws 3194, 4708 and 6331 — so the
+implementing regulation is outside it and **43 P6 claims drawn from that
+regulation were not independently verified by any route**.
 
 **Second pass, and it is negative.** On the 58 non-control items agreement fell to
 κ = 0.722, approximate 95% CI [0.513, 0.933]; the interval is wide and the normal
@@ -746,7 +828,8 @@ The additional cell clears chance by 0.0013 — narrower still than the 0.0017 b
 which `gemma3:27b` clears it under v7a — so what this exposes is the fragility of
 threshold cells, not a difference in what the models can do. λ is the measure
 EK-5 predicted would be most exposed, and it is: in three of four hosted cells λ
-moves further between label sets than balanced accuracy does. Full table: S9.
+moves further between label sets than balanced accuracy does. The
+cell-by-cell comparison is in S9.
 
 **What the audit does and does not license.** It establishes that the labels are
 internally consistent on the evidence the first pass shows a rater, and that a
@@ -798,11 +881,14 @@ per system rather than assumed.
 ## 5.3 Re-qualification: a fixed test set, a changed component
 
 The claim set was frozen, the prompts were byte-identical, the budget was the
-same, and thinking was disabled in both. Within the limits §3.8 states, the
-component changed underneath a fixed measurement. In engineering practice this is
-a verified tool changing without notice, and the practical consequence is that a
-qualification file for a hosted model needs a date, a re-check interval, and a
-retained gold subset the re-check can be run against. We do not claim to know how
+same, and thinking was disabled in both. Within the limits §3.8 and §6 state, the
+component behaved differently underneath a fixed measurement. We do not know what
+changed on the provider's side, and §6 says so; what an inspection organisation
+would face is the same either way — a tool whose qualification evidence was
+gathered on one date and whose behaviour on the same test set is no longer the
+same. The practical consequence is that a qualification file for a hosted model
+needs a date, a re-check interval, and a retained gold subset the re-check can be
+run against. We do not claim to know how
 often such changes occur; one observation does not establish a rate.
 
 ## 5.4 Supplying the governing provision changes the operating point
@@ -871,8 +957,18 @@ as `gemma3:27b` clearing chance by 0.0017 — sit inside that uncertainty.
 **The drift result is one run against three.** The archived runs are three single
 runs, not a distribution, so no interval on the *change* is available and the
 comparison rests on a range. The repeat run's own within-arm band was not
-measured. "Version drift" here means what the provider served behind a model name
-changed; the served version could not be read from the API.
+measured.
+
+**"Version drift" is our label for a behavioural difference, not a claim about the
+provider.** We did not observe, and were not told, any vendor release, weight
+change or serving change, and no vendor version identifier was recorded or could
+be read from the API. What we measured is that a fixed claim set produced
+different behaviour on two dates under prompts we verified identical.
+
+**Mechanism unmeasured.** Whether the shift in abstention selectivity reflects
+decoding, serving, prompt handling on the provider's side, or something else, is
+outside what these runs can determine. We report the difference and its
+consequence for qualification practice, not its cause.
 
 **The provenance chain has a boundary.** Archived run records carry no script or
 prompt hash; prompt identity was re-derived from archived source code. The
@@ -967,12 +1063,15 @@ supplementary material S1–S9.
 
 Repository: **https://github.com/alicetinkaya76/ruhsat-bench**
 
-> **[TO BE COMPLETED BEFORE SUBMISSION]** Archival DOI. The repository above is
-> public, but a repository can be moved, rewritten or deleted, so the paper also
-> needs a fixed archival identifier for the exact state the reported figures were
-> produced from. That identifier is minted when release v1.0.0 is deposited, and
-> this block must carry it before submission: the abstract and introduction claim
-> the material is released, and that claim is only fully true once it resolves.
+Archive: **https://doi.org/10.5281/zenodo.22168590** — this identifier resolves to
+the most recent archived version. The exact state from which every figure in this
+paper was produced is release v1.0.0,
+**https://doi.org/10.5281/zenodo.22168591**. Readers checking a specific number
+should use the second; readers wanting the benchmark should use the first.
+
+The repository is where the work continues and the archive is what does not
+change; a repository can be moved, rewritten or deleted, so the reproducibility
+claim in §1 rests on the archive rather than on the repository.
 
 *One limit on the provenance of the archive itself.* The version-control history
 of the development repository was lost before submission and the repository was

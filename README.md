@@ -1,5 +1,6 @@
 # RUHSAT-Bench
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22168590.svg)](https://doi.org/10.5281/zenodo.22168590)
 [![License: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 

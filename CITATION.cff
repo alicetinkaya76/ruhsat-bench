@@ -9,6 +9,8 @@ authors:
     affiliation: "Department of Computer Engineering, Faculty of Technology, Selçuk University, Konya, Türkiye"
     email: "ali.cetinkaya@selcuk.edu.tr"
 version: "1.0.0"
+doi: "10.5281/zenodo.22168590"
+repository-code: "https://github.com/alicetinkaya76/ruhsat-bench"
 license: CC-BY-4.0
 keywords:
   - compliance checking

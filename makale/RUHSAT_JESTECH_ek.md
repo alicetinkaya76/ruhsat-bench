@@ -38,7 +38,7 @@ The study sits between legal engineering practice and language-model evaluation,
 
 ## S2 — Scoring gates and the pre-registration compliance record
 
-> The main text §3.4 states the deviation and its consequence; the full discussion, including the model-by-model outcome of the original gate, is here.
+> The main text §3.4 states the deviation, the 7-scored/13-removed outcome and the three systems it removes; the full argument for the redefinition, the two gates in their original wording and the four named cells that fall under the minimum-n rule are here. The commitment rate of every cell, from which the original gate's outcome can be read off for all twenty, is in the table in S3.
 
 Every claim is asked twice. **E1** allows abstention (true / false / not sure); **E2** forces a binary choice. Two system-prompt variants (A and B) were written for each condition; A is primary and B is a controlled re-wording. Annex EK-2, written after both variants had run but before any cross-variant comparison was computed, records that B's declared role changed at that point. The main pre-registration had called B a *consistency check*, wording that presumes B would confirm A. It does not: re-wording the system prompt alone moves abstention rates by tens of points on the same claims and the same model. EK-2 therefore reframes B as a controlled manipulation of the measurement's stability, and the instability is reported as a finding rather than as a deviation (§4.4). The reframing was declared before the comparison was computed, and we note it here because a role change of this kind is otherwise indistinguishable from choosing an interpretation after seeing the result. Output budget is part of the run label (A@32, A@128, B@128). For the hosted models, extended thinking was disabled so that the task matched the local arm, and this was verified per response rather than assumed.
 
@@ -59,7 +59,7 @@ One cell sits close to the boundary and is worth naming here rather than in the 
 
 ## S3 — The open-weight arm in full
 
-> The main text §4.2 reports the twelve scored cells and the two survivors; the complete eighteen-cell listing with response rates, commitment counts and gate outcomes is here.
+> The main text §4.2 reports the twelve scored cells and the two survivors; the complete listing of all eighteen open-weight cells, with response rates, commitment counts and gate outcomes, is here. The two hosted cells are in the main text's Table 1.
 
 Eighteen open-weight models have a complete E1 cell under prompt variant A. The
 two rules declared in Section 3.4 are applied to Table S1 rather than merely
@@ -201,7 +201,7 @@ the measurements and refrain from a general verdict on usability.
 
 ## S4 — The confirmatory contrast and its family-size sensitivity
 
-> The main text §4.3.1 gives Table S3 and the verdict; Table S4, which reports the same contrast at every defensible family size, is here.
+> The main text §4.3.1 gives its own Table 3 and the verdict; the family-size sensitivity table (Table S4 below) is here.
 
 **Which correction family this contrast belongs to.** This study carries two
 distinct confirmatory families and they must not be merged. The contrast
@@ -227,7 +227,7 @@ belongs to annex EK-4 §4 and covers the grounded-arm hypotheses H1 and H2 of
 Section 4.6.3, not this contrast. An earlier draft of this paper applied the
 family of two here, which understates the correction, and a later one asserted a
 family of seventeen, which cannot be derived from any counting rule used in this
-paper; the figures below use eighteen.
+paper; the figures below use twenty, the number of models run, as the main text §4.3.1 explains.
 
 **Table S3. Confirmatory contrast BAcc(E1) − BAcc(E2), hosted arm.** Paired
 cluster bootstrap, 4,000 resamples, clusters = law + article, seed 42, v7a gold.
@@ -507,7 +507,7 @@ sensitivity check below shows.
 | R3-BM25 | — | 17 | 17 | 0.5294 |
 
 Removing them from the headline contrast moves it by less than the width of its
-interval: R2 − R3-BM25 is +0.2292 [+0.1932, +0.2639] on all 473 claims and
+interval: R2 − R3-BM25 is +0.2292 [+0.1939, +0.2635] on all 473 claims and
 +0.2312 [+0.1943, +0.2672] on the 456 that remain under E1, and +0.2162
 [+0.1829, +0.2512] against +0.2154 [+0.1798, +0.2504] under E2. The flagged
 claims are not driving the result.
@@ -652,7 +652,10 @@ movements are small, but the ordering is the one the annex anticipated and it is
 reported here as such rather than the other way round.
 
 The one cell where the label set matters qualitatively is the deterministic
-baseline R3-rule, which scores 1.0000 under v6 and 0.9860 under v7a on the
-refined corpus. That gap is not noise but the EK-5 correction itself: seven gold
+baseline R3-rule. Two different quantities are involved and they must not be run
+together. Its exact-match count against the **refined** corpus is 473/473 with
+v7a. The figure in the gold-comparison table, 0.9860 under v7a against 1.0000
+under v6, is a balanced accuracy on the **raw** corpus cell, where the exact-match
+count is 466/473. That gap is not noise but the EK-5 correction itself: seven gold
 labels were revised, and the baseline had been agreeing with the pre-revision
 versions. Section 4.5 is about exactly that.

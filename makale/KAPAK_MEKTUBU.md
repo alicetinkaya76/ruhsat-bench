@@ -14,6 +14,9 @@
 >
 > **Gönderilecek dosyalar:** `RUHSAT_JESTECH_ana_metin.md` (9.741 kelime) +
 > `RUHSAT_JESTECH_ek.md` (S1–S9, supplementary material olarak yüklenir).
+>
+> **Depo ve DOI hazır:** github.com/alicetinkaya76/ruhsat-bench ·
+> DOI 10.5281/zenodo.22168590 (tüm sürümler) / .22168591 (v1.0.0).
 
 ---
 
