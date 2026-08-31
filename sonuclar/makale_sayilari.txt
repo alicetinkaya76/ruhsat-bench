@@ -980,3 +980,70 @@ OLMAYAN hicbir sayi kullanilmaz.
      yok) ve bir hipotez testi degil betimsel bir olcudur. 1.4 sonnet icin
      pozitif, haiku icin negatif — 1.2 ile AYNI yonu veriyor.
      Makale bunlari raporlamali ve hangisinin test edildigini acikca demeli.
+
+==========================================================================
+## EK — 9. TUR: UCUNCU GOZ v2 (31.08.2026). ONCEKI SATIRLARI EZER.
+==========================================================================
+
+### D9.1 *** KISAYOL TABANLARI — UCUNCU GOZUN ISTEDIGI KONTROL, KOSULDU
+  Iddia METNINE HIC BAKMAYAN taban: her grubun COGUNLUK altin sinifini
+  tahmin et. (altin v7a, kumeli bootstrap 4000, tohum 42, E2 esdegeri)
+
+    taban                     grup  dogruluk    BAcc      %95 GA          lambda
+    prob ailesi (P1..P6)         6    0.8436  0.8503  [0.8196, 0.8794]   0.9571
+    sablon alt-turu (probe_alt) 14    0.9852  0.9860  [0.9705, 0.9981]   0.9571
+
+  KARSILASTIRMA (ayni altin, ayni kume tanimi):
+    R1     E2   BAcc 0.8615   lambda 0.988
+    R2     E2   BAcc 0.8100   lambda 0.829
+    R3-BM25     BAcc 0.5938   lambda -0.043
+    R0     E2   BAcc 0.5493
+
+  >> AILE-YALNIZ taban (0.8503) DAYANAKLI KOL R2'yi (0.8100) GECIYOR.
+     SABLON-YALNIZ taban (0.9860) HER SEYI, R1 dahil, geciyor.
+  >> lambda ICIN DAHA SERT: kisayol tabanlarinin lambda'si 0.9571;
+     R2'nin 0.804'unden YUKSEK, R1'in 0.987'sine yakin.
+     Yani lambda SABIT cevaba karsi dayanikli (notr nokta +-0.0429,
+     bkz. D5.4) ama AILE-KOSULLU cevaba karsi DEGIL.
+
+  NE ANLAMA GELIR / GELMEZ:
+   * Modeller aile etiketini GORMUYOR; yalniz iddia metnini goruyor.
+     Bu taban modellerin kisayol KULLANDIGINI gostermez.
+   * Gosterdigi sey: kiyaslamanin etiket dagilimi aile/sablon kimliginden
+     GUCLU bicimde ongorulebilir, ve yuzey bicimi aile kimligini sizdiriyorsa
+     bir sistem mevzuati hic okumadan bu bandi yakalayabilir.
+   * AYNI sistem icinde ayni maddelerde yapilan karsilastirmalar
+     (E1-E2 kontrasti) sabit bir kisayoldan ETKILENMEZ; kisayol her iki
+     kosulda ayni sekilde islerdi.
+   * ETKILENEN: kollar-arasi karsilastirmalarin YORUMU ve lambda'nin
+     "yanlilikla ulasilmasi zor" diye sunulmasi.
+  >> MAKALEYE GIRMELI. Bu, hakemin bulup da yazarin yazmadigi hâlde
+     makaleyi batiracak sinifta bir olcumdur.
+
+### D9.2 — KUNYE TAMAMLAMALARI (Crossref kayitlarindan)
+  Chen 2024   TAM baslik: "...Combined with Deep Learning AND ONTOLOGY"
+              (taslakta 'and Ontology' EKSIKTI) · Buildings 14(7), 1983
+  Magesh 2025 J. Empirical Legal Studies 22(2), 216-242
+              yazarlar: Magesh, Surani, Dahl, Suzgun, Manning, Ho
+  Dahl 2024   J. Legal Analysis 16(1), 64-93
+  Eastman 2009 Automation in Construction 18(8), 1011-1033
+  Solihin 2015 Automation in Construction 53, 69-82
+  Zhang 2016  J. Comput. Civ. Eng. 30(2), makale no 04015014
+  Zhou 2017   Automation in Construction 74, 103-117
+  Jiang 2021  TACL 9, 962-977
+  Naeini 2015 AAAI 29(1); yazar soyadi "Pakdaman Naeini"
+  Chow 1970   IEEE Trans. Inf. Theory 16(1), 41-46
+
+  ÇELISKI — cozulmedi, ikisi de kayda geciriliyor:
+    Robertson & Zaragoza 10.1561/1500000019
+      Crossref (DOI tescil kaydi) : cilt 4, sayi 1-2, ss 1-174
+      Ucuncu gozun kaynagi (yayinci sayfasi) : 3(4), 333-389
+    Ayni DOI, ayni baslik, FARKLI cilt/sayfa. Bu oturumda cozulemedi.
+    KARAR: cilt/sayfa VERILMEZ; kunye DOI ile birakilir ve bu
+    tutarsizlik atif dogrulama kaydina yazilir.
+
+### D9.3 — 17.028 VE 472'NIN TURETIMI (cizelgede yoktu)
+  17.028 = 18 model x 2 kosul x 473 iddia   (kapali kitap cagri sayisi)
+  472    = 335 taahhut + 137 taahhut-disi   (haiku Delta satiri)
+           eksik olan 1 iddia: id 211, E2'de uc kosu uc farkli sonuc
+           verdigi icin cogunluk olusmadi; her iki koldan da dusuyor.
