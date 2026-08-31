@@ -78,6 +78,19 @@ those documents and on the packages that contain them, not on commit timestamps.
 **Blinding.** The expert-audit workbooks identify the two coders only by role
 (`INS_MUH`, `ISG_UZM`). No personal data is included in this archive.
 
+**Seventeen provisional labels.** Seventeen claims remain labelled
+`needs_human_review`; no human adjudication was completed for them. The released
+labels are provisional for those items, and all principal results are reported
+both with and without them (§4.6.5 of the paper). The claim identifiers are 25,
+38, 60, 70, 123, 159, 189, 203, 211, 278, 310, 323, 351, 426, 444, 455 and 476.
+
+**A shortcut this benchmark permits.** A baseline that reads no claim text and
+predicts each template subtype's majority gold label scores 0.9860 balanced
+accuracy, above every system reported in the paper; a probe-family-only baseline
+scores 0.8503. This bounds what cross-arm comparisons on this claim set can
+establish and is reported in §4.6.6. Anyone reusing this benchmark should
+measure against those baselines, not against chance.
+
 ## Source documents
 
 The six documents are Turkish primary legislation and regulation published in the

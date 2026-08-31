@@ -1,6 +1,6 @@
 # RUHSAT-Bench — JESTECH ana metin
 
-**Title.** Measuring abstention, not accuracy: a re-qualification benchmark for
+**Title.** Measuring abstention, not accuracy alone: a re-qualification benchmark for
 language-model decision support on Turkish construction and occupational-safety
 regulation
 
@@ -42,12 +42,13 @@ open-weight configurations, twelve carry a scored accuracy figure and, after the
 pre-registered Bonferroni correction, **one** excludes chance robustly. A second
 sits on the threshold, clearing it by 0.0017 under the reported seed and failing
 to under three of five, and we report it as undecided rather than as a
-survivor. Second, supplying the governing text changes the
-operating point decisively. On the pre-registered primary family, a 32B
-open-weight model gains +0.2607 in balanced accuracy under forced choice when
-three retrieved passages are supplied (95% CI [+0.2218, +0.2964]) and +0.3552
-when the cited article is supplied (95% CI [+0.3112, +0.3984]); both survive
-correction. Against a string-matching rule applied to the *same* retrieved
+survivor. Second, on the one model where the grounded
+ladder was run (`qwen2.5:32b-instruct`), supplying the governing text changes the
+operating point decisively. On the pre-registered primary family it gains +0.2607
+in balanced accuracy under forced choice when three retrieved passages are
+supplied (95% CI [+0.2218, +0.2964]) and +0.3552 when the cited article is
+supplied (95% CI [+0.3112, +0.3984]); both survive correction. Generalisation
+across model families was not tested. Against a string-matching rule applied to the *same* retrieved
 passages, the model adds +0.2292 under E1 (95% CI [+0.1939, +0.2635]), so the
 judgement step is separable from the presence of evidence. Third, and this is the
 qualification result: a hosted model re-run about four weeks later on the same
@@ -117,9 +118,15 @@ Our claim is that for this class of tool the qualification criterion cannot be
 accuracy alone. A compliance check has two failure modes and they are not
 equivalent. A tool that says "I cannot resolve this" hands the case to a person;
 a tool that answers wrongly with the same fluency it uses when right does not.
-The first is a fail-safe failure and the second is fail-silent, and functional
-safety practice has treated the distinction as fundamental for decades
-(IEC 61508). Meeting the verification obligations such standards impose is itself
+We call the first a fail-safe failure and the second fail-silent. The terms are
+ours and the distinction is operational: in this study an abstention is an
+observable outcome that routes a case to a person, and a confident wrong verdict
+is an unobserved decision error. Functional-safety standards organise system
+verification around failure behaviour and the evidence required to accept it
+(IEC 61508-1:2010), and that is the tradition this framing belongs to; we do not
+claim that these two terms appear in that standard with these definitions,
+because we could not verify it from the publicly available catalogue entry.
+Meeting the verification obligations such standards impose is itself
 an engineering problem rather than a formality — the cost of demonstrating
 compliance is what usually decides whether a method is adopted (Makartetskiy et
 al., 2020) — and the argument of this paper is that for a language-model
@@ -258,7 +265,11 @@ cross-reference family P5, minus one. P1 holds 163 claims of which 156 are true
 and P5 holds 121, all false, so λ's neutral point is not zero: a system answering
 "true" throughout scores −0.0429 and one answering "false" throughout scores
 +0.0429. Those two values, not 0, are the reference points (§4.6.2 shows a
-measured system sitting on one of them exactly). **Intervals** are cluster
+measured system sitting on one of them exactly). The protection λ offers is
+against a *constant* answer and not against a *family-conditional* one: §4.6.6
+reports a baseline that reads no claim text at all and scores λ = 0.9571, above
+the best grounded arm. λ is therefore evidence about response bias, not evidence
+that a provision was understood. **Intervals** are cluster
 bootstraps; the resampled unit is the (law, article) pair, of which the 473 claims
 form 183, because several claims come from one article and resampling claims
 individually would narrow every interval artificially. A **probe family** is a
@@ -322,8 +333,12 @@ the first. The reason is definitional and independent of the data: an 0.80 floor
 on the commitment rate would classify this study's dependent variable as protocol
 non-compliance, so that a system emitting perfectly parsable output while
 declining 467 of 473 claims would be recorded as violating a protocol it is in
-fact following exactly. It is nonetheless a deviation, and the sensitivity arm the
-addendum requires is not a formality: applying the original gate to the commitment
+fact following exactly. It is nonetheless a deviation, and one made after the calls had completed and
+after response and abstention counts had been inspected — before any accuracy
+metric was computed, but not before any data had been seen. We therefore
+describe the analyses that depend on it as **amendment-conditioned primary
+analyses** rather than as pre-registered without qualification, and report the
+original reading as a sensitivity arm. That arm is not a formality: applying the original gate to the commitment
 rate leaves **7 cells scored and removes 13**, and the 13 include three of the
 four systems this paper's findings rest on — `claude-sonnet-5` (0.615),
 `claude-haiku-4.5` (0.710) and `qwen2.5:32b-instruct` (0.173). The fourth,
@@ -461,9 +476,16 @@ Table 2.
 | claude-haiku-4.5 | E2 | 0.5558 | — | 0.998 | 0.061 | 0.2070 |
 
 **ECE** is expected calibration error, the average gap between the confidence a
-system states and the accuracy it achieves at that confidence, computed over
-buckets of stated confidence and weighted by bucket size; a well-calibrated system
-approaches 0. The estimator was positive-controlled against the deterministic
+system states and the accuracy it achieves at that confidence; a well-calibrated
+system approaches 0. The implementation is fixed: ten equal-width bins over
+stated confidence with boundaries [0,10), [10,20), …, [90,100], the bin index
+taken as ⌊confidence/10⌋ capped at 9 so that a stated 100 falls in the last bin;
+each bin contributes the absolute difference between its observed accuracy and
+its *mean* stated confidence, weighted by bin size; empty bins contribute
+nothing; and the denominator is the number of committed records that carry a
+confidence value, not the number of committed records. Cells with fewer than 50
+confidence-bearing records have ECE and Brier suppressed and are marked
+low-n. The estimator was positive-controlled against the deterministic
 baseline, which states 100 on every claim it answers and answers almost all of
 them correctly: it returns 0.0000, where an earlier mid-point formula returned
 0.0500 on the same records.
@@ -528,8 +550,8 @@ this section, independently of which side of the threshold the second one falls.
 be read as one figure. `gemma3:27b` answers 459 of 473 and sits about seven
 points above chance on nearly the whole set. One is accurate on a small
 self-selected fraction; the other is barely better than chance on almost
-everything. Neither is a usable closed-book compliance checker, and they are
-unusable for different reasons. Which operating point is preferable depends on
+everything. Neither supplies evidence sufficient for acceptance as a
+closed-book compliance checker, and they fall short for different reasons. Which operating point is preferable depends on
 the workflow, and §2.2 argues the choice cannot be made by accuracy alone.
 
 ## 4.3 What abstention buys
@@ -789,7 +811,11 @@ convention rather than a test — but **no conclusion here rests on H2 under E1*
 H2 / E2 is computed on all 289 committed items and both forms of H1 use the
 full-set R0 cell with 82 commitments.
 
-All four corrected intervals exclude zero. The E1 intervals are much wider than
+Three of the four rows are evaluable under this paper's own reporting rule, and
+all three exclude zero after correction. The H2 / E1 row is shown for
+pre-registration transparency only: its restricted R0 cell carries 29
+commitments, below the 30-item floor, so it is not scored and no inference rests
+on it. The E1 intervals are much wider than
 the E2 intervals because R0 under E1 commits on few items; the E2 comparison,
 where both arms answer everything, is the better-conditioned one. There is a
 further reason to prefer it. Under E1 the two arms of each contrast are scored on
@@ -853,11 +879,53 @@ not adopt them — they read the claim record's `madde` field as the provision t
 claim cites, whereas EK-4 §2 defines it as the provision the text was drawn
 *from*, and all three cite at document level, which EK-4 §9(d) resolves against the
 whole document. R3-rule detected the same thing independently, dropping from
-473/473 to 470/473 on exactly those three claims. The seventeen therefore remain
-`needs_human_review`: a study measuring whether language models can judge Turkish
-regulation cannot let a language model set the labels it is scored against without
-saying so. Removing them moves the headline contrast by less than its interval
+473/473 to 470/473 on exactly those three claims. **Seventeen claims therefore remain labelled `needs_human_review`; no human
+adjudication was completed for them, and the released labels are provisional for
+those items.** A study measuring whether language models can judge Turkish
+regulation cannot let a language model set the labels it is scored against
+without saying so. All principal results are reported both with and without these
+claims, and the same statement appears in the archive's README and data card. Removing them moves the headline contrast by less than its interval
 width (S7).
+
+### 4.6.6 A shortcut baseline that reads no regulation at all
+
+A benchmark built from templates can be gamed by whatever the templates leak.
+The control for this is a baseline that never sees the claim text: it is told only
+which probe family, or which template subtype, a claim belongs to, and predicts
+that group's majority gold class. Whatever it scores is an upper bound on what a
+system could achieve on this benchmark by recognising surface form instead of
+regulation.
+
+| baseline | groups | accuracy | BAcc | 95 % CI | λ |
+|---|---|---|---|---|---|
+| probe family (P1–P6) | 6 | 0.8436 | 0.8503 | [0.8196, 0.8794] | 0.9571 |
+| template subtype | 14 | 0.9852 | 0.9860 | [0.9705, 0.9981] | 0.9571 |
+
+**Both exceed the grounded arm.** R2 reaches 0.8100 under forced choice; family
+identity alone reaches 0.8503, and template identity alone reaches 0.9860, above
+even the oracle-citation arm. The λ figures are sharper still: the shortcut
+baselines score 0.9571, against 0.804 for R2 and 0.987 for R1. λ was introduced
+in §3.1 as an index that a fixed response preference cannot inflate, and that
+remains true — a constant answer scores ±0.0429. It is not true of a
+*family-conditional* answer, and this table is the correction to that reading.
+
+We report this because it bounds what the benchmark can establish, not because we
+have evidence the models used it. The systems never see a family label; they see
+claim text. What the table shows is that **the label distribution of this claim
+set is strongly predictable from template identity**, so if surface form leaks
+family membership, a system could reach this band without reading a provision.
+Whether it does was not measured, and separating the two would need claim sets
+whose families are not distinguishable by form — which this one is not.
+
+Three consequences follow, and we state them rather than leave them to a reader.
+First, comparisons *within* a system on the *same* items — the E1-versus-E2
+condition contrast, which is this paper's confirmatory measure — are unaffected: a
+shortcut available in one condition is equally available in the other and cancels.
+Second, comparisons *between* arms are bounded by this table: R2's 0.8100 is below
+the family-only baseline, so the grounded result cannot be read as evidence that
+the model is doing something the surface form could not. Third, λ should be read
+as robust against constant answering and not against family-conditional answering,
+and §5.4's use of it is qualified accordingly.
 
 ## 4.7 The expert audit of the gold labels
 
@@ -920,9 +988,12 @@ four exceed chance with uncorrected intervals; after the pre-registered
 correction one does so robustly and a second is seed-dependent. The two sit at
 opposite operating points, and that contrast is the finding rather than the count. `qwen2.5:32b-instruct` answers one claim
 in six and is accurate on those; `gemma3:27b` answers nearly all of them barely
-above chance. Neither is usable as a closed-book compliance checker, but they are
-unusable for different reasons, and only the second would be caught by an accuracy
-threshold. The first would pass a 0.65-accuracy gate while declining five items in
+above chance. Neither operating point, on its own, establishes evidence sufficient
+for acceptance in a compliance workflow — and the two fall short for different
+reasons, only the second of which an accuracy threshold would catch. We say
+"insufficient evidence for acceptance" rather than "unusable" deliberately:
+acceptance requires a workflow-specific criterion over coverage, committed error
+and the cost of a routed case, and §5.6 declines to supply one. The first would pass a 0.65-accuracy gate while declining five items in
 six, which is why §2.2 argues the criterion has to be joint.
 
 ## 5.2 Abstention frequency held; abstention selectivity fell
@@ -948,9 +1019,13 @@ overlap the archived ones throughout (§4.4); a monitor built on Δ alone would 
 registered a drop it could not distinguish from resampling.
 
 Across the two hosted models the value of abstention is model-specific: +0.0678
-[+0.0018, +0.1359] for one and −0.0260 [−0.0765, +0.0377] for the other. It is a
-property of the system, not of the prompt or the task, and it has to be measured
-per system rather than assumed.
+[+0.0018, +0.1359] for one and −0.0260 [−0.0765, +0.0377] for the other. It is a property of a particular
+system–prompt–task configuration rather than of a model name, and §4.4 measures
+exactly that: re-wording the system prompt alone moves abstention rates by tens
+of points on the same claims and the same model. The consequence for practice is
+that the value of abstention must be measured for the configuration actually
+being qualified, and cannot be inferred from the model or carried over from a
+different prompt.
 
 ## 5.3 Re-qualification: a fixed test set, a changed component
 
@@ -1020,6 +1095,19 @@ subset, since a change large enough to halve the value of abstention was invisib
 to forced-choice accuracy.
 
 # 6 Limitations
+
+**The benchmark permits a shortcut that reaches the grounded band.** A baseline
+that never reads a claim and predicts each template subtype's majority gold class
+scores 0.9860 in balanced accuracy, above every arm reported here, and one that
+uses only the six probe families scores 0.8503, above the retrieval-grounded arm
+(§4.6.6). We have no evidence the models exploited this — they never see a family
+label — but the label distribution of this claim set is strongly predictable from
+template identity, so a system able to infer family membership from surface form
+could reach that band without reading a provision. Within-system comparisons on
+the same items are unaffected; between-arm comparisons are bounded by it. Closing
+this would require a claim set whose families are not distinguishable by form,
+which this one is not, and building one is the most useful single extension of
+this work.
 
 **One claim set, one jurisdiction, six documents.** No coverage claim is made. The
 claims are generated from frozen text by templates, so they test recognition of
@@ -1104,13 +1192,14 @@ The closed-book deficit is a deficit of the deployment architecture, not of the
 task. Supplying three retrieved passages raises forced-choice balanced accuracy by
 +0.2607 [+0.2218, +0.2964] and supplying the cited article by +0.3552 [+0.3112,
 +0.3984]; a string-matching rule over the same retrieved passages gains nothing,
-so roughly 22 points of the grounded result come from the model's judgement of the
-evidence rather than from the evidence being present. The practical implication is
+Under identical supplied passages the model-bearing arm exceeds the
+literal-containment rule by that margin; the experiment does not separate use of
+those passages from parametric knowledge, and §4.6.4 says so. The practical implication is
 to put engineering effort into supplying the governing provision rather than into
 selecting a closed-book model — with the cautions that this was measured on one
 model and that the retrieval component is the least examined part of the pipeline.
 
-Finally, a qualified component changed. Re-running one hosted configuration about four
+Finally, a qualified configuration behaved differently on a date. Re-running one hosted configuration about four
 weeks later on the frozen claim set left forced-choice accuracy inside its
 archived range while abstention-permitted accuracy fell outside it, with the
 number of abstentions barely moving. The size of the drop in what abstention was
@@ -1180,15 +1269,15 @@ released with the archive.*
 
 Abanda, Kamsu-Foguem and Tah, 2017. BIM — new rules of measurement ontology for construction cost estimation. *Engineering Science and Technology, an International Journal* 20(2), 443–459. doi:10.1016/j.jestch.2017.01.007
 
-Chen, et al., 2024. Automated building information modeling compliance check through a large language model combined with deep learning. *Buildings* 14(7). doi:10.3390/buildings14071983
+Chen, Lin, Jiang and An, 2024. Automated building information modeling compliance check through a large language model combined with deep learning and ontology. *Buildings* 14(7), 1983. doi:10.3390/buildings14071983
 
 Chen, Xu, Lim, Sharma and Tiang, 2025. Transparent and reliable construction cost prediction using advanced machine learning and explainable AI. *Engineering Science and Technology, an International Journal* 70, 102159. doi:10.1016/j.jestch.2025.102159
 
-Chow, 1970. On optimum recognition error and reject tradeoff. *IEEE Transactions on Information Theory*. doi:10.1109/tit.1970.1054406
+Chow, 1970. On optimum recognition error and reject tradeoff. *IEEE Transactions on Information Theory* 16(1), 41–46. doi:10.1109/tit.1970.1054406
 
-Dahl, et al., 2024. Large legal fictions: profiling legal hallucinations in large language models. *Journal of Legal Analysis*. doi:10.1093/jla/laae003
+Dahl, Magesh, Suzgun and Ho, 2024. Large legal fictions: profiling legal hallucinations in large language models. *Journal of Legal Analysis* 16(1), 64–93. doi:10.1093/jla/laae003
 
-Eastman, et al., 2009. Automatic rule-based checking of building designs. *Automation in Construction*. doi:10.1016/j.autcon.2009.07.002
+Eastman, Lee, Jeong and Lee, 2009. Automatic rule-based checking of building designs. *Automation in Construction* 18(8), 1011–1033. doi:10.1016/j.autcon.2009.07.002
 
 El-Yaniv and Wiener, 2010. On the foundations of noise-free selective classification. *Journal of Machine Learning Research* 11, 1605–1641. — *no registered DOI; the identifier 10.5555/1756006.1859904 that appears in some indexes is an ACM placeholder and does not resolve.*
 
@@ -1196,33 +1285,33 @@ Geifman and El-Yaniv, 2017. Selective classification for deep neural networks. a
 
 Guo, et al., 2017. On calibration of modern neural networks. *ICML*. arXiv:1706.04599
 
-Jiang, et al., 2021. How can we know when language models know? On the calibration of language models for question answering. *TACL*. doi:10.1162/tacl_a_00407
+Jiang, Araki, Ding and Neubig, 2021. How can we know when language models know? On the calibration of language models for question answering. *Transactions of the Association for Computational Linguistics* 9, 962–977. doi:10.1162/tacl_a_00407
 
 Kadavath, et al., 2022. Language models (mostly) know what they know. arXiv:2207.05221
 
-Lin, et al., 2022. Teaching models to express their uncertainty in words. arXiv:2205.14334
+Lin, Hilton and Evans, 2022. Teaching models to express their uncertainty in words. *Transactions on Machine Learning Research*. arXiv:2205.14334
 
 Makartetskiy, Marchetto, Sisto, Valenza and Virgilio, 2020. (User-friendly) formal requirements verification in the context of ISO26262. *Engineering Science and Technology, an International Journal* 23(3), 494–506. doi:10.1016/j.jestch.2019.09.005 — *online October 2019, June 2020 issue; cited by issue year.*
 
-Magesh, et al., 2025. Hallucination-free? Assessing the reliability of leading AI legal research tools. *Journal of Empirical Legal Studies*. doi:10.1111/jels.12413
+Magesh, Surani, Dahl, Suzgun, Manning and Ho, 2025. Hallucination-free? Assessing the reliability of leading AI legal research tools. *Journal of Empirical Legal Studies* 22(2), 216–242. doi:10.1111/jels.12413
 
-Naeini, et al., 2015. Obtaining well calibrated probabilities using Bayesian binning. *AAAI*. doi:10.1609/aaai.v29i1.9602
+Pakdaman Naeini, Cooper and Hauskrecht, 2015. Obtaining well calibrated probabilities using Bayesian binning. *Proceedings of the AAAI Conference on Artificial Intelligence* 29(1). doi:10.1609/aaai.v29i1.9602
 
-Robertson and Zaragoza, 2009. The probabilistic relevance framework: BM25 and beyond. *Foundations and Trends in Information Retrieval*. doi:10.1561/1500000019
+Robertson and Zaragoza, 2009. The probabilistic relevance framework: BM25 and beyond. *Foundations and Trends in Information Retrieval*. doi:10.1561/1500000019 — *the Crossref record and the publisher's page give different volume and page numbers for this item; neither is reproduced here and the DOI is authoritative.*
 
-Solihin and Eastman, 2015. Classification of rules for automated BIM rule checking development. *Automation in Construction*. doi:10.1016/j.autcon.2015.03.003
+Solihin and Eastman, 2015. Classification of rules for automated BIM rule checking development. *Automation in Construction* 53, 69–82. doi:10.1016/j.autcon.2015.03.003
 
 Turan, Çelik, Kumbasaroğlu and Yalçıner, 2024. Assessment of reinforced concrete building damages following the Kahramanmaraş earthquakes in Malatya, Turkey (February 6, 2023). *Engineering Science and Technology, an International Journal* 54, 101718. doi:10.1016/j.jestch.2024.101718
 
 Xiong, et al., 2024. Can LLMs express their uncertainty? An empirical evaluation of confidence elicitation in LLMs. *International Conference on Learning Representations (ICLR) 2024*. arXiv:2306.13063 — *the preprint is dated 2023 and the conference version 2024; this paper cites the conference version throughout.*
 
-Zhang and El-Gohary, 2016. Semantic NLP-based information extraction from construction regulatory documents for automated compliance checking. *Journal of Computing in Civil Engineering* 30(2). doi:10.1061/(ASCE)CP.1943-5487.0000346 — *the article carries a 2013 online-first date and a March 2016 issue date; it is cited by its issue year.*
+Zhang and El-Gohary, 2016. Semantic NLP-based information extraction from construction regulatory documents for automated compliance checking. *Journal of Computing in Civil Engineering* 30(2), 04015014. doi:10.1061/(ASCE)CP.1943-5487.0000346 — *the article carries a 2013 online-first date and a March 2016 issue date; it is cited by its issue year.*
 
 Zhou and El-Gohary, 2017. Ontology-based automated information extraction from building energy conservation codes. *Automation in Construction* 74, 103–117. doi:10.1016/j.autcon.2016.09.004 — *online December 2016, February 2017 issue; cited by issue year.*
 
 ## Standard
 
-IEC 61508. *Functional safety of electrical/electronic/programmable electronic safety-related systems.* International Electrotechnical Commission, Geneva. — *A standard rather than a journal article; outside OpenAlex coverage, and its edition and part number should be completed from the IEC catalogue before submission.*
+IEC 61508-1:2010. *Functional safety of electrical/electronic/programmable electronic safety-related systems — Part 1: General requirements.* 2nd edition. International Electrotechnical Commission, Geneva. — *A standard rather than a journal article, and outside Crossref and OpenAlex coverage. The part number and edition are taken from the publicly available IEC catalogue entry; the licensed text was not consulted, and no claim in this paper depends on a specific clause of it.*
 
 ## Primary legal sources
 

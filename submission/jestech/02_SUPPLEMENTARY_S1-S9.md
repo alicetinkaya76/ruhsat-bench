@@ -1,6 +1,6 @@
 # RUHSAT-Bench — Supplementary material
 
-Companion to *"Measuring abstention, not accuracy: a re-qualification benchmark
+Companion to *"Measuring abstention, not accuracy alone: a re-qualification benchmark
 for language-model decision support on Turkish construction and
 occupational-safety regulation."*
 

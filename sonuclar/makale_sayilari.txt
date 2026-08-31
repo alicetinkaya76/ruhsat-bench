@@ -1047,3 +1047,24 @@ OLMAYAN hicbir sayi kullanilmaz.
   472    = 335 taahhut + 137 taahhut-disi   (haiku Delta satiri)
            eksik olan 1 iddia: id 211, E2'de uc kosu uc farkli sonuc
            verdigi icin cogunluk olusmadi; her iki koldan da dusuyor.
+
+### D9.4 — ECE UYGULAMASININ TAM TARIFI (koddan okundu, tahmin degil)
+  Kaynak: scripts/f4_analiz.py, hucre_olc() icindeki "STANDART ECE" blogu.
+
+  * kova sayisi   : 10, ESIT GENISLIKTE
+  * kova indisi   : b = min(9, max(0, int(guven) // 10))
+                    yani sinirlar [0,10) [10,20) ... [80,90) [90,100]
+                    100 degeri b=9'a kirpilir (min(9,...) sayesinde)
+  * guven kaynagi : kayittaki `guven` alani, 0-100 tamsayi; kova ortalamasi
+                    icin guven/100 ile [0,1]'e normalize edilir
+  * hangi kayitlar: yalnizca TAAHHUT edilen (DOGRU|YANLIS) VE `guven` alani
+                    sayisal olan kayitlar. Guven tasimayanlar ATLANIR.
+  * agirlik       : kova buyuklugu; ECE = sum_b (n_b/N) * |acc_b - conf_ort_b|
+                    N = guven tasiyan taahhutlerin sayisi (tum taahhutler degil)
+  * bos kova      : toplama HIC GIRMEZ (v[0] kontrolu)
+  * cogunluk oyu  : birlestirme cogunluk dosyasinda yapilir; f4_analiz.py
+                    birlestirilmis kaydin `guven` alanini oldugu gibi okur.
+  * ESIK          : guven tasiyan kayit sayisi < 50 olan hucrelerde ECE ve
+                    Brier BASTIRILIR ve "az-n" diye isaretlenir (--min-guven-n)
+  * POZITIF KONTROL: R3 (hep guven=100, hep dogru) -> ECE 0.0000.
+                     Eski orta-nokta formulu ayni kayitlarda 0.0500 basiyordu.

@@ -1,7 +1,7 @@
 # Title page
 
 **Title**
-Measuring abstention, not accuracy: a re-qualification benchmark for
+Measuring abstention, not accuracy alone: a re-qualification benchmark for
 language-model decision support on Turkish construction and occupational-safety
 regulation
 
