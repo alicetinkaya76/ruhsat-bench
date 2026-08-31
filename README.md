@@ -8,7 +8,7 @@ A 473-claim benchmark for measuring **whether a language model declines the
 regulatory questions it cannot answer**, over six frozen Turkish construction and
 occupational-safety documents.
 
-Companion repository to *"Measuring abstention, not accuracy: a re-qualification
+Companion repository to *"Measuring abstention, not accuracy alone: a re-qualification
 benchmark for language-model decision support on Turkish construction and
 occupational-safety regulation"* (Ali Çetinkaya, Selçuk University).
 
