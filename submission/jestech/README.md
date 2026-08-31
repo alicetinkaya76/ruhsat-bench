@@ -37,11 +37,40 @@ ver, istemezse şart değil.
 **Verme:** depo geçmişi, `KILAVUZ.md`, `DURUM.md`, kusur kütüğü. Bunlar iç
 çalışma belgeleri; değerlendiriciyi yönlendirir ve bağımsızlığı bozar.
 
+## ⚠ GÖNDERİMİ BLOKE EDEN TEK ŞEY: SAYFA SINIRI
+
+Üçüncü göz denetimi JESTECH'in yazar kılavuzunda **yayımlanan sayfaların 10
+sayfayı aşmaması** şartını gösterdi ve bu şartı karşılamayan dosyaların hakem
+sürecine alınmadığını belirtti. **Bunu ben doğrulayamadım** — kılavuz sayfasına
+bu oturumdan erişemedim — ama denetçi somut kaynak verdi ve ciddiye alınmalı.
+
+Ana metin şu anda **13.504 kelime**. Elsevier'in iki sütunlu düzeninde bir
+yayımlanmış sayfa kabaca 800–1.000 kelime tutar; yani 10 sayfa ≈ 8–10 bin
+kelime, tablolar ve kaynakça dahil. **Muhtemelen sınırın üstündeyiz.**
+
+**Yapılması gereken sırayla:**
+
+1. Kılavuzu aç ve sınırı doğrula (`sciencedirect.com` → JESTECH → Guide for
+   Authors). Sınır yoksa bu blok düşer.
+2. Metni resmî JESTECH Word/LaTeX şablonuna aktar ve **gerçek** sayfa sayısını
+   gör. Kelime sayısından sayfa tahmin edilemez.
+3. Sınırın üstündeyse kes. **Ama neyi keseceğin bir karar** ve bana sorman
+   lazım: bu makalenin savunulabilirliği dürüstlük aygıtından geliyor ve onu
+   keserek sığdırmak selef makalenin hatasını tersinden tekrarlamak olur.
+   Kesilebilecek yerler, en az zararlıdan başlayarak: §4.2'nin model dökümü
+   (eke), §4.7'nin denetim ayrıntısı (eke), §3.4'ün kapı tartışması (eke),
+   §1'in ilgili çalışma paragrafı (kısaltılabilir).
+4. **Kesilmeyecekler:** kısayol tabanı (§4.6.6), sürüm kaymasının aralık
+   nitelemesi, EK-1 sapmasının taşıyıcılığı, 17 vakanın provenansı. Bunlar
+   hakemin bulup da yazarın yazmadığı hâlde makaleyi batıracak sınıfta.
+
 ## Gönderimden önce kalan iş
 
+- [ ] **Sayfa sınırı** — yukarıdaki blok
 - [ ] İki kodlayıcının uzlaşı kural notu **imzası** (`uzlasi/IMZA_SAYFASI_v7a.md`)
-- [ ] `05_DECLARATION_OF_INTEREST.md` içindeki **üretken yapay zekâ kullanım
-      beyanı** bloğu — yazarın kendi ifadesiyle doldurulacak, olduğu gibi
-      bırakılamaz
-- [ ] Zenodo kaydında v1.0.1'in sürüm alanı hâlâ "1.0.0" görünüyor (kozmetik;
-      DOI ve dosya adı doğru)
+- [x] ~~YZ beyanı~~ yazıldı ve kesinleşti
+- [x] ~~Kaynakça tamamlama~~ 21 künye Crossref'ten tam cilt/sayı/sayfayla
+- [x] ~~Arşiv DOI~~ v1.0.2, `10.5281/zenodo.22180708`
+
+**Not:** makale 9. turdan sonra değişti; gönderimden önce bir `v1.0.3` release
+alıp DOI'yi güncellemek gerekir. Bunu imzalar gelince tek seferde yaparım.
