@@ -37,32 +37,61 @@ ver, istemezse şart değil.
 **Verme:** depo geçmişi, `KILAVUZ.md`, `DURUM.md`, kusur kütüğü. Bunlar iç
 çalışma belgeleri; değerlendiriciyi yönlendirir ve bağımsızlığı bozar.
 
-## ⚠ GÖNDERİMİ BLOKE EDEN TEK ŞEY: SAYFA SINIRI
+## ⚠ İKİ BİÇİMSEL BLOKE EDİCİ — DOĞRULANDI (01.09.2026)
 
-Üçüncü göz denetimi JESTECH'in yazar kılavuzunda **yayımlanan sayfaların 10
-sayfayı aşmaması** şartını gösterdi ve bu şartı karşılamayan dosyaların hakem
-sürecine alınmadığını belirtti. **Bunu ben doğrulayamadım** — kılavuz sayfasına
-bu oturumdan erişemedim — ama denetçi somut kaynak verdi ve ciddiye alınmalı.
+### Ne bulundu
 
-Ana metin şu anda **13.504 kelime**. Elsevier'in iki sütunlu düzeninde bir
-yayımlanmış sayfa kabaca 800–1.000 kelime tutar; yani 10 sayfa ≈ 8–10 bin
-kelime, tablolar ve kaynakça dahil. **Muhtemelen sınırın üstündeyiz.**
+JESTECH'in yazar kılavuzunda iki ayrı şart var ve **ikisi de bizi tutuyor**:
 
-**Yapılması gereken sırayla:**
+> *"the editorial board of the journal has decided to limit all published pages
+> within **10 pages**"*
+>
+> *"All authors are requested to use the **Word Author Template or LaTeX Author
+> Template**… the journal **will not proceed with the peer-review process** if
+> authors do not submit their articles using the Author Template."*
 
-1. Kılavuzu aç ve sınırı doğrula (`sciencedirect.com` → JESTECH → Guide for
-   Authors). Sınır yoksa bu blok düşer.
-2. Metni resmî JESTECH Word/LaTeX şablonuna aktar ve **gerçek** sayfa sayısını
-   gör. Kelime sayısından sayfa tahmin edilemez.
-3. Sınırın üstündeyse kes. **Ama neyi keseceğin bir karar** ve bana sorman
-   lazım: bu makalenin savunulabilirliği dürüstlük aygıtından geliyor ve onu
-   keserek sığdırmak selef makalenin hatasını tersinden tekrarlamak olur.
-   Kesilebilecek yerler, en az zararlıdan başlayarak: §4.2'nin model dökümü
-   (eke), §4.7'nin denetim ayrıntısı (eke), §3.4'ün kapı tartışması (eke),
-   §1'in ilgili çalışma paragrafı (kısaltılabilir).
-4. **Kesilmeyecekler:** kısayol tabanı (§4.6.6), sürüm kaymasının aralık
-   nitelemesi, EK-1 sapmasının taşıyıcılığı, 17 vakanın provenansı. Bunlar
-   hakemin bulup da yazarın yazmadığı hâlde makaleyi batıracak sınıfta.
+**Doğrulama notu — dürüstçe:** kılavuzun kendi sayfasını (`sciencedirect.com`)
+**okuyamadım**; hem `WebFetch` hem tarayıcı **HTTP 403** aldı (bot koruması).
+İki bağımsız arama bu iki cümleyi aynı şekilde, aynı kılavuz sayfasına işaret
+ederek döndürdü ve üçüncü göz denetimi de aynı kaynağı gösterdi. Yani şart
+**yüksek olasılıkla doğru ama birincil kaynaktan teyit edilmedi.** Ali'nin
+kılavuzu bir kez kendi tarayıcısında açıp bakması 30 saniyelik iş ve bu notu
+kapatır.
+
+### Neredeyiz
+
+Ana metin **13.504 kelime**. Elsevier iki sütunlu düzende bir yayımlanmış sayfa
+kabaca 800–1.000 kelime; yani **~14–17 sayfa**. Sınırın belirgin biçimde
+üstündeyiz. Ek materyal (S1–S9) normalde sayfa sınırına girmez.
+
+### Yapılacaklar
+
+**1. Şablon.** Elinde Markdown var, dergi Word ya da LaTeX istiyor. LaTeX
+şablonu bu makale için daha uygun (çok tablo var). Şablonu indirip metni
+aktarmak lazım; bunu yapabilirim ama şablonu senin indirmen gerekiyor
+(Elsevier sayfası bana kapalı).
+
+**2. Kısaltma — ~4.500 kelime.** Hedef ana metin ~9.000. Kesme sırası, en az
+zararlıdan:
+
+| taşınacak | kelime | gövdede kalacak |
+|---|---|---|
+| §4.2'nin model-model dökümü ve Tablo 2 | ~700 | iki cümle + "biri şansı aşıyor" |
+| §4.7'nin denetim ayrıntısı | ~900 | κ değerleri + ikinci geçişin olumsuz sonucu |
+| §3.4'ün kapı sapması tartışması | ~800 | 4 cümle: sapma var, taşıyıcı, gerekçe kavramsal |
+| §4.6.5 duyarlılık tabloları | ~500 | "hiçbiri sonucu değiştirmiyor" |
+| §1'in ilgili çalışma paragrafı | ~350 | yarıya iner, atıflar kalır |
+| §6'nın uzun maddeleri | ~700 | her madde 2-3 cümleye iner |
+| §5.4'ün sayı tekrarları | ~600 | tablodan okunur, metinde tekrarlanmaz |
+
+**3. KESİLMEYECEKLER.** Bunlar hakemin bulup da yazarın yazmadığı hâlde
+makaleyi batıracak sınıfta; ek dosyaya da gömülmezler, gövdede kalırlar:
+
+* kısayol tabanı (§4.6.6) — şablon-yalnız taban 0.9860 ile her kolu geçiyor
+* sürüm kaymasının aralık nitelemesi — değişim aralığı sıfırı içeriyor
+* EK-1 kapı sapmasının **taşıyıcı** olduğu — orijinal kuralla üç ana sistem elenirdi
+* 17 vakanın provenansı — kararları bir dil modeli verdi
+* λ'nın aile-koşullu cevaba karşı korumasız olduğu
 
 ## Gönderimden önce kalan iş
 

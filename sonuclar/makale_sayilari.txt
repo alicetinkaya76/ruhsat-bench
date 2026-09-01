@@ -1068,3 +1068,14 @@ OLMAYAN hicbir sayi kullanilmaz.
                     Brier BASTIRILIR ve "az-n" diye isaretlenir (--min-guven-n)
   * POZITIF KONTROL: R3 (hep guven=100, hep dogru) -> ECE 0.0000.
                      Eski orta-nokta formulu ayni kayitlarda 0.0500 basiyordu.
+
+### D9.5 — JESTECH BICIMSEL SARTLARI (01.09.2026, ikincil kaynaktan)
+  Yazar kilavuzunun iki sarti:
+    (a) yayimlanan sayfalar 10 sayfayi asmayacak
+    (b) Word ya da LaTeX Author Template ZORUNLU; sablonsuz gonderimde
+        hakem sureci BASLATILMIYOR
+  DOGRULAMA SINIRI: sciencedirect.com kilavuz sayfasi hem WebFetch hem
+  tarayici ile HTTP 403 verdi (bot korumasi). Iki bagimsiz arama ayni iki
+  cumleyi ayni sayfaya isaret ederek dondurdu; ucuncu goz denetimi de ayni
+  kaynagi gosterdi. BIRINCIL KAYNAKTAN OKUNAMADI, ikincil teyit var.
+  Mevcut durum: ana metin 13.504 kelime -> kabaca 14-17 yayimlanmis sayfa.
